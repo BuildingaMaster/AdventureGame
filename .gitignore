@@ -428,3 +428,13 @@ FodyWeavers.xsd
 *.exe
 *.out
 *.app
+
+# macOS
+.DS_Store
+
+# Visual Studio Code
+.vscode
+
+# Build Files (For John)
+AdventureGame.dSYM
+AdventureGame
