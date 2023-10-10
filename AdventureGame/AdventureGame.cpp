@@ -1,11 +1,13 @@
-// AdventureGame.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
+#include "Location.h"
+#include "Player Actions.h"
+#include "Starting Room.h"
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    StartingRoom start;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
