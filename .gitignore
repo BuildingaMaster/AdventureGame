@@ -436,5 +436,5 @@ FodyWeavers.xsd
 .vscode
 
 # Build Files (For John)
-AdventureGame.dSYM
-AdventureGame
+AdventureGame-out.dSYM
+AdventureGame-out
