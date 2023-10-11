@@ -8,7 +8,7 @@ class Action
 {
 protected:
 	char move;
-
+	// move to a cpp file 
 	void Move()
 	{
 		bool validInput = false;

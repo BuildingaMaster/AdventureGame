@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-class Location
+class Location : public Action
 {
 protected:
 	// pure virtual function
