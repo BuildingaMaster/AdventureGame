@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Location.h"
-#include "Player Actions.h"
+#include "PlayerActions.h"
 using namespace std;
 
 class StartingRoom : public Action

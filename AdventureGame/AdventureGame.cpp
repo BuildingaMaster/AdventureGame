@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 #include "Location.h"
-#include "Player Actions.h"
-#include "Starting Room.h"
+#include "PlayerActions.h"
+#include "StartingRoom.h"
 using namespace std;
 
 int main()
