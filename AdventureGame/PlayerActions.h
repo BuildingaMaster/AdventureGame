@@ -11,26 +11,26 @@ protected:
 
 	void Move()
 	{
-		bool validInput = true;
+		bool validInput = false;
 		do
 		{
 			cout << "Where to? ";
 			cin >> move;
 			if (move == 'N' || move == 'n')
 			{
-
+				validInput = true;
 			}
 			else if (move == 'S' || move == 's')
 			{
-
+				validInput = true;
 			}
 			else if (move == 'E' || move == 'e')
 			{
-
+				validInput = true;
 			}
 			else if (move == 'W' || move == 'w')
 			{
-
+				validInput = true;
 			}
 			else
 			{
