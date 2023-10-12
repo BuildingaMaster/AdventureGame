@@ -33,7 +33,8 @@ public:
 				validInput = true;
 				cout << endl << description << endl;
 			}
-		}while (validInput = false);
+			
+		}while (validInput == false);
 	}
 	Location()
 	{
