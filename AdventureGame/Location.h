@@ -28,7 +28,6 @@ public:
 			string c;
 			cout << "What to do? ";
 			cin >> c;
-			cin >> c;
 			for(auto& character : c)
 			{
 				character = tolower(character);
