@@ -28,7 +28,12 @@ public:
 			string c;
 			cout << "What to do? ";
 			cin >> c;
-			if (c == "look" || c == "Look")
+			cin >> c;
+			for(auto& character : c)
+			{
+				character = tolower(character);
+			}
+			if (c == "look")
 			{
 				validInput = true;
 				cout << endl << description << endl;
