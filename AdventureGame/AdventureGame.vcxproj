@@ -129,6 +129,13 @@
   <ItemGroup>
     <ClCompile Include="AdventureGame.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Location.h" />
+    <ClCompile Include="StartingRoom.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlayerActions.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
