@@ -26,7 +26,7 @@ public:
 		cin >> c;
 		if (c == "look")
 		{
-			cout << endl << description;
+			cout << endl << description << endl;
 		}
 	}
 	Location()
