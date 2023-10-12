@@ -7,10 +7,26 @@
 #include "StartingRoom.h"
 using namespace std;
 
+void backStory()
+{
+	cout << "You open your eyes and see you are in the middle of a forest. " << endl;
+	cout << "Its just you, your thoughts, and the colorful wilderness. " << endl;
+	cout << "You ask yourself, how the hell did I get here and what is my purpose here? " << endl;
+	cout << "Well, the more you explore, the more you learn about not only where you are, but who you are. " << endl << endl;
+}
 int main()
 {
-    StartingRoom start;
+	backStory();
+
+	Location startingRoom;
+
+	startingRoom.setDescription("You are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.");
+	cout << endl;
+	startingRoom.printLocation();
+	cout << endl;
+	startingRoom.choice();
 }
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

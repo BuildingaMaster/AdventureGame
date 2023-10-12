@@ -2,17 +2,36 @@
 #define LOCATION_H
 #include <string>
 #include <iostream>
+#include "PlayerActions.h"
 using namespace std;
 
-class Location : public Action
+class Location
 {
-protected:
-	// pure virtual function
-	virtual void printLocation() {	}
+private:
+	string description;
 public:
+	void setDescription(string s)
+	{
+		description = s; 
+	}
+	void printLocation()
+	{
+		cout << description;
+	}
+	
+	void choice()
+	{
+		string c;
+		cout << "What to do? ";
+		cin >> c;
+		if (c == "look")
+		{
+			cout << endl << description;
+		}
+	}
 	Location()
 	{
-		// print current location
+		description = "";
 	}
 };
 #endif // !LOCATION_H

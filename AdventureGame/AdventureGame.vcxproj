@@ -131,8 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Location.h" />
-	<ClCompile Include="PlayerActions.h" />
-	<ClCompile Include="StartingRoom.h" />
+    <ClCompile Include="StartingRoom.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlayerActions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

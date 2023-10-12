@@ -17,8 +17,6 @@ protected:
 		cout << "a deserted hut to the east, and more wilderness. " << endl;
 		cout << "south and north of your location." << endl;
 		cout << "Where would you like to go?" << endl;
-
-		Action::Move();
 	}
 	void backStory()
 	{
