@@ -21,13 +21,19 @@ public:
 	
 	void choice()
 	{
-		string c;
-		cout << "What to do? ";
-		cin >> c;
-		if (c == "look" || "Look")
+		bool validInput;
+
+		do
 		{
-			cout << endl << description << endl;
-		}
+			string c;
+			cout << "What to do? ";
+			cin >> c;
+			if (c == "look" || "Look")
+			{
+				validInput = true;
+				cout << endl << description << endl;
+			}
+		}while (validInput = false);
 	}
 	Location()
 	{
