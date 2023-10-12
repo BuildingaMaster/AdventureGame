@@ -8,17 +8,17 @@ using namespace std;
 class Inventory
 {
 public:
+	Inventory();
+
 	void listInventory();
 
 	//void addItem(Item toAdd, enum, int);
-	void addItem(Item toAdd)
-	{
-		// Add item and erase item
-	}
+	void addItem(Item toAdd);
 	void removeItem(Item toRemove);
-	
+	Item fetchItem(consumableType);
+
 private:
-	vector<Item*> currentInventory;
+	vector<Item> currentInventory;
 
 	//currentInventory[0] = iteminRoom[42][0]
 	//iteminRoom.erase(iteminRoom.begin())

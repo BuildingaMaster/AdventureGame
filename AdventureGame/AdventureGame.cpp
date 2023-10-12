@@ -8,9 +8,15 @@
 #include "PlayerActions.h"
 #include "StartingRoom.h"
 #include "Item.h"
+#include "Inventory.h"
+#include "Consumable.h"
 using namespace std;
 
+Inventory userInventory;
 
+void getUserInput();
+
+map<int, vector<Item>> itemMap;
 
 
 
@@ -24,14 +30,14 @@ void backStory()
 
 int main()
 {
-    map<int, vector<Item>> itemMap;
-    itemMap.insert(std::pair<int, vector<Item>>(0,vector<Item>()));
+    itemMap.insert(std::pair<int, vector<Item>>(0, vector<Item>()));
     itemMap[0].insert(itemMap[0].begin(), Item());
 
-    itemMap[0][0].print();
+    // itemMap[0][0].print();
+
 
     // Starting Room ID = 0
-
+    
     // itemMap.insert(itemMap.begin(), new vector<Item>);
 
     // itemMap[0] = new vector<Item>;
@@ -44,6 +50,29 @@ int main()
 	startingRoom.printLocation();
 	cout << endl;
 	startingRoom.choice();
+}
+
+void getUserInput()
+{
+    cout << "What would you like to do?\n";
+    string input;
+    cin >> input;
+    if (input == "pick apple")
+    {
+        if (itemMap[0].size() > 0)
+        {
+            userInventory.addItem(itemMap[0][0]);
+            cout << "\nYou grab an apple from the tree.\n";
+        }
+        else
+        {
+            cout << "\nThere is no apple for you to take!\n";
+        }
+    }
+    else if (input == "eat apple")
+    {
+        if(userInventory)
+    }
 }
 
 
