@@ -21,14 +21,14 @@ public:
 	
 	void choice()
 	{
-		bool validInput;
+		bool validInput = false;
 
 		do
 		{
 			string c;
 			cout << "What to do? ";
 			cin >> c;
-			if (c == "look" || "Look")
+			if (c == "look" || c == "Look")
 			{
 				validInput = true;
 				cout << endl << description << endl;
