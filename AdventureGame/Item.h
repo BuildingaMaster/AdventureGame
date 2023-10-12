@@ -2,6 +2,10 @@
 class Item
 {
 public:
+   
+    Item();
+    void print();
+
 private:
 };
 

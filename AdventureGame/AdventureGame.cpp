@@ -2,10 +2,17 @@
 //
 #include <iostream>
 #include <string>
+#include <vector>
+#include <map>
 #include "Location.h"
 #include "PlayerActions.h"
 #include "StartingRoom.h"
+#include "Item.h"
 using namespace std;
+
+
+
+
 
 void backStory()
 {
@@ -14,8 +21,20 @@ void backStory()
 	cout << "You ask yourself, how the hell did I get here and what is my purpose here? " << endl;
 	cout << "Well, the more you explore, the more you learn about not only where you are, but who you are. " << endl << endl;
 }
+
 int main()
 {
+    map<int, vector<Item>> itemMap;
+    itemMap.insert(std::pair<int, vector<Item>>(0,vector<Item>()));
+    itemMap[0].insert(itemMap[0].begin(), Item());
+
+    itemMap[0][0].print();
+
+    // Starting Room ID = 0
+
+    // itemMap.insert(itemMap.begin(), new vector<Item>);
+
+    // itemMap[0] = new vector<Item>;
 	backStory();
 
 	Location startingRoom;
