@@ -24,7 +24,7 @@ public:
 		string c;
 		cout << "What to do? ";
 		cin >> c;
-		if (c == "look")
+		if (c == "look" || "Look")
 		{
 			cout << endl << description << endl;
 		}
