@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>641</width>
+    <height>639</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>431</width>
+    <height>383</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>.SF NS Text</family>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Properties</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_7">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="GeneralTab">
+      <attribute name="title">
+       <string>General</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QGroupBox" name="GenInfo">
+         <property name="title">
+          <string>General Info</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QHBoxLayout" name="RoomName_Layout">
+            <item>
+             <widget class="QLabel" name="RoomNameLabel">
+              <property name="text">
+               <string>Room Name:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="RoomNameEdit"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="RoomDesc_Layout">
+            <item>
+             <widget class="QLabel" name="RoomDescLabel">
+              <property name="text">
+               <string>Story Description:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="RoomDescEdit">
+              <property name="placeholderText">
+               <string>Supports basic HTML formatting</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="ConnectionsTab">
+      <attribute name="title">
+       <string>Connections</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QGroupBox" name="Connections">
+         <property name="title">
+          <string>Connections</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <layout class="QHBoxLayout" name="North_Layout">
+            <item>
+             <widget class="QLabel" name="NorthLabel">
+              <property name="text">
+               <string>North Room:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="NorthCombo">
+              <property name="placeholderText">
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="South_Layout">
+            <item>
+             <widget class="QLabel" name="SouthLabel">
+              <property name="text">
+               <string>South Room:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="SouthCombo">
+              <property name="placeholderText">
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="East_Layout">
+            <item>
+             <widget class="QLabel" name="EastLabel">
+              <property name="text">
+               <string>East Room:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="EastCombo">
+              <property name="placeholderText">
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="West_Layout">
+            <item>
+             <widget class="QLabel" name="WestLabel">
+              <property name="text">
+               <string>West Room:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="WestCombo">
+              <property name="placeholderText">
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="Above_Layout">
+            <item>
+             <widget class="QLabel" name="AboveLabel">
+              <property name="text">
+               <string>Above Room:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="AboveCombo">
+              <property name="placeholderText">
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="Below_Layout">
+            <item>
+             <widget class="QLabel" name="BelowLabel">
+              <property name="text">
+               <string>Below Room:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="BelowCombo">
+              <property name="placeholderText">
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="Attributes">
+      <attribute name="title">
+       <string>Attributes</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>NOTE: Not really implemented</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="Common">
+         <property name="title">
+          <string>Common</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="Option8Check">
+            <property name="text">
+             <string>Option 8</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="Option3Check">
+            <property name="text">
+             <string>Option 3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="Option2Check">
+            <property name="text">
+             <string>Option 2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="Option6Check">
+            <property name="text">
+             <string>Option 6</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="Option5Check">
+            <property name="text">
+             <string>Option 5</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="Option1Check">
+            <property name="text">
+             <string>Option 1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QCheckBox" name="Option4Check">
+            <property name="text">
+             <string>Option 4</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QCheckBox" name="Option7Check">
+            <property name="text">
+             <string>Option 7</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="Extended">
+         <property name="title">
+          <string>Extended</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QComboBox" name="EnabledCombo">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="EnabledCheck">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>.SF NS Text</family>
+             </font>
+            </property>
+            <property name="text">
+             <string>Enabled</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AboveCombo</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>AboveCombo</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>455</x>
+     <y>434</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>BelowCombo</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>BelowCombo</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>517</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>455</x>
+     <y>517</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>NorthCombo</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>NorthCombo</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>100</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>455</x>
+     <y>100</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SouthCombo</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>SouthCombo</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>184</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>455</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>WestCombo</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>WestCombo</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>350</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>455</x>
+     <y>350</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>EastCombo</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>EastCombo</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>267</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>455</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
