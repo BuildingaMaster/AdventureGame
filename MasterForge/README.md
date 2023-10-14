@@ -18,6 +18,6 @@ A really simple tool for very complex maps.
 * Right click or double click on the room to change it's attributes and connections.
 
 ## Installation
-* Run `pip -r requirements.txt` in the project directory.
+* Run `pip install -r requirements.txt` in the project directory.
 * Launch the main.py script.
 
