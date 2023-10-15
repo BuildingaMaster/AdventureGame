@@ -28,6 +28,7 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         self.ID = self.GUIWin.box_check[-1]["RoomID"]
         self.RoomNameEdit.setText(self.GUIWin.box_check[-1]["RoomName"])
         self.setWindowTitle(f"Properties  - {self.RoomNameEdit.text()}")
+        self.RoomDescEdit.textChanged.connect(self.descChanged)
         self.RoomDescEdit.setText(self.GUIWin.box_check[-1]["RoomDesc"]) 
         self.comboAlloc = [self.AboveCombo, self.BelowCombo, self.NorthCombo, self.SouthCombo, self.EastCombo, self.WestCombo]
         self.intToNav = ["A","B","N","S","E","W"]
@@ -62,6 +63,13 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         
         # Perform update on create
         self.update()
+    
+    def descChanged(self):
+        if len(self.RoomDescEdit.toPlainText()) > 400:
+            self.CharLimitLabel.setText(f"<div style='color:red'>{len(self.RoomDescEdit.toPlainText())}/400 Characters</div>")
+        else:
+            self.CharLimitLabel.setText(f"{len(self.RoomDescEdit.toPlainText())}/400 Characters")
+
 
     def setComboBoxID(self,comboType,ID):
         combo = self.comboAlloc[self.intToNav.index(comboType)]
@@ -105,7 +113,7 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
             oppMapDir = obj.mapDirection-1
 
         oppElement.properties.disconnectComboBoxes()
-        oppElement.properties.comboAlloc[oppMapDir].setCurrentIndex(obj.currentIndex())
+        oppElement.properties.comboAlloc[oppMapDir].setCurrentIndex(next(i for i in range(obj.count()) if obj.itemData(i) == self.ID))
         oppBoxListing[self.intToNav[oppMapDir]] = self.ID
         oppElement.properties.connectComboBoxes()
         oppElement.properties.setDirectionString()
@@ -286,6 +294,10 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
 
     # Save the the main array
     def accept(self):
+        if len(self.RoomDescEdit.toPlainText()) > 400:
+            QMessageBox.warning(self, 'Description over character limit.',
+                'The description must be under 400 characters.')
+            return
         index = next((self.GUIWin.box_check.index(i) for i in self.GUIWin.box_check if i["RoomID"] == self.ID))
         self.GUIWin.box_check[index]["RoomName"] = self.RoomNameEdit.text()
         self.GUIWin.box_check[index]["RoomDesc"] = self.RoomDescEdit.toPlainText()
@@ -559,9 +571,9 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
             dataFile.write(struct.pack('=I', len(self.box_check))) #Number of Rooms
             for item in self.box_check:
                 dataFile.write(struct.pack('=I', item["RoomID"])) #ID
-                dataFile.write(struct.pack('=I', len(item["RoomDesc"]) + (4-(len(item["RoomDesc"])))%4)) #Length
+                dataFile.write(struct.pack('=I', len(item["RoomDesc"]))) #Length
                 dataFile.write(bytes(item["RoomDesc"],"utf-8")) #Room Description
-                for x in range((4-(len(item["RoomDesc"])))%4): #Padding
+                for x in range(400 - (len(item["RoomDesc"]))): #Padding
                     dataFile.write(b'\0')
     
     # Save the workspace to a MFW file.

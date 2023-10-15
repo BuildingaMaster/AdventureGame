@@ -72,6 +72,12 @@ class Ui_Dialog(object):
 
         self.verticalLayout_3.addLayout(self.RoomDesc_Layout)
 
+        self.CharLimitLabel = QLabel(self.GenInfo)
+        self.CharLimitLabel.setObjectName(u"CharLimitLabel")
+        self.CharLimitLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.verticalLayout_3.addWidget(self.CharLimitLabel)
+
 
         self.verticalLayout_6.addWidget(self.GenInfo)
 
@@ -304,6 +310,7 @@ class Ui_Dialog(object):
         self.RoomNameLabel.setText(QCoreApplication.translate("Dialog", u"Room Name:", None))
         self.RoomDescLabel.setText(QCoreApplication.translate("Dialog", u"Story Description:", None))
         self.RoomDescEdit.setPlaceholderText(QCoreApplication.translate("Dialog", u"Supports basic HTML formatting", None))
+        self.CharLimitLabel.setText(QCoreApplication.translate("Dialog", u"0/400 Characters", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.GeneralTab), QCoreApplication.translate("Dialog", u"General", None))
         self.Connections.setTitle(QCoreApplication.translate("Dialog", u"Connections", None))
         self.NorthLabel.setText(QCoreApplication.translate("Dialog", u"North Room:", None))

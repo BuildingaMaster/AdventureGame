@@ -76,6 +76,16 @@
             </item>
            </layout>
           </item>
+          <item>
+           <widget class="QLabel" name="CharLimitLabel">
+            <property name="text">
+             <string>0/400 Characters</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
