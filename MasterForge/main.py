@@ -30,6 +30,7 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         self.setWindowTitle(f"Properties  - {self.RoomNameEdit.text()}")
         self.RoomDescEdit.setText(self.GUIWin.box_check[-1]["RoomDesc"]) 
         self.comboAlloc = [self.AboveCombo, self.BelowCombo, self.NorthCombo, self.SouthCombo, self.EastCombo, self.WestCombo]
+        self.intToNav = ["A","B","N","S","E","W"]
 
         # Initalize item data
         self.AboveCombo.setItemData(0,0)
@@ -62,6 +63,14 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         # Perform update on create
         self.update()
 
+    def setComboBoxID(self,comboType,ID):
+        combo = self.comboAlloc[self.intToNav.index(comboType)]
+        comboIndex = next(i for i in range(combo.count()) if combo.itemData(i) == ID)
+        self.disconnectComboBoxes()
+        combo.setCurrentIndex(comboIndex)
+        self.connectComboBoxes()
+        self.setDirectionString()
+        
     def connectComboBoxes(self):
         self.AboveCombo.currentIndexChanged.connect(self.aIndexChange)
         self.BelowCombo.currentIndexChanged.connect(self.bIndexChange)
@@ -81,7 +90,6 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
     # STUB
     #TODO: Backwards connectivity
     def indexChange(self,obj,index):
-        #next((i["RoomID"] for i in self.GUIWin.box_check if i["RoomID"] == AboveComboArc),0)
         if index == 0:
             return
         confirm = QMessageBox.question(self, 'Connection',
@@ -89,7 +97,8 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         if confirm == QMessageBox.No:
             return
         selectID = obj.currentData()
-        oppElement = next(self.GUIWin.box_check[i]["roomDef"] for i, item in enumerate(self.GUIWin.box_check) if item['RoomID'] == selectID)
+        oppBoxListing = next(self.GUIWin.box_check[i] for i, item in enumerate(self.GUIWin.box_check) if item['RoomID'] == selectID)
+        oppElement = oppBoxListing["roomDef"]
         if (obj.mapDirection+1)%2:
             oppMapDir = obj.mapDirection+1
         else:
@@ -97,8 +106,9 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
 
         oppElement.properties.disconnectComboBoxes()
         oppElement.properties.comboAlloc[oppMapDir].setCurrentIndex(obj.currentIndex())
+        oppBoxListing[self.intToNav[oppMapDir]] = self.ID
         oppElement.properties.connectComboBoxes()
-        oppElement.setDirectionString()
+        oppElement.properties.setDirectionString()
         #oppElement.properties
 
     
@@ -602,9 +612,19 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
 
         for item in data["data"]:
             self.importRoom(item)
+        for item in self.box_check:
+            item["roomDef"].properties.update()
+        self.autoConnect(data["data"])
         self.setWindowTitle(f"MasterForge - {file_info.fileName()}")
         self.ui.actionClose.setDisabled(False)
         self.hasUnsavedChanges = False
+    
+    def autoConnect(self,data):
+        for item in data:
+            for x in ["A","B","N","S","E","W"]:
+                item["roomDef"].properties.setComboBoxID(x,item[x])
+
+
 
     # Closes (and saves if necessary) the workspace
     def closeWorkspace(self):
