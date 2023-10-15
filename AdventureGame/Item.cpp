@@ -3,6 +3,11 @@
 
 using namespace std;
 
+Item::Item()
+{
+    weight = 0.0;
+}
+
 Item::Item(itemState initState)
 {
     currentState = initState;

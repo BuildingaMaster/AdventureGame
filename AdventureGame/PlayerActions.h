@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-class Action
+class Action // TODO: Please convert to processCommand structure.
 {
 protected:
 	char move;

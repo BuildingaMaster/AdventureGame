@@ -4,19 +4,20 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <cctype>
+
 #include "Location.h"
 #include "PlayerActions.h"
 #include "StartingRoom.h"
 #include "Item.h"
 #include "Inventory.h"
 #include "Consumable.h"
+#include "ContextParser.h"
 using namespace std;
 
 Inventory userInventory;
 
-void getUserInput();
 
-map<int, vector<Item>> itemMap;
 
 
 
@@ -30,9 +31,6 @@ void backStory()
 
 int main()
 {
-    itemMap.insert(std::pair<int, vector<Item>>(0, vector<Item>()));
-    itemMap[0].insert(itemMap[0].begin(), Item());
-
     // itemMap[0][0].print();
 
 
@@ -49,30 +47,15 @@ int main()
 	cout << endl;
 	startingRoom.printLocation();
 	cout << endl;
-	startingRoom.choice();
-}
-
-void getUserInput()
-{
-    cout << "What would you like to do?\n";
-    string input;
-    cin >> input;
-    if (input == "pick apple")
+    string command;
+    ContextParser CP(&startingRoom,&userInventory);
+    bool validInput;
+    do
     {
-        if (itemMap[0].size() > 0)
-        {
-            userInventory.addItem(itemMap[0][0]);
-            cout << "\nYou grab an apple from the tree.\n";
-        }
-        else
-        {
-            cout << "\nThere is no apple for you to take!\n";
-        }
-    }
-    else if (input == "eat apple")
-    {
-        if(userInventory)
-    }
+        cout << "What would you like to do?\n> ";
+        getline(cin,command);
+        validInput = CP.interpretCommand(command);
+    } while (validInput == false);
 }
 
 
