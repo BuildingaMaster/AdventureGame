@@ -459,6 +459,12 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
         self.ui.actionClose.triggered.connect(self.closeWorkspace)
         self.ui.actionBig_Brother.triggered.connect(self.bigBrother)
 
+        self.ui.actionOpen.setShortcut(QKeySequence(QKeySequence.Open))
+        self.ui.actionRoom.setShortcut(QKeySequence(QKeySequence.New))
+        self.ui.actionExport.setShortcut(QKeySequence(QKeySequence.SaveAs))
+        self.ui.actionSave.setShortcut(QKeySequence(QKeySequence.Save))
+        self.ui.actionClose.setShortcut(QKeySequence(QKeySequence.Close))
+
         # Disable closing workspace, until there is an open workspace
         self.ui.actionClose.setDisabled(True)
         
