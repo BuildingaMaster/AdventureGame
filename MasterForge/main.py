@@ -5,7 +5,7 @@ import mainwindow_ui
 import Properties_ui
 import sys
 from PySide6.QtCore import Qt, QPoint, QFileInfo
-from PySide6.QtGui import QAction
+from PySide6.QtGui import QAction, QKeySequence
 from PySide6.QtWidgets import (QGraphicsSceneMouseEvent,QFileDialog, QDialog, QMenu, QApplication, QMainWindow,
     QMessageBox, QGraphicsScene,QGraphicsRectItem,QGraphicsItem,QGraphicsView, QGraphicsTextItem, QInputDialog)
 
@@ -18,7 +18,12 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         # Qt does not like any additional arguments.
 
         self.mainRec = kwargs["rect"]
+        self.bypass = False
         kwargs.pop("rect")
+        if "bypassFirstPass" in kwargs:
+            self.bypass = kwargs["bypassFirstPass"]
+            kwargs.pop("bypassFirstPass")
+
 
         super(recProperties, self).__init__(*args, **kwargs)
         # Setup interface
@@ -34,27 +39,39 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         self.intToNav = ["A","B","N","S","E","W"]
 
         # Initalize item data
-        self.AboveCombo.setItemData(0,0)
+        self.AboveCombo.addItem("None")
+        self.BelowCombo.addItem("None")
+        self.NorthCombo.addItem("None")
+        self.SouthCombo.addItem("None")
+        self.EastCombo.addItem("None")
+        self.WestCombo.addItem("None")
+        self.AboveCombo.setCurrentIndex(0)
+        self.AboveCombo.setItemData(0,self.GUIWin.box_check[-1]["A"])
         self.AboveCombo.mapDirection = 0
         self.aIndexChange = lambda data: self.indexChange(self.AboveCombo, data)
 
-        self.BelowCombo.setItemData(0,0)
+        self.BelowCombo.setCurrentIndex(0)
+        self.BelowCombo.setItemData(0,self.GUIWin.box_check[-1]["B"])
         self.BelowCombo.mapDirection = 1
         self.bIndexChange = lambda data: self.indexChange(self.BelowCombo, data)
 
-        self.NorthCombo.setItemData(0,0)
+        self.NorthCombo.setCurrentIndex(0)
+        self.NorthCombo.setItemData(0,self.GUIWin.box_check[-1]["N"])
         self.NorthCombo.mapDirection = 2
         self.nIndexChange = lambda data: self.indexChange(self.NorthCombo, data)
 
-        self.SouthCombo.setItemData(0,0)
+        self.SouthCombo.setCurrentIndex(0)
+        self.SouthCombo.setItemData(0,self.GUIWin.box_check[-1]["S"])
         self.SouthCombo.mapDirection = 3
         self.sIndexChange = lambda data: self.indexChange(self.SouthCombo, data)
 
-        self.EastCombo.setItemData(0,0)
+        self.EastCombo.setCurrentIndex(0)
+        self.EastCombo.setItemData(0,self.GUIWin.box_check[-1]["E"])
         self.EastCombo.mapDirection = 4
         self.eIndexChange = lambda data: self.indexChange(self.EastCombo, data)
 
-        self.WestCombo.setItemData(0,0)
+        self.WestCombo.setCurrentIndex(0)
+        self.WestCombo.setItemData(0,self.GUIWin.box_check[-1]["W"])
         self.WestCombo.mapDirection = 5
         self.wIndexChange = lambda data: self.indexChange(self.WestCombo, data)
 
@@ -62,7 +79,8 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         #self.disconnectComboBoxes()
         
         # Perform update on create
-        self.update()
+        if self.bypass == False:
+            self.update()
     
     def descChanged(self):
         if len(self.RoomDescEdit.toPlainText()) > 400:
@@ -112,6 +130,7 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         else:
             oppMapDir = obj.mapDirection-1
 
+        oppElement.properties.update()
         oppElement.properties.disconnectComboBoxes()
         oppElement.properties.comboAlloc[oppMapDir].setCurrentIndex(next(i for i in range(obj.count()) if obj.itemData(i) == self.ID))
         oppBoxListing[self.intToNav[oppMapDir]] = self.ID
@@ -280,16 +299,6 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
                 displayedWarning = True
             self.WestLabel.setText("<strong>West Room: [PREVIOUSLY DELETED]</strong>")
 
-
-
-        # Set the index to the currently connected room.
-        self.AboveCombo.setCurrentIndex(next((possible.index(i["RoomName"]) for i in self.GUIWin.box_check if i["RoomID"] == AboveComboArc),possible.index("None")))
-        self.BelowCombo.setCurrentIndex(next((possible.index(i["RoomName"]) for i in self.GUIWin.box_check if i["RoomID"] == BelowComboArc),possible.index("None")))
-        self.NorthCombo.setCurrentIndex(next((possible.index(i["RoomName"]) for i in self.GUIWin.box_check if i["RoomID"] == NorthComboArc),possible.index("None")))
-        self.SouthCombo.setCurrentIndex(next((possible.index(i["RoomName"]) for i in self.GUIWin.box_check if i["RoomID"] == SouthComboArc),possible.index("None")))
-        self.EastCombo.setCurrentIndex(next((possible.index(i["RoomName"]) for i in self.GUIWin.box_check if i["RoomID"] == EastComboArc),possible.index("None")))
-        self.WestCombo.setCurrentIndex(next((possible.index(i["RoomName"]) for i in self.GUIWin.box_check if i["RoomID"] == WestComboArc),possible.index("None")))
-
         self.connectComboBoxes()
 
     # Save the the main array
@@ -378,12 +387,16 @@ class rec(QGraphicsRectItem):
         kwargs.pop('graphicsWin')
         kwargs.pop('GUIWin')
         kwargs.pop('name')
+        self.bypass = False
+        if "bypassFirstPass" in kwargs:
+            self.bypass = kwargs["bypassFirstPass"]
+            kwargs.pop("bypassFirstPass")
 
         super(rec, self).__init__(*args, **kwargs)
         
         self.nameTextItem = QGraphicsTextItem(self.name,self)
         self.connectedRooms = QGraphicsTextItem(self)
-        self.properties = recProperties(self.GUIWin, rect = self)
+        self.properties = recProperties(self.GUIWin, rect = self, bypassFirstPass = self.bypass)
         self.nameTextItem.setX(args[0])
         self.nameTextItem.setY(args[1])
         self.connectedRooms.setX(args[0])
@@ -514,7 +527,7 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
         data.pop("X")
         data.pop("Y")
         self.box_check.append(data)
-        self.scene.addItem(rec(x,y,60,60,graphicsWin=self.ui.graphicsView,GUIWin=self,name=data["RoomName"]))
+        self.scene.addItem(rec(x,y,60,60,graphicsWin=self.ui.graphicsView,GUIWin=self,name=data["RoomName"],bypassFirstPass=True))
 
         # Qt likes to put new objects at the beginning of the list.
         self.box_check[-1]["roomDef"] = self.filterSceneObjs()[0]
@@ -658,8 +671,8 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
     
     # Resets the workspace
     def cleanWorkSpace(self):
-        for i, item in enumerate(self.box_check):
-            self.box_check.pop(i)
+        for i in range(len(self.box_check)):
+            self.box_check.pop()
         for item in self.ui.graphicsView.items():
             self.scene.removeItem(item)
         self.setWindowTitle(f"MasterForge - Untitled")
