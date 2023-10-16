@@ -419,6 +419,22 @@ class rec(QGraphicsRectItem):
         self.rClickMenu.addAction(self.roomDel)
         self.setAcceptDrops(True)
 
+    def mouseReleaseEvent(self, event):
+        self.GUIWin.markAsUnsaved()
+        ignore = False
+        if self.rect().x() + self.x() < 0:
+            self.setX(-self.rect().x())
+            ignore = True
+            event.ignore()
+        if self.rect().y() + self.y() < 0:
+            self.setY(-self.rect().y())
+            ignore = True
+            event.ignore()
+        #if ignore:
+            #return
+        return super(rec,self).mouseReleaseEvent(event)
+    
+
     # Open the properties box on double click.
     def mouseDoubleClickEvent(self, event):
         self.properties.show()
@@ -427,12 +443,6 @@ class rec(QGraphicsRectItem):
     def contextMenuEvent(self,event):
         self.rClickMenu.exec(self.cursor().pos())
 
-    def sceneEvent(self, event):
-        # If an onbject moves, mark it as unsaved.
-        if event.type() == QGraphicsSceneMouseEvent.GraphicsSceneMouseMove:
-            self.GUIWin.markAsUnsaved()
-        # Required here, otherwise nothing happens.
-        return super(rec,self).sceneEvent(event)
 
 
 
@@ -610,7 +620,7 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
             temp['Y'] = temp["roomDef"].rect().y() + temp["roomDef"].y()
             temp.pop("roomDef")
             wsSave["data"].append(temp)
-        with open("map_workspace.mfw", "w") as ws:
+        with open(loc, "w") as ws:
             json.dump(wsSave,ws)
         self.setWindowTitle(f"MasterForge - {file_info.fileName()}")
         self.hasUnsavedChanges = False
