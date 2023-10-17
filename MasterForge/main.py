@@ -35,8 +35,26 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         self.setWindowTitle(f"Properties  - {self.RoomNameEdit.text()}")
         self.RoomDescEdit.textChanged.connect(self.descChanged)
         self.RoomDescEdit.setText(self.GUIWin.box_check[-1]["RoomDesc"]) 
-        self.comboAlloc = [self.AboveCombo, self.BelowCombo, self.NorthCombo, self.SouthCombo, self.EastCombo, self.WestCombo]
+        self.connectComboAlloc = [self.AboveCombo, self.BelowCombo, self.NorthCombo, self.SouthCombo, self.EastCombo, self.WestCombo]
+        self.connectRegOptionAlloc = [self.Option1Check, self.Option2Check, self.Option3Check, self.Option4Check, self.Option5Check, self.Option6Check, self.Option7Check, self.Option8Check]
         self.intToNav = ["A","B","N","S","E","W"]
+
+        self.backupConnectionCombo = []
+        self.backupRegOption = []
+        self.backupRoomName = ""
+        self.backupRoomDesc = ""
+
+        attrib = self.GUIWin.box_check[-1]["attrib"]
+
+        for i in range(self.EnabledCombo.count()):
+            self.EnabledCombo.setItemData(i,attrib & (2**(i+8)))
+        self.checkTick(0)
+        self.EnabledCombo.currentIndexChanged.connect(self.checkTick)
+        self.EnabledCheck.stateChanged.connect(self.changeEnabledState)
+
+        for i, option in enumerate(self.connectRegOptionAlloc):
+            option.setChecked(attrib & (2**i))
+
 
         # Initalize item data
         self.AboveCombo.addItem("None")
@@ -82,6 +100,42 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         if self.bypass == False:
             self.update()
     
+    def reject(self):
+        for i, item in enumerate(self.connectComboAlloc):
+            item.setCurrentIndex(self.backupConnectionCombo[i])
+        self.RoomNameEdit.setText(self.backupRoomName)
+        self.RoomDescEdit.setText(self.backupRoomDesc)
+        self.setDirectionString()
+        for i, checkBox in enumerate(self.connectRegOptionAlloc):
+            checkBox.setCheckState(self.backupRegOption[i])
+        self.backupConnectionCombo.clear()
+        self.backupRegOption.clear()
+        attrib = self.GUIWin.box_check[-1]["attrib"]
+        for i in range(self.EnabledCombo.count()):
+            self.EnabledCombo.setItemData(i,attrib & (2**(i+8)))
+        self.checkTick(0)
+        self.EnabledCombo.currentIndexChanged.connect(self.checkTick)
+        self.EnabledCheck.stateChanged.connect(self.changeEnabledState)
+        for i, option in enumerate(self.connectRegOptionAlloc):
+            option.setChecked(attrib & (2**i))
+        return super(recProperties,self).reject()
+
+        
+
+    def checkTick(self, index):
+        if self.EnabledCombo.itemData(index):
+            self.EnabledCheck.setCheckState(Qt.Checked)
+        else:
+            self.EnabledCheck.setCheckState(Qt.Unchecked)
+
+    def changeEnabledState(self,state):
+        self.EnabledCombo.currentIndexChanged.disconnect(self.checkTick)
+        if state == Qt.Checked.value:
+            self.EnabledCombo.setItemData(self.EnabledCombo.currentIndex(),True)
+        else:
+            self.EnabledCombo.setItemData(self.EnabledCombo.currentIndex(),False)
+        self.EnabledCombo.currentIndexChanged.connect(self.checkTick)
+
     def descChanged(self):
         if len(self.RoomDescEdit.toPlainText()) > 400:
             self.CharLimitLabel.setText(f"<div style='color:red'>{len(self.RoomDescEdit.toPlainText())}/400 Characters</div>")
@@ -90,7 +144,7 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
 
 
     def setComboBoxID(self,comboType,ID):
-        combo = self.comboAlloc[self.intToNav.index(comboType)]
+        combo = self.connectComboAlloc[self.intToNav.index(comboType)]
         comboIndex = next(i for i in range(combo.count()) if combo.itemData(i) == ID)
         self.disconnectComboBoxes()
         combo.setCurrentIndex(comboIndex)
@@ -113,8 +167,6 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         self.EastCombo.currentIndexChanged.disconnect(self.eIndexChange)
         self.WestCombo.currentIndexChanged.disconnect(self.wIndexChange)
 
-    # STUB
-    #TODO: Backwards connectivity
     def indexChange(self,obj,index):
         if index == 0:
             return
@@ -132,7 +184,7 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
 
         oppElement.properties.update()
         oppElement.properties.disconnectComboBoxes()
-        oppElement.properties.comboAlloc[oppMapDir].setCurrentIndex(next(i for i in range(obj.count()) if obj.itemData(i) == self.ID))
+        oppElement.properties.connectComboAlloc[oppMapDir].setCurrentIndex(next(i for i in range(obj.count()) if obj.itemData(i) == self.ID))
         oppBoxListing[self.intToNav[oppMapDir]] = self.ID
         oppElement.properties.connectComboBoxes()
         oppElement.properties.setDirectionString()
@@ -144,6 +196,12 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         self.tabWidget.setCurrentIndex(0)
         self.setWindowTitle(f"Properties  - {self.RoomNameEdit.text()}")
         self.update()
+        self.backupConnectionCombo = [self.AboveCombo.currentIndex(),self.BelowCombo.currentIndex(),self.NorthCombo.currentIndex(),self.SouthCombo.currentIndex(),self.EastCombo.currentIndex(),self.WestCombo.currentIndex()]
+        self.backupRoomName = self.RoomNameEdit.text()
+        self.backupRoomDesc = self.RoomDescEdit.toPlainText()
+        self.backupRegOption.clear()
+        for x in self.connectRegOptionAlloc:
+            self.backupRegOption.append(x.checkState())
 
     # Shows that a room is disconnected.
     def disconnectWarning(self):
@@ -324,34 +382,21 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         self.EastLabel.setText("East Room:")
         self.WestLabel.setText("West Room:")
        
-        #NorthComboArc = self.NorthCombo.currentText()
-        #self.GUIWin.box_check[index]["N"] = next((i["RoomID"] for i in self.GUIWin.box_check if i["RoomName"] == NorthComboArc),0)
-        #self.NorthCombo.setItemData(0,self.GUIWin.box_check[index]["N"])
-       
-        #SouthComboArc = self.SouthCombo.currentText()
-        #self.GUIWin.box_check[index]["S"] = next((i["RoomID"] for i in self.GUIWin.box_check if i["RoomName"] == SouthComboArc),0)
-        #self.SouthCombo.setItemData(0,self.GUIWin.box_check[index]["S"])
-
-        #EastComboArc = self.EastCombo.currentText()
-        #self.GUIWin.box_check[index]["E"] = next((i["RoomID"] for i in self.GUIWin.box_check if i["RoomName"] == EastComboArc),0)
-        #self.EastCombo.setItemData(0,self.GUIWin.box_check[index]["E"])
-        
-        #WestComboArc = self.WestCombo.currentText()
-        #self.GUIWin.box_check[index]["W"] = next((i["RoomID"] for i in self.GUIWin.box_check if i["RoomName"] == WestComboArc),0)
-        #self.WestCombo.setItemData(0,self.GUIWin.box_check[index]["W"])
-
-        #AboveComboArc = self.AboveCombo.currentText()
-        #self.GUIWin.box_check[index]["A"] = next((i["RoomID"] for i in self.GUIWin.box_check if i["RoomName"] == AboveComboArc),0)
-        #self.AboveCombo.setItemData(0,self.GUIWin.box_check[index]["A"])
-
-        #BelowComboArc = self.BelowCombo.currentText()
-        #self.GUIWin.box_check[index]["B"] = next((i["RoomID"] for i in self.GUIWin.box_check if i["RoomName"] == BelowComboArc),0)
-        #self.BelowCombo.setItemData(0,self.GUIWin.box_check[index]["B"])
         
         self.setDirectionString()
 
+        attribTickAlloc = [self.Option1Check, self.Option2Check, self.Option3Check, self.Option4Check, self.Option5Check, self.Option6Check, self.Option7Check, self.Option8Check]
+        values = []
+        for i, item in enumerate(attribTickAlloc):
+            values.append(item.isChecked())
+        #if op
+        for i in range(self.EnabledCombo.count()):
+            values.append(self.EnabledCombo.itemData(i))
+        self.GUIWin.box_check[index]["attrib"] = 0
+        for i, v in enumerate(values):
+            self.GUIWin.box_check[index]["attrib"] += v * (2**i)
         self.GUIWin.markAsUnsaved()
-        self.close()
+        return super(recProperties,self).accept()
     
     def setDirectionString(self):
         # Direction info
@@ -420,15 +465,13 @@ class rec(QGraphicsRectItem):
         self.setAcceptDrops(True)
 
     def mouseReleaseEvent(self, event):
-        self.GUIWin.markAsUnsaved()
-        ignore = False
+        if self.x() != 0 or self.y() != 0:
+            self.GUIWin.markAsUnsaved()
         if self.rect().x() + self.x() < 0:
             self.setX(-self.rect().x())
-            ignore = True
             event.ignore()
         if self.rect().y() + self.y() < 0:
             self.setY(-self.rect().y())
-            ignore = True
             event.ignore()
         #if ignore:
             #return
@@ -454,7 +497,8 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
         self.box_check = []
         self.idIter = 1
         self.scene = QGraphicsScene()
-        self.hasUnsavedChanges = False        
+        self.hasUnsavedChanges = False   
+        self.locFile = None     
 
 
         self.ui = mainwindow_ui.Ui_MainWindow()
@@ -466,12 +510,14 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
         self.ui.actionRoom.triggered.connect(self.addRoom)
         self.ui.actionExport.triggered.connect(self.exportData)
         self.ui.actionSave.triggered.connect(self.saveWorkspace)
+        self.ui.actionSaveAs.triggered.connect(lambda: self.saveWorkspace(saveAs=True))
         self.ui.actionClose.triggered.connect(self.closeWorkspace)
         self.ui.actionBig_Brother.triggered.connect(self.bigBrother)
 
         self.ui.actionOpen.setShortcut(QKeySequence(QKeySequence.Open))
         self.ui.actionRoom.setShortcut(QKeySequence(QKeySequence.New))
-        self.ui.actionExport.setShortcut(QKeySequence(QKeySequence.SaveAs))
+        self.ui.actionSaveAs.setShortcut(QKeySequence(QKeySequence.SaveAs))
+        self.ui.actionExport.setShortcut(QKeySequence(Qt.CTRL | Qt.Key_E))
         self.ui.actionSave.setShortcut(QKeySequence(QKeySequence.Save))
         self.ui.actionClose.setShortcut(QKeySequence(QKeySequence.Close))
 
@@ -606,11 +652,12 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
                     dataFile.write(b'\0')
     
     # Save the workspace to a MFW file.
-    def saveWorkspace(self):
-        loc, ok = QFileDialog.getSaveFileName(self,"Save Project workspace",'map_workspace',"*.mfw")
-        
-        if not ok:
-            return False
+    def saveWorkspace(self, saveAs=False):
+        loc = self.locFile
+        if self.locFile == None or saveAs == True:
+            loc, ok = QFileDialog.getSaveFileName(self,"Save Project workspace",'map_workspace',"*.mfw")
+            if not ok:
+                return False
         
         file_info = QFileInfo(loc)
         wsSave = {"version":VERSION,"iteration":self.idIter,"data":[]}        
@@ -625,6 +672,7 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
         self.setWindowTitle(f"MasterForge - {file_info.fileName()}")
         self.hasUnsavedChanges = False
         self.ui.actionClose.setDisabled(False)
+        self.locFile = loc
         return True
     
     # Open a workspace file
@@ -634,6 +682,7 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
             return
         data = []
         self.closeWorkspace()
+        self.locFile = loc
         file_info = QFileInfo(loc)
         
         loc.split()
@@ -695,6 +744,7 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
         self.ui.actionClose.setDisabled(True)
         self.idIter = 1
         self.hasUnsavedChanges = False
+        self.locFile = None
     
     def markAsUnsaved(self):
         if self.hasUnsavedChanges is False: 

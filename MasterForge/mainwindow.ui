@@ -63,6 +63,7 @@
     </property>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
     <addaction name="actionClose"/>
     <addaction name="separator"/>
     <addaction name="actionExport"/>
@@ -112,6 +113,11 @@
   <action name="actionBig_Brother">
    <property name="text">
     <string>Big Brother</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>Save Workspace As</string>
    </property>
   </action>
  </widget>
