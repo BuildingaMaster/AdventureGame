@@ -31,6 +31,7 @@ bool Inventory::processCommand(vector<string> args)
 			if (itemMap[0].size() > 0)
 			{
 				addItem(itemMap[0][0]);
+				itemMap[0].pop_back();
 				cout << "\nYou grab an apple from the tree.\n";
 			}
 			else
