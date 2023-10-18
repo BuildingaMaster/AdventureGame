@@ -6,6 +6,12 @@ Consumable::Consumable(consumableType initType, double initWeight)
 	setWeight(initWeight);
 }
 
+Consumable::Consumable()
+{
+	thisType = consumable;
+	itemType = apple;
+}
+
 Consumable::~Consumable()
 {
 	
@@ -13,15 +19,13 @@ Consumable::~Consumable()
 
 void Consumable::consume()
 {
-	if (itemType == Apple)
+	if (itemType == apple)
 	{
 		// Implement eating apple functionality here!
-
-		delete this;
 	}
 }
 
-consumableType Consumable::getType()
+consumableType Consumable::getConsumType()
 {
 	return itemType;
 }

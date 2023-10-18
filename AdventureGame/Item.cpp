@@ -8,10 +8,15 @@ Item::Item()
     weight = 0.0;
 }
 
-Item::Item(itemState initState)
+Item::Item(itemType initType)
 {
-    currentState = initState;
+    thisType = initType;
     weight = 0.0;
+}
+
+itemType Item::getType()
+{
+    return thisType;
 }
 
 itemState Item::getState()

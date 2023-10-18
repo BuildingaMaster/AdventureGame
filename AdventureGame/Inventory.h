@@ -10,13 +10,8 @@ class Inventory
 {
 public:
 	Inventory();
-
-	void listInventory();
-
 	//void addItem(Item toAdd, enum, int);
 	void addItem(Item toAdd);
-	void removeItem(Item toRemove);
-	Item fetchItem(consumableType);
 	bool processCommand(vector<string> args);
 	string inventoryValidCommands = "pick grab eat consume ";
 

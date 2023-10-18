@@ -1,9 +1,11 @@
 #include "Inventory.h"
+#include "Item.h"
+#include "Consumable.h"
 
 Inventory::Inventory()
 {
     itemMap.insert(std::pair<int, vector<Item>>(0, vector<Item>()));
-    itemMap[0].insert(itemMap[0].begin(), Item());
+    itemMap[0].insert(itemMap[0].begin(), Item(consumable));
 }
 
 void Inventory::addItem(Item toAdd)
@@ -11,20 +13,11 @@ void Inventory::addItem(Item toAdd)
 	currentInventory.push_back(toAdd);
 }
 
-/*Item Inventory::fetchItem(consumableType toFind)
-{
-	for (int i = 0; i < currentInventory.size(); i++)
-	{
-		// if(currentInventory[i].)
-		// Stuck here
-	}
-}*/
-
 
 bool Inventory::processCommand(vector<string> args)
 {
 	//TODO 
-	if (args[0] == "pick")
+	if (args[0] == "pick" || args[0] == "grab")
 	{
 		if (args[1] == "apple")
 		{
@@ -32,7 +25,7 @@ bool Inventory::processCommand(vector<string> args)
 			{
 				addItem(itemMap[0][0]);
 				itemMap[0].pop_back();
-				cout << "\nYou grab an apple from the tree.\n";
+				cout << "\nYou pick an apple from the tree.\n";
 			}
 			else
 			{
@@ -41,11 +34,20 @@ bool Inventory::processCommand(vector<string> args)
 		}
 	}
 
-	else if (args[0] == "pick")
+	else if (args[0] == "eat" || args[0] == "consume")
 	{
 		if (args[1] == "apple")
 		{
-			//if(userInventory)
+			for (int i = 0; i < currentInventory.size(); i++)
+			{
+				if (currentInventory[i].getType() == consumable)
+				{
+					currentInventory.erase(currentInventory.begin()+i);
+					cout << "\nYou eat the apple!\n";
+					return true;
+				}
+			}
+			cout << "\nYou don't have an apple.\n";
 		}
 	}
 	return true;

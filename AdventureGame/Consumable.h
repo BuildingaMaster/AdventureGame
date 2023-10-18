@@ -1,16 +1,17 @@
 #pragma once
 #include "Item.h"
 // Apples, Mushrooms
-enum consumableType { Apple, Mushroom };
+enum consumableType { apple, mushroom };
 
 class Consumable : protected Item
 {
 private:
 	consumableType itemType;
 public:
-	consumableType getType();
+	consumableType getConsumType();
 	Consumable(consumableType, double);
 	void consume();
 	~Consumable();
+	Consumable();
 };
 
