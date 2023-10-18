@@ -8,7 +8,6 @@
 
 #include "Location.h"
 #include "PlayerActions.h"
-#include "StartingRoom.h"
 #include "Item.h"
 #include "Inventory.h"
 #include "Consumable.h"
