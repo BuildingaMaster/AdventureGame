@@ -20,6 +20,7 @@ Inventory userInventory;
 
 
 
+// Tells the player the backstory of the game
 void backStory()
 {
 	cout << "You open your eyes and see you are in the middle of a forest. " << endl;
@@ -40,7 +41,7 @@ int main()
     // itemMap[0] = new vector<Item>;
 	backStory();
 
-	Location startingRoom;
+	Action startingRoom;
 
 	startingRoom.setDescription("You are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight, although a nearby apple tree seems to be within reach. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.");
 	cout << endl;

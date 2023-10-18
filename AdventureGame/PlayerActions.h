@@ -2,13 +2,15 @@
 
 #include <iostream>
 #include <string>
+#include "Location.h"
 using namespace std;
-
-class Action // TODO: Please convert to processCommand structure.
+// Derived from Location
+class Action : public Location // TODO: Please convert to processCommand structure.
 {
-protected:
-	char move;
+public:
+	string move;
 	// move to a cpp file 
+	// Allows player to move around the map
 	void Move()
 	{
 		bool validInput = false;
@@ -16,21 +18,27 @@ protected:
 		{
 			cout << "Where to? ";
 			cin >> move;
-			if (move == 'N' || move == 'n')
+			if (move == "N" || move == "n")
 			{
-				validInput = true;
+				validInput = false;
 			}
-			else if (move == 'S' || move == 's')
+			else if (move == "S" || move == "s")
 			{
-				validInput = true;
+				validInput = false;
 			}
-			else if (move == 'E' || move == 'e')
+			else if (move == "E" || move == "e")
 			{
-				validInput = true;
+				validInput = false;
 			}
-			else if (move == 'W' || move == 'w')
+			else if (move == "W" || move == "w")
 			{
-				validInput = true;
+				validInput = false;
+			}
+			// displays where the is user 
+			else if (move == "Look" || move == "look")
+			{
+				cout << endl << description << endl;
+				validInput = false;
 			}
 			else
 			{
@@ -44,10 +52,6 @@ protected:
 			}
 		} while (validInput == false);
 	}
-public:
-	Action()
-	{
 
-	}
 
 };
