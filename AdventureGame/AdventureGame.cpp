@@ -23,9 +23,9 @@ Inventory userInventory;
 void backStory()
 {
 	cout << "You open your eyes and see you are in the middle of a forest. " << endl;
-	cout << "Its just you, your thoughts, and the colorful wilderness. " << endl;
-	cout << "You ask yourself, how the hell did I get here and what is my purpose here? " << endl;
-	cout << "Well, the more you explore, the more you learn about not only where you are, but who you are. " << endl << endl;
+	cout << "It's just you, your thoughts, and the colorful wilderness. " << endl;
+	cout << "You ask yourself: how the hell did I get here, and what is my purpose?" << endl;
+	cout << "The more you explore, the more you learn about not only where you are, but who you are. " << endl << endl;
 }
 
 int main()
@@ -51,10 +51,13 @@ int main()
     bool validInput;
     do
     {
-        cout << "What would you like to do?\n> ";
-        getline(cin,command);
-        validInput = CP.interpretCommand(command);
-    } while (validInput == false);
+        do
+        {
+            cout << "What would you like to do?\n> ";
+            getline(cin, command);
+            validInput = CP.interpretCommand(command);
+        } while (validInput == false);
+    } while (true);
 }
 
 
