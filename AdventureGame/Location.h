@@ -1,5 +1,5 @@
-#ifndef LOCATION_H
-#define LOCATION_H
+#pragma once
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -17,8 +17,10 @@ public:
 		if (args[0] == "look")
 		{
 			cout << endl << description << endl;
+			return true;
 		}
-		return true;
+		cout << "\nWhat do you want to "<<args[0]<<"?\n";
+		return false;
 	}
 	void setDescription(string s)
 	{
@@ -34,4 +36,3 @@ public:
 		description = "";
 	}
 };
-#endif // !LOCATION_H

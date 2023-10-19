@@ -1,5 +1,5 @@
-#ifndef ACTION_H
-#define ACTION_H
+#pragma once
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -51,4 +51,3 @@ public:
 	}
 
 };
-#endif // !ACTION_H
