@@ -3,7 +3,7 @@
 // Apples, Mushrooms
 enum consumableType { apple, mushroom };
 
-class Consumable : protected Item
+class Consumable : public Item
 {
 private:
 	consumableType itemType;
