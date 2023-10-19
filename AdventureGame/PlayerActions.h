@@ -1,10 +1,10 @@
-#ifndef ACTION_H
-#define ACTION_H
+#pragma once
+
 #include <iostream>
 #include <string>
 using namespace std;
 
-class Action
+class Action // TODO: Please convert to processCommand structure.
 {
 protected:
 	char move;
@@ -51,4 +51,3 @@ public:
 	}
 
 };
-#endif // !ACTION_H

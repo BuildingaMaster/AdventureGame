@@ -1,6 +1,7 @@
-#ifndef LOCATION_H
-#define LOCATION_H
+#pragma once
+
 #include <string>
+#include <vector>
 #include <iostream>
 #include "PlayerActions.h"
 using namespace std;
@@ -10,6 +11,17 @@ class Location
 private:
 	string description;
 public:
+	string locationValidCommands = "look see describe visualize ";
+	bool processCommand(vector<string> args)
+	{
+		if (args[0] == "look")
+		{
+			cout << endl << description << endl;
+			return true;
+		}
+		cout << "\nWhat do you want to "<<args[0]<<"?\n";
+		return false;
+	}
 	void setDescription(string s)
 	{
 		description = s; 
@@ -19,30 +31,8 @@ public:
 		cout << description;
 	}
 	
-	void choice()
-	{
-		bool validInput = false;
-
-		do
-		{
-			string c;
-			cout << "What to do? ";
-			cin >> c;
-			for(auto& character : c)
-			{
-				character = tolower(character);
-			}
-			if (c == "look")
-			{
-				validInput = true;
-				cout << endl << description << endl;
-			}
-			
-		}while (validInput == false);
-	}
 	Location()
 	{
 		description = "";
 	}
 };
-#endif // !LOCATION_H

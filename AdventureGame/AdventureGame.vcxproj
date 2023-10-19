@@ -128,10 +128,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AdventureGame.cpp" />
+    <ClCompile Include="Consumable.cpp" />
+    <ClCompile Include="ContextParser.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Consumable.h" />
+    <ClCompile Include="ContextParser.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Location.h" />
-    <ClCompile Include="StartingRoom.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerActions.h" />
