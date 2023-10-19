@@ -46,6 +46,12 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         return false;
     }
 
+    if (formattedCmd[0].size() < 3)
+    {
+        cout << "\nI don't know what that is!\n";
+        return false;
+    }
+
     // Figure out what command this is for.
     if (locationMGR->locationValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
     {
@@ -55,6 +61,6 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
     {
         return inventoryMGR->processCommand(formattedCmd);
     }
-
+    cout << "\nI don't know what that is!\n";
     return false;
 }
