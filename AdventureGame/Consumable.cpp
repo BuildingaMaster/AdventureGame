@@ -1,15 +1,23 @@
 #include "Consumable.h"
 
-Consumable::Consumable(consumableType initType, double initWeight)
+Consumable::Consumable(consumableType initType, double initWeight) : Item(consumable)
 {
 	itemType = initType;
 	setWeight(initWeight);
+	if (initType == apple)
+	{
+		itemName = "apple";
+	}
+	else if (initType == mushroom)
+	{
+		itemName = "mushroom";
+	}
 }
 
-Consumable::Consumable()
+Consumable::Consumable() : Item(consumable)
 {
-	thisType = consumable;
 	itemType = apple;
+	itemName = "apple";
 }
 
 Consumable::~Consumable()
