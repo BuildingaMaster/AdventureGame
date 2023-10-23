@@ -16,10 +16,6 @@ using namespace std;
 
 Inventory userInventory;
 
-
-
-
-
 void backStory()
 {
 	cout << "You open your eyes and see you are in the middle of a forest. " << endl;
@@ -30,25 +26,26 @@ void backStory()
 
 int main()
 {
-    // itemMap[0][0].print();
-
-
-    // Starting Room ID = 0
-    
-    // itemMap.insert(itemMap.begin(), new vector<Item>);
-
-    // itemMap[0] = new vector<Item>;
 	backStory();
-
-	Location startingRoom;
+    
     PlayerActions playeract;
 
-	startingRoom.setDescription("You are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight, although a nearby apple tree seems to be within reach. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.");
+    // Initializing Starting Rooms
+	Location* startingRoom = new Location();
+    startingRoom->updateCurrentLocation(startingRoom);
+
+    // All it takes to make a Room
+    Location* northRoom = new Location();
+    northRoom->setDescription("This is a new room!");
+    startingRoom->setAdjacent(northRoom, North);
+    northRoom->setAdjacent(startingRoom, South);
+
+	startingRoom->setDescription("You are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight, although a nearby apple tree seems to be within reach. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.");
 	cout << endl;
-	startingRoom.printLocation();
+	startingRoom->printLocation();
 	cout << endl;
     string command;
-    ContextParser CP(&startingRoom,&userInventory,&playeract);
+    ContextParser CP(&userInventory,&playeract);
     bool validInput;
     do
     {
@@ -56,7 +53,7 @@ int main()
         {
             cout << "What would you like to do?\n> ";
             getline(cin, command);
-            validInput = CP.interpretCommand(command);
+            validInput = CP.interpretCommand(startingRoom->getCurrentLocation(), command);
         } while (validInput == false);
     } while (true);
 }

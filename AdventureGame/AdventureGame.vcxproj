@@ -143,6 +143,7 @@
     <ClInclude Include="Item.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Location.cpp" />
     <ClCompile Include="Location.h" />
   </ItemGroup>
   <ItemGroup>
