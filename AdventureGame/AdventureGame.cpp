@@ -27,6 +27,7 @@ void backStory()
 	cout << "The more you explore, the more you learn about not only where you are, but who you are. " << endl << endl;
 }
 
+/*
 #pragma pack(push, 1)
 struct mapFileHeader
 {
@@ -74,6 +75,7 @@ struct mapDescFile
 #pragma pack(pop)
 
 map<int, Location*> locationMap;
+*/
 
 int main()
 {
@@ -81,6 +83,7 @@ int main()
     
     PlayerActions playeract;
 
+    /*
     // Reading from Map File
     ifstream in;
     in.open("map.mbm", ifstream::in | ifstream::binary);
@@ -127,8 +130,9 @@ int main()
             locationMap[map.layout[i].id]->setAdjacent(locationMap[map.layout[i].direction[j]], static_cast<cardinalDirection>(j));
         }
     }
-    
-    /* Convert to map file
+    */
+
+    // Convert to map file
     // Initializing Starting Rooms
 	Location* startingRoom = new Location();
     startingRoom->updateCurrentLocation(startingRoom);
@@ -142,9 +146,9 @@ int main()
 	cout << endl;
 	startingRoom->printLocation();
 	cout << endl;
-    */
-    Location* getStarted = locationMap[1];
-    getStarted->updateCurrentLocation(locationMap[1]);
+    
+    // Location* getStarted = locationMap[1];
+    // getStarted->updateCurrentLocation(locationMap[1]);
     
     string command;
     ContextParser CP(&userInventory,&playeract);
@@ -155,7 +159,8 @@ int main()
         {
             cout << "What would you like to do?\n> ";
             getline(cin, command);
-            validInput = CP.interpretCommand(getStarted->getCurrentLocation(), command);
+            validInput = CP.interpretCommand(startingRoom->getCurrentLocation(), command);
+            // validInput = CP.interpretCommand(getStarted->getCurrentLocation(), command);
         } while (validInput == false);
     } while (true);
 }
