@@ -7,7 +7,7 @@ using namespace std;
 Location::Location()
 {
 	description = "";
-	locationValidCommands = "look see describe visualize ";
+	locationValidCommands = "look see describe visualize north south east west above below ";
 	
 	// Initialize connection array to nullptrs
 	for (int i = 0; i < 6; i++)
@@ -35,6 +35,90 @@ bool Location::processCommand(vector<string> args)
 	{
 		cout << endl << description << endl;
 		return true;
+	}
+	if (args[0] == "north")
+	{
+		if (currentLocation->checkAdjacent(North) == nullptr)
+		{
+			cout << "\nYou can't go North!\n\n";
+			return true;
+		}
+		else
+		{
+			updateCurrentLocation(checkAdjacent(North));
+			currentLocation->printLocation();
+			return true;
+		}
+	}
+	if (args[0] == "south")
+	{
+		if (currentLocation->checkAdjacent(South) == nullptr)
+		{
+			cout << "\nYou can't go South!\n\n";
+			return true;
+		}
+		else
+		{
+			updateCurrentLocation(checkAdjacent(South));
+			currentLocation->printLocation();
+			return true;
+		}
+	}
+	if (args[0] == "east")
+	{
+		if (currentLocation->checkAdjacent(East) == nullptr)
+		{
+			cout << "\nYou can't go East!\n\n";
+			return true;
+		}
+		else
+		{
+			updateCurrentLocation(checkAdjacent(East));
+			currentLocation->printLocation();
+			return true;
+		}
+	}
+	if (args[0] == "west")
+	{
+		if (currentLocation->checkAdjacent(West) == nullptr)
+		{
+			cout << "\nYou can't go West!\n\n";
+			return true;
+		}
+		else
+		{
+			updateCurrentLocation(checkAdjacent(West));
+			currentLocation->printLocation();
+			return true;
+		}
+	}
+	if (args[0] == "above")
+	{
+		if (currentLocation->checkAdjacent(Above) == nullptr)
+		{
+			cout << "\nYou can't go above!\n\n";
+			return true;
+		}
+		else
+		{
+			updateCurrentLocation(checkAdjacent(Above));
+			currentLocation->printLocation();
+			return true;
+		}
+	}
+	if (args[0] == "below")
+	{
+		if (currentLocation->checkAdjacent(Below) == nullptr)
+		{
+			cout << "\nYou can't go below!\n\n";
+			return true;
+		}
+		else
+		{
+			updateCurrentLocation(checkAdjacent(Below));
+			currentLocation->printLocation();
+			return true;
+		}
 	}
 	cout << "\nWhat do you want to " << args[0] << "?\n";
 	return false;
