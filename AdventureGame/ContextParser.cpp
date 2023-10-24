@@ -1,13 +1,15 @@
 #include "ContextParser.h"
+
 #include <vector>
 #include <string>
 
 using namespace std;
 
-ContextParser::ContextParser(Location* loc, Inventory* inv)
+ContextParser::ContextParser(Location* loc, Inventory* inv, PlayerActions* pact)
 {
     locationMGR = loc;
     inventoryMGR = inv;
+    playerActionsMGR = pact;
 }
 
 bool ContextParser::interpretCommand(string unfilteredCmd)
@@ -60,6 +62,10 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
     else if (inventoryMGR->inventoryValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
     {
         return inventoryMGR->processCommand(formattedCmd);
+    }
+    else if (playerActionsMGR->playerActionsValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
+    {
+        return playerActionsMGR->processCommand(formattedCmd);
     }
     cout << "\nI don't know what that is!\n";
     return false;
