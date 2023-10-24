@@ -138,6 +138,33 @@ void Location::setAdjacent(Location* adjRoom, cardinalDirection dir)
 	}
 }
 
+void Location::setAdjacent(Location* adjRoom, cardinalDirection dir, bool twoWay)
+{
+	// Input Validation for cardinalDirection
+	if (dir >= 0 && dir <= 5)
+	{
+		locationConnections[dir] = adjRoom;
+	}
+	else
+	{
+		cout << "Invalid direction!\n";
+		return;
+	}
+	if (twoWay)
+	{
+		cardinalDirection dirOpp;
+		if (dir % 2)
+		{
+			dirOpp = static_cast<cardinalDirection>(dir - 1);
+		}
+		else
+		{
+			dirOpp = static_cast<cardinalDirection>(dir + 1);
+		}
+		adjRoom->setAdjacent(this, dirOpp, false);
+	}
+}
+
 // Returns a pointer to a Location in the direction of dir from the current Location
 Location* Location::checkAdjacent(cardinalDirection dir)
 {

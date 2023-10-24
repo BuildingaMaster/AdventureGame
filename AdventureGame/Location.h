@@ -17,6 +17,7 @@ public:
 	void printLocation();
 
 	void setAdjacent(Location*, cardinalDirection);
+	void setAdjacent(Location*, cardinalDirection, bool);
 	Location* checkAdjacent(cardinalDirection);
 
 	void updateCurrentLocation(Location*);

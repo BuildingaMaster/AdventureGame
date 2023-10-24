@@ -37,10 +37,9 @@ int main()
     // All it takes to make a Room
     Location* northRoom = new Location();
     northRoom->setDescription("\nThis is a new room!\n\n");
-    startingRoom->setAdjacent(northRoom, North);
-    northRoom->setAdjacent(startingRoom, South);
+    startingRoom->setAdjacent(northRoom, North, true);
 
-	startingRoom->setDescription("\nYou are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight, although a nearby apple tree seems to be within reach. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.");
+	startingRoom->setDescription("\nYou are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight, although a nearby apple tree seems to be within reach. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.\n");
 	cout << endl;
 	startingRoom->printLocation();
 	cout << endl;
