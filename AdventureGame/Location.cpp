@@ -16,6 +16,19 @@ Location::Location()
 	}
 }
 
+// Constructor with Description
+Location::Location(string desc)
+{
+	description = desc;
+	locationValidCommands = "look see describe visualize north south east west above below ";
+
+	// Initialize connection array to nullptrs
+	for (int i = 0; i < 6; i++)
+	{
+		locationConnections[i] = nullptr; // If not set to null program will crash
+	}
+}
+
 // Outputs the description of the Location
 void Location::printLocation()
 {

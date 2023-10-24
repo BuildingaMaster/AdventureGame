@@ -65,4 +65,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="map.mbd" />
+    <None Include="map.mbm" />
+  </ItemGroup>
 </Project>

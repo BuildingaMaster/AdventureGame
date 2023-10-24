@@ -11,6 +11,7 @@ class Location
 {
 public:
 	Location();
+	Location(string);
 	string locationValidCommands;
 	bool processCommand(vector<string>);
 	void setDescription(string);
