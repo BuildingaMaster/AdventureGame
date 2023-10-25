@@ -28,33 +28,33 @@ Location::Location(string desc)
 		locationConnections[i] = nullptr; // If not set to null program will crash
 	}
 }
-
+const string Location::directionStrings[] = { "North", "South", "East", "West", "above", "below" };
 // Outputs the description of the Location
 void Location::printLocation()
 {
 	cout << endl << description << endl;
 }
 
-// Sets the location description to the string s
 void Location::setDescription(string s)
 {
 	description = s; 
 }
 
-// Processes Location-based commands
 bool Location::processCommand(vector<string> args)
 {
-	if (args[0] == "look")
+	// Run the "look" command
+	if (args[0] == "look" || args[0] == "see" || args[0] == "visualize")
 	{
 		cout << endl << description << endl;
 		return true;
 	}
 
 	cardinalDirection arg0Direction = stringToDirection(args[0]);
-	string directionStrings[6] = { "North", "South", "East", "West", "above", "below" };
 
+	// Checking for valid direction input, will take just a direction as input 
 	if (arg0Direction >= 0 && arg0Direction <= 5)
 	{
+		// No room in userr's direction input (YET)
 		if (currentLocation->checkAdjacent(arg0Direction) == nullptr)
 		{
 			cout << "\nYou can't go " << directionStrings[arg0Direction] << "!\n";
@@ -62,25 +62,30 @@ bool Location::processCommand(vector<string> args)
 		}
 		else
 		{
+			// Move Player to the new location and print out its description
 			updateCurrentLocation(checkAdjacent(arg0Direction));
 			currentLocation->printLocation();
 			return true;
 		}
 	}
-
+	//arg[0] is the first word the user inputs, then takes the user's direction input
 	if (args[0] == "go" || args[0] == "travel" || args[0] == "walk" || args[0] == "move")
 	{
+		// vector is greater than 1 (has more than 1 room)
 		if (args.size() > 1)
 		{
+			// converts the user's direction input to the cardinal direction eNum
 			cardinalDirection arg1Direction = stringToDirection(args[1]);
+			// valid input for direction
 			if (arg1Direction >= 0 && arg1Direction <= 5)
 			{
+				// no room connected to user's direction input
 				if (currentLocation->checkAdjacent(arg1Direction) == nullptr)
 				{
 					cout << "\nYou can't go " << directionStrings[arg1Direction] << "!\n";
 					return true;
 				}
-				else
+				else // user direction has a room connected 
 				{
 					updateCurrentLocation(checkAdjacent(arg1Direction));
 					currentLocation->printLocation();
@@ -95,7 +100,7 @@ bool Location::processCommand(vector<string> args)
 	return false;
 }
 
-// Sets a new connection from the current room to a new room based off of the direction you want to go
+///@brief Sets a new connection from the current room to a new room based off of the direction you want to go
 void Location::setAdjacent(Location* adjRoom, cardinalDirection dir)
 {
 	// Input Validation for cardinalDirection
@@ -110,6 +115,7 @@ void Location::setAdjacent(Location* adjRoom, cardinalDirection dir)
 }
 
 // Sets a new connection from the current room to a new room in direction dir, either one way or two way
+/// @brief Creates a new connection in a set direction 
 void Location::setAdjacent(Location* adjRoom, cardinalDirection dir, bool twoWay)
 {
 	// Input Validation for cardinalDirection

@@ -22,6 +22,7 @@ bool ContextParser::interpretCommand(Location* loc, string unfilteredCmd)
     {
         // Convert the character to lowercase before parsing.
         character = tolower(character);
+        // Splitting up the string into multiple smaller strings by checking if they are separated by spaces
         if (temp.length() > 0 && character == ' ')
         {
             // Add the string to the vector.

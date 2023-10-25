@@ -17,7 +17,7 @@ void Inventory::addItem(Item toAdd)
 
 bool Inventory::processCommand(vector<string> args)
 {
-	//TODO 
+	//TODO Apple is in every room
 	if (args.size() == 1)
 	{
 		cout << "\nIt's not clear what you want to "<< args[0] <<".\n";
