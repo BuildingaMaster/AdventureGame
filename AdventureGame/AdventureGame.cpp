@@ -173,6 +173,7 @@ int main()
         } while (validInput == false);
     } while (true);
 
+    // Destroying the map pointers so there are no memory leaks
     for (int i = 0; i < map.header.roomCount; i++)
     {
         delete locationMap[map.layout[i].id];
