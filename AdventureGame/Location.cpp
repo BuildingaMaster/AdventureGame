@@ -32,7 +32,7 @@ Location::Location(string desc)
 // Outputs the description of the Location
 void Location::printLocation()
 {
-	cout << description;
+	cout << endl << description << endl;
 }
 
 // Sets the location description to the string s
@@ -53,7 +53,7 @@ bool Location::processCommand(vector<string> args)
 	{
 		if (currentLocation->checkAdjacent(North) == nullptr)
 		{
-			cout << "\nYou can't go North!\n\n";
+			cout << "\nYou can't go North!\n";
 			return true;
 		}
 		else
@@ -67,7 +67,7 @@ bool Location::processCommand(vector<string> args)
 	{
 		if (currentLocation->checkAdjacent(South) == nullptr)
 		{
-			cout << "\nYou can't go South!\n\n";
+			cout << "\nYou can't go South!\n";
 			return true;
 		}
 		else
@@ -81,7 +81,7 @@ bool Location::processCommand(vector<string> args)
 	{
 		if (currentLocation->checkAdjacent(East) == nullptr)
 		{
-			cout << "\nYou can't go East!\n\n";
+			cout << "\nYou can't go East!\n";
 			return true;
 		}
 		else
@@ -95,7 +95,7 @@ bool Location::processCommand(vector<string> args)
 	{
 		if (currentLocation->checkAdjacent(West) == nullptr)
 		{
-			cout << "\nYou can't go West!\n\n";
+			cout << "\nYou can't go West!\n";
 			return true;
 		}
 		else
@@ -109,7 +109,7 @@ bool Location::processCommand(vector<string> args)
 	{
 		if (currentLocation->checkAdjacent(Above) == nullptr)
 		{
-			cout << "\nYou can't go above!\n\n";
+			cout << "\nYou can't go above!\n";
 			return true;
 		}
 		else
@@ -123,7 +123,7 @@ bool Location::processCommand(vector<string> args)
 	{
 		if (currentLocation->checkAdjacent(Below) == nullptr)
 		{
-			cout << "\nYou can't go below!\n\n";
+			cout << "\nYou can't go below!\n";
 			return true;
 		}
 		else

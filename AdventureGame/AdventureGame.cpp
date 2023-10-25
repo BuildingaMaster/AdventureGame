@@ -106,7 +106,7 @@ int main()
     std::vector<char> descBytes(
         (std::istreambuf_iterator<char>(in)),
         (std::istreambuf_iterator<char>()));
-    memcpy(&mapDesc, descBytes.data(), mapBytes.size());
+    memcpy(&mapDesc, descBytes.data(), descBytes.size());
     in.close();
 
     // Converting data read from files to initialize Location objects
@@ -156,7 +156,7 @@ int main()
     {
         do
         {
-            cout << "\n\nWhat would you like to do?\n> ";
+            cout << "\nWhat would you like to do?\n> ";
             getline(cin, command);
             validInput = CP.interpretCommand(getStarted->getCurrentLocation(), command);
         } while (validInput == false);
