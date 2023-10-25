@@ -172,6 +172,12 @@ int main()
             validInput = CP.interpretCommand(locationMap[1]->getCurrentLocation(), command);
         } while (validInput == false);
     } while (true);
+
+    for (int i = 0; i < map.header.roomCount; i++)
+    {
+        delete locationMap[map.layout[i].id];
+        locationMap[map.layout[i].id] = nullptr;
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
