@@ -16,6 +16,7 @@
 #include "ContextParser.h"
 using namespace std;
 
+// Initialize player's inventory object
 Inventory userInventory;
 
 // Called at start of game, couts initial backstory
@@ -27,6 +28,7 @@ void backStory()
 	cout << "The more you explore, the more you learn about not only where you are, but who you are. " << endl << endl;
 }
 
+// Define map file header structure
 #pragma pack(push, 1)
 struct mapFileHeader
 {
@@ -38,6 +40,7 @@ struct mapFileHeader
 };
 #pragma pack(pop)
 
+// Define map layout structure
 #pragma pack(push, 1)
 struct roomLayout
 {
@@ -47,6 +50,7 @@ struct roomLayout
 };
 #pragma pack(pop)
 
+// Define map file structure
 #pragma pack(push, 1)
 struct mapFile 
 {
@@ -56,6 +60,7 @@ struct mapFile
 };
 #pragma pack(pop)
 
+// Define room description structure
 #pragma pack(push, 1)
 struct roomDes
 {
@@ -65,6 +70,7 @@ struct roomDes
 };
 #pragma pack(pop)
 
+// Define map description file structure
 #pragma pack(push, 1)
 struct mapDescFile
 {
@@ -73,16 +79,20 @@ struct mapDescFile
 };
 #pragma pack(pop)
 
+// Initialize map of location pointers with location ID integers
 map<int, Location*> locationMap;
 
 int main()
 {
+    // Print out backstory upon starting game
 	backStory();
     
     PlayerActions playeract;
 
-    // Reading from Map File
+    // Reading from Map Files
     ifstream in;
+    // mbm map files contain location connections
+    // Convert mbm data to map structures
     in.open("map.mbm", ifstream::in | ifstream::binary);
     if (!in.is_open())
     {
@@ -96,7 +106,8 @@ int main()
         (std::istreambuf_iterator<char>()));
     memcpy(&map, mapBytes.data(), mapBytes.size());
     in.close();
-
+    // mbd map files contain location descriptions
+    // Convert mbd data to description structures
     in.open("map.mbd", ifstream::in | ifstream::binary);
     if (!in.is_open())
     {
@@ -129,7 +140,7 @@ int main()
     }
 
     /*
-    // Convert to map file
+    // Convert the actual game map into a map file
     // Initializing Starting Rooms
 	Location* startingRoom = new Location();
     startingRoom->updateCurrentLocation(startingRoom);
@@ -145,9 +156,9 @@ int main()
 	cout << endl;
     */
 
-    Location* getStarted = locationMap[1];
-    getStarted->updateCurrentLocation(locationMap[1]);
-    getStarted->getCurrentLocation()->printLocation();
+    // Set the starting location to the player location and print the description
+    locationMap[1]->updateCurrentLocation(locationMap[1]);
+    locationMap[1]->getCurrentLocation()->printLocation();
     
     string command;
     ContextParser CP(&userInventory,&playeract);
@@ -158,11 +169,10 @@ int main()
         {
             cout << "\nWhat would you like to do?\n> ";
             getline(cin, command);
-            validInput = CP.interpretCommand(getStarted->getCurrentLocation(), command);
+            validInput = CP.interpretCommand(locationMap[1]->getCurrentLocation(), command);
         } while (validInput == false);
     } while (true);
 }
-
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

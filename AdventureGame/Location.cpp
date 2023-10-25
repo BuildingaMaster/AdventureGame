@@ -166,6 +166,7 @@ Location* Location::getCurrentLocation()
 	return currentLocation;
 }
 
+// Converts user input string into readable cardinal direction enum
 cardinalDirection Location::stringToDirection(string str)
 {
 	string stringDirections[6] = { "north", "south", "east", "west", "above", "below" };
