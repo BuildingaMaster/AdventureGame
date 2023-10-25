@@ -7,7 +7,7 @@
 
 #define PLAYER_HEALTH 3
 
-class PlayerActions // TODO: Please convert to processCommand structure.
+class PlayerActions
 {
 private:
 	BaseHealth healthMGR;
