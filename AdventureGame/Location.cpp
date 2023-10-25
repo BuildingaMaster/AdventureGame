@@ -49,90 +49,25 @@ bool Location::processCommand(vector<string> args)
 		cout << endl << description << endl;
 		return true;
 	}
-	if (args[0] == "north")
+
+	cardinalDirection arg0Direction = stringToDirection(args[0]);
+	string directionStrings[6] = { "North", "South", "East", "West", "above", "below" };
+
+	if (arg0Direction >= 0 && arg0Direction <= 5)
 	{
-		if (currentLocation->checkAdjacent(North) == nullptr)
+		if (currentLocation->checkAdjacent(arg0Direction) == nullptr)
 		{
-			cout << "\nYou can't go North!\n";
+			cout << "\nYou can't go " << directionStrings[arg0Direction] << "!\n";
 			return true;
 		}
 		else
 		{
-			updateCurrentLocation(checkAdjacent(North));
+			updateCurrentLocation(checkAdjacent(arg0Direction));
 			currentLocation->printLocation();
 			return true;
 		}
 	}
-	if (args[0] == "south")
-	{
-		if (currentLocation->checkAdjacent(South) == nullptr)
-		{
-			cout << "\nYou can't go South!\n";
-			return true;
-		}
-		else
-		{
-			updateCurrentLocation(checkAdjacent(South));
-			currentLocation->printLocation();
-			return true;
-		}
-	}
-	if (args[0] == "east")
-	{
-		if (currentLocation->checkAdjacent(East) == nullptr)
-		{
-			cout << "\nYou can't go East!\n";
-			return true;
-		}
-		else
-		{
-			updateCurrentLocation(checkAdjacent(East));
-			currentLocation->printLocation();
-			return true;
-		}
-	}
-	if (args[0] == "west")
-	{
-		if (currentLocation->checkAdjacent(West) == nullptr)
-		{
-			cout << "\nYou can't go West!\n";
-			return true;
-		}
-		else
-		{
-			updateCurrentLocation(checkAdjacent(West));
-			currentLocation->printLocation();
-			return true;
-		}
-	}
-	if (args[0] == "above")
-	{
-		if (currentLocation->checkAdjacent(Above) == nullptr)
-		{
-			cout << "\nYou can't go above!\n";
-			return true;
-		}
-		else
-		{
-			updateCurrentLocation(checkAdjacent(Above));
-			currentLocation->printLocation();
-			return true;
-		}
-	}
-	if (args[0] == "below")
-	{
-		if (currentLocation->checkAdjacent(Below) == nullptr)
-		{
-			cout << "\nYou can't go below!\n";
-			return true;
-		}
-		else
-		{
-			updateCurrentLocation(checkAdjacent(Below));
-			currentLocation->printLocation();
-			return true;
-		}
-	}
+
 	cout << "\nWhat do you want to " << args[0] << "?\n";
 	return false;
 }
@@ -151,6 +86,7 @@ void Location::setAdjacent(Location* adjRoom, cardinalDirection dir)
 	}
 }
 
+// Sets a new connection from the current room to a new room in direction dir, either one way or two way
 void Location::setAdjacent(Location* adjRoom, cardinalDirection dir, bool twoWay)
 {
 	// Input Validation for cardinalDirection
@@ -205,4 +141,18 @@ void Location::updateCurrentLocation(Location* newLocation)
 Location* Location::getCurrentLocation()
 {
 	return currentLocation;
+}
+
+cardinalDirection Location::stringToDirection(string str)
+{
+	string stringDirections[6] = { "north", "south", "east", "west", "above", "below" };
+	cardinalDirection enumDirections[6] = { North, South, East, West, Above, Below };
+	for (int i = 0; i < 6; i++)
+	{
+		if (str == stringDirections[i])
+		{
+			return enumDirections[i];
+		}
+	}
+	return Invalid;
 }
