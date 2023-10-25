@@ -49,7 +49,7 @@ bool ContextParser::interpretCommand(Location* loc, string unfilteredCmd)
         return false;
     }
 
-    if (formattedCmd[0].size() < 3)
+    if (formattedCmd[0].size() < 2)
     {
         cout << "\nI don't know what that is!\n";
         return false;

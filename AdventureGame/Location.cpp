@@ -7,7 +7,7 @@ using namespace std;
 Location::Location()
 {
 	description = "";
-	locationValidCommands = "look see describe visualize north south east west above below ";
+	locationValidCommands = "look see describe visualize north south east west above below go walk travel move ";
 	
 	// Initialize connection array to nullptrs
 	for (int i = 0; i < 6; i++)
@@ -20,7 +20,7 @@ Location::Location()
 Location::Location(string desc)
 {
 	description = desc;
-	locationValidCommands = "look see describe visualize north south east west above below ";
+	locationValidCommands = "look see describe visualize north south east west above below go walk travel move ";
 
 	// Initialize connection array to nullptrs
 	for (int i = 0; i < 6; i++)
@@ -65,6 +65,29 @@ bool Location::processCommand(vector<string> args)
 			updateCurrentLocation(checkAdjacent(arg0Direction));
 			currentLocation->printLocation();
 			return true;
+		}
+	}
+
+	if (args[0] == "go" || args[0] == "travel" || args[0] == "walk" || args[0] == "move")
+	{
+		if (args.size() > 1)
+		{
+			cardinalDirection arg1Direction = stringToDirection(args[1]);
+			if (arg1Direction >= 0 && arg1Direction <= 5)
+			{
+				if (currentLocation->checkAdjacent(arg1Direction) == nullptr)
+				{
+					cout << "\nYou can't go " << directionStrings[arg1Direction] << "!\n";
+					return true;
+				}
+				else
+				{
+					updateCurrentLocation(checkAdjacent(arg1Direction));
+					currentLocation->printLocation();
+					return true;
+				}
+			}
+
 		}
 	}
 
