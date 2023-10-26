@@ -6,15 +6,14 @@
 
 #include "gtest/gtest.h"
 
-Inventory userInventory;
-Location startingRoom;
-ContextParser CP(&startingRoom, &userInventory);
+
 
 namespace
 {
     Inventory userInventory;
     Location startingRoom;
-    ContextParser CP(&startingRoom, &userInventory);
+    PlayerActions playerAct;
+    ContextParser CP(&startingRoom, &userInventory, &playerAct);
 
     TEST(ItemTest, Init)
     {
