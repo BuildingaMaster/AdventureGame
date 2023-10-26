@@ -1,53 +1,25 @@
 #pragma once
 
-#include <iostream>
 #include <string>
-using namespace std;
+#include <vector>
 
-class Action // TODO: Please convert to processCommand structure.
+#include "BaseHealth.h"
+
+#define PLAYER_HEALTH 3
+
+class PlayerActions
 {
-protected:
-	char move;
-	// move to a cpp file 
-	void Move()
-	{
-		bool validInput = false;
-		do
-		{
-			cout << "Where to? ";
-			cin >> move;
-			if (move == 'N' || move == 'n')
-			{
-				validInput = true;
-			}
-			else if (move == 'S' || move == 's')
-			{
-				validInput = true;
-			}
-			else if (move == 'E' || move == 'e')
-			{
-				validInput = true;
-			}
-			else if (move == 'W' || move == 'w')
-			{
-				validInput = true;
-			}
-			else
-			{
-				cout << "Invalid input for a direction to go. " << endl;
-				cout << "To go North, enter: N or n" << endl;
-				cout << "To go South, enter: S or s" << endl;
-				cout << "To go East, enter: E or e" << endl;
-				cout << "To go West, enter: W or w" << endl;
-
-				validInput = false;
-			}
-		} while (validInput == false);
-	}
+private:
+	BaseHealth healthMGR;
 public:
-	Action()
-	{
+	// Constructor 
+	/// @brief sets HealthMGR equal to BaseHealth(PLAYER_HEALTH)
+	PlayerActions();
 
-	}
+	// Function
+	/// @brief Allows player to check their health
+	/// @param args What the player inputs
+	bool processCommand(std::vector<std::string> args);
+	std::string playerActionsValidCommands = "check hit ";
 
 };

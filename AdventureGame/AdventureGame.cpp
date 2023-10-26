@@ -41,13 +41,14 @@ int main()
 	backStory();
 
 	Location startingRoom;
+    PlayerActions playeract;
 
 	startingRoom.setDescription("You are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight, although a nearby apple tree seems to be within reach. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.");
 	cout << endl;
 	startingRoom.printLocation();
 	cout << endl;
     string command;
-    ContextParser CP(&startingRoom,&userInventory);
+    ContextParser CP(&startingRoom,&userInventory,&playeract);
     bool validInput;
     do
     {

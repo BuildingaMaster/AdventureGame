@@ -21,7 +21,13 @@
     <ClCompile Include="Location.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="StartingRoom.h">
+    <ClCompile Include="ContextParser.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseHealth.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,6 +47,9 @@
     <ClCompile Include="ContextParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClInclude Include="BaseHealth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Item.h">
@@ -50,9 +59,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Consumable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ContextParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
