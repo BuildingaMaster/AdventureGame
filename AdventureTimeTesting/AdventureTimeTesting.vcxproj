@@ -95,10 +95,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\AdventureGame\BaseHealth.cpp" />
     <ClCompile Include="..\AdventureGame\Consumable.cpp" />
     <ClCompile Include="..\AdventureGame\ContextParser.cpp" />
     <ClCompile Include="..\AdventureGame\Inventory.cpp" />
     <ClCompile Include="..\AdventureGame\Item.cpp" />
+    <ClCompile Include="..\AdventureGame\PlayerActions.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +112,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\AdventureGame\BaseHealth.h" />
     <ClInclude Include="..\AdventureGame\Consumable.h" />
     <ClInclude Include="..\AdventureGame\ContextParser.h" />
     <ClInclude Include="..\AdventureGame\Inventory.h" />

@@ -14,6 +14,12 @@
     <ClCompile Include="..\AdventureGame\Item.cpp">
       <Filter>Adventure Game Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\AdventureGame\PlayerActions.cpp">
+      <Filter>Adventure Game Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AdventureGame\BaseHealth.cpp">
+      <Filter>Adventure Game Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AdventureGame\Consumable.h">
@@ -32,6 +38,9 @@
       <Filter>Adventure Game Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\AdventureGame\PlayerActions.h">
+      <Filter>Adventure Game Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AdventureGame\BaseHealth.h">
       <Filter>Adventure Game Source Files</Filter>
     </ClInclude>
   </ItemGroup>
