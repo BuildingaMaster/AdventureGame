@@ -6,16 +6,11 @@
 
 using namespace std;
 
-// Constructor 
-/// @brief sets HealthMGR equal to BaseHealth(PLAYER_HEALTH)
 PlayerActions::PlayerActions()
 {
 	healthMGR = BaseHealth(PLAYER_HEALTH);
 }
 
-// Function
-/// @brief Allows player to check their health
-/// @args What the player inputs
 bool PlayerActions::processCommand(vector<string> args)
 {
     if (args[0] == "check" &&  args[1] == "health")

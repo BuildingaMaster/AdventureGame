@@ -11,7 +11,7 @@ public:
     BaseHealth();
     
     /// @brief Constructor for BaseHealth, supplying max health
-    /// @arg max healh
+    /// @param amount Max HP
     BaseHealth(int);
     
     /// @brief adds HP to an entity's health

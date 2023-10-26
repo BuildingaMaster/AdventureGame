@@ -12,7 +12,13 @@ class PlayerActions
 private:
 	BaseHealth healthMGR;
 public:
+	// Constructor 
+	/// @brief sets HealthMGR equal to BaseHealth(PLAYER_HEALTH)
 	PlayerActions();
+
+	// Function
+	/// @brief Allows player to check their health
+	/// @param args What the player inputs
 	bool processCommand(std::vector<std::string> args);
 	std::string playerActionsValidCommands = "check hit ";
 
