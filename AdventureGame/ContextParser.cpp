@@ -1,5 +1,6 @@
 #include "ContextParser.h"
 
+#include <ctype.h>
 #include <vector>
 #include <string>
 
@@ -21,14 +22,14 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         // Convert the character to lowercase before parsing.
         character = tolower(character);
         // Splitting up the string into multiple smaller strings by checking if they are separated by spaces
-        if (temp.length() > 0 && character == ' ')
+        if (temp.length() > 0 && isspace(character))
         {
             // Add the string to the vector.
             formattedCmd.push_back(temp);
             temp.clear();
             continue;
         }
-        else if (character == ' ')
+        else if (isspace(character))
         {
             // The string has an extra space, don't include it.
             continue;
