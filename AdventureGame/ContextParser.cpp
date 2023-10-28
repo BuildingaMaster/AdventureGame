@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <vector>
 #include <string>
+#include <regex>
 
 using namespace std;
 
@@ -55,17 +56,20 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         return false;
     }
 
+    // RegEx query to match the whole world.
+    regex exp ("\\b("+formattedCmd[0]+")\\b");
+
     // Figure out what command this is for.
 
-    if (locationManager::getValidCommands().find(formattedCmd[0] + " ") != std::string::npos)
+    if (regex_search(locationManager::getValidCommands(), exp))
     {
         return locationManager::processCommand(formattedCmd);
     }
-    else if (inventoryMGR->inventoryValidCommands.find(formattedCmd[0] + " ") != std::string::npos)
+    else if (regex_search(inventoryMGR->inventoryValidCommands,exp))
     {
         return inventoryMGR->processCommand(formattedCmd);
     }
-    else if (playerActionsMGR->playerActionsValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
+    else if (regex_search(playerActionsMGR->playerActionsValidCommands,exp))
     {
         return playerActionsMGR->processCommand(formattedCmd);
     }
