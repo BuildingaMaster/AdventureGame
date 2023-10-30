@@ -59,7 +59,7 @@ bool ContextParser::interpretCommand(Location* loc, string unfilteredCmd)
     // Figure out what command this is for.
     if (locationMGR != nullptr)
     {
-        if (locationMGR->locationValidCommands.find(formattedCmd[0] + " ") != std::string::npos)
+        if (locationMGR->getValidCommands().find(formattedCmd[0] + " ") != std::string::npos)
         {
             return locationMGR->processCommand(formattedCmd);
         }

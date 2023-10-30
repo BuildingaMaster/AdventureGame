@@ -12,7 +12,9 @@ class Location
 public:
 
 	// Contains a string containing all accepted player commands
-	string locationValidCommands;
+	const static string locationValidCommands;
+
+	string getValidCommands();
 
 	/// @brief Initializes a new Location with nullptr connections
 	Location();
@@ -39,6 +41,8 @@ public:
 	void updateCurrentLocation(Location*);
 	static Location* getCurrentLocation();
 private:
+	void initializeLocation();
+
 	static Location* currentLocation;
 	string description;
 	Location* locationConnections[6];

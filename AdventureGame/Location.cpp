@@ -7,28 +7,35 @@ using namespace std;
 Location::Location()
 {
 	description = "";
-	locationValidCommands = "look see describe visualize north south east west above below go walk travel move ";
-	
-	// Initialize connection array to nullptrs
-	for (int i = 0; i < 6; i++)
-	{
-		locationConnections[i] = nullptr; // If not set to null program will crash
-	}
+	initializeLocation();
 }
 
 // Constructor with Description
 Location::Location(string desc)
 {
 	description = desc;
-	locationValidCommands = "look see describe visualize north south east west above below go walk travel move ";
+	initializeLocation();
+}
 
+// Creates validCommands variable and initializes nullptr array
+void Location::initializeLocation()
+{
 	// Initialize connection array to nullptrs
 	for (int i = 0; i < 6; i++)
 	{
 		locationConnections[i] = nullptr; // If not set to null program will crash
 	}
 }
-const string Location::directionStrings[] = { "North", "South", "East", "West", "above", "below" };
+
+const string Location::locationValidCommands = "look see describe visualize north south east west above below go walk travel move ";
+
+string Location::getValidCommands()
+{
+	return locationValidCommands;
+}
+
+const string Location::directionStrings[] = { "north", "south", "east", "west", "above", "below" };
+
 // Outputs the description of the Location
 void Location::printLocation()
 {
@@ -54,7 +61,7 @@ bool Location::processCommand(vector<string> args)
 	// Checking for valid direction input, will take just a direction as input 
 	if (arg0Direction >= 0 && arg0Direction <= 5)
 	{
-		// No room in userr's direction input (YET)
+		// No room in user's direction input (YET)
 		if (currentLocation->checkAdjacent(arg0Direction) == nullptr)
 		{
 			cout << "\nYou can't go " << directionStrings[arg0Direction] << "!\n";
@@ -103,15 +110,7 @@ bool Location::processCommand(vector<string> args)
 ///@brief Sets a new connection from the current room to a new room based off of the direction you want to go
 void Location::setAdjacent(Location* adjRoom, cardinalDirection dir)
 {
-	// Input Validation for cardinalDirection
-	if (dir >= 0 && dir <= 5)
-	{
-		locationConnections[dir] = adjRoom;
-	}
-	else
-	{
-		cout << "Invalid direction!\n";
-	}
+	setAdjacent(adjRoom, dir, false);
 }
 
 // Sets a new connection from the current room to a new room in direction dir, either one way or two way
@@ -175,11 +174,10 @@ Location* Location::getCurrentLocation()
 // Converts user input string into readable cardinal direction enum
 cardinalDirection Location::stringToDirection(string str)
 {
-	string stringDirections[6] = { "north", "south", "east", "west", "above", "below" };
 	cardinalDirection enumDirections[6] = { North, South, East, West, Above, Below };
 	for (int i = 0; i < 6; i++)
 	{
-		if (str == stringDirections[i])
+		if (str == directionStrings[i])
 		{
 			return enumDirections[i];
 		}
