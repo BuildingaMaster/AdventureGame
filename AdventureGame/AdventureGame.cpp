@@ -139,23 +139,6 @@ int main()
         }
     }
 
-    /*
-    // Convert the actual game map into a map file
-    // Initializing Starting Rooms
-	Location* startingRoom = new Location();
-    startingRoom->updateCurrentLocation(startingRoom);
-
-    // All it takes to make a Room
-    Location* northRoom = new Location();
-    northRoom->setDescription("\nThis is a new room!\n\n");
-    startingRoom->setAdjacent(northRoom, North, true);
-
-	startingRoom->setDescription("\nYou are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight, although a nearby apple tree seems to be within reach. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.\n");
-	cout << endl;
-	startingRoom->printLocation();
-	cout << endl;
-    */
-
     // Set the starting location to the player location and print the description
     locationMap[1]->updateCurrentLocation(locationMap[1]);
     locationMap[1]->getCurrentLocation()->printLocation();
