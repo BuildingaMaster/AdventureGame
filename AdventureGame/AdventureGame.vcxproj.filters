@@ -30,6 +30,9 @@
     <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Location.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerActions.h">
@@ -61,5 +64,9 @@
     <ClInclude Include="Consumable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="map.mbd" />
+    <None Include="map.mbm" />
   </ItemGroup>
 </Project>

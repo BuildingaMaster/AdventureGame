@@ -5,22 +5,24 @@
 
 using namespace std;
 
-ContextParser::ContextParser(Location* loc, Inventory* inv, PlayerActions* pact)
+ContextParser::ContextParser(Inventory* inv, PlayerActions* pact)
 {
-    locationMGR = loc;
     inventoryMGR = inv;
+    locationMGR = nullptr;
     playerActionsMGR = pact;
 }
 
-bool ContextParser::interpretCommand(string unfilteredCmd)
+bool ContextParser::interpretCommand(Location* loc, string unfilteredCmd)
 {
     vector<string> formattedCmd;
+    locationMGR = loc;
 
     string temp = "";
     for (auto &character : unfilteredCmd)
     {
         // Convert the character to lowercase before parsing.
         character = tolower(character);
+        // Splitting up the string into multiple smaller strings by checking if they are separated by spaces
         if (temp.length() > 0 && character == ' ')
         {
             // Add the string to the vector.
@@ -48,25 +50,29 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         return false;
     }
 
-    if (formattedCmd[0].size() < 3)
+    if (formattedCmd[0].size() < 2)
     {
         cout << "\nI don't know what that is!\n";
         return false;
     }
 
     // Figure out what command this is for.
-    if (locationMGR->locationValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
+    if (locationMGR != nullptr)
     {
-        return locationMGR->processCommand(formattedCmd);
+        if (locationMGR->getValidCommands().find(formattedCmd[0] + " ") != std::string::npos)
+        {
+            return locationMGR->processCommand(formattedCmd);
+        }
+        else if (inventoryMGR->inventoryValidCommands.find(formattedCmd[0] + " ") != std::string::npos)
+        {
+            return inventoryMGR->processCommand(formattedCmd);
+        }
+        else if (playerActionsMGR->playerActionsValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
+        {
+            return playerActionsMGR->processCommand(formattedCmd);
+        }
     }
-    else if (inventoryMGR->inventoryValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
-    {
-        return inventoryMGR->processCommand(formattedCmd);
-    }
-    else if (playerActionsMGR->playerActionsValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
-    {
-        return playerActionsMGR->processCommand(formattedCmd);
-    }
+
     cout << "\nI don't know what that is!\n";
     return false;
 }

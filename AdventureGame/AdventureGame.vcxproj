@@ -143,10 +143,19 @@
     <ClInclude Include="Item.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Location.cpp" />
     <ClCompile Include="Location.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerActions.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="map.mbd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="map.mbm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
