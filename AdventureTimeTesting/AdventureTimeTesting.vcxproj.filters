@@ -2,54 +2,34 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="..\AdventureGame\BaseHealth.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\AdventureGame\Consumable.cpp">
-      <Filter>Adventure Game Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\AdventureGame\ContextParser.cpp">
-      <Filter>Adventure Game Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\AdventureGame\Inventory.cpp">
-      <Filter>Adventure Game Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\AdventureGame\Item.cpp">
-      <Filter>Adventure Game Source Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AdventureGame\Location.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\AdventureGame\PlayerActions.cpp">
-      <Filter>Adventure Game Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\AdventureGame\BaseHealth.cpp">
-      <Filter>Adventure Game Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\AdventureGame\Consumable.h">
-      <Filter>Adventure Game Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AdventureGame\ContextParser.h">
-      <Filter>Adventure Game Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AdventureGame\Inventory.h">
-      <Filter>Adventure Game Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AdventureGame\Item.h">
-      <Filter>Adventure Game Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AdventureGame\Location.h">
-      <Filter>Adventure Game Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AdventureGame\PlayerActions.h">
-      <Filter>Adventure Game Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AdventureGame\BaseHealth.h">
-      <Filter>Adventure Game Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Adventure Game Source Files">
-      <UniqueIdentifier>{7a33394f-3a09-462d-bdfd-91cf83181e8d}</UniqueIdentifier>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7f667a92-7168-492f-8f9f-9bd0208dba70}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

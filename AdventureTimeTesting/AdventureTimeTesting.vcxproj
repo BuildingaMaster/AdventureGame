@@ -100,25 +100,18 @@
     <ClCompile Include="..\AdventureGame\ContextParser.cpp" />
     <ClCompile Include="..\AdventureGame\Inventory.cpp" />
     <ClCompile Include="..\AdventureGame\Item.cpp" />
+    <ClCompile Include="..\AdventureGame\Location.cpp" />
     <ClCompile Include="..\AdventureGame\PlayerActions.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AdventureGame\AdventureGame.vcxproj">
       <Project>{53f18229-cb95-47da-9668-728cbe566282}</Project>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\AdventureGame\BaseHealth.h" />
-    <ClInclude Include="..\AdventureGame\Consumable.h" />
-    <ClInclude Include="..\AdventureGame\ContextParser.h" />
-    <ClInclude Include="..\AdventureGame\Inventory.h" />
-    <ClInclude Include="..\AdventureGame\Item.h" />
-    <ClInclude Include="..\AdventureGame\Location.h" />
-    <ClInclude Include="..\AdventureGame\PlayerActions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
