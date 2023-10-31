@@ -31,6 +31,10 @@ void Consumable::consume()
 	{
 		// Implement eating apple functionality here!
 	}
+	else if (itemType == mushroom)
+	{
+		// Implement eating mushroom functionality here!
+	}
 }
 
 consumableType Consumable::getConsumType()
