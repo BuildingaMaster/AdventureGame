@@ -159,6 +159,11 @@ Location* Location::checkAdjacent(cardinalDirection dir)
 	}
 }
 
+int Location::getLocationID()
+{
+	return roomID;
+}
+
 // Initializes the current Location
 Location* locationManager::currentLocation = currentLocation = nullptr;
 

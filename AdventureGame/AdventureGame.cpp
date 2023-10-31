@@ -16,7 +16,7 @@
 using namespace std;
 
 // Initialize player's inventory object
-Inventory userInventory;
+
 
 // Called at start of game, couts initial backstory
 void backStory()
@@ -30,6 +30,7 @@ void backStory()
 int main()
 {
     locationManager::init();
+    Inventory userInventory;
     // Print out backstory upon starting game
 	backStory();
     

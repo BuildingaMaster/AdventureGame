@@ -86,7 +86,7 @@ public:
 	void setAdjacent(Location*, cardinalDirection);
 	void setAdjacent(Location*, cardinalDirection, bool);
 	Location* checkAdjacent(cardinalDirection);
-	static int getLocationID();
+	int getLocationID();
 private:
 	int roomID;
 	void initializeLocation();
@@ -111,11 +111,11 @@ public:
 	/// @brief Processes Location-based commands
 	/// @param args - the vector of strings that contain filtered commands
 	static bool processCommand(vector<string>);
-	static fileParse::mapFile map;
-	static fileParse::mapDescFile mapDesc;
 private:
 	static Location* currentLocation;
 	const static string directionStrings[6];
 	static cardinalDirection stringToDirection(string);
+	static fileParse::mapFile map;
+	static fileParse::mapDescFile mapDesc;
 };
 #endif // !LOCATION_H
