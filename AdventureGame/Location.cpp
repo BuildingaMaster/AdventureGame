@@ -1,18 +1,21 @@
 #include "Location.h"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
 // Default Constructor
-Location::Location()
+Location::Location(int ID)
 {
+	roomID = ID;
 	description = "";
 	initializeLocation();
 }
 
 // Constructor with Description
-Location::Location(string desc)
+Location::Location(int ID, string desc)
 {
+	roomID = ID;
 	description = desc;
 	initializeLocation();
 }
@@ -27,14 +30,14 @@ void Location::initializeLocation()
 	}
 }
 
-const string Location::locationValidCommands = "look see describe visualize north south east west above below go walk travel move ";
+const string locationManager::locationValidCommands = "look see describe visualize north south east west above below go walk travel move ";
 
-string Location::getValidCommands()
+string locationManager::getValidCommands()
 {
 	return locationValidCommands;
 }
 
-const string Location::directionStrings[] = { "north", "south", "east", "west", "above", "below" };
+const string locationManager::directionStrings[] = { "north", "south", "east", "west", "above", "below" };
 
 // Outputs the description of the Location
 void Location::printLocation()
@@ -47,12 +50,12 @@ void Location::setDescription(string s)
 	description = s; 
 }
 
-bool Location::processCommand(vector<string> args)
+bool locationManager::processCommand(vector<string> args)
 {
 	// Run the "look" command
 	if (args[0] == "look" || args[0] == "see" || args[0] == "visualize")
 	{
-		cout << endl << description << endl;
+		currentLocation->printLocation();
 		return true;
 	}
 
@@ -70,7 +73,7 @@ bool Location::processCommand(vector<string> args)
 		else
 		{
 			// Move Player to the new location and print out its description
-			updateCurrentLocation(checkAdjacent(arg0Direction));
+			updateCurrentLocation(currentLocation->checkAdjacent(arg0Direction));
 			currentLocation->printLocation();
 			return true;
 		}
@@ -94,7 +97,7 @@ bool Location::processCommand(vector<string> args)
 				}
 				else // user direction has a room connected 
 				{
-					updateCurrentLocation(checkAdjacent(arg1Direction));
+					updateCurrentLocation(currentLocation->checkAdjacent(arg1Direction));
 					currentLocation->printLocation();
 					return true;
 				}
@@ -157,22 +160,22 @@ Location* Location::checkAdjacent(cardinalDirection dir)
 }
 
 // Initializes the current Location
-Location* Location::currentLocation = currentLocation = nullptr;
+Location* locationManager::currentLocation = currentLocation = nullptr;
 
 // Updates the current Location to a new Location
-void Location::updateCurrentLocation(Location* newLocation)
+void locationManager::updateCurrentLocation(Location* newLocation)
 {
 	currentLocation = newLocation;
 }
 
 // Returns the current player Location
-Location* Location::getCurrentLocation()
+Location* locationManager::getCurrentLocation()
 {
 	return currentLocation;
 }
 
 // Converts user input string into readable cardinal direction enum
-cardinalDirection Location::stringToDirection(string str)
+cardinalDirection locationManager::stringToDirection(string str)
 {
 	cardinalDirection enumDirections[6] = { North, South, East, West, Above, Below };
 	for (int i = 0; i < 6; i++)
@@ -183,4 +186,74 @@ cardinalDirection Location::stringToDirection(string str)
 		}
 	}
 	return Invalid;
+}
+
+map<int, Location*> locationManager::locationMap;
+fileParse::mapFile locationManager::map;
+fileParse::mapDescFile locationManager::mapDesc;
+
+bool locationManager::init()
+{
+	// Reading from Map Files
+    ifstream in;
+    // mbm map files contain location connections
+    // Convert mbm data to map structures
+    in.open("map.mbm", ifstream::in | ifstream::binary);
+    if (!in.is_open())
+    {
+        cout << "Could not open map.mbm.\n";
+        return false;
+    }
+    std::vector<char>mapBytes(
+        (std::istreambuf_iterator<char>(in)),
+        (std::istreambuf_iterator<char>()));
+    memcpy(&map, mapBytes.data(), mapBytes.size());
+    in.close();
+    // mbd map files contain location descriptions
+    // Convert mbd data to description structures
+    in.open("map.mbd", ifstream::in | ifstream::binary);
+    if (!in.is_open())
+    {
+        cout << "Could not open map.mbd.\n";
+        return false;
+    }
+    std::vector<char> descBytes(
+        (std::istreambuf_iterator<char>(in)),
+        (std::istreambuf_iterator<char>()));
+    memcpy(&mapDesc, descBytes.data(), descBytes.size());
+    in.close();
+
+    // Converting data read from files to initialize Location objects
+    for (int i = 0; i < map.header.roomCount; i++)
+    {
+        locationManager::locationMap.insert(std::pair<int, Location*>(map.layout[i].id, new Location(map.layout[i].id, mapDesc.descLayout[i].description)));
+    }
+    // Connect the initialized rooms
+    for (int i = 0; i < map.header.roomCount; i++)
+    {
+        for (int j = 0; j < sizeof(map.layout[i].direction) / sizeof(uint32_t); j++)
+        {
+            // If there's no connection, skip
+            if (map.layout[i].direction[j] == 0)
+            {
+                continue;
+            }
+            locationManager::locationMap[map.layout[i].id]->setAdjacent(locationManager::locationMap[map.layout[i].direction[j]], static_cast<cardinalDirection>(j));
+        }
+    }
+
+    // Set the starting location to the player location and print the description
+    updateCurrentLocation(locationManager::locationMap[1]);
+    //locationMap[1]->getCurrentLocation()->printLocation();
+	return true;
+}
+
+void locationManager::deinit()
+{
+    // Destroying the map pointers so there are no memory leaks
+    for (int i = 0; i < map.header.roomCount; i++)
+    {
+        delete locationManager::locationMap[map.layout[i].id];
+        locationManager::locationMap[map.layout[i].id] = nullptr;
+    }
 }

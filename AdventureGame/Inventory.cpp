@@ -1,6 +1,7 @@
 #include "Inventory.h"
 #include "Item.h"
 #include "Consumable.h"
+#include "Location.h"
 
 Inventory::Inventory()
 {
