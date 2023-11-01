@@ -5,9 +5,13 @@
 
 Inventory::Inventory()
 {
-    itemMap.insert(std::pair<int, vector<Item>>(0, vector<Item>()));
-    itemMap[0].insert(itemMap[0].begin(), Consumable(apple,1));
-	itemMap[0].insert(itemMap[0].begin(), Consumable(mushroom, 1)); //add mushroom
+    for (auto const& x : locationManager::locationMap)
+    {
+        itemMap.insert(std::pair<int, vector<Item>>(x.first, vector<Item>())); 
+    }
+
+    itemMap[1].insert(itemMap[1].begin(), Consumable(apple,1));
+	itemMap[2].insert(itemMap[2].begin(), Consumable(mushroom, 1)); //add mushroom
 }
 
 void Inventory::addItem(Item toAdd)
@@ -25,23 +29,25 @@ bool Inventory::processCommand(vector<string> args)
         return false;
     }
 
+    int roomID = locationManager::getCurrentLocation()->getLocationID();
+
     if (args[0] == "pick" || args[0] == "grab")
     {
-        for (int i = 0; i < itemMap[0].size(); i++) //We are assuming 0 is the current room.
+        for (int i = 0; i < itemMap[roomID].size(); i++) //We are assuming 0 is the current room.
         {
-            if (itemMap[0][i].getItemName() == args[1])
+            if (itemMap[roomID][i].getItemName() == args[1])
             {
                 // player picks a mushroom
-                if (itemMap[0][i].getItemName() == "mushroom" && itemMap[0][i].getType() == consumable)
+                if (itemMap[roomID][i].getItemName() == "mushroom" && itemMap[roomID][i].getType() == consumable)
                 {
-                    addItem(itemMap[0][i]);
-                    itemMap[0].erase(itemMap[0].begin()+i);
+                    addItem(itemMap[roomID][i]);
+                    itemMap[roomID].erase(itemMap[roomID].begin()+i);
                     cout << "\nYou pick a " << args[1] << " from the ground.\n";
                     return true;
                 }
                 // player picks an apple
-                addItem(itemMap[0][i]);
-                itemMap[0].erase(itemMap[0].begin() + i);
+                addItem(itemMap[roomID][i]);
+                itemMap[roomID].erase(itemMap[roomID].begin() + i);
                 cout << "\nYou pick an " << args[1] << " from the tree.\n";
                 return true;
             }
