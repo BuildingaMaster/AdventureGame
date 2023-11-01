@@ -19,20 +19,20 @@ using namespace std;
 
 
 // Called at start of game, couts initial backstory
-void backStory()
+/*void backStory()
 {
 	cout << "You open your eyes and see you are in the middle of a forest. " << endl;
 	cout << "It's just you, your thoughts, and the colorful wilderness. " << endl;
 	cout << "You ask yourself: how the hell did I get here, and what is my purpose?" << endl;
 	cout << "The more you explore, the more you learn about not only where you are, but who you are. " << endl << endl;
-}
+} */
 
 int main()
 {
     locationManager::init();
     Inventory userInventory;
     // Print out backstory upon starting game
-	backStory();
+	// backStory();
     
     PlayerActions playeract;
 
