@@ -11,7 +11,6 @@ Inventory::Inventory()
     }
     // itemMap[i].insert(itemMap[i].begin(), Consumable(item,weight)) i = room number
     // TODO how do we assign items to west, east rooms?
-    itemMap[1].insert(itemMap[1].begin(), Consumable(apple,1));
 	itemMap[2].insert(itemMap[2].begin(), Consumable(mushroom, 1)); //add mushroom
     itemMap[3].insert(itemMap[3].begin(), Consumable(apple, 1));
 }
