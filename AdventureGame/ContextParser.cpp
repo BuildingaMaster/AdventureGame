@@ -8,14 +8,12 @@ using namespace std;
 ContextParser::ContextParser(Inventory* inv, PlayerActions* pact)
 {
     inventoryMGR = inv;
-    locationMGR = nullptr;
     playerActionsMGR = pact;
 }
 
-bool ContextParser::interpretCommand(Location* loc, string unfilteredCmd)
+bool ContextParser::interpretCommand(string unfilteredCmd)
 {
     vector<string> formattedCmd;
-    locationMGR = loc;
 
     string temp = "";
     for (auto &character : unfilteredCmd)
@@ -57,20 +55,18 @@ bool ContextParser::interpretCommand(Location* loc, string unfilteredCmd)
     }
 
     // Figure out what command this is for.
-    if (locationMGR != nullptr)
+
+    if (locationManager::getValidCommands().find(formattedCmd[0] + " ") != std::string::npos)
     {
-        if (locationMGR->getValidCommands().find(formattedCmd[0] + " ") != std::string::npos)
-        {
-            return locationMGR->processCommand(formattedCmd);
-        }
-        else if (inventoryMGR->inventoryValidCommands.find(formattedCmd[0] + " ") != std::string::npos)
-        {
-            return inventoryMGR->processCommand(formattedCmd);
-        }
-        else if (playerActionsMGR->playerActionsValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
-        {
-            return playerActionsMGR->processCommand(formattedCmd);
-        }
+        return locationManager::processCommand(formattedCmd);
+    }
+    else if (inventoryMGR->inventoryValidCommands.find(formattedCmd[0] + " ") != std::string::npos)
+    {
+        return inventoryMGR->processCommand(formattedCmd);
+    }
+    else if (playerActionsMGR->playerActionsValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
+    {
+        return playerActionsMGR->processCommand(formattedCmd);
     }
 
     cout << "\nI don't know what that is!\n";

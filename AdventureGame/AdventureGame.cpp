@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <cctype>
 #include <fstream>
 #include <istream>
 
@@ -17,7 +16,7 @@
 using namespace std;
 
 // Initialize player's inventory object
-Inventory userInventory;
+
 
 // Called at start of game, couts initial backstory
 void backStory()
@@ -28,120 +27,15 @@ void backStory()
 	cout << "The more you explore, the more you learn about not only where you are, but who you are. " << endl << endl;
 }
 
-// Define map file header structure
-#pragma pack(push, 1)
-struct mapFileHeader
-{
-    char magic[4];
-    uint16_t endian = 0;
-    uint16_t version = 0;
-    uint32_t hash = 0;
-    uint32_t roomCount = 0;
-};
-#pragma pack(pop)
-
-// Define map layout structure
-#pragma pack(push, 1)
-struct roomLayout
-{
-    uint32_t id = 0;
-    uint32_t direction[6] = { 0, 0, 0, 0, 0, 0 }; // North South East West Above Below
-    uint32_t attributes[2] = { 0, 0 };
-};
-#pragma pack(pop)
-
-// Define map file structure
-#pragma pack(push, 1)
-struct mapFile 
-{
-    mapFileHeader header;
-    roomLayout layout[2000];
-    
-};
-#pragma pack(pop)
-
-// Define room description structure
-#pragma pack(push, 1)
-struct roomDes
-{
-    uint32_t id = 0;
-    uint32_t stringSize = 0;
-    char description[400];
-};
-#pragma pack(pop)
-
-// Define map description file structure
-#pragma pack(push, 1)
-struct mapDescFile
-{
-    mapFileHeader header;
-    roomDes descLayout[2000];
-};
-#pragma pack(pop)
-
-// Initialize map of location pointers with location ID integers
-map<int, Location*> locationMap;
-
 int main()
 {
+    locationManager::init();
+    Inventory userInventory;
     // Print out backstory upon starting game
 	backStory();
     
     PlayerActions playeract;
 
-    // Reading from Map Files
-    ifstream in;
-    // mbm map files contain location connections
-    // Convert mbm data to map structures
-    in.open("map.mbm", ifstream::in | ifstream::binary);
-    if (!in.is_open())
-    {
-        cout << "Could not open map.mbm.\n";
-        return 1;
-    }
-    mapFile map;
-    mapDescFile mapDesc;
-    std::vector<char>mapBytes(
-        (std::istreambuf_iterator<char>(in)),
-        (std::istreambuf_iterator<char>()));
-    memcpy(&map, mapBytes.data(), mapBytes.size());
-    in.close();
-    // mbd map files contain location descriptions
-    // Convert mbd data to description structures
-    in.open("map.mbd", ifstream::in | ifstream::binary);
-    if (!in.is_open())
-    {
-        cout << "Could not open map.mbd.\n";
-        return 1;
-    }
-    std::vector<char> descBytes(
-        (std::istreambuf_iterator<char>(in)),
-        (std::istreambuf_iterator<char>()));
-    memcpy(&mapDesc, descBytes.data(), descBytes.size());
-    in.close();
-
-    // Converting data read from files to initialize Location objects
-    for (int i = 0; i < map.header.roomCount; i++)
-    {
-        locationMap.insert(std::pair<int, Location*>(map.layout[i].id, new Location(mapDesc.descLayout[i].description)));
-    }
-    // Connect the initialized rooms
-    for (int i = 0; i < map.header.roomCount; i++)
-    {
-        for (int j = 0; j < sizeof(map.layout[i].direction) / sizeof(uint32_t); j++)
-        {
-            // If there's no connection, skip
-            if (map.layout[i].direction[j] == 0)
-            {
-                continue;
-            }
-            locationMap[map.layout[i].id]->setAdjacent(locationMap[map.layout[i].direction[j]], static_cast<cardinalDirection>(j));
-        }
-    }
-
-    // Set the starting location to the player location and print the description
-    locationMap[1]->updateCurrentLocation(locationMap[1]);
-    locationMap[1]->getCurrentLocation()->printLocation();
     
     string command;
     ContextParser CP(&userInventory,&playeract);
@@ -152,16 +46,11 @@ int main()
         {
             cout << "\nWhat would you like to do?\n> ";
             getline(cin, command);
-            validInput = CP.interpretCommand(locationMap[1]->getCurrentLocation(), command);
+            validInput = CP.interpretCommand(command);
         } while (validInput == false);
     } while (true);
 
-    // Destroying the map pointers so there are no memory leaks
-    for (int i = 0; i < map.header.roomCount; i++)
-    {
-        delete locationMap[map.layout[i].id];
-        locationMap[map.layout[i].id] = nullptr;
-    }
+    locationManager::deinit();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

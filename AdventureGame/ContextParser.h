@@ -11,12 +11,11 @@
 class ContextParser
 {
     private:
-        Location* locationMGR;
         Inventory* inventoryMGR;
         PlayerActions* playerActionsMGR;
     public:
         /// @brief Reads a command from the user than breaks it appart.
-        bool interpretCommand(Location*, std::string);
+        bool interpretCommand(std::string);
         ContextParser(Inventory*, PlayerActions*);
 };
 #endif // !CONTEXTPARSER_H
