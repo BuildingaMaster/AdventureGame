@@ -18,7 +18,6 @@ using namespace std;
 // Initialize player's inventory object
 
 
-// Called at start of game, couts initial backstory
 void backStory()
 {
 	cout << "You open your eyes and see you are in the middle of a forest. " << endl;
