@@ -1,7 +1,9 @@
 #include "ContextParser.h"
 
+#include <ctype.h>
 #include <vector>
 #include <string>
+#include <regex>
 
 using namespace std;
 
@@ -21,14 +23,14 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         // Convert the character to lowercase before parsing.
         character = tolower(character);
         // Splitting up the string into multiple smaller strings by checking if they are separated by spaces
-        if (temp.length() > 0 && character == ' ')
+        if (temp.length() > 0 && isspace(character))
         {
             // Add the string to the vector.
             formattedCmd.push_back(temp);
             temp.clear();
             continue;
         }
-        else if (character == ' ')
+        else if (isspace(character))
         {
             // The string has an extra space, don't include it.
             continue;
@@ -54,17 +56,20 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         return false;
     }
 
+    // RegEx query to match the whole world.
+    regex exp ("\\b("+formattedCmd[0]+")\\b");
+
     // Figure out what command this is for.
 
-    if (locationManager::getValidCommands().find(formattedCmd[0] + " ") != std::string::npos)
+    if (regex_search(locationManager::getValidCommands(), exp))
     {
         return locationManager::processCommand(formattedCmd);
     }
-    else if (inventoryMGR->inventoryValidCommands.find(formattedCmd[0] + " ") != std::string::npos)
+    else if (regex_search(inventoryMGR->inventoryValidCommands,exp))
     {
         return inventoryMGR->processCommand(formattedCmd);
     }
-    else if (playerActionsMGR->playerActionsValidCommands.find(formattedCmd[0]+" ") != std::string::npos)
+    else if (regex_search(playerActionsMGR->playerActionsValidCommands,exp))
     {
         return playerActionsMGR->processCommand(formattedCmd);
     }
