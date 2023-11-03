@@ -24,6 +24,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -31,6 +32,14 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <Microsoft-GoogleTest-Disable-gtest_main>true</Microsoft-GoogleTest-Disable-gtest_main>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <Microsoft-GoogleTest-Disable-gtest_main>true</Microsoft-GoogleTest-Disable-gtest_main>
+  </PropertyGroup>
   <ItemDefinitionGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -46,6 +55,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
+    <CustomBuildStep>
+      <Command>robocopy $(SolutionDir) $(OutDir) map.mbm map.mbd
+if %errorlevel% leq 1 exit 0 else exit %errorlevel%
+
+</Command>
+      <Message>Moving current map.mbm and map.mbd for testing</Message>
+      <Outputs>map.mbm map.mbd</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -61,6 +78,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
+    <CustomBuildStep>
+      <Command>robocopy $(SolutionDir) $(OutDir) map.mbm map.mbd
+if %errorlevel% leq 1 exit 0 else exit %errorlevel%
+
+</Command>
+      <Outputs>map.mbm map.mbd</Outputs>
+      <Message>Moving current map.mbm and map.mbd for testing</Message>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -77,6 +102,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
+    <CustomBuildStep>
+      <Command>robocopy $(SolutionDir) $(OutDir) map.mbm map.mbd
+if %errorlevel% leq 1 exit 0 else exit %errorlevel%
+
+</Command>
+      <Message>Moving current map.mbm and map.mbd for testing</Message>
+      <Outputs>map.mbm map.mbd</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -93,6 +126,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
+    <CustomBuildStep>
+      <Command>robocopy $(SolutionDir) $(OutDir) map.mbm map.mbd
+if %errorlevel% leq 1 exit 0 else exit %errorlevel%
+
+</Command>
+      <Outputs>map.mbm map.mbd</Outputs>
+      <Message>Moving current map.mbm and map.mbd for testing</Message>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\AdventureGame\BaseHealth.cpp" />
