@@ -10,7 +10,11 @@
 
 class ContextParser
 {
+#ifdef GTESTING
+    public:
+#else
     private:
+#endif
         Inventory* inventoryMGR;
         PlayerActions* playerActionsMGR;
     public:

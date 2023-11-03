@@ -111,7 +111,11 @@ public:
 	/// @brief Processes Location-based commands
 	/// @param args - the vector of strings that contain filtered commands
 	static bool processCommand(vector<string>);
+#ifdef GTESTING
+public:
+#else
 private:
+#endif
 	static Location* currentLocation;
 	const static string directionStrings[6];
 	static cardinalDirection stringToDirection(string);

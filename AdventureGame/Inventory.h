@@ -15,7 +15,11 @@ public:
 	bool processCommand(vector<string> args);
 	string inventoryValidCommands = "pick grab eat consume ";
 
+#ifdef GTESTING
+public:
+#else
 private:
+#endif
 	vector<Item> currentInventory;
 	// This is temporary for POC and should be moved somewhere else.
 	map<int, vector<Item>> itemMap;
