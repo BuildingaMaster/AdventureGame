@@ -17,6 +17,7 @@ public:
     itemType getType();
     void setItemName(std::string);
     std::string getItemName();
+    virtual void action() {};  // Does nothing
 #ifdef GTESTING
 public:
 #else

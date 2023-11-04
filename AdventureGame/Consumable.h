@@ -17,5 +17,6 @@ public:
 	void consume();
 	~Consumable();
 	Consumable();
+	virtual void action() {}; // Does nothing
 };
 

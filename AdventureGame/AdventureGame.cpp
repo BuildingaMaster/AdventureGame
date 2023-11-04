@@ -39,15 +39,22 @@ int main()
     string command;
     ContextParser CP(&userInventory,&playeract);
     bool validInput;
+    bool stay = true;
     do
     {
         do
         {
             cout << "\nWhat would you like to do?\n> ";
             getline(cin, command);
+            // This is temporary, and needs to have CP logic
+            if (command == "quit")
+            {
+                stay =false;
+                break;
+            }
             validInput = CP.interpretCommand(command);
         } while (validInput == false);
-    } while (true);
+    } while (stay);
 
     locationManager::deinit();
 }
