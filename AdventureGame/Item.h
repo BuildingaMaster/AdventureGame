@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <map>
 
 enum itemState { inWorld, inInventory };
 enum itemType { consumable, weapon };
@@ -32,5 +33,11 @@ public:
 private:
 #endif
     itemState currentState;
+};
+
+class itemDescription
+{
+    public:
+        static std::map<std::string,  std::pair<std::string,std::string>> itemTag;
 };
 

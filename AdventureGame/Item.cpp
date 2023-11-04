@@ -3,6 +3,12 @@
 
 using namespace std;
 
+
+std::map<std::string,  std::pair<std::string,std::string>> itemDescription::itemTag = {
+    {"apple", std::pair<std::string,std::string>{"There is one apple that has fallen from the tree.", "There are a few apples that has fallen from the tree."}},
+    {"mushroom", std::pair<std::string,std::string>{"Looking down, you see a small mushroom that's likely safe to eat.", "Looking down, you see a few wild mushrooms growing."}},
+};
+
 Item::Item()
 {
     weight = 0.0;

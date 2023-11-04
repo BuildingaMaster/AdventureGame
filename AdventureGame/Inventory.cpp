@@ -16,6 +16,10 @@ Inventory::Inventory(PlayerActions* pd)
     // TODO how do we assign items to west, east rooms?
 	itemMap[2].insert(itemMap[2].begin(), new Consumable(mushroom, 1)); //add mushroom
     itemMap[3].insert(itemMap[3].begin(), new Consumable(apple, 1));
+    itemMap[3].insert(itemMap[3].begin(), new Consumable(apple, 1));
+    itemMap[3].insert(itemMap[3].begin(), new Consumable(apple, 1));
+    itemMap[3].insert(itemMap[3].begin(), new Consumable(apple, 1));
+    itemMap[3].insert(itemMap[3].begin(), new Consumable(apple, 1));
 }
 
 Inventory::~Inventory()
@@ -42,6 +46,26 @@ void Inventory::addItem(Item* toAdd)
 {
 	currentInventory.push_back(toAdd);
 	currentInventory[currentInventory.size()-1]->setState(inInventory);
+}
+
+map<int, vector<Item*>> Inventory::itemMap;
+
+
+bool Inventory::discardItem(string method, string item, int roomID)
+{
+    for (int i = 0; i<currentInventory.size(); i++)
+    {
+        if (currentInventory[i]->getItemName() == item)
+        {
+            itemMap[roomID].push_back(currentInventory[i]);
+            itemMap[roomID][itemMap.size()-1]->setState(inWorld);
+            currentInventory.erase(currentInventory.begin()+i);
+            cout << "\nYou " << method << " the " << item << "!\n";
+            return true;
+        }
+    }
+    cout << "\nYou don't have a(n) " << item << ".\n";
+    return false;
 }
 
 bool Inventory::processCommand(vector<string> args)
@@ -116,5 +140,10 @@ bool Inventory::processCommand(vector<string> args)
         cout << "\nYou don't have a(n) " << args[1] << ".\n";
         return false;
     }
+    else if ( args[0] == "drop" || args[0] == "throw" || args[0] == "discard")
+    {
+        discardItem(args[0], args[1], roomID);
+    }
+    
     return true;
 }

@@ -14,8 +14,10 @@ public:
 	~Inventory();
 	//void addItem(Item toAdd, enum, int);
 	void addItem(Item* toAdd);
+	bool discardItem(string method, string item, int roomID);
 	bool processCommand(vector<string> args);
-	string inventoryValidCommands = "pick grab eat consume ";
+	string inventoryValidCommands = "pick grab eat consume drop throw discard";
+	static map<int, vector<Item*>> itemMap;
 
 #ifdef GTESTING
 public:
@@ -25,7 +27,6 @@ private:
 	PlayerActions* playerData;
 	vector<Item*> currentInventory;
 	// This is temporary for POC and should be moved somewhere else.
-	map<int, vector<Item*>> itemMap;
 
 	//currentInventory[0] = iteminRoom[42][0]
 	//iteminRoom.erase(iteminRoom.begin())

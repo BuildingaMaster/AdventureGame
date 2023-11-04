@@ -7,6 +7,9 @@
 #include <cctype>
 using namespace std;
 
+#define CURRENT_MBM_VERSION 0
+#define CURRENT_MBD_VERSION 1
+
 enum cardinalDirection { North = 0, South = 1, East = 2, West = 3, Above = 4, Below = 5, Invalid = -1 };
 
 namespace fileParse
@@ -50,6 +53,8 @@ namespace fileParse
 		uint32_t id = 0;
 		uint32_t stringSize = 0;
 		char description[400];
+		uint32_t altstringSize = 0;
+		char altdescription[400];
 	};
 	#pragma pack(pop)
 
@@ -72,7 +77,8 @@ public:
 
 	/// @brief Initializes a new Location with nullptr connections
 	/// @param desc - set to description of Location
-	Location(int ID, string desc);
+	/// @param altDesc - set to description of Location
+	Location(int ID, string desc, string altDesc);
 
 	/// @brief cout the description of the location
 	void printLocation();
@@ -80,7 +86,12 @@ public:
 	/// @brief Sets the location description
 	/// @param desc - set to description of Location
 	void setDescription(string desc);
-		
+
+	/// @brief Sets the alternae location description (not the first time)
+	/// @param desc - set the alt description of Location
+	void setAltDescription(string desc);
+
+	void justVisitedRoom();
 
 	/// 
 	void setAdjacent(Location*, cardinalDirection);
@@ -93,8 +104,10 @@ public:
 private:
 #endif
 	int roomID;
+	bool firstTime = true;
 	void initializeLocation();
 	string description;
+	string altDescription;
 	Location* locationConnections[6];
 	// When the player can't go in a direction.		
 };
