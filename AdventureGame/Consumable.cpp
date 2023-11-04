@@ -1,5 +1,9 @@
 #include "Consumable.h"
 
+#include <iostream>
+
+using namespace std;
+
 Consumable::Consumable(consumableType initType, double initWeight) : Item(consumable)
 {
 	itemType = initType;
@@ -17,6 +21,7 @@ Consumable::Consumable(consumableType initType, double initWeight) : Item(consum
 Consumable::Consumable() : Item(consumable)
 {
 	itemType = apple;
+	setWeight(1);
 	itemName = "apple";
 }
 
@@ -25,15 +30,25 @@ Consumable::~Consumable()
 	
 }
 
-void Consumable::consume()
+void Consumable::consume(PlayerActions* player)
 {
-	if (itemType == apple)
+	switch (itemType)
 	{
-		// Implement eating apple functionality here!
-	}
-	else if (itemType == mushroom)
-	{
-		// Implement eating mushroom functionality here!
+		case apple:
+		{
+			player->healPlayer(1);
+			cout << "\nYou healed by 1 HP!\n";
+			break;
+		}
+		case mushroom:
+		{
+			// Implement eating mushroom functionality here!
+			player->healPlayer(1);
+			cout << "\nYou healed by 1 HP!\n";
+			break;
+		}
+		default:
+			break;
 	}
 }
 

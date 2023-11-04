@@ -29,6 +29,10 @@ public:
     /// @return Does the entity have 0 health
     bool removeHP();
     
+    /// @brief Checks the max health
+    /// @return Max health of entity
+    int checkMaxHP();
+
     /// @brief Restores an entity's health to it's max.
     void restoreMaxHP();
     

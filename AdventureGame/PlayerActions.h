@@ -24,6 +24,15 @@ public:
 	/// @brief Allows player to check their health
 	/// @param args What the player inputs
 	bool processCommand(std::vector<std::string> args);
+	void healPlayer(int);
+
+	/// @brief Checks the player's health
+	/// @return The players current health
+	int checkPlayerHealth();
+
+	/// @brief Checks the player's' max health
+	/// @return The players max health
+	int checkMaxPlayerHealth();
 	std::string playerActionsValidCommands = "check hit ";
 
 };

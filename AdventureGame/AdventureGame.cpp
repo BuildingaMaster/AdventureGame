@@ -29,11 +29,12 @@ void backStory()
 int main()
 {
     locationManager::init();
-    Inventory userInventory;
+    
     // Print out backstory upon starting game
 	backStory();
     
     PlayerActions playeract;
+    Inventory userInventory(&playeract);
 
     
     string command;

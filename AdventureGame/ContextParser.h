@@ -7,6 +7,10 @@
 #include "Inventory.h"
 #include "PlayerActions.h"
 
+namespace CPResponse
+{
+    enum Response{ YES = true, NO = false };
+};
 
 class ContextParser
 {
@@ -21,5 +25,9 @@ class ContextParser
         /// @brief Reads a command from the user than breaks it appart.
         bool interpretCommand(std::string);
         ContextParser(Inventory*, PlayerActions*);
+        /// @brief Displays a standard Yes/No prompt
+        /// @return True: yes, false: no
+        static bool yesNoPrompt();
+
 };
 #endif // !CONTEXTPARSER_H

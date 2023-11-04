@@ -33,3 +33,18 @@ bool PlayerActions::processCommand(vector<string> args)
     }
     return false;
 }
+
+void PlayerActions::healPlayer(int amount)
+{
+    healthMGR.addHP(amount);
+}
+
+int PlayerActions::checkPlayerHealth()
+{
+    return healthMGR.checkMaxHP();
+}
+
+int PlayerActions::checkMaxPlayerHealth()
+{
+    return healthMGR.checkHP();
+}

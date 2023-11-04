@@ -28,6 +28,11 @@ bool BaseHealth::removeHP()
     return (health <= 0);
 }
 
+int BaseHealth::checkMaxHP()
+{
+    return maxHealth;
+}
+
 void BaseHealth::restoreMaxHP()
 {
     health = maxHealth;
