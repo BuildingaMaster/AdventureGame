@@ -90,7 +90,7 @@ bool Inventory::processCommand(vector<string> args)
                 if (currentInventory[i]->getType() == consumable)
                 {
                     // Is the player already at max health?
-                    if (playerData->checkMaxPlayerHealth() == playerData->checkMaxPlayerHealth())
+                    if (playerData->checkPlayerHealth() == playerData->checkMaxPlayerHealth())
                     {
                         cout << "\nYou already have max health, are you sure you want to eat the " << args[1] <<"?\n";
                         if (ContextParser::yesNoPrompt() == CPResponse::Response::NO)
