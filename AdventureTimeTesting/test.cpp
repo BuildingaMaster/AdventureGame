@@ -4,6 +4,9 @@
 
 #include "gtest/gtest.h"
 
+#include <streambuf>
+
+
 #include "../AdventureGame/Item.h"
 #include "../AdventureGame/ContextParser.h"
 #include "../AdventureGame/PlayerActions.h"
@@ -21,9 +24,54 @@ namespace
         //EXPECT_EQ(locationManager::stringToDirection("north"),cardinalDirection::North);
     } 
 
+    class HitTest : public testing::Test {
+        protected:
+        Inventory *userInventory;
+        PlayerActions playeract;
+        ContextParser *CP;
+
+        // You can remove any or all of the following functions if their bodies would
+        // be empty.
+
+        HitTest() {
+            userInventory = new Inventory(&playeract);
+            CP = new ContextParser(userInventory, &playeract);
+            // You can do set-up work for each test here.
+        }
+
+        ~HitTest() override {
+            delete CP;
+            delete userInventory;
+            // You can do clean-up work that doesn't throw exceptions here.
+        }
+
+        // If the constructor and destructor are not enough for setting up
+        // and cleaning up each test, you can define the following methods:
+
+        void SetUp() override {
+            // Code here will be called immediately after the constructor (right
+            // before each test).
+        }
+
+        void TearDown() override {
+            // Code here will be called immediately after each test (right
+            // before the destructor).
+        }
+    };
+    TEST_F(HitTest, HitYourself)
+    {
+        string command;
+        command = "hit self";
+        testing::internal::CaptureStdout();
+        EXPECT_TRUE(CP->interpretCommand(command));
+        string output = testing::internal::GetCapturedStdout();
+        EXPECT_EQ(output, "\nFor some reason, you hit yourself.\nYou can withstand 2 more hits.\n");
+        EXPECT_EQ(playeract.checkPlayerHealth(),2);
+    }
+
     class CPTest : public testing::Test {
         protected:
-        Inventory userInventory;
+        Inventory *userInventory;
         PlayerActions playeract;
         ContextParser *CP;
 
@@ -31,12 +79,14 @@ namespace
         // be empty.
 
         CPTest() {
-            CP = new ContextParser(&userInventory, &playeract);
+            userInventory = new Inventory(&playeract);
+            CP = new ContextParser(userInventory, &playeract);
             // You can do set-up work for each test here.
         }
 
         ~CPTest() override {
             delete CP;
+            delete userInventory;
             // You can do clean-up work that doesn't throw exceptions here.
         }
 
@@ -77,6 +127,7 @@ namespace
 
     TEST_F(CPTest, OutOfOrderTest)
     {
+        playeract.healPlayer(-1);
         // Move to apple room
         CP->interpretCommand("north");
         CP->interpretCommand("north");
@@ -109,7 +160,7 @@ namespace
         testing::internal::CaptureStdout();
         EXPECT_TRUE(CP->interpretCommand(command));
         output = testing::internal::GetCapturedStdout();
-        EXPECT_EQ(output, "\nYou eat the apple!\n");
+        EXPECT_EQ(output, "\nYou eat the apple!\n\nYou healed by 1 HP!\n");
 
         // Can't eat apple, already ate
         command = "eat apple";
@@ -119,22 +170,24 @@ namespace
         EXPECT_EQ(output, "\nYou don't have a(n) apple.\n");
     }
 
-    class HitTest : public testing::Test {
+    class EatTest : public testing::Test {
         protected:
-        Inventory userInventory;
+        Inventory *userInventory;
         PlayerActions playeract;
         ContextParser *CP;
 
         // You can remove any or all of the following functions if their bodies would
         // be empty.
 
-        HitTest() {
-            CP = new ContextParser(&userInventory, &playeract);
+        EatTest() {
+            userInventory = new Inventory(&playeract);
+            CP = new ContextParser(userInventory, &playeract);
             // You can do set-up work for each test here.
         }
 
-        ~HitTest() override {
+        ~EatTest() override {
             delete CP;
+            delete userInventory;
             // You can do clean-up work that doesn't throw exceptions here.
         }
 
@@ -151,8 +204,24 @@ namespace
             // before the destructor).
         }
     };
-    TEST_F(HitTest, HitYourself)
+
+    TEST_F(EatTest, OvereatTest)
     {
+        // Pick up mushroom 
+        EXPECT_TRUE(CP->interpretCommand("pick apple"));
+        // Yes/No needs cin, so fake it
+        streambuf *cinbuf = std::cin.rdbuf();
+        std::stringstream ss;
+        ss << "yes\n";
+        cin.rdbuf(ss.rdbuf());
+        // Eat the apple
+        testing::internal::CaptureStdout();
+        EXPECT_TRUE(CP->interpretCommand("eat apple"));
+        string output = testing::internal::GetCapturedStdout();
+        // Reset cin
+        cin.rdbuf(cinbuf);
+        EXPECT_EQ(output,"\nYou already have max health, are you sure you want to eat the apple?\n\nYes or no?\n> \nYou eat the apple!\n\nYou healed by 1 HP!\n");
+        EXPECT_EQ(playeract.checkPlayerHealth(), playeract.checkMaxPlayerHealth());
 
     }
 
