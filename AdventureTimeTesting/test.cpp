@@ -142,14 +142,14 @@ namespace
         EXPECT_EQ(output, "\nYou don't have a(n) apple.\n");
 
         // Can pick up apple
-        command = "pick apple";
+        command = "pick apples";
         testing::internal::CaptureStdout();
         EXPECT_TRUE(CP->interpretCommand(command));
         output = testing::internal::GetCapturedStdout();
-        EXPECT_EQ(output, "\nYou pick an apple from the tree.\n");
+        EXPECT_EQ(output, "\nYou have taken 4 apples.\n");
 
         // Can't pick up apple, already done
-        command = "pick apple";
+        command = "pick apples";
         testing::internal::CaptureStdout();
         EXPECT_FALSE(CP->interpretCommand(command));
         output = testing::internal::GetCapturedStdout();
@@ -162,12 +162,19 @@ namespace
         output = testing::internal::GetCapturedStdout();
         EXPECT_EQ(output, "\nYou eat the apple!\n\nYou healed by 1 HP!\n");
 
+        // Drop apples
+        command = "drop apples";
+        testing::internal::CaptureStdout();
+        EXPECT_TRUE(CP->interpretCommand(command));
+        output = testing::internal::GetCapturedStdout();
+        EXPECT_EQ(output, "\nYou drop 3 apples!\n");
+
         // Can't eat apple, already ate
         command = "eat apple";
         testing::internal::CaptureStdout();
         EXPECT_FALSE(CP->interpretCommand(command));
         output = testing::internal::GetCapturedStdout();
-        EXPECT_EQ(output, "\nYou don't have a(n) apple.\n");
+        EXPECT_EQ(output, "\nYou don't have any apples.\n");
     }
 
     class EatTest : public testing::Test {
