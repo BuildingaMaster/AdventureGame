@@ -2,7 +2,11 @@
 
 class BaseHealth
 {
+#ifdef GTESTING
+public:
+#else
 private:
+#endif
     int health;
     int maxHealth;
 

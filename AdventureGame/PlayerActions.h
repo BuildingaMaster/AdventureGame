@@ -9,7 +9,11 @@
 
 class PlayerActions
 {
+#ifdef GTESTING
+public:
+#else
 private:
+#endif
 	BaseHealth healthMGR;
 public:
 	// Constructor 

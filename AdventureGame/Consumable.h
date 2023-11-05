@@ -5,7 +5,11 @@ enum consumableType { apple, mushroom };
 
 class Consumable : public Item
 {
+#ifdef GTESTING
+public:
+#else
 private:
+#endif
 	consumableType itemType;
 public:
 	consumableType getConsumType();

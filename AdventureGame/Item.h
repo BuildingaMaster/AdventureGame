@@ -17,11 +17,19 @@ public:
     itemType getType();
     void setItemName(std::string);
     std::string getItemName();
+#ifdef GTESTING
+public:
+#else
 protected:
+#endif
     itemType thisType;
     double weight;
     std::string itemName;
+#ifdef GTESTING
+public:
+#else
 private:
+#endif
     itemState currentState;
 };
 
