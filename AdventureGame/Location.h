@@ -32,7 +32,9 @@ namespace fileParse
 	{
 		uint32_t id = 0;
 		uint32_t direction[6] = { 0, 0, 0, 0, 0, 0 }; // North South East West Above Below
-		uint32_t attributes[2] = { 0, 0 };
+		//uint32_t attributes[2] = { 0, 0 };
+		//uint64_t attributes[1] = { 0 };
+		uint64_t attributes = 0 ;
 	};
 	#pragma pack(pop)
 
@@ -71,6 +73,13 @@ namespace fileParse
 class Location
 {
 public:
+	enum roomAttributes : uint64_t
+	{
+		APPLE_TREE_IN_ROOM = 1UL,
+		MUSHROOMS_IN_ROOM = 2UL,
+		AAAA = 9223372036854775808UL,
+		NONE = 0
+	};
 
 	/// @brief Initializes a new Location with nullptr connections
 	Location(int ID);
@@ -78,7 +87,8 @@ public:
 	/// @brief Initializes a new Location with nullptr connections
 	/// @param desc - set to description of Location
 	/// @param altDesc - set to description of Location
-	Location(int ID, string desc, string altDesc);
+	/// @param attrib - the attributes of the room
+	Location(int ID, string desc, string altDesc, uint64_t attrib);
 
 	/// @brief cout the description of the location
 	void printLocation();
@@ -98,6 +108,9 @@ public:
 	void setAdjacent(Location*, cardinalDirection, bool);
 	Location* checkAdjacent(cardinalDirection);
 	int getLocationID();
+
+	bool hasAttribute(roomAttributes);
+	
 #ifdef GTESTING
 public:
 #else
@@ -105,7 +118,10 @@ private:
 #endif
 	int roomID;
 	bool firstTime = true;
+	uint64_t roomAttrs;
+	map<uint64_t,bool> attributeMap;
 	void initializeLocation();
+	void initializeAttribMap();
 	string description;
 	string altDescription;
 	Location* locationConnections[6];

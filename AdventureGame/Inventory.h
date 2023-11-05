@@ -14,9 +14,9 @@ public:
 	~Inventory();
 	//void addItem(Item toAdd, enum, int);
 	void addItem(Item* toAdd);
-	bool discardItem(string method, string item, int roomID);
+	bool discardItem(vector<string> args, int roomID);
 	bool processCommand(vector<string> args);
-	string inventoryValidCommands = "pick grab eat consume drop throw discard";
+	string inventoryValidCommands = "pick grab take eat consume drop throw discard";
 	static map<int, vector<Item*>> itemMap;
 
 #ifdef GTESTING

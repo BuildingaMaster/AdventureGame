@@ -1,4 +1,5 @@
 #include "Location.h"
+#include <math.h> 
 
 #include "Inventory.h"
 #include <iostream>
@@ -13,16 +14,20 @@ Location::Location(int ID)
 	roomID = ID;
 	description = "";
 	altDescription = "";
+	roomAttrs = 0;
 	initializeLocation();
+	initializeAttribMap();
 }
 
 // Constructor with Description
-Location::Location(int ID, string desc, string altDesc)
+Location::Location(int ID, string desc, string altDesc, uint64_t attrib)
 {
 	roomID = ID;
 	description = desc;
 	altDescription = altDesc;
+	roomAttrs = attrib;
 	initializeLocation();
+	initializeAttribMap();
 }
 
 // Creates validCommands variable and initializes nullptr array
@@ -33,6 +38,20 @@ void Location::initializeLocation()
 	{
 		locationConnections[i] = nullptr; // If not set to null program will crash
 	}
+}
+
+void Location::initializeAttribMap()
+{
+	for (int i = 63 ; i >= 0; i--)
+	{
+		uint64_t data = pow(2,i);
+		attributeMap.insert({data, roomAttrs & data});
+	}
+}
+
+bool Location::hasAttribute(roomAttributes attrib)
+{
+	return attributeMap[static_cast<uint64_t>(attrib)];
 }
 
 const string locationManager::locationValidCommands = "look see describe visualize north south east west above below go walk travel move ";
@@ -292,7 +311,7 @@ bool locationManager::init()
     // Converting data read from files to initialize Location objects
     for (int i = 0; i < map.header.roomCount; i++)
     {
-        locationManager::locationMap.insert(std::pair<int, Location*>(map.layout[i].id, new Location(map.layout[i].id, mapDesc.descLayout[i].description, mapDesc.descLayout[i].altdescription)));
+        locationManager::locationMap.insert(std::pair<int, Location*>(map.layout[i].id, new Location(map.layout[i].id, mapDesc.descLayout[i].description, mapDesc.descLayout[i].altdescription, map.layout[i].attributes)));
     }
     // Connect the initialized rooms
     for (int i = 0; i < map.header.roomCount; i++)
