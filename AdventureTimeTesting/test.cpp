@@ -139,21 +139,21 @@ namespace
         testing::internal::CaptureStdout();
         EXPECT_FALSE(CP->interpretCommand(command));
         string output = testing::internal::GetCapturedStdout();
-        EXPECT_EQ(output, "\nYou don't have a(n) apple.\n");
+        EXPECT_EQ(output, "\nYou don't have any apples.\n");
 
         // Can pick up apple
         command = "pick apples";
         testing::internal::CaptureStdout();
         EXPECT_TRUE(CP->interpretCommand(command));
         output = testing::internal::GetCapturedStdout();
-        EXPECT_EQ(output, "\nYou have taken 4 apples.\n");
+        EXPECT_EQ(output, "\nYou took 5 apples!\n");
 
         // Can't pick up apple, already done
         command = "pick apples";
         testing::internal::CaptureStdout();
         EXPECT_FALSE(CP->interpretCommand(command));
         output = testing::internal::GetCapturedStdout();
-        EXPECT_EQ(output, "\nThere is no apple for you to pick!\n");
+        EXPECT_EQ(output, "\nThere are no apples for you to pick!\n");
 
         // Eat apple
         command = "eat apple";
@@ -167,7 +167,7 @@ namespace
         testing::internal::CaptureStdout();
         EXPECT_TRUE(CP->interpretCommand(command));
         output = testing::internal::GetCapturedStdout();
-        EXPECT_EQ(output, "\nYou drop 3 apples!\n");
+        EXPECT_EQ(output, "\nYou drop 4 apples!\n");
 
         // Can't eat apple, already ate
         command = "eat apple";

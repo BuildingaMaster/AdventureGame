@@ -127,21 +127,22 @@ bool Inventory::processCommand(vector<string> args)
     bool multiSelect = false;
     bool found = false;
 
+    string itemArg = args[1];
+    int count = 0;
+    if (itemArg == "all" || itemArg == "every")
+    {
+        itemArg = args[2];
+        multiSelect = true;
+    }
+    
+    if (itemArg[itemArg.size() - 1] == 's')
+    {
+        itemArg.erase(itemArg.size() - 1, 1);
+        multiSelect = true;
+    }
+
     if (args[0] == "pick" || args[0] == "grab" || args[0] == "take")
     {
-        string itemArg = args[1];
-        int count = 0;
-        if (itemArg == "all" || itemArg == "every")
-        {
-            itemArg = args[2];
-            multiSelect = true;
-        }
-        
-        if (itemArg[itemArg.size() - 1] == 's')
-        {
-            itemArg.erase(itemArg.size() - 1, 1);
-            multiSelect = true;
-        }
 
         for (int i = 0; i < itemMap[roomID].size(); i++) // Grab pass
         {
@@ -188,7 +189,7 @@ bool Inventory::processCommand(vector<string> args)
         }
         else
         {
-            cout << "\nThere is no " << itemArg << " for you to " << args[0] << "!\n";
+            cout << "\nThere are no " << itemArg << "s for you to " << args[0] << "!\n";
             return false;
         }
     }
@@ -197,7 +198,7 @@ bool Inventory::processCommand(vector<string> args)
         for (int i = 0; i < currentInventory.size(); i++)
         {
             // Is the item in the inventory
-            if (currentInventory[i]->getItemName() == args[1])
+            if (currentInventory[i]->getItemName() == itemArg)
             {
                 // Is it a consumable?
                 if (currentInventory[i]->getType() == consumable)
@@ -226,7 +227,7 @@ bool Inventory::processCommand(vector<string> args)
                 }
             }
         }
-        cout << "\nYou don't have a(n) " << args[1] << ".\n";
+        cout << "\nYou don't have any " << itemArg << "s.\n";
         return false;
     }
     else if ( args[0] == "drop" || args[0] == "throw" || args[0] == "discard")
