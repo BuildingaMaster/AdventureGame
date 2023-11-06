@@ -4,14 +4,16 @@
 #include <map>
 #include "Item.h"
 #include "Consumable.h"
+#include "PlayerActions.h"
 
 using namespace std;
 class Inventory
 {
 public:
-	Inventory();
+	Inventory(PlayerActions*);
+	~Inventory();
 	//void addItem(Item toAdd, enum, int);
-	void addItem(Item toAdd);
+	void addItem(Item* toAdd);
 	bool processCommand(vector<string> args);
 	string inventoryValidCommands = "pick grab eat consume ";
 
@@ -20,9 +22,10 @@ public:
 #else
 private:
 #endif
-	vector<Item> currentInventory;
+	PlayerActions* playerData;
+	vector<Item*> currentInventory;
 	// This is temporary for POC and should be moved somewhere else.
-	map<int, vector<Item>> itemMap;
+	map<int, vector<Item*>> itemMap;
 
 	//currentInventory[0] = iteminRoom[42][0]
 	//iteminRoom.erase(iteminRoom.begin())

@@ -1,24 +1,47 @@
 #include "Inventory.h"
+
+#include "ContextParser.h"
 #include "Item.h"
 #include "Consumable.h"
 #include "Location.h"
 
-Inventory::Inventory()
+Inventory::Inventory(PlayerActions* pd)
 {
+    playerData = pd;
     for (auto const& x : locationManager::locationMap)
     {
-        itemMap.insert(std::pair<int, vector<Item>>(x.first, vector<Item>())); 
+        itemMap.insert(std::pair<int, vector<Item*>>(x.first, vector<Item*>())); 
     }
     // itemMap[i].insert(itemMap[i].begin(), Consumable(item,weight)) i = room number
     // TODO how do we assign items to west, east rooms?
-	itemMap[2].insert(itemMap[2].begin(), Consumable(mushroom, 1)); //add mushroom
-    itemMap[3].insert(itemMap[3].begin(), Consumable(apple, 1));
+	itemMap[2].insert(itemMap[2].begin(), new Consumable(mushroom, 1)); //add mushroom
+    itemMap[3].insert(itemMap[3].begin(), new Consumable(apple, 1));
 }
 
-void Inventory::addItem(Item toAdd)
+Inventory::~Inventory()
+{
+    // Delete all dynamic data from map
+    for (auto &entry : itemMap)
+    {
+        for (auto obj : entry.second)
+        {
+            delete obj;
+        }
+        entry.second.clear();
+    }
+
+    // Delete all dynamic data from inventory
+    for (auto x : currentInventory)
+    {
+        delete x;
+    }
+    currentInventory.clear();
+}
+
+void Inventory::addItem(Item* toAdd)
 {
 	currentInventory.push_back(toAdd);
-	currentInventory[currentInventory.size()-1].setState(inInventory);
+	currentInventory[currentInventory.size()-1]->setState(inInventory);
 }
 
 bool Inventory::processCommand(vector<string> args)
@@ -36,10 +59,10 @@ bool Inventory::processCommand(vector<string> args)
     {
         for (int i = 0; i < itemMap[roomID].size(); i++) //We are assuming 0 is the current room.
         {
-            if (itemMap[roomID][i].getItemName() == args[1])
+            if (itemMap[roomID][i]->getItemName() == args[1])
             {
                 // player picks a mushroom
-                if (itemMap[roomID][i].getItemName() == "mushroom" && itemMap[roomID][i].getType() == consumable)
+                if (itemMap[roomID][i]->getItemName() == "mushroom" && itemMap[roomID][i]->getType() == consumable)
                 {
                     addItem(itemMap[roomID][i]);
                     itemMap[roomID].erase(itemMap[roomID].begin()+i);
@@ -60,12 +83,27 @@ bool Inventory::processCommand(vector<string> args)
     {
         for (int i = 0; i < currentInventory.size(); i++)
         {
-            if (currentInventory[i].getItemName() == args[1])
+            // Is the item in the inventory
+            if (currentInventory[i]->getItemName() == args[1])
             {
-                if (currentInventory[i].getType() == consumable)
+                // Is it a consumable?
+                if (currentInventory[i]->getType() == consumable)
                 {
-                    currentInventory.erase(currentInventory.begin()+i);
+                    // Is the player already at max health?
+                    if (playerData->checkPlayerHealth() == playerData->checkMaxPlayerHealth())
+                    {
+                        cout << "\nYou already have max health, are you sure you want to eat the " << args[1] <<"?\n";
+                        if (ContextParser::yesNoPrompt() == CPResponse::Response::NO)
+                        {
+                            return true;
+                        }
+                    }
+                    // https://stackoverflow.com/questions/19501838/get-derived-type-via-base-class-virtual-function
+                    Consumable& item = dynamic_cast<Consumable&>(*currentInventory[i]);
                     cout << "\nYou eat the " << args[1] << "!\n";
+                    item.consume(playerData);
+                    delete currentInventory[i];
+                    currentInventory.erase(currentInventory.begin()+i);
                     return true;
                 }
                 else

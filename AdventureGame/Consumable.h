@@ -1,5 +1,6 @@
 #pragma once
 #include "Item.h"
+#include "PlayerActions.h"
 // Apples, Mushrooms
 enum consumableType { apple, mushroom };
 
@@ -14,8 +15,11 @@ private:
 public:
 	consumableType getConsumType();
 	Consumable(consumableType, double);
-	void consume();
+	/// @brief The player can eat the item
+	/// @param  player A reference to the PlayerActions object 
+	void consume(PlayerActions*);
 	~Consumable();
 	Consumable();
+	virtual void action() {}; // Does nothing
 };
 

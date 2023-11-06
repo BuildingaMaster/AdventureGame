@@ -14,7 +14,14 @@ BaseHealth::BaseHealth(int amount)
 
 void BaseHealth::addHP(int amount)
 {
-    health = health + amount;
+    if ((health + amount) >= maxHealth)
+    {
+        restoreMaxHP();
+    }
+    else
+    {
+        health = health + amount;
+    }
 }
 
 int BaseHealth::checkHP()
@@ -26,6 +33,11 @@ bool BaseHealth::removeHP()
 {
     health = health - 1;
     return (health <= 0);
+}
+
+int BaseHealth::checkMaxHP()
+{
+    return maxHealth;
 }
 
 void BaseHealth::restoreMaxHP()

@@ -77,3 +77,35 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
     cout << "\nI don't know what that is!\n";
     return false;
 }
+
+bool ContextParser::yesNoPrompt()
+{
+    string unfilteredCommand;
+    string command;
+    bool validInput = false;
+    do
+    {
+        unfilteredCommand = "";
+        command = "";
+        cout << "\nYes or no?\n> ";
+        getline(cin, unfilteredCommand);
+        for (auto &character : unfilteredCommand) 
+        {
+            character = tolower(character);
+            if (isspace(character))
+            {
+                // The string has a space, don't include it.
+                continue;
+            }
+            command.push_back(character);
+        }
+        if (command == "yes" || command == "y" || command == "ye")
+        {
+            return CPResponse::Response::YES;
+        }
+        else if (command == "no" || command == "n")
+        {
+            return CPResponse::Response::NO;
+        }
+    } while (true);
+}
