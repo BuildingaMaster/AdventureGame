@@ -2,7 +2,7 @@
 #define GTESTING
 #endif
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 #include <streambuf>
 #include <ctime>

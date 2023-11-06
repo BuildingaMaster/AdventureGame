@@ -438,3 +438,6 @@ FodyWeavers.xsd
 # Build Files (For John)
 AdventureGame-out.dSYM
 AdventureGame-out
+
+# CMake
+build/

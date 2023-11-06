@@ -1,0 +1,10 @@
+add_executable(AdventureGame 
+    AdventureGame.cpp 
+    BaseHealth.cpp 
+    Consumable.cpp 
+    ContextParser.cpp 
+    Inventory.cpp 
+    Item.cpp 
+    Location.cpp
+    PlayerActions.cpp
+)
