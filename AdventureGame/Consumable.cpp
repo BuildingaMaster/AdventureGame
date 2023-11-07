@@ -55,7 +55,7 @@ void Consumable::consume(PlayerActions* player)
 			int random = rand() % 3 + 1;
 			player->hurtPlayer(random);
 			
-			cout << "You were hurt by " << random << " HP"
+			cout << "You were hurt by " << random << " HP";
 		}
 		default:
 			break;

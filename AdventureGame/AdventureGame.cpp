@@ -30,7 +30,7 @@ int main()
     
     PlayerActions playeract;
     Inventory userInventory(&playeract);
-
+    BaseHealth check;
     
     string command;
     ContextParser CP(&userInventory,&playeract);
@@ -45,8 +45,14 @@ int main()
             // This is temporary, and needs to have CP logic
             if (command == "quit")
             {
-                stay =false;
+                stay = false;
                 break;
+            }
+            // TODO: how do we restart the game? not make it a harsh exit of the game 
+            else if (check.playerDead() == true)
+            {
+                cout << "Ahhhhhh you've died!";
+                exit(0);
             }
             validInput = CP.interpretCommand(command);
         } while (validInput == false);

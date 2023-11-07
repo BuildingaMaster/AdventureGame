@@ -1,5 +1,5 @@
 #include "BaseHealth.h"
-
+#include <iostream>
 BaseHealth::BaseHealth()
 {
     health = 3;
@@ -43,4 +43,16 @@ int BaseHealth::checkMaxHP()
 void BaseHealth::restoreMaxHP()
 {
     health = maxHealth;
+}
+
+bool BaseHealth::playerDead()
+{
+    if (health == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
