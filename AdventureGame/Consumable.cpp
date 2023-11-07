@@ -1,5 +1,6 @@
 #include "Consumable.h"
-
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 using namespace std;
@@ -46,6 +47,15 @@ void Consumable::consume(PlayerActions* player)
 			player->healPlayer(1);
 			cout << "\nYou healed by 1 HP!\n";
 			break;
+		}
+		case badmushroom:
+		{
+			// creating seed
+			srand(time(0));
+			int random = rand() % 3 + 1;
+			player->hurtPlayer(random);
+			
+			cout << "You were hurt by " << random << " HP"
 		}
 		default:
 			break;

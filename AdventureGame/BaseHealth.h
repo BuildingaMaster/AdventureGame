@@ -27,7 +27,7 @@ public:
     
     /// @brief Removes 1 HP from entity
     /// @return Does the entity have 0 health
-    bool removeHP();
+    bool removeHP(int);
     
     /// @brief Checks the max health
     /// @return Max health of entity

@@ -39,6 +39,10 @@ void PlayerActions::healPlayer(int amount)
     healthMGR.addHP(amount);
 }
 
+void PlayerActions::hurtPlayer(int amount)
+{
+    healthMGR.removeHP(amount);
+}
 int PlayerActions::checkPlayerHealth()
 {
     return healthMGR.checkHP();

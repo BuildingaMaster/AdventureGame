@@ -26,6 +26,8 @@ public:
 	bool processCommand(std::vector<std::string> args);
 	void healPlayer(int);
 
+	/// @brief when player is attacked or eats a bad shroom
+	void hurtPlayer(int);
 	/// @brief Checks the player's health
 	/// @return The players current health
 	int checkPlayerHealth();
