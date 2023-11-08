@@ -61,7 +61,7 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         // Handles the "help" command
         cout << "Here is a list of commands that might be useful: \n\n";
         cout << "Movements\n move/go/walk/travel north/east/south/west/above/below \n\nActions\n pick/grab/eat/consume apple/mushroom\n hit self\n check health \n\nSurroundings\n visualize,look,see,describe \n\nquit\n";    
-        return false;
+        return true;
     }
 
     // RegEx query to match the whole world.
