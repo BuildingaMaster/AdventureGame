@@ -82,7 +82,7 @@ bool Inventory::discardItem(vector<string> args, int roomID)
         if (currentInventory[i]->getItemName() == itemArg)
         {
             itemMap[roomID].push_back(currentInventory[i]);
-            itemMap[roomID][itemMap.size()-1]->setState(inWorld);
+            itemMap[roomID][itemMap[roomID].size() - 1]->setState(inWorld);
             if (multiSelect == false)
             {
                 currentInventory.erase(currentInventory.begin()+i);
