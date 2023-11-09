@@ -5,6 +5,8 @@
 #include "Consumable.h"
 #include "Location.h"
 
+#include "PrintDisplay.h"
+
 Inventory::Inventory(PlayerActions* pd)
 {
     playerData = pd;
@@ -90,7 +92,8 @@ bool Inventory::discardItem(vector<string> args, int roomID)
             if (multiSelect == false)
             {
                 currentInventory.erase(currentInventory.begin()+i);
-                cout << "\nYou " << args[0] << " the " << itemArg << "!\n";
+                PrintDisplay::custom_cout << "\nYou " << args[0] << " the " << itemArg << "!\n";
+                PrintDisplay::flush();
                 return true;
             }
             count=count+1;
@@ -110,16 +113,18 @@ bool Inventory::discardItem(vector<string> args, int roomID)
                 }
             }
         }
-        cout << "\nYou " << args[0] << " " << count << " " << itemArg;
+        PrintDisplay::custom_cout << "\nYou " << args[0] << " " << count << " " << itemArg;
         if (count > 1)
         {
-            cout << "s";
+            PrintDisplay::custom_cout << "s";
         }
-        cout << "!\n";
+        PrintDisplay::custom_cout << "!\n";
+        PrintDisplay::flush();
         return true;
     }
     // else
-    cout << "\nYou don't have any " << itemArg << "s.\n";
+    PrintDisplay::custom_cout << "\nYou don't have any " << itemArg << "s.\n";
+    PrintDisplay::flush();
     return false;
 }
 
@@ -161,7 +166,8 @@ bool Inventory::processCommand(vector<string> args)
                 if (multiSelect == false)
                 {
                     itemMap[roomID].erase(itemMap[roomID].begin() + i); // Remove pass
-                    cout << "\nYou have taken the " << itemArg <<".\n";
+                    PrintDisplay::custom_cout << "\nYou have taken the " << itemArg <<".\n";
+                    PrintDisplay::flush();
                     return true;
                 }
                 found = true;
@@ -172,13 +178,15 @@ bool Inventory::processCommand(vector<string> args)
                 {
                     addItem(itemMap[roomID][i]);
                     itemMap[roomID].erase(itemMap[roomID].begin()+i);
-                    cout << "\nYou pick a " << args[1] << " from the ground.\n";
+                    PrintDisplay::custom_cout << "\nYou pick a " << args[1] << " from the ground.\n";
+                    PrintDisplay::flush();
                     return true;
                 }
                 // player picks an apple
                 addItem(itemMap[roomID][i]);
                 itemMap[roomID].erase(itemMap[roomID].begin()+i);
-                cout << "\nYou pick an " << args[1] << " from the tree.\n";
+                PrintDisplay::custom_cout << "\nYou pick an " << args[1] << " from the tree.\n";
+                PrintDisplay::flush();
                 return true;
                 */
             }
@@ -193,17 +201,19 @@ bool Inventory::processCommand(vector<string> args)
                     break;
                 }        
             }
-            cout << "\nYou took " << count << " " << itemArg;
+            PrintDisplay::custom_cout << "\nYou took " << count << " " << itemArg;
             if (count > 1)
             {
-                cout << "s";
+                PrintDisplay::custom_cout << "s";
             }
-            cout << "!\n";
+            PrintDisplay::custom_cout << "!\n";
+            PrintDisplay::flush();
             return true;
         }
         else
         {
-            cout << "\nThere are no " << itemArg << "s for you to " << args[0] << "!\n";
+            PrintDisplay::custom_cout << "\nThere are no " << itemArg << "s for you to " << args[0] << "!\n";
+            PrintDisplay::flush();
             return false;
         }
     }
@@ -220,7 +230,8 @@ bool Inventory::processCommand(vector<string> args)
                     // Is the player already at max health?
                     if (playerData->checkPlayerHealth() == playerData->checkMaxPlayerHealth())
                     {
-                        cout << "\nYou already have max health, are you sure you want to eat the " << args[1] <<"?\n";
+                        PrintDisplay::custom_cout << "\nYou already have max health, are you sure you want to eat the " << args[1] <<"?\n";
+                        PrintDisplay::flush();
                         if (ContextParser::yesNoPrompt() == CPResponse::Response::NO)
                         {
                             return true;
@@ -228,7 +239,7 @@ bool Inventory::processCommand(vector<string> args)
                     }
                     // https://stackoverflow.com/questions/19501838/get-derived-type-via-base-class-virtual-function
                     Consumable& item = dynamic_cast<Consumable&>(*currentInventory[i]);
-                    cout << "\nYou eat the " << args[1] << "!\n";
+                    PrintDisplay::custom_cout << "\nYou eat the " << args[1] << "!\n";
                     item.consume(playerData);
                     delete currentInventory[i];
                     currentInventory.erase(currentInventory.begin()+i);
@@ -236,12 +247,14 @@ bool Inventory::processCommand(vector<string> args)
                 }
                 else
                 {
-                    cout << "\nYou can't eat that!\n";
+                    PrintDisplay::custom_cout << "\nYou can't eat that!\n";
+                    PrintDisplay::flush();
                     return false;
                 }
             }
         }
-        cout << "\nYou don't have any " << itemArg << "s.\n";
+        PrintDisplay::custom_cout << "\nYou don't have any " << itemArg << "s.\n";
+        PrintDisplay::flush();
         return false;
     }
     else if ( args[0] == "drop" || args[0] == "throw" || args[0] == "discard")

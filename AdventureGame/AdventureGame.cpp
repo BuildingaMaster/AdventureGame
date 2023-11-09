@@ -13,10 +13,13 @@
 #include "Inventory.h"
 #include "Consumable.h"
 #include "ContextParser.h"
+
+#include "CommonGameObjects.h"
 using namespace std;
 
 // Initialize player's inventory object
 
+#include "PrintDisplay.h"
 
 int main()
 {
@@ -29,6 +32,8 @@ int main()
     locationManager::updateCurrentLocation(locationManager::getCurrentLocation());
     
     PlayerActions playeract;
+    CommonGameObjects::PAManager = &playeract;
+
     Inventory userInventory(&playeract);
     BaseHealth check;
     
@@ -57,6 +62,7 @@ int main()
             // TODO: how do we restart the game? not make it a harsh exit of the game 
             validInput = CP.interpretCommand(command);
         } while (validInput == false);
+        playeract.decrementMovingHigh();
     } while (stay);
 
     locationManager::deinit();

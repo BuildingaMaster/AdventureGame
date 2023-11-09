@@ -42,7 +42,8 @@ void Consumable::consume(PlayerActions* player)
 		case apple:
 		{
 			player->healPlayer(1);
-			cout << "\nYou healed by 1 HP!\n";
+			PrintDisplay::custom_cout << "\nYou healed by 1 HP!\n";
+			PrintDisplay::flush();
 			break;
 		}
 		case mushroom: // creating a 50 50 chance of a good / bad shroom
@@ -53,18 +54,37 @@ void Consumable::consume(PlayerActions* player)
 			{
 				// Implement eating mushroom functionality here!
 				player->healPlayer(1);
-				cout << "\nYou healed by 1 HP!\n";
+				PrintDisplay::custom_cout << "\nYou healed by 1 HP!\n";
+				PrintDisplay::flush();
 				break;
 			}
 			else
 			{
 				// creating seed
 				srand(time(0));
-				int random = rand() % 3 + 1;
-				player->hurtPlayer(random);
+				int random = rand() % 2 + 1;
+				switch(random)
+				{
+					case 1:
+					{
+						random = rand() % 3 + 1;
+						player->hurtPlayer(random);
 
-				cout << "\nYou were hurt by " << random << " HP!\n";
+						PrintDisplay::custom_cout << "\nYou were hurt by " << random << " HP!\n";
+						PrintDisplay::flush();
+						break;
+					}
+					case 2:
+					{
+						PrintDisplay::custom_cout << "\nThe mushroom tasted fine, but you don't feel right...\n";
+						PrintDisplay::flush();
+						player->thePlayerIsHigh(true);
+						player->highForNMoves(rand() % 10 + 5);
+						break;
+					}
+				}
 				break;
+
 			}	
 		}
 		default:

@@ -6,6 +6,8 @@
 #include <fstream>
 #include <map>
 
+#include "PrintDisplay.h"
+
 using namespace std;
 
 // Default Constructor
@@ -71,12 +73,15 @@ void Location::printLocation()
 	map<string,int> counter;
 	if (firstTime)
 	{
-		cout << endl << description << endl;
+		PrintDisplay::custom_cout << endl << description << endl;
 	}
 	else
 	{
-		cout << endl << altDescription << endl;
+		PrintDisplay::custom_cout << endl << altDescription << endl;
 	}
+
+	PrintDisplay::flush();
+
 	for (auto element : Inventory::itemMap[roomID])
 	{
 		if (counter.find(element->getItemName()) == counter.end())
@@ -87,17 +92,18 @@ void Location::printLocation()
 	}
 	if (counter.size() > 0)
 	{
-		cout << endl;
+		PrintDisplay::custom_cout << endl;
 		for (auto element : counter)
 		{
 			if (element.second > 1)
 			{
-				cout << itemDescription::itemTag[element.first].second << endl;
+				PrintDisplay::custom_cout << itemDescription::itemTag[element.first].second << endl;
 			}
 			else
 			{
-				cout << itemDescription::itemTag[element.first].first << endl;
+				PrintDisplay::custom_cout << itemDescription::itemTag[element.first].first << endl;
 			}
+			PrintDisplay::flush();
 		}
 	}
 
@@ -135,8 +141,9 @@ bool locationManager::processCommand(vector<string> args)
 		// No room in user's direction input (YET)
 		if (currentLocation->checkAdjacent(arg0Direction) == nullptr)
 		{
-			cout << "\nYou can't go " << directionStrings[arg0Direction] << "!\n";
-			return true;
+			PrintDisplay::custom_cout << "\nYou can't go " << directionStrings[arg0Direction] << "!\n";
+			PrintDisplay::flush();
+			return false;
 		}
 		else
 		{
@@ -159,8 +166,9 @@ bool locationManager::processCommand(vector<string> args)
 				// no room connected to user's direction input
 				if (currentLocation->checkAdjacent(arg1Direction) == nullptr)
 				{
-					cout << "\nYou can't go " << directionStrings[arg1Direction] << "!\n";
-					return true;
+					PrintDisplay::custom_cout << "\nYou can't go " << directionStrings[arg1Direction] << "!\n";
+					PrintDisplay::flush();
+					return false;
 				}
 				else // user direction has a room connected 
 				{
@@ -172,7 +180,8 @@ bool locationManager::processCommand(vector<string> args)
 		}
 	}
 
-	cout << "\nWhat do you want to " << args[0] << "?\n";
+	PrintDisplay::custom_cout << "\nWhat do you want to " << args[0] << "?\n";
+	PrintDisplay::flush();
 	return false;
 }
 

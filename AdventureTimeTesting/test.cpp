@@ -35,6 +35,7 @@ namespace
 
         HitTest() {
             userInventory = new Inventory(&playeract);
+            CommonGameObjects::PAManager = &playeract;
             CP = new ContextParser(userInventory, &playeract);
             // You can do set-up work for each test here.
         }
@@ -80,6 +81,7 @@ namespace
 
         CPTest() {
             userInventory = new Inventory(&playeract);
+            CommonGameObjects::PAManager = &playeract;
             CP = new ContextParser(userInventory, &playeract);
             // You can do set-up work for each test here.
         }
@@ -188,6 +190,7 @@ namespace
 
         EatTest() {
             userInventory = new Inventory(&playeract);
+            CommonGameObjects::PAManager = &playeract;
             CP = new ContextParser(userInventory, &playeract);
             // You can do set-up work for each test here.
         }
