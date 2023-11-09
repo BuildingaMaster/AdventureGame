@@ -43,9 +43,9 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         formattedCmd.push_back(temp);
         temp.clear();
     }
-
+    
     // The program will crash if the vector is empty.
-    if (formattedCmd.size() == 0)
+    if (formattedCmd.empty())
     {
         return false;
     }

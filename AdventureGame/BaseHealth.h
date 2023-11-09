@@ -35,8 +35,6 @@ public:
 
     /// @brief Restores an entity's health to it's max.
     void restoreMaxHP();
-
-    bool playerDead();
     
 
 };

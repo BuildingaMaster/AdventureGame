@@ -35,6 +35,10 @@ public:
 	/// @brief Checks the player's' max health
 	/// @return The players max health
 	int checkMaxPlayerHealth();
+
+	/// @brief Checks if the player is dead. Who killed him?
+	/// @return true if the player is dead.
+	bool thePlayerIsDead();
 	std::string playerActionsValidCommands = "check hit ";
 
 };

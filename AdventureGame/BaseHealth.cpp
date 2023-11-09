@@ -44,15 +44,3 @@ void BaseHealth::restoreMaxHP()
 {
     health = maxHealth;
 }
-
-bool BaseHealth::playerDead()
-{
-    if (health == 0)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}

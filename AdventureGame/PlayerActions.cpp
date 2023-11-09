@@ -20,15 +20,15 @@ bool PlayerActions::processCommand(vector<string> args)
     }
     else if (args[0] == "hit" &&  args[1] == "self")
     {
-        if (healthMGR.removeHP())
+        if (healthMGR.removeHP(1))
         {
-            cout << "\nFor some reason, you still hit yourself, even though you have no more HP.\n";
+            cout << "\nFor some reason, you hit yourself, and you slapped yourself to death. You win.\n";
         }
         else
         {
             cout << "\nFor some reason, you hit yourself.\n";
+            cout << "You can withstand "<< healthMGR.checkHP() <<" more hits.\n";
         }
-        cout << "You can withstand "<< healthMGR.checkHP() <<" more hits.\n";
         return true;
     }
     return false;
@@ -51,4 +51,9 @@ int PlayerActions::checkPlayerHealth()
 int PlayerActions::checkMaxPlayerHealth()
 {
     return healthMGR.checkMaxHP();
+}
+
+bool PlayerActions::thePlayerIsDead()
+{
+    return healthMGR.checkHP() <= 0;
 }

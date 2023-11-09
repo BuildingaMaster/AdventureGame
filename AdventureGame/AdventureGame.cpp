@@ -40,6 +40,12 @@ int main()
     {
         do
         {
+            if (playeract.thePlayerIsDead())
+            {
+                cout << "\nAhhhhhh you've died!\n";
+                stay = false;
+                break;
+            }
             cout << "\nWhat would you like to do?\n> ";
             getline(cin, command);
             // This is temporary, and needs to have CP logic
@@ -49,11 +55,6 @@ int main()
                 break;
             }
             // TODO: how do we restart the game? not make it a harsh exit of the game 
-            else if (check.playerDead() == true)
-            {
-                cout << "Ahhhhhh you've died!";
-                exit(0);
-            }
             validInput = CP.interpretCommand(command);
         } while (validInput == false);
     } while (stay);
