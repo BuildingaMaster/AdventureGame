@@ -14,6 +14,10 @@ public:
 	~Inventory();
 	//void addItem(Item toAdd, enum, int);
 	void addItem(Item* toAdd);
+	/// @brief Discards an item from the inventory to the room
+	/// @param args The arguements from CP
+	/// @param roomID The room the user is currently in
+	/// @return If discarding worked.
 	bool discardItem(vector<string> args, int roomID);
 	bool processCommand(vector<string> args);
 	string inventoryValidCommands = "pick grab take eat consume drop throw discard";

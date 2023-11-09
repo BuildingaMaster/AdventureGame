@@ -56,6 +56,7 @@ void Inventory::addItem(Item* toAdd)
 	currentInventory[currentInventory.size()-1]->setState(inInventory);
 }
 
+// The item map, shared.
 map<int, vector<Item*>> Inventory::itemMap;
 
 
@@ -65,12 +66,15 @@ bool Inventory::discardItem(vector<string> args, int roomID)
     int count = 0;
     bool multiSelect = false;
     bool found = false;
+
+    // MultiSelect, if all or any is listed
     if (itemArg == "all" || itemArg == "every")
     {
         itemArg = args[2];
         multiSelect = true;
     }
 
+    // MultiSelect, if plural
     if (itemArg[itemArg.size() - 1] == 's')
     {
         itemArg.erase(itemArg.size() - 1, 1);
@@ -106,7 +110,12 @@ bool Inventory::discardItem(vector<string> args, int roomID)
                 }
             }
         }
-        cout << "\nYou " << args[0] << " " << count << " " << itemArg << "s!\n";
+        cout << "\nYou " << args[0] << " " << count << " " << itemArg;
+        if (count > 1)
+        {
+            cout << "s";
+        }
+        cout << "!\n";
         return true;
     }
     // else
@@ -184,7 +193,12 @@ bool Inventory::processCommand(vector<string> args)
                     break;
                 }        
             }
-            cout << "\nYou took " << count << " " << itemArg << "s" << "!\n";
+            cout << "\nYou took " << count << " " << itemArg;
+            if (count > 1)
+            {
+                cout << "s";
+            }
+            cout << "!\n";
             return true;
         }
         else

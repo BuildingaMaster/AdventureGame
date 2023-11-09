@@ -75,9 +75,9 @@ class Location
 public:
 	enum roomAttributes : uint64_t
 	{
-		APPLE_TREE_IN_ROOM = 1UL,
-		MUSHROOMS_IN_ROOM = 2UL,
-		AAAA = 9223372036854775808UL,
+		APPLE_TREE_IN_ROOM = 1,
+		MUSHROOMS_IN_ROOM = 2,
+		AAAA = 64,
 		NONE = 0
 	};
 
@@ -103,8 +103,15 @@ public:
 
 	void justVisitedRoom();
 
-	/// 
+	/// @brief Sets a new connection from the current room to a new room based off of the direction you want to go
+	/// @param adjRoom The room to connect to
+	/// @param dir The direction of the connection
 	void setAdjacent(Location*, cardinalDirection);
+
+	///  @brief Sets a new connection from the current room to a new room based off of the direction you want to go
+	/// @param adjRoom The room to connect to
+	/// @param dir The direction of the connection
+	/// @param twoWay Should the opposite room be connected?
 	void setAdjacent(Location*, cardinalDirection, bool);
 	Location* checkAdjacent(cardinalDirection);
 	int getLocationID();
@@ -121,6 +128,8 @@ private:
 	uint64_t roomAttrs;
 	map<uint64_t,bool> attributeMap;
 	void initializeLocation();
+
+	/// @brief 
 	void initializeAttribMap();
 	string description;
 	string altDescription;

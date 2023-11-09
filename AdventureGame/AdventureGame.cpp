@@ -25,7 +25,7 @@ int main()
         locationManager::deinit();
         return 1;
     }
-    
+    // Print the first description, and verify we are in the first room
     locationManager::updateCurrentLocation(locationManager::getCurrentLocation());
     
     PlayerActions playeract;

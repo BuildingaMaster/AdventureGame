@@ -38,6 +38,7 @@ private:
 class itemDescription
 {
     public:
+        /// @brief The item's description, first singular, second is plural
         static std::map<std::string,  std::pair<std::string,std::string>> itemTag;
 };
 

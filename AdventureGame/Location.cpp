@@ -42,10 +42,12 @@ void Location::initializeLocation()
 
 void Location::initializeAttribMap()
 {
-	for (int i = 63 ; i >= 0; i--)
+	// Bit mask. This is required as it needs the uint64_t
+	uint64_t mask = 1; 
+	for (uint64_t i = 0 ; i < 64 ; ++i)
 	{
-		uint64_t data = pow(2,i);
-		attributeMap.insert({data, roomAttrs & data});
+		// Check from the least significant byte.
+		attributeMap.insert({(i+1),(roomAttrs & mask << i)});
 	}
 }
 
@@ -174,14 +176,12 @@ bool locationManager::processCommand(vector<string> args)
 	return false;
 }
 
-///@brief Sets a new connection from the current room to a new room based off of the direction you want to go
+
 void Location::setAdjacent(Location* adjRoom, cardinalDirection dir)
 {
 	setAdjacent(adjRoom, dir, false);
 }
 
-// Sets a new connection from the current room to a new room in direction dir, either one way or two way
-/// @brief Creates a new connection in a set direction 
 void Location::setAdjacent(Location* adjRoom, cardinalDirection dir, bool twoWay)
 {
 	// Input Validation for cardinalDirection
@@ -309,12 +309,12 @@ bool locationManager::init()
 	}
 
     // Converting data read from files to initialize Location objects
-    for (int i = 0; i < map.header.roomCount; i++)
+    for (uint32_t i = 0; i < map.header.roomCount; i++)
     {
         locationManager::locationMap.insert(std::pair<int, Location*>(map.layout[i].id, new Location(map.layout[i].id, mapDesc.descLayout[i].description, mapDesc.descLayout[i].altdescription, map.layout[i].attributes)));
     }
     // Connect the initialized rooms
-    for (int i = 0; i < map.header.roomCount; i++)
+    for (uint32_t i = 0; i < map.header.roomCount; i++)
     {
         for (int j = 0; j < sizeof(map.layout[i].direction) / sizeof(uint32_t); j++)
         {
@@ -335,7 +335,7 @@ bool locationManager::init()
 void locationManager::deinit()
 {
     // Destroying the map pointers so there are no memory leaks
-    for (int i = 0; i < map.header.roomCount; i++)
+    for (uint32_t i = 0; i < map.header.roomCount; i++)
     {
         delete locationManager::locationMap[map.layout[i].id];
         locationManager::locationMap[map.layout[i].id] = nullptr;
