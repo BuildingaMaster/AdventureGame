@@ -1,6 +1,10 @@
 #include "Location.h"
+#include <math.h> 
+
+#include "Inventory.h"
 #include <iostream>
 #include <fstream>
+#include <map>
 
 using namespace std;
 
@@ -9,15 +13,21 @@ Location::Location(int ID)
 {
 	roomID = ID;
 	description = "";
+	altDescription = "";
+	roomAttrs = 0;
 	initializeLocation();
+	initializeAttribMap();
 }
 
 // Constructor with Description
-Location::Location(int ID, string desc)
+Location::Location(int ID, string desc, string altDesc, uint64_t attrib)
 {
 	roomID = ID;
 	description = desc;
+	altDescription = altDesc;
+	roomAttrs = attrib;
 	initializeLocation();
+	initializeAttribMap();
 }
 
 // Creates validCommands variable and initializes nullptr array
@@ -28,6 +38,22 @@ void Location::initializeLocation()
 	{
 		locationConnections[i] = nullptr; // If not set to null program will crash
 	}
+}
+
+void Location::initializeAttribMap()
+{
+	// Bit mask. This is required as it needs the uint64_t
+	uint64_t mask = 1; 
+	for (uint64_t i = 0 ; i < 64 ; ++i)
+	{
+		// Check from the least significant byte.
+		attributeMap.insert({(i+1),(roomAttrs & mask << i)});
+	}
+}
+
+bool Location::hasAttribute(roomAttributes attrib)
+{
+	return attributeMap[static_cast<uint64_t>(attrib)];
 }
 
 const string locationManager::locationValidCommands = "look see describe visualize north south east west above below go walk travel move ";
@@ -42,12 +68,54 @@ const string locationManager::directionStrings[] = { "north", "south", "east", "
 // Outputs the description of the Location
 void Location::printLocation()
 {
-	cout << endl << description << endl;
+	map<string,int> counter;
+	if (firstTime)
+	{
+		cout << endl << description << endl;
+	}
+	else
+	{
+		cout << endl << altDescription << endl;
+	}
+	for (auto element : Inventory::itemMap[roomID])
+	{
+		if (counter.find(element->getItemName()) == counter.end())
+		{
+			counter.insert(pair<string,int>{element->getItemName(),0});
+		}
+		counter[element->getItemName()] = counter[element->getItemName()]+1;
+	}
+	if (counter.size() > 0)
+	{
+		cout << endl;
+		for (auto element : counter)
+		{
+			if (element.second > 1)
+			{
+				cout << itemDescription::itemTag[element.first].second << endl;
+			}
+			else
+			{
+				cout << itemDescription::itemTag[element.first].first << endl;
+			}
+		}
+	}
+
 }
 
 void Location::setDescription(string s)
 {
 	description = s; 
+}
+
+void Location::setAltDescription(string s)
+{
+	altDescription = s; 
+}
+
+void Location::justVisitedRoom()
+{
+	firstTime = false;
 }
 
 bool locationManager::processCommand(vector<string> args)
@@ -74,7 +142,6 @@ bool locationManager::processCommand(vector<string> args)
 		{
 			// Move Player to the new location and print out its description
 			updateCurrentLocation(currentLocation->checkAdjacent(arg0Direction));
-			currentLocation->printLocation();
 			return true;
 		}
 	}
@@ -98,7 +165,6 @@ bool locationManager::processCommand(vector<string> args)
 				else // user direction has a room connected 
 				{
 					updateCurrentLocation(currentLocation->checkAdjacent(arg1Direction));
-					currentLocation->printLocation();
 					return true;
 				}
 			}
@@ -110,14 +176,12 @@ bool locationManager::processCommand(vector<string> args)
 	return false;
 }
 
-///@brief Sets a new connection from the current room to a new room based off of the direction you want to go
+
 void Location::setAdjacent(Location* adjRoom, cardinalDirection dir)
 {
 	setAdjacent(adjRoom, dir, false);
 }
 
-// Sets a new connection from the current room to a new room in direction dir, either one way or two way
-/// @brief Creates a new connection in a set direction 
 void Location::setAdjacent(Location* adjRoom, cardinalDirection dir, bool twoWay)
 {
 	// Input Validation for cardinalDirection
@@ -171,6 +235,8 @@ Location* locationManager::currentLocation = currentLocation = nullptr;
 void locationManager::updateCurrentLocation(Location* newLocation)
 {
 	currentLocation = newLocation;
+	currentLocation->printLocation();
+	currentLocation->justVisitedRoom();
 }
 
 // Returns the current player Location
@@ -228,13 +294,27 @@ bool locationManager::init()
     memcpy(&mapDesc, descBytes.data(), descBytes.size());
     in.close();
 
+	if (map.header.version != CURRENT_MBM_VERSION)
+	{
+		cout << "The loaded map file is not compatible with this version of the game.\n";
+		cout << "Requires MBM version: "<< CURRENT_MBM_VERSION << ", loaded version: " << map.header.version << "\n";
+		return false;
+	}
+
+	if (mapDesc.header.version != CURRENT_MBD_VERSION)
+	{
+		cout << "The loaded map description file is not compatible with this version of the game.\n";
+		cout << "Requires MBD version: "<< CURRENT_MBD_VERSION << ", loaded version: " << mapDesc.header.version << "\n";
+		return false;
+	}
+
     // Converting data read from files to initialize Location objects
-    for (int i = 0; i < map.header.roomCount; i++)
+    for (uint32_t i = 0; i < map.header.roomCount; i++)
     {
-        locationManager::locationMap.insert(std::pair<int, Location*>(map.layout[i].id, new Location(map.layout[i].id, mapDesc.descLayout[i].description)));
+        locationManager::locationMap.insert(std::pair<int, Location*>(map.layout[i].id, new Location(map.layout[i].id, mapDesc.descLayout[i].description, mapDesc.descLayout[i].altdescription, map.layout[i].attributes)));
     }
     // Connect the initialized rooms
-    for (int i = 0; i < map.header.roomCount; i++)
+    for (uint32_t i = 0; i < map.header.roomCount; i++)
     {
         for (int j = 0; j < sizeof(map.layout[i].direction) / sizeof(uint32_t); j++)
         {
@@ -248,15 +328,14 @@ bool locationManager::init()
     }
 
     // Set the starting location to the player location and print the description
-    updateCurrentLocation(locationManager::locationMap[1]);
-    //locationMap[1]->getCurrentLocation()->printLocation();
+	locationManager::currentLocation = locationManager::locationMap[1];
 	return true;
 }
 
 void locationManager::deinit()
 {
     // Destroying the map pointers so there are no memory leaks
-    for (int i = 0; i < map.header.roomCount; i++)
+    for (uint32_t i = 0; i < map.header.roomCount; i++)
     {
         delete locationManager::locationMap[map.layout[i].id];
         locationManager::locationMap[map.layout[i].id] = nullptr;

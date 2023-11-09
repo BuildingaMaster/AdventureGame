@@ -78,6 +78,27 @@ class Ui_Dialog(object):
 
         self.verticalLayout_3.addWidget(self.CharLimitLabel)
 
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.AltRoomDescLabel = QLabel(self.GenInfo)
+        self.AltRoomDescLabel.setObjectName(u"AltRoomDescLabel")
+
+        self.horizontalLayout_3.addWidget(self.AltRoomDescLabel)
+
+        self.AltRoomDescEdit = QTextEdit(self.GenInfo)
+        self.AltRoomDescEdit.setObjectName(u"AltRoomDescEdit")
+
+        self.horizontalLayout_3.addWidget(self.AltRoomDescEdit)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_3)
+
+        self.AltCharLimitLabel = QLabel(self.GenInfo)
+        self.AltCharLimitLabel.setObjectName(u"AltCharLimitLabel")
+        self.AltCharLimitLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.verticalLayout_3.addWidget(self.AltCharLimitLabel)
+
 
         self.verticalLayout_6.addWidget(self.GenInfo)
 
@@ -313,6 +334,9 @@ class Ui_Dialog(object):
         self.RoomDescLabel.setText(QCoreApplication.translate("Dialog", u"Story Description:", None))
         self.RoomDescEdit.setPlaceholderText(QCoreApplication.translate("Dialog", u"Supports basic HTML formatting", None))
         self.CharLimitLabel.setText(QCoreApplication.translate("Dialog", u"0/400 Characters", None))
+        self.AltRoomDescLabel.setText(QCoreApplication.translate("Dialog", u"Alternate Story Description:", None))
+        self.AltRoomDescEdit.setPlaceholderText(QCoreApplication.translate("Dialog", u"Supports basic HTML formattting", None))
+        self.AltCharLimitLabel.setText(QCoreApplication.translate("Dialog", u"0/400 Characters", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.GeneralTab), QCoreApplication.translate("Dialog", u"General", None))
         self.Connections.setTitle(QCoreApplication.translate("Dialog", u"Connections", None))
         self.NorthLabel.setText(QCoreApplication.translate("Dialog", u"North Room:", None))
@@ -332,10 +356,10 @@ class Ui_Dialog(object):
         self.Common.setTitle(QCoreApplication.translate("Dialog", u"Common", None))
         self.Option8Check.setText(QCoreApplication.translate("Dialog", u"Option 8", None))
         self.Option3Check.setText(QCoreApplication.translate("Dialog", u"Option 3", None))
-        self.Option2Check.setText(QCoreApplication.translate("Dialog", u"Option 2", None))
+        self.Option2Check.setText(QCoreApplication.translate("Dialog", u"Mushrooms in room", None))
         self.Option6Check.setText(QCoreApplication.translate("Dialog", u"Option 6", None))
         self.Option5Check.setText(QCoreApplication.translate("Dialog", u"Option 5", None))
-        self.Option1Check.setText(QCoreApplication.translate("Dialog", u"Option 1", None))
+        self.Option1Check.setText(QCoreApplication.translate("Dialog", u"Apples in room", None))
         self.Option4Check.setText(QCoreApplication.translate("Dialog", u"Option 4", None))
         self.Option7Check.setText(QCoreApplication.translate("Dialog", u"Option 7", None))
         self.Extended.setTitle(QCoreApplication.translate("Dialog", u"Extended", None))

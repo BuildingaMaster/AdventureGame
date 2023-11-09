@@ -18,20 +18,15 @@ using namespace std;
 // Initialize player's inventory object
 
 
-void backStory()
-{
-	cout << "You open your eyes and see you are in the middle of a forest. " << endl;
-	cout << "It's just you, your thoughts, and the colorful wilderness. " << endl;
-	cout << "You ask yourself: how the hell did I get here, and what is my purpose?" << endl;
-	cout << "The more you explore, the more you learn about not only where you are, but who you are. " << endl << endl;
-}
-
 int main()
 {
-    locationManager::init();
-    
-    // Print out backstory upon starting game
-	backStory();
+    if (locationManager::init() == false)
+    {
+        locationManager::deinit();
+        return 1;
+    }
+    // Print the first description, and verify we are in the first room
+    locationManager::updateCurrentLocation(locationManager::getCurrentLocation());
     
     PlayerActions playeract;
     Inventory userInventory(&playeract);

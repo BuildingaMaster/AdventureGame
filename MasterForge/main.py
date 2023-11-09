@@ -9,7 +9,7 @@ from PySide6.QtGui import QAction, QKeySequence
 from PySide6.QtWidgets import (QGraphicsSceneMouseEvent,QFileDialog, QDialog, QMenu, QApplication, QMainWindow,
     QMessageBox, QGraphicsScene,QGraphicsRectItem,QGraphicsItem,QGraphicsView, QGraphicsTextItem, QInputDialog)
 
-VERSION = 1.0
+VERSION = 1.1
 
 class recProperties(Properties_ui.Ui_Dialog,QDialog):
     def __init__(self, *args, **kwargs):
@@ -34,7 +34,9 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         self.RoomNameEdit.setText(self.GUIWin.box_check[-1]["RoomName"])
         self.setWindowTitle(f"Properties  - {self.RoomNameEdit.text()}")
         self.RoomDescEdit.textChanged.connect(self.descChanged)
+        self.AltRoomDescEdit.textChanged.connect(self.altDescChanged)
         self.RoomDescEdit.setText(self.GUIWin.box_check[-1]["RoomDesc"]) 
+        self.AltRoomDescEdit.setText(self.GUIWin.box_check[-1]["AltRoomDesc"]) 
         self.connectComboAlloc = [self.AboveCombo, self.BelowCombo, self.NorthCombo, self.SouthCombo, self.EastCombo, self.WestCombo]
         self.connectRegOptionAlloc = [self.Option1Check, self.Option2Check, self.Option3Check, self.Option4Check, self.Option5Check, self.Option6Check, self.Option7Check, self.Option8Check]
         self.intToNav = ["A","B","N","S","E","W"]
@@ -105,6 +107,7 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
             item.setCurrentIndex(self.backupConnectionCombo[i])
         self.RoomNameEdit.setText(self.backupRoomName)
         self.RoomDescEdit.setText(self.backupRoomDesc)
+        self.AltRoomDescEdit.setText(self.backupAltRoomDesc)
         self.setDirectionString()
         for i, checkBox in enumerate(self.connectRegOptionAlloc):
             checkBox.setCheckState(self.backupRegOption[i])
@@ -141,6 +144,12 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
             self.CharLimitLabel.setText(f"<div style='color:red'>{len(self.RoomDescEdit.toPlainText())}/400 Characters</div>")
         else:
             self.CharLimitLabel.setText(f"{len(self.RoomDescEdit.toPlainText())}/400 Characters")
+
+    def altDescChanged(self):
+        if len(self.AltRoomDescEdit.toPlainText()) > 400:
+            self.AltCharLimitLabel.setText(f"<div style='color:red'>{len(self.AltRoomDescEdit.toPlainText())}/400 Characters</div>")
+        else:
+            self.AltCharLimitLabel.setText(f"{len(self.AltRoomDescEdit.toPlainText())}/400 Characters")
 
 
     def setComboBoxID(self,comboType,ID):
@@ -199,6 +208,7 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
         self.backupConnectionCombo = [self.AboveCombo.currentIndex(),self.BelowCombo.currentIndex(),self.NorthCombo.currentIndex(),self.SouthCombo.currentIndex(),self.EastCombo.currentIndex(),self.WestCombo.currentIndex()]
         self.backupRoomName = self.RoomNameEdit.text()
         self.backupRoomDesc = self.RoomDescEdit.toPlainText()
+        self.backupAltRoomDesc = self.AltRoomDescEdit.toPlainText()
         self.backupRegOption.clear()
         for x in self.connectRegOptionAlloc:
             self.backupRegOption.append(x.checkState())
@@ -365,9 +375,14 @@ class recProperties(Properties_ui.Ui_Dialog,QDialog):
             QMessageBox.warning(self, 'Description over character limit.',
                 'The description must be under 400 characters.')
             return
+        elif len(self.AltRoomDescEdit.toPlainText()) > 400:
+            QMessageBox.warning(self, 'Alternate Description over character limit.',
+                'The alternate description must be under 400 characters.')
+            return
         index = next((self.GUIWin.box_check.index(i) for i in self.GUIWin.box_check if i["RoomID"] == self.ID))
         self.GUIWin.box_check[index]["RoomName"] = self.RoomNameEdit.text()
         self.GUIWin.box_check[index]["RoomDesc"] = self.RoomDescEdit.toPlainText()
+        self.GUIWin.box_check[index]["AltRoomDesc"] = self.AltRoomDescEdit.toPlainText()
         self.mainRec.nameTextItem.setPlainText(self.RoomNameEdit.text()) 
         self.GUIWin.box_check[index]["N"] = self.NorthCombo.itemData(self.NorthCombo.currentIndex())
         self.GUIWin.box_check[index]["S"] = self.SouthCombo.itemData(self.SouthCombo.currentIndex())
@@ -641,7 +656,7 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
         with open(f"{baseName}.mbd", "wb") as dataFile:
             dataFile.write(bytes("MBMD",'utf-8')) #Magic
             dataFile.write(struct.pack('=H', 0xFEFF)) #Endian
-            dataFile.write(struct.pack('=H', 0x0000)) #Version
+            dataFile.write(struct.pack('=H', 0x0001)) #Version
             dataFile.write(struct.pack('=I', 0x0000)) #Hash
             dataFile.write(struct.pack('=I', len(self.box_check))) #Number of Rooms
             for item in self.box_check:
@@ -649,6 +664,10 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
                 dataFile.write(struct.pack('=I', len(item["RoomDesc"]))) #Length
                 dataFile.write(bytes(item["RoomDesc"],"utf-8")) #Room Description
                 for x in range(400 - (len(item["RoomDesc"]))): #Padding
+                    dataFile.write(b'\0')
+                dataFile.write(struct.pack('=I', len(item["AltRoomDesc"]))) #Length
+                dataFile.write(bytes(item["AltRoomDesc"],"utf-8")) #Room Description
+                for x in range(400 - (len(item["AltRoomDesc"]))): #Padding
                     dataFile.write(b'\0')
     
     # Save the workspace to a MFW file.
@@ -686,6 +705,7 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
         file_info = QFileInfo(loc)
         
         loc.split()
+        needsUpgrade = False
         with open(loc, "r") as ws:
             data = json.load(ws)
         if data['version'] > VERSION:
@@ -697,17 +717,20 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
                                 'This file has been created in a older version of MasterForge. Update the file?',QMessageBox.Ok,QMessageBox.Cancel)
             if ok == QMessageBox.Cancel:
                 return
+            needsUpgrade = True
             
         self.idIter = data['iteration']
 
         for item in data["data"]:
+            if "AltRoomDesc" not in item: # 1.1 Change
+                item["AltRoomDesc"] = ""
             self.importRoom(item)
         for item in self.box_check:
             item["roomDef"].properties.update()
         self.autoConnect(data["data"])
         self.setWindowTitle(f"MasterForge - {file_info.fileName()}")
         self.ui.actionClose.setDisabled(False)
-        self.hasUnsavedChanges = False
+        self.hasUnsavedChanges = needsUpgrade
     
     def autoConnect(self,data):
         for item in data:
