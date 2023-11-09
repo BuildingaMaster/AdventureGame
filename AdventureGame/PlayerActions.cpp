@@ -41,10 +41,10 @@ void PlayerActions::healPlayer(int amount)
 
 int PlayerActions::checkPlayerHealth()
 {
-    return healthMGR.checkMaxHP();
+    return healthMGR.checkHP();
 }
 
 int PlayerActions::checkMaxPlayerHealth()
 {
-    return healthMGR.checkHP();
+    return healthMGR.checkMaxHP();
 }
