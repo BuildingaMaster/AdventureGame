@@ -235,7 +235,82 @@ namespace
 
     }
 
-}
+    class IsOnCloud9Test : public testing::Test {
+        protected:
+        Inventory *userInventory;
+        PlayerActions playeract;
+        ContextParser *CP;
+
+        // You can remove any or all of the following functions if their bodies would
+        // be empty.
+
+        IsOnCloud9Test() {
+            userInventory = new Inventory(&playeract);
+            CommonGameObjects::PAManager = &playeract;
+            CP = new ContextParser(userInventory, &playeract);
+            // You can do set-up work for each test here.
+        }
+
+        ~IsOnCloud9Test() override {
+            delete CP;
+            delete userInventory;
+            // You can do clean-up work that doesn't throw exceptions here.
+        }
+
+        // If the constructor and destructor are not enough for setting up
+        // and cleaning up each test, you can define the following methods:
+
+        void SetUp() override {
+            // Code here will be called immediately after the constructor (right
+            // before each test).
+        }
+
+        void TearDown() override {
+            // Code here will be called immediately after each test (right
+            // before the destructor).
+        }
+    };
+
+    TEST_F(IsOnCloud9Test, notHigh)
+    {
+        // Not high
+        PrintDisplay::custom_cout << "This is a test.\nHello World!\n";
+        testing::internal::CaptureStdout();
+        PrintDisplay::flush();
+        string output = testing::internal::GetCapturedStdout();
+        EXPECT_EQ(output, "This is a test.\nHello World!\n");
+    }
+    
+    TEST_F(IsOnCloud9Test, newLineTest)
+    {
+        // High
+        playeract.stepsUntilNotHigh = 3;
+        playeract.playerIsHigh = true;
+
+        // New lines not affected test
+        PrintDisplay::custom_cout << "\n\nP\n\n";
+        testing::internal::CaptureStdout();
+        PrintDisplay::flush();
+        string output = testing::internal::GetCapturedStdout();
+        EXPECT_EQ(output, "\n\nP\n\n");
+    }
+    
+    TEST_F(IsOnCloud9Test, pureRandom)
+    {
+        // High
+        playeract.stepsUntilNotHigh = 3;
+        playeract.playerIsHigh = true;
+
+        // Pure random test
+        PrintDisplay::custom_cout << "This text should be really scrambled.\n It shouldn't be too hard to read though.\n";
+        testing::internal::CaptureStdout();
+        PrintDisplay::flush();
+        string output = testing::internal::GetCapturedStdout();
+        cout << output;
+        EXPECT_NE(output, "This text should be really scrambled.\n It shouldn't be too hard to read though.\n");
+    }
+
+} // namespace
     int main(int argc, char** argv)
     {
 
