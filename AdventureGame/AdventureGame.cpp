@@ -6,6 +6,8 @@
 #include <map>
 #include <fstream>
 #include <istream>
+#include <ctime>
+#include <random>
 
 #include "Location.h"
 #include "PlayerActions.h"
@@ -23,6 +25,7 @@ using namespace std;
 
 int main()
 {
+    srand(time(0));
     if (locationManager::init() == false)
     {
         locationManager::deinit();
@@ -53,6 +56,7 @@ int main()
             }
             cout << "\nWhat would you like to do?\n> ";
             getline(cin, command);
+            cin.clear();
             // This is temporary, and needs to have CP logic
             if (command == "quit")
             {

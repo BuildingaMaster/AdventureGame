@@ -60,8 +60,7 @@ void Consumable::consume(PlayerActions* player)
 			}
 			else
 			{
-				// creating seed
-				srand(time(0));
+				// using seed
 				int random = rand() % 2 + 1;
 				switch(random)
 				{

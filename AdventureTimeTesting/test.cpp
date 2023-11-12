@@ -5,7 +5,8 @@
 #include "gtest/gtest.h"
 
 #include <streambuf>
-
+#include <ctime>
+#include <random>
 
 #include "../AdventureGame/Item.h"
 #include "../AdventureGame/ContextParser.h"
@@ -280,7 +281,7 @@ namespace
         string output = testing::internal::GetCapturedStdout();
         EXPECT_EQ(output, "This is a test.\nHello World!\n");
     }
-    
+
     TEST_F(IsOnCloud9Test, newLineTest)
     {
         // High
@@ -294,7 +295,7 @@ namespace
         string output = testing::internal::GetCapturedStdout();
         EXPECT_EQ(output, "\n\nP\n\n");
     }
-    
+
     TEST_F(IsOnCloud9Test, pureRandom)
     {
         // High
@@ -313,7 +314,7 @@ namespace
 } // namespace
     int main(int argc, char** argv)
     {
-
+        srand(time(0));
         //startingRoom->setDescription("You are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight, although a nearby apple tree seems to be within reach. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.");
         //startingRoom->printLocation();
         testing::InitGoogleTest(&argc, argv);

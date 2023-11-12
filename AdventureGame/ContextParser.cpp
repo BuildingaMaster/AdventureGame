@@ -97,6 +97,7 @@ bool ContextParser::yesNoPrompt()
         command = "";
         cout << "\nYes or no?\n> ";
         getline(cin, unfilteredCommand);
+        cin.clear();
         for (auto &character : unfilteredCommand) 
         {
             character = tolower(character);
