@@ -106,6 +106,7 @@ void Location::printLocation()
 			PrintDisplay::flush();
 		}
 	}
+	cout << timeDescription << endl;
 
 }
 
@@ -148,6 +149,7 @@ bool locationManager::processCommand(vector<string> args)
 		else
 		{
 			// Move Player to the new location and print out its description
+			updateCurrentTime();
 			updateCurrentLocation(currentLocation->checkAdjacent(arg0Direction));
 			return true;
 		}
@@ -172,6 +174,7 @@ bool locationManager::processCommand(vector<string> args)
 				}
 				else // user direction has a room connected 
 				{
+					updateCurrentTime();
 					updateCurrentLocation(currentLocation->checkAdjacent(arg1Direction));
 					return true;
 				}
@@ -240,6 +243,51 @@ int Location::getLocationID()
 
 // Initializes the current Location
 Location* locationManager::currentLocation = currentLocation = nullptr;
+
+// Initializes the current Time
+int locationManager::currentTime = 8;
+
+// Initializes the time description
+string Location::timeDescription = "The sun is high in the sky...";
+
+void locationManager::updateCurrentTime()
+{
+	switch (currentTime)
+	{
+		case 23:
+			currentTime = 0;
+		break;
+
+		default:
+			currentTime++;
+	}
+
+	switch (currentTime)
+	{
+	case 6:
+		getCurrentLocation()->setTimeDescription("The sun is rising...");
+		break;
+	case 7:
+		getCurrentLocation()->setTimeDescription("The sun is high in the sky...");
+		break;
+	case 18:
+		getCurrentLocation()->setTimeDescription("The sun is setting...");
+		break;
+	case 19:
+		getCurrentLocation()->setTimeDescription("It's dark, and the moon is high in the sky...");
+		break;
+	}
+}
+
+void Location::setTimeDescription(string desc)
+{
+	timeDescription = desc;
+}
+
+int locationManager::getCurrentTime()
+{
+	return currentTime;
+}
 
 // Updates the current Location to a new Location
 void locationManager::updateCurrentLocation(Location* newLocation)
