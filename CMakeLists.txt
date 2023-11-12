@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(AdventureGame VERSION 0.1.0 LANGUAGES C CXX)
-set (CMAKE_CXX_STANDARD 14)
 
 #include(CTest)
-#enable_testing()
 
 option(ENABLE_TESTS "Enables building the unit tests" ON)
 
 if(ENABLE_TESTS)
   find_package(GTest REQUIRED)
   if (GTEST_FOUND)
+    enable_testing()
     message(STATUS "Using the system gtest")
+    include(GoogleTest)
     #include_directories(${GTEST_INCLUDE_DIRS})
     add_subdirectory(AdventureTimeTesting)
   endif()
