@@ -14,4 +14,9 @@ public:
 
         /// @brief Print the buffer to the console, must be called.
         static void flush();
+
+        /// @brief Print the buffer to the console without effects, must be called.
+        static void no_effect_flush();
+private:
+        static void common_flush(bool);
 };

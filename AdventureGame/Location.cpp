@@ -200,7 +200,8 @@ void Location::setAdjacent(Location* adjRoom, cardinalDirection dir, bool twoWay
 	}
 	else
 	{
-		cout << "Invalid direction!\n";
+		PrintDisplay::custom_cout << "Invalid direction!\n";
+		PrintDisplay::no_effect_flush();
 		return;
 	}
 	if (twoWay)
@@ -281,7 +282,8 @@ bool locationManager::init()
     in.open("map.mbm", ifstream::in | ifstream::binary);
     if (!in.is_open())
     {
-        cout << "Could not open map.mbm.\n";
+        PrintDisplay::custom_cout <<  "Could not open map.mbm.\n";
+		PrintDisplay::no_effect_flush();
         return false;
     }
     std::vector<char>mapBytes(
@@ -294,7 +296,8 @@ bool locationManager::init()
     in.open("map.mbd", ifstream::in | ifstream::binary);
     if (!in.is_open())
     {
-        cout << "Could not open map.mbd.\n";
+        PrintDisplay::custom_cout << "Could not open map.mbd.\n";
+		PrintDisplay::no_effect_flush();
         return false;
     }
     std::vector<char> descBytes(
@@ -305,15 +308,17 @@ bool locationManager::init()
 
 	if (map.header.version != CURRENT_MBM_VERSION)
 	{
-		cout << "The loaded map file is not compatible with this version of the game.\n";
-		cout << "Requires MBM version: "<< CURRENT_MBM_VERSION << ", loaded version: " << map.header.version << "\n";
+		PrintDisplay::custom_cout << "The loaded map file is not compatible with this version of the game.\n";
+		PrintDisplay::custom_cout << "Requires MBM version: "<< CURRENT_MBM_VERSION << ", loaded version: " << map.header.version << "\n";
+		PrintDisplay::no_effect_flush();
 		return false;
 	}
 
 	if (mapDesc.header.version != CURRENT_MBD_VERSION)
 	{
-		cout << "The loaded map description file is not compatible with this version of the game.\n";
-		cout << "Requires MBD version: "<< CURRENT_MBD_VERSION << ", loaded version: " << mapDesc.header.version << "\n";
+		PrintDisplay::custom_cout << "The loaded map description file is not compatible with this version of the game.\n";
+		PrintDisplay::custom_cout << "Requires MBD version: "<< CURRENT_MBD_VERSION << ", loaded version: " << mapDesc.header.version << "\n";
+		PrintDisplay::no_effect_flush();
 		return false;
 	}
 

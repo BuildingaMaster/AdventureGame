@@ -133,7 +133,8 @@ bool Inventory::processCommand(vector<string> args)
     //TODO Apple is in every room
     if (args.size() == 1)
     {
-        cout << "\nIt's not clear what you want to " << args[0] << ".\n";
+        PrintDisplay::custom_cout << "\nIt's not clear what you want to " << args[0] << ".\n";
+        PrintDisplay::no_effect_flush();
         return false;
     }
 

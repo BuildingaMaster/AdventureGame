@@ -50,11 +50,13 @@ int main()
         {
             if (playeract.thePlayerIsDead())
             {
-                cout << "\nAhhhhhh you've died!\n";
+                PrintDisplay::custom_cout << "\nAhhhhhh you've died!\n";
+                PrintDisplay::no_effect_flush();
                 stay = false;
                 break;
             }
-            cout << "\nWhat would you like to do?\n> ";
+            PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
+            PrintDisplay::no_effect_flush();
             getline(cin, command);
             cin.clear();
             // This is temporary, and needs to have CP logic
