@@ -588,7 +588,7 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
         roomName = roomName[roomNameCheck.start():]       
         self.markAsUnsaved()
         
-        data = {"RoomID":self.idIter,"RoomName":roomName,"RoomDesc":"","N":0,"S":0,"E":0,"W":0,"A":0,"B":0,"attrib":0}
+        data = {"RoomID":self.idIter,"RoomName":roomName,"RoomDesc":"","N":0,"S":0,"E":0,"W":0,"A":0,"B":0,"attrib":0, "AltRoomDesc":""}
         self.box_check.append(data)
         self.idIter+=1
         self.scene.addItem(rec(x,y,60,60,graphicsWin=self.ui.graphicsView,GUIWin=self,name=roomName))
