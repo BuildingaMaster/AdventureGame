@@ -16,6 +16,7 @@ PlayerActions::PlayerActions()
 
 bool PlayerActions::processCommand(vector<string> args)
 {
+    // PA needs two arguments. If only one is available, bypass.
     if (args.size() == 1)
     {
         PrintDisplay::custom_cout << "\nIt's not clear what you want to " << args[0] << ".\n";
@@ -23,15 +24,17 @@ bool PlayerActions::processCommand(vector<string> args)
         return false;
     }
 
+    // Check player health [basic]
     if (args[0] == "check" &&  args[1] == "health")
     {
         PrintDisplay::custom_cout << "\nYou can withstand "<< healthMGR.checkHP() <<" more hits.\n";
         PrintDisplay::flush();
         return true;
     }
+    // Hit command [base]
     else if (args[0] == "hit" &&  args[1] == "self")
     {
-        if (healthMGR.removeHP(1))
+        if (healthMGR.removeHP(1)) // The player is dead.
         {
             PrintDisplay::custom_cout << "\nFor some reason, you hit yourself, and you slapped yourself to death. You win.\n";
             PrintDisplay::flush();
@@ -44,6 +47,8 @@ bool PlayerActions::processCommand(vector<string> args)
         }
         return true;
     }
+
+    // Nothing else to do.
     PrintDisplay::custom_cout << "\nYou can't " << args[0] << " that!\n";
     PrintDisplay::no_effect_flush();
     return false;
