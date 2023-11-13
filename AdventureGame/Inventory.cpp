@@ -220,6 +220,12 @@ bool Inventory::processCommand(vector<string> args)
     }
     else if (args[0] == "eat" || args[0] == "consume")
     {
+        if (multiSelect == true)
+        {
+            PrintDisplay::custom_cout << "\nYou can only eat one " << itemArg << " at a time.\n";
+            PrintDisplay::flush();
+        }
+
         for (int i = 0; i < currentInventory.size(); i++)
         {
             // Is the item in the inventory
@@ -231,7 +237,7 @@ bool Inventory::processCommand(vector<string> args)
                     // Is the player already at max health?
                     if (playerData->checkPlayerHealth() == playerData->checkMaxPlayerHealth())
                     {
-                        PrintDisplay::custom_cout << "\nYou already have max health, are you sure you want to eat the " << args[1] <<"?\n";
+                        PrintDisplay::custom_cout << "\nYou already have max health, are you sure you want to eat the " << itemArg <<"?\n";
                         PrintDisplay::flush();
                         if (ContextParser::yesNoPrompt() == CPResponse::Response::NO)
                         {
@@ -240,7 +246,7 @@ bool Inventory::processCommand(vector<string> args)
                     }
                     // https://stackoverflow.com/questions/19501838/get-derived-type-via-base-class-virtual-function
                     Consumable& item = dynamic_cast<Consumable&>(*currentInventory[i]);
-                    PrintDisplay::custom_cout << "\nYou eat the " << args[1] << "!\n";
+                    PrintDisplay::custom_cout << "\nYou eat the " << itemArg << "!\n";
                     item.consume(playerData);
                     delete currentInventory[i];
                     currentInventory.erase(currentInventory.begin()+i);

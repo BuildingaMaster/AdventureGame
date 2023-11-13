@@ -35,7 +35,7 @@ void PrintDisplay::common_flush(bool forceNormal)
             {
                 int a = rand() % (str.size());
                 int b = rand() % (str.size());
-                if (str[a] == '\n' || str[b] == '\n') // We keep endlines as is
+                if ((str[a] == '\n' || str[b] == '\n') || (str[a] == ' ' || str[b] == ' ')) // We keep endlines and spaces as is
                 {
                     i--;
                     continue;
