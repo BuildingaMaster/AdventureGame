@@ -14,11 +14,6 @@
 
 namespace
 {
-    TEST(LocationMGRTest,init)
-    {
-        EXPECT_TRUE(locationManager::init());
-    }
-
     TEST(LocationMGRTest,validDirection)
     {
         locationManager::stringToDirection("north");
@@ -311,10 +306,68 @@ namespace
         EXPECT_NE(output, "This text should be really scrambled.\n It shouldn't be too hard to read though.\n");
     }
 
+    class InstantKillTest : public testing::Test {
+        protected:
+        Inventory *userInventory;
+        PlayerActions playeract;
+        ContextParser *CP;
+
+        // You can remove any or all of the following functions if their bodies would
+        // be empty.
+
+        InstantKillTest() {
+            userInventory = new Inventory(&playeract);
+            CommonGameObjects::PAManager = &playeract;
+            CP = new ContextParser(userInventory, &playeract);
+            // You can do set-up work for each test here.
+        }
+
+        ~InstantKillTest() override {
+            delete CP;
+            delete userInventory;
+            // You can do clean-up work that doesn't throw exceptions here.
+        }
+
+        // If the constructor and destructor are not enough for setting up
+        // and cleaning up each test, you can define the following methods:
+
+        void SetUp() override {
+            playeract.healthMGR.restoreMaxHP();
+            locationManager::updateCurrentLocation(locationManager::locationMap[3]);
+            // Code here will be called immediately after the constructor (right
+            // before each test).
+        }
+
+        void TearDown() override {
+            // Code here will be called immediately after each test (right
+            // before the destructor).
+        }
+    };
+
+    TEST_F(InstantKillTest, PlayerDiesInTrap)
+    {
+        // Player moves to kill room
+        EXPECT_TRUE(CP->interpretCommand("east"));
+        EXPECT_LE(playeract.healthMGR.checkHP(),0);
+    }
+
+    TEST_F(InstantKillTest, NoTrap)
+    {
+        // Player moves to non-kill room
+        EXPECT_TRUE(CP->interpretCommand("west"));
+        EXPECT_GT(playeract.healthMGR.checkHP(),0);
+    }
+
 } // namespace
     int main(int argc, char** argv)
     {
         srand(time(0));
+        if (locationManager::init() == false)
+        {
+            cout << "Could not run tests." << endl;
+            locationManager::deinit();
+            return 1;
+        }
         //startingRoom->setDescription("You are in a vibrant, yet desolate forest. \nThere seems to be no wildlife in sight, although a nearby apple tree seems to be within reach. \nTo the west is a shallow pond, \na deserted hut to the east, and more wilderness \nsouth and north of your location.");
         //startingRoom->printLocation();
         testing::InitGoogleTest(&argc, argv);
