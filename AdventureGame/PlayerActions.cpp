@@ -31,7 +31,7 @@ bool PlayerActions::processCommand(vector<string> args)
         PrintDisplay::flush();
         return true;
     }
-    // Hit command [base]
+    // Hit command [base, only the player for now]
     else if (args[0] == "hit" &&  args[1] == "self")
     {
         if (healthMGR.removeHP(1)) // The player is dead.
