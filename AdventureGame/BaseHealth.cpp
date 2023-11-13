@@ -1,5 +1,5 @@
 #include "BaseHealth.h"
-
+#include <iostream>
 BaseHealth::BaseHealth()
 {
     health = 3;
@@ -29,9 +29,9 @@ int BaseHealth::checkHP()
     return health;
 }
 
-bool BaseHealth::removeHP()
+bool BaseHealth::removeHP(int amount)
 {
-    health = health - 1;
+    health = health - amount;
     return (health <= 0);
 }
 

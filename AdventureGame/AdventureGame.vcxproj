@@ -129,14 +129,17 @@
   <ItemGroup>
     <ClCompile Include="AdventureGame.cpp" />
     <ClCompile Include="BaseHealth.cpp" />
+    <ClCompile Include="CommonGameObjects.cpp" />
     <ClCompile Include="Consumable.cpp" />
     <ClCompile Include="ContextParser.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
+    <ClCompile Include="PrintDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseHealth.h" />
+    <ClInclude Include="CommonGameObjects.h" />
     <ClInclude Include="Consumable.h" />
     <ClCompile Include="ContextParser.h" />
     <ClInclude Include="Inventory.h" />
@@ -148,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerActions.h" />
+    <ClInclude Include="PrintDisplay.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="map.mbd">

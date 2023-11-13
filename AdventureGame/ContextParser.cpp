@@ -5,6 +5,8 @@
 #include <string>
 #include <regex>
 
+#include "PrintDisplay.h"
+
 using namespace std;
 
 ContextParser::ContextParser(Inventory* inv, PlayerActions* pact)
@@ -43,24 +45,27 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         formattedCmd.push_back(temp);
         temp.clear();
     }
-
+    
     // The program will crash if the vector is empty.
-    if (formattedCmd.size() == 0)
+    if (formattedCmd.empty())
     {
         return false;
     }
 
     if (formattedCmd[0].size() < 2)
     {
-        cout << "\nI don't know what that is!\n";
+        PrintDisplay::custom_cout << "\nI don't know what that is!\n";
+        PrintDisplay::no_effect_flush();
         return false;
     }
 
     if (formattedCmd[0] == "help")
     {
         // Handles the "help" command
-        cout << "Here is a list of commands that might be useful: \n\n";
-        cout << "Movements\n move/go/walk/travel north/east/south/west/above/below \n\nActions\n pick/grab/eat/consume apple/mushroom\n hit self\n check health \n\nSurroundings\n visualize,look,see,describe \n\nquit\n";    
+        PrintDisplay::custom_cout << "Here is a list of commands that might be useful: \n\n";
+        PrintDisplay::no_effect_flush();
+        PrintDisplay::custom_cout << "Movements\n move/go/walk/travel north/east/south/west/above/below \n\nActions\n pick/grab/eat/consume apple/mushroom\n hit self\n check health \n\nSurroundings\n visualize,look,see,describe \n\nquit\n";
+        PrintDisplay::no_effect_flush();    
         return true;
     }
 
@@ -82,7 +87,8 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         return playerActionsMGR->processCommand(formattedCmd);
     }
 
-    cout << "\nI don't know what that is!\n";
+    PrintDisplay::custom_cout << "\nI don't know what that is!\n";
+    PrintDisplay::no_effect_flush();
     return false;
 }
 
@@ -95,8 +101,10 @@ bool ContextParser::yesNoPrompt()
     {
         unfilteredCommand = "";
         command = "";
-        cout << "\nYes or no?\n> ";
+        PrintDisplay::custom_cout << "\nYes or no?\n> ";
+        PrintDisplay::no_effect_flush();
         getline(cin, unfilteredCommand);
+        cin.clear();
         for (auto &character : unfilteredCommand) 
         {
             character = tolower(character);

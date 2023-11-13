@@ -6,6 +6,8 @@
 #include <map>
 #include <fstream>
 #include <istream>
+#include <ctime>
+#include <random>
 
 #include "Location.h"
 #include "PlayerActions.h"
@@ -13,13 +15,17 @@
 #include "Inventory.h"
 #include "Consumable.h"
 #include "ContextParser.h"
+
+#include "CommonGameObjects.h"
 using namespace std;
 
 // Initialize player's inventory object
 
+#include "PrintDisplay.h"
 
 int main()
 {
+    srand(time(0));
     if (locationManager::init() == false)
     {
         locationManager::deinit();
@@ -29,8 +35,10 @@ int main()
     locationManager::updateCurrentLocation(locationManager::getCurrentLocation());
     
     PlayerActions playeract;
-    Inventory userInventory(&playeract);
+    CommonGameObjects::PAManager = &playeract;
 
+    Inventory userInventory(&playeract);
+    BaseHealth check;
     
     string command;
     ContextParser CP(&userInventory,&playeract);
@@ -40,16 +48,27 @@ int main()
     {
         do
         {
-            cout << "\nWhat would you like to do?\n> ";
+            if (playeract.thePlayerIsDead())
+            {
+                PrintDisplay::custom_cout << "\nAhhhhhh you've died!\n";
+                PrintDisplay::no_effect_flush();
+                stay = false;
+                break;
+            }
+            PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
+            PrintDisplay::no_effect_flush();
             getline(cin, command);
+            cin.clear();
             // This is temporary, and needs to have CP logic
             if (command == "quit")
             {
-                stay =false;
+                stay = false;
                 break;
             }
+            // TODO: how do we restart the game? not make it a harsh exit of the game 
             validInput = CP.interpretCommand(command);
         } while (validInput == false);
+        playeract.decrementMovingHigh();
     } while (stay);
 
     locationManager::deinit();

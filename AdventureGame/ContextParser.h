@@ -6,6 +6,7 @@
 #include "Location.h"
 #include "Inventory.h"
 #include "PlayerActions.h"
+#include "PrintDisplay.h"
 
 namespace CPResponse
 {

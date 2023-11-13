@@ -6,6 +6,8 @@
 #include <fstream>
 #include <map>
 
+#include "PrintDisplay.h"
+
 using namespace std;
 
 // Default Constructor
@@ -71,12 +73,15 @@ void Location::printLocation()
 	map<string,int> counter;
 	if (firstTime)
 	{
-		cout << endl << description << endl;
+		PrintDisplay::custom_cout << endl << description << endl;
 	}
 	else
 	{
-		cout << endl << altDescription << endl;
+		PrintDisplay::custom_cout << endl << altDescription << endl;
 	}
+
+	PrintDisplay::flush();
+
 	for (auto element : Inventory::itemMap[roomID])
 	{
 		if (counter.find(element->getItemName()) == counter.end())
@@ -87,17 +92,18 @@ void Location::printLocation()
 	}
 	if (counter.size() > 0)
 	{
-		cout << endl;
+		PrintDisplay::custom_cout << endl;
 		for (auto element : counter)
 		{
 			if (element.second > 1)
 			{
-				cout << itemDescription::itemTag[element.first].second << endl;
+				PrintDisplay::custom_cout << itemDescription::itemTag[element.first].second << endl;
 			}
 			else
 			{
-				cout << itemDescription::itemTag[element.first].first << endl;
+				PrintDisplay::custom_cout << itemDescription::itemTag[element.first].first << endl;
 			}
+			PrintDisplay::flush();
 		}
 	}
 
@@ -135,8 +141,9 @@ bool locationManager::processCommand(vector<string> args)
 		// No room in user's direction input (YET)
 		if (currentLocation->checkAdjacent(arg0Direction) == nullptr)
 		{
-			cout << "\nYou can't go " << directionStrings[arg0Direction] << "!\n";
-			return true;
+			PrintDisplay::custom_cout << "\nYou can't go " << directionStrings[arg0Direction] << "!\n";
+			PrintDisplay::flush();
+			return false;
 		}
 		else
 		{
@@ -159,8 +166,9 @@ bool locationManager::processCommand(vector<string> args)
 				// no room connected to user's direction input
 				if (currentLocation->checkAdjacent(arg1Direction) == nullptr)
 				{
-					cout << "\nYou can't go " << directionStrings[arg1Direction] << "!\n";
-					return true;
+					PrintDisplay::custom_cout << "\nYou can't go " << directionStrings[arg1Direction] << "!\n";
+					PrintDisplay::flush();
+					return false;
 				}
 				else // user direction has a room connected 
 				{
@@ -172,7 +180,8 @@ bool locationManager::processCommand(vector<string> args)
 		}
 	}
 
-	cout << "\nWhat do you want to " << args[0] << "?\n";
+	PrintDisplay::custom_cout << "\nWhat do you want to " << args[0] << "?\n";
+	PrintDisplay::flush();
 	return false;
 }
 
@@ -191,7 +200,8 @@ void Location::setAdjacent(Location* adjRoom, cardinalDirection dir, bool twoWay
 	}
 	else
 	{
-		cout << "Invalid direction!\n";
+		PrintDisplay::custom_cout << "Invalid direction!\n";
+		PrintDisplay::no_effect_flush();
 		return;
 	}
 	if (twoWay)
@@ -272,7 +282,8 @@ bool locationManager::init()
     in.open("map.mbm", ifstream::in | ifstream::binary);
     if (!in.is_open())
     {
-        cout << "Could not open map.mbm.\n";
+        PrintDisplay::custom_cout <<  "Could not open map.mbm.\n";
+		PrintDisplay::no_effect_flush();
         return false;
     }
     std::vector<char>mapBytes(
@@ -285,7 +296,8 @@ bool locationManager::init()
     in.open("map.mbd", ifstream::in | ifstream::binary);
     if (!in.is_open())
     {
-        cout << "Could not open map.mbd.\n";
+        PrintDisplay::custom_cout << "Could not open map.mbd.\n";
+		PrintDisplay::no_effect_flush();
         return false;
     }
     std::vector<char> descBytes(
@@ -296,15 +308,17 @@ bool locationManager::init()
 
 	if (map.header.version != CURRENT_MBM_VERSION)
 	{
-		cout << "The loaded map file is not compatible with this version of the game.\n";
-		cout << "Requires MBM version: "<< CURRENT_MBM_VERSION << ", loaded version: " << map.header.version << "\n";
+		PrintDisplay::custom_cout << "The loaded map file is not compatible with this version of the game.\n";
+		PrintDisplay::custom_cout << "Requires MBM version: "<< CURRENT_MBM_VERSION << ", loaded version: " << map.header.version << "\n";
+		PrintDisplay::no_effect_flush();
 		return false;
 	}
 
 	if (mapDesc.header.version != CURRENT_MBD_VERSION)
 	{
-		cout << "The loaded map description file is not compatible with this version of the game.\n";
-		cout << "Requires MBD version: "<< CURRENT_MBD_VERSION << ", loaded version: " << mapDesc.header.version << "\n";
+		PrintDisplay::custom_cout << "The loaded map description file is not compatible with this version of the game.\n";
+		PrintDisplay::custom_cout << "Requires MBD version: "<< CURRENT_MBD_VERSION << ", loaded version: " << mapDesc.header.version << "\n";
+		PrintDisplay::no_effect_flush();
 		return false;
 	}
 

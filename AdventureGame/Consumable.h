@@ -1,6 +1,10 @@
 #pragma once
+#include <random>
+
 #include "Item.h"
 #include "PlayerActions.h"
+#include "PrintDisplay.h"
+
 // Apples, Mushrooms
 enum consumableType { apple, mushroom };
 
@@ -12,6 +16,10 @@ public:
 private:
 #endif
 	consumableType itemType;
+	// for good / bad shroom 50 50 chance, static so the same seed isn't created
+	// everytime a shroom is eaten
+	static std::random_device rd;
+	static std::uniform_int_distribution<int> dist;
 public:
 	consumableType getConsumType();
 	Consumable(consumableType, double);
