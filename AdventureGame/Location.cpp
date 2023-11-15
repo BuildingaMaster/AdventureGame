@@ -283,8 +283,8 @@ int locationManager::getCurrentTime()
 // Updates the current Location to a new Location
 void locationManager::updateCurrentLocation(Location* newLocation)
 {
-	updateCurrentTime();
 	currentLocation = newLocation;
+	updateCurrentTime();
 	currentLocation->printLocation();
 	currentLocation->justVisitedRoom();
 	if (currentLocation->hasAttribute(Location::INSTANT_KILL_ROOM))
