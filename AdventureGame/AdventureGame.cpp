@@ -54,8 +54,11 @@ int main()
             {
                 PrintDisplay::custom_cout << "\nYOU DID NOT SURVIVE!\n";
                 PrintDisplay::no_effect_flush();
-                stay = false;
-                break;
+                if (!playeract.playAgain(command))
+                {
+                    stay = false;
+                    break;
+                }
             }
             PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
             PrintDisplay::no_effect_flush();

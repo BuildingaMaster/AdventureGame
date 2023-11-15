@@ -136,3 +136,23 @@ void PlayerActions::decrementMovingHigh()
         thePlayerIsHigh(false);
     }
 }
+bool PlayerActions::playAgain(string command)
+{
+    bool runItBack;
+    cout << "Do you wanna play again? " << endl;
+
+    if (command == "yes")
+    {
+        runItBack = true;
+        // bring player back to starting room, reset the game items & NPCS
+
+    }
+    else if (command == "no")
+    {
+        runItBack = false;
+        cout << "The difference between the master and the student is that the master has failed far more times than the student." << endl;
+  
+    }
+    return runItBack;
+}
+
