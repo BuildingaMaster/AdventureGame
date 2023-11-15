@@ -50,7 +50,7 @@ int main()
         {
             if (playeract.thePlayerIsDead())
             {
-                PrintDisplay::custom_cout << "\nAhhhhhh you've died!\n";
+                PrintDisplay::custom_cout << "\nYOU DID NOT SURVIVE!\n";
                 PrintDisplay::no_effect_flush();
                 stay = false;
                 break;

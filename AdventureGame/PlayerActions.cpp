@@ -36,7 +36,7 @@ bool PlayerActions::processCommand(vector<string> args)
     {
         if (healthMGR.removeHP(1)) // The player is dead.
         {
-            PrintDisplay::custom_cout << "\nFor some reason, you hit yourself, and you slapped yourself to death. You win.\n";
+            PrintDisplay::custom_cout << "\nFor some reason, you hit yourself and slapped yourself to death. YOU WIN!!!\n\nJust Joking:";
             PrintDisplay::flush();
         }
         else
