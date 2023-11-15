@@ -149,7 +149,6 @@ bool locationManager::processCommand(vector<string> args)
 		else
 		{
 			// Move Player to the new location and print out its description
-			updateCurrentTime();
 			updateCurrentLocation(currentLocation->checkAdjacent(arg0Direction));
 			return true;
 		}
@@ -174,7 +173,6 @@ bool locationManager::processCommand(vector<string> args)
 				}
 				else // user direction has a room connected 
 				{
-					updateCurrentTime();
 					updateCurrentLocation(currentLocation->checkAdjacent(arg1Direction));
 					return true;
 				}
@@ -252,15 +250,8 @@ string Location::timeDescription = "The sun is high in the sky...";
 
 void locationManager::updateCurrentTime()
 {
-	switch (currentTime)
-	{
-		case 23:
-			currentTime = 0;
-		break;
-
-		default:
-			currentTime++;
-	}
+	// Increments current time by 1, unless it is 24, then goes back to 0 for a new day
+	currentTime = ++currentTime % 24;
 
 	switch (currentTime)
 	{
@@ -292,6 +283,7 @@ int locationManager::getCurrentTime()
 // Updates the current Location to a new Location
 void locationManager::updateCurrentLocation(Location* newLocation)
 {
+	updateCurrentTime();
 	currentLocation = newLocation;
 	currentLocation->printLocation();
 	currentLocation->justVisitedRoom();

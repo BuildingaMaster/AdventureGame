@@ -152,7 +152,9 @@ public:
 	static string getValidCommands();
 	static Location* getCurrentLocation();
 	static void updateCurrentLocation(Location*);
+	/// @brief Increments the current time by a constant interval
 	static void updateCurrentTime();
+	/// @return The current world time
 	static int getCurrentTime();
 	// Initialize map of location pointers with location ID integers
 	static map<int, Location*> locationMap;
