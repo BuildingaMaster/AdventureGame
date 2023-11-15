@@ -62,7 +62,7 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <CustomBuildStep>
-      <Command>robocopy $(SolutionDir) $(OutDir) map.mbm map.mbd
+      <Command>robocopy "$(SolutionDir) " "$(OutDir) " map.mbm map.mbd
 if %errorlevel% leq 1 exit 0 else exit %errorlevel%
 
 </Command>
@@ -85,7 +85,7 @@ if %errorlevel% leq 1 exit 0 else exit %errorlevel%
       <SubSystem>Console</SubSystem>
     </Link>
     <CustomBuildStep>
-      <Command>robocopy $(SolutionDir) $(OutDir) map.mbm map.mbd
+      <Command>robocopy "$(SolutionDir) " "$(OutDir) " map.mbm map.mbd
 if %errorlevel% leq 1 exit 0 else exit %errorlevel%
 
 </Command>
@@ -109,7 +109,7 @@ if %errorlevel% leq 1 exit 0 else exit %errorlevel%
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <CustomBuildStep>
-      <Command>robocopy $(SolutionDir) $(OutDir) map.mbm map.mbd
+      <Command>robocopy "$(SolutionDir) " "$(OutDir) " map.mbm map.mbd
 if %errorlevel% leq 1 exit 0 else exit %errorlevel%
 
 </Command>
@@ -133,7 +133,7 @@ if %errorlevel% leq 1 exit 0 else exit %errorlevel%
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <CustomBuildStep>
-      <Command>robocopy $(SolutionDir) $(OutDir) map.mbm map.mbd
+      <Command>robocopy "$(SolutionDir) " "$(OutDir) " map.mbm map.mbd
 if %errorlevel% leq 1 exit 0 else exit %errorlevel%
 
 </Command>
