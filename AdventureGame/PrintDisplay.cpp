@@ -1,6 +1,13 @@
 #include "PrintDisplay.h"
 #include "CommonGameObjects.h"
 
+#ifndef WIN32
+#include <ncurses.h>
+#else
+#include <condio.h>
+#define getch() _getch()
+#endif
+
 using namespace std;
 
 std::ostringstream PrintDisplay::custom_cout;
@@ -20,14 +27,25 @@ void PrintDisplay::common_flush(bool forceNormal)
         string str(custom_cout.str());
         if (CommonGameObjects::PAManager == nullptr || forceNormal == true) // If we are printing without PA, just print the string
         {
+            #ifndef WIN32
+            printw("%s",str.c_str());
+            refresh();
+            #else
             std::cout << str << std::flush;
+            #endif
+            
             custom_cout.str("");
             return;
         }
 
         if (CommonGameObjects::PAManager->isThePlayerHigh() == false)
         {
+            #ifndef WIN32
+            printw("%s",str.c_str());
+            refresh();
+            #else
             std::cout << str << std::flush;
+            #endif
         } 
         else
         {
@@ -43,7 +61,12 @@ void PrintDisplay::common_flush(bool forceNormal)
                 }
                 std::swap(str[a], str[b]);
             }
+            #ifndef WIN32
+            printw("%s",str.c_str());
+            refresh();
+            #else
             std::cout << str << std::flush;
+            #endif
         }
         // Clear the stringstream
         custom_cout.str("");
