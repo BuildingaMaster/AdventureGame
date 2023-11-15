@@ -274,13 +274,13 @@ class Ui_Dialog(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.EnabledCombo = QComboBox(self.Extended)
         self.EnabledCombo.addItem("")
-        self.EnabledCombo.addItem("")
         self.EnabledCombo.setObjectName(u"EnabledCombo")
         sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.EnabledCombo.sizePolicy().hasHeightForWidth())
         self.EnabledCombo.setSizePolicy(sizePolicy1)
+        self.EnabledCombo.setFont(font)
 
         self.horizontalLayout.addWidget(self.EnabledCombo)
 
@@ -363,8 +363,7 @@ class Ui_Dialog(object):
         self.Option4Check.setText(QCoreApplication.translate("Dialog", u"Option 4", None))
         self.Option7Check.setText(QCoreApplication.translate("Dialog", u"Option 7", None))
         self.Extended.setTitle(QCoreApplication.translate("Dialog", u"Extended", None))
-        self.EnabledCombo.setItemText(0, QCoreApplication.translate("Dialog", u"Option 9", None))
-        self.EnabledCombo.setItemText(1, QCoreApplication.translate("Dialog", u"Option 10", None))
+        self.EnabledCombo.setItemText(0, QCoreApplication.translate("Dialog", u"Instant Kill Room", None))
 
         self.EnabledCheck.setText(QCoreApplication.translate("Dialog", u"Enabled", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Attributes), QCoreApplication.translate("Dialog", u"Attributes", None))

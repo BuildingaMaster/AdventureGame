@@ -247,6 +247,10 @@ void locationManager::updateCurrentLocation(Location* newLocation)
 	currentLocation = newLocation;
 	currentLocation->printLocation();
 	currentLocation->justVisitedRoom();
+	if (currentLocation->hasAttribute(Location::INSTANT_KILL_ROOM))
+	{
+		CommonGameObjects::PAManager->hurtPlayer(99999999);
+	}
 }
 
 // Returns the current player Location

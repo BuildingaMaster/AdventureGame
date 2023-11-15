@@ -349,14 +349,14 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <family>.SF NS Text</family>
+             </font>
+            </property>
             <item>
              <property name="text">
-              <string>Option 9</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Option 10</string>
+              <string>Instant Kill Room</string>
              </property>
             </item>
            </widget>
