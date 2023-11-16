@@ -2,12 +2,14 @@
 add_executable(AdventureGame 
     AdventureGame.cpp 
     BaseHealth.cpp 
+    CommonGameObjects.cpp
     Consumable.cpp 
     ContextParser.cpp 
     Inventory.cpp 
     Item.cpp 
     Location.cpp
     PlayerActions.cpp
+    PrintDisplay.cpp
 )
 
 if(${CMAKE_GENERATOR} EQUAL "Xcode")
