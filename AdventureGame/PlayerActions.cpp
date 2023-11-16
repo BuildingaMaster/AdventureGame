@@ -7,6 +7,8 @@
 #include "NPC.h"
 #include "ContextParser.h"
 #include "Location.h"
+#include "CommonGameObjects.h"
+
 
 using namespace std;
 
@@ -148,7 +150,7 @@ bool PlayerActions::playAgain(string command)
         locationManager::updateCurrentLocation(locationManager::locationMap[1]);
         healthMGR.restoreMaxHP();
         CommonGameObjects::INManager->clearInventory();
-            // bring player back to starting room, reset the game items & NPCS
+         // bring player back to starting room, reset the inventory & NPCS
     }
     else
     {
