@@ -107,7 +107,8 @@ void Location::printLocation()
 			PrintDisplay::flush();
 		}
 	}
-	cout << timeDescription << endl;
+	PrintDisplay::custom_cout << timeDescription << endl;
+	PrintDisplay::flush();
 
 }
 

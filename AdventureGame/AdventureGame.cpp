@@ -36,8 +36,7 @@ using namespace std;
 #include "PrintDisplay.h"
 
 int main()
-{
-    vector<string> commandHistory;
+{    
     #ifndef WIN32
     initscr();
     keypad(stdscr, TRUE);
@@ -74,7 +73,6 @@ int main()
     {
         do
         {
-            command = ""; // The comamnd string
             indexOfHistory = -1; // The index the history is on.
             if (playeract.thePlayerIsDead())
             {
@@ -88,8 +86,9 @@ int main()
             }
             PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
             PrintDisplay::no_effect_flush();
+            command = PrintDisplay::inputValidation();
 
-            #ifndef WIN32
+            /*#ifndef WIN32
             char ch = 0; // The character the user entered.
             int interator = -1;
             // The following is complicated. Happy reading!
@@ -107,23 +106,20 @@ int main()
 
                 if (ch == '\x7f') // Captured backspace
                 {
-                     // Already at the front of string, don't do anything.
                     if (interator == -1)
                     {
                         continue;
-                    }
-                    // Move the cursor back
-                    ch = '\b';
-                    PrintDisplay::custom_cout << ch;
-                    PrintDisplay::no_effect_flush();
-
-                    // Get terminal cordinates (needs to be changed)
-                    int x,y;
-                    getyx(stdscr,y,x);
-                    //Delete line
-                    mvdelch(y,x);
-                    command.erase(command.begin()+(interator));
+                    }                  
+                    command.erase(command.begin()+(interator)); 
                     interator--;
+                    cout << "\033[2K\r"<<flush;
+                    PrintDisplay::custom_cout << "> " << command;
+                    PrintDisplay::no_effect_flush();
+                    for (int a = command.size()-2; a>=interator; a--)
+                    {
+                        PrintDisplay::custom_cout << '\b';
+                        PrintDisplay::no_effect_flush();
+                    }
                     continue;
                 }
                 else if (ch == '\x04') // Left arrow key
@@ -252,10 +248,11 @@ int main()
             }
             // Remove the new line, we don't want it.
             command.replace(command.find('\n'),1,"");
-            #else
-            getline(cin, command);
-            cin.clear();
-            #endif
+            
+            #else*/
+            //getline(cin, command);
+            //cin.clear();
+            //#endif
             // This is temporary, and needs to have CP logic
             if (command == "quit")
             {
@@ -267,10 +264,10 @@ int main()
         } while (validInput == false);
         
         // If there is no history, or the most recent command is not the newest one..
-        if (commandHistory.size() == 0 || commandHistory[0] != command)
+        if (PrintDisplay::commandHistory.size() == 0 || PrintDisplay::commandHistory[0] != command)
         {
             // Add it to the history.
-            commandHistory.insert(commandHistory.begin(),command);   
+            PrintDisplay::commandHistory.insert(PrintDisplay::commandHistory.begin(),command);   
         }
         playeract.decrementMovingHigh();
     } while (stay);
