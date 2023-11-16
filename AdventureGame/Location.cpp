@@ -106,6 +106,7 @@ void Location::printLocation()
 			PrintDisplay::flush();
 		}
 	}
+	cout << timeDescription << endl;
 
 }
 
@@ -241,10 +242,49 @@ int Location::getLocationID()
 // Initializes the current Location
 Location* locationManager::currentLocation = currentLocation = nullptr;
 
+// Initializes the current Time
+int locationManager::currentTime = 8;
+
+// Initializes the time description
+string Location::timeDescription = "The sun is high in the sky...";
+
+void locationManager::updateCurrentTime()
+{
+	// Increments current time by 1, unless it is 24, then goes back to 0 for a new day
+	currentTime = ++currentTime % 24;
+
+	switch (currentTime)
+	{
+	case 6:
+		getCurrentLocation()->setTimeDescription("The sun is rising...");
+		break;
+	case 7:
+		getCurrentLocation()->setTimeDescription("The sun is high in the sky...");
+		break;
+	case 18:
+		getCurrentLocation()->setTimeDescription("The sun is setting...");
+		break;
+	case 19:
+		getCurrentLocation()->setTimeDescription("It's dark, and the moon is high in the sky...");
+		break;
+	}
+}
+
+void Location::setTimeDescription(string desc)
+{
+	timeDescription = desc;
+}
+
+int locationManager::getCurrentTime()
+{
+	return currentTime;
+}
+
 // Updates the current Location to a new Location
 void locationManager::updateCurrentLocation(Location* newLocation)
 {
 	currentLocation = newLocation;
+	updateCurrentTime();
 	currentLocation->printLocation();
 	currentLocation->justVisitedRoom();
 	if (currentLocation->hasAttribute(Location::INSTANT_KILL_ROOM))

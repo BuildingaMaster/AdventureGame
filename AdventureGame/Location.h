@@ -118,6 +118,8 @@ public:
 	int getLocationID();
 
 	bool hasAttribute(roomAttributes);
+
+	static void setTimeDescription(string);
 	
 #ifdef GTESTING
 public:
@@ -134,6 +136,7 @@ private:
 	void initializeAttribMap();
 	string description;
 	string altDescription;
+	static string timeDescription;
 	Location* locationConnections[6];
 	// When the player can't go in a direction.		
 };
@@ -149,6 +152,10 @@ public:
 	static string getValidCommands();
 	static Location* getCurrentLocation();
 	static void updateCurrentLocation(Location*);
+	/// @brief Increments the current time by a constant interval
+	static void updateCurrentTime();
+	/// @return The current world time
+	static int getCurrentTime();
 	// Initialize map of location pointers with location ID integers
 	static map<int, Location*> locationMap;
 	/// @brief Processes Location-based commands
@@ -164,5 +171,7 @@ private:
 	const static string directionStrings[6];
 	static fileParse::mapFile map;
 	static fileParse::mapDescFile mapDesc;
+	// Current time is read in military time 0 - 23:59, in hourly increments
+	static int currentTime;
 };
 #endif // !LOCATION_H
