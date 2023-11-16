@@ -7,6 +7,7 @@
 #include <map>
 
 #include "PrintDisplay.h"
+#include "CommonGameObjects.h"
 
 using namespace std;
 

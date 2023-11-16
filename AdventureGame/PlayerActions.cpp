@@ -5,7 +5,10 @@
 #include "PlayerActions.h"
 #include "PrintDisplay.h"
 #include "NPC.h"
+#include "ContextParser.h"
 #include "Location.h"
+#include "CommonGameObjects.h"
+
 
 using namespace std;
 
@@ -136,3 +139,28 @@ void PlayerActions::decrementMovingHigh()
         thePlayerIsHigh(false);
     }
 }
+bool PlayerActions::playAgain()
+{
+    bool runItBack;
+    PrintDisplay::custom_cout << "\n Do you wanna play again? \n";
+    PrintDisplay::no_effect_flush();
+
+    // If true, the player want to play again
+    // Otherwise close the game
+    runItBack = ContextParser::yesNoPrompt();
+    if (runItBack == true)
+    {
+        CommonGameObjects::INManager->dropAllInventory();
+        locationManager::updateCurrentLocation(locationManager::locationMap[1]);
+        healthMGR.restoreMaxHP();
+         // bring player back to starting room, reset the inventory & NPCS
+    }
+    else
+    {
+        // Goodbye quote
+        PrintDisplay::custom_cout << "\nThe difference between the master and the student is that the master has failed far more times than the student.\n";
+        PrintDisplay::no_effect_flush();
+    }
+    return runItBack;
+}
+

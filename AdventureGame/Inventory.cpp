@@ -43,13 +43,7 @@ Inventory::~Inventory()
         }
         entry.second.clear();
     }
-
-    // Delete all dynamic data from inventory
-    for (auto x : currentInventory)
-    {
-        delete x;
-    }
-    currentInventory.clear();
+    clearInventory();
 }
 
 void Inventory::addItem(Item* toAdd)
@@ -270,4 +264,24 @@ bool Inventory::processCommand(vector<string> args)
     }
     
     return true;
+}
+void Inventory::clearInventory()
+{
+    // Delete all dynamic data from inventory
+    for (auto x : currentInventory)
+    {
+        delete x;
+    }
+    currentInventory.clear();
+}
+
+void Inventory::dropAllInventory()
+{
+    int roomID = locationManager::getCurrentLocation()->getLocationID();
+    for (int i = 0; i<currentInventory.size(); i++)
+    {
+        itemMap[roomID].push_back(currentInventory[i]);
+        itemMap[roomID][itemMap[roomID].size() - 1]->setState(inWorld);
+    }
+    currentInventory.clear();
 }

@@ -61,4 +61,6 @@ public:
 	void decrementMovingHigh();
 	std::string playerActionsValidCommands = "check hit ";
 
+	/// @brief The player is asked to play the game again
+	bool playAgain();
 };

@@ -40,6 +40,7 @@ int main()
     CommonGameObjects::PAManager = &playeract;
 
     Inventory userInventory(&playeract);
+    CommonGameObjects::INManager = &userInventory;
     BaseHealth check;
     
     string command;
@@ -54,8 +55,11 @@ int main()
             {
                 PrintDisplay::custom_cout << "\nYOU DID NOT SURVIVE!\n";
                 PrintDisplay::no_effect_flush();
-                stay = false;
-                break;
+                if (!playeract.playAgain())
+                {
+                    stay = false;
+                    break;
+                }
             }
             PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
             PrintDisplay::no_effect_flush();
