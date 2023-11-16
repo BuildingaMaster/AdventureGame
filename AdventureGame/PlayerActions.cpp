@@ -150,9 +150,9 @@ bool PlayerActions::playAgain()
     runItBack = ContextParser::yesNoPrompt();
     if (runItBack == true)
     {
+        CommonGameObjects::INManager->dropAllInventory();
         locationManager::updateCurrentLocation(locationManager::locationMap[1]);
         healthMGR.restoreMaxHP();
-        CommonGameObjects::INManager->clearInventory();
          // bring player back to starting room, reset the inventory & NPCS
     }
     else

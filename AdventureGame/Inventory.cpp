@@ -274,3 +274,14 @@ void Inventory::clearInventory()
     }
     currentInventory.clear();
 }
+
+void Inventory::dropAllInventory()
+{
+    int roomID = locationManager::getCurrentLocation()->getLocationID();
+    for (int i = 0; i<currentInventory.size(); i++)
+    {
+        itemMap[roomID].push_back(currentInventory[i]);
+        itemMap[roomID][itemMap[roomID].size() - 1]->setState(inWorld);
+    }
+    currentInventory.clear();
+}

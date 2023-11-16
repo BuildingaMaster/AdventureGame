@@ -22,6 +22,9 @@ public:
 	bool processCommand(vector<string> args);
 	string inventoryValidCommands = "pick grab take eat consume drop throw discard";
 	static map<int, vector<Item*>> itemMap;
+	
+	/// @brief Drops all items to the ground.
+	void dropAllInventory();
 	void clearInventory();
 
 #ifdef GTESTING
