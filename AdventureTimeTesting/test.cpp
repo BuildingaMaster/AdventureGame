@@ -18,7 +18,40 @@ namespace
     {
         locationManager::stringToDirection("north");
         //EXPECT_EQ(locationManager::stringToDirection("north"),cardinalDirection::North);
-    } 
+    }
+
+    TEST(TimePassTest, cycle)
+    {
+        int start = locationManager::getCurrentTime();
+        Location* temp = locationManager::getCurrentLocation();
+        for (int i = 0; i <= 11; i++)
+        {
+            locationManager::updateCurrentLocation(temp->checkAdjacent(North));
+            locationManager::updateCurrentLocation(temp->checkAdjacent(South));
+        }
+        int end = locationManager::getCurrentTime();
+        EXPECT_TRUE(start == end);
+    }
+
+    TEST(TimePassTest, IsCycle24hours)
+    {
+        int start = locationManager::getCurrentTime();
+        int steps = 0;
+        Location* temp = locationManager::getCurrentLocation();
+        do
+        {
+            if (steps % 2 == 0)
+            {
+                locationManager::updateCurrentLocation(temp->checkAdjacent(North));
+            }
+            if (steps % 2 == 1)
+            {
+                locationManager::updateCurrentLocation(temp->checkAdjacent(South));
+            }
+            steps++;
+        } while (locationManager::getCurrentTime() != start);
+        EXPECT_TRUE(steps == 24);
+    }
 
     class HitTest : public testing::Test {
         protected:
