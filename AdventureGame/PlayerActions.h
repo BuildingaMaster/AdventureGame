@@ -1,9 +1,12 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
 
 #include "BaseHealth.h"
+#include "NPC.h"
+
 
 #define PLAYER_HEALTH 3
 
@@ -17,6 +20,8 @@ private:
 	BaseHealth healthMGR;
 	bool playerIsHigh;
 	int stepsUntilNotHigh;
+	//Wolf NPC
+	NPC wolf;
 public:
 	// Constructor 
 	/// @brief sets HealthMGR equal to BaseHealth(PLAYER_HEALTH)

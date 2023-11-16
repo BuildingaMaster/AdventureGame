@@ -5,9 +5,10 @@
 #include <vector>
 
 #include "PrintDisplay.h"
+
 using namespace std;
 
-PlayerActions::PlayerActions()
+PlayerActions::PlayerActions() : wolf(3)
 {
 	healthMGR = BaseHealth(PLAYER_HEALTH);
     playerIsHigh = false;
@@ -46,6 +47,33 @@ bool PlayerActions::processCommand(vector<string> args)
             PrintDisplay::flush();
         }
         return true;
+    }
+    else if (args[0] == "hit" && args[1] == "wolf")
+    {
+        if (!wolf.isDead())
+        {
+            if (wolf.takeDamage(1))
+            {
+                PrintDisplay::custom_cout << "\nYou hit the wolf. It has " << wolf.getLives() << " lives remaining.\n";
+                if (wolf.isDead())
+                {
+                    PrintDisplay::custom_cout << "The wolf is dead.\n";
+                }
+            }
+            else
+            {
+                PrintDisplay::custom_cout << "\nYou hit the wolf, but it still has " << wolf.getLives() << " lives remaining.\n";
+            }
+            PrintDisplay::flush();
+            return true;
+        }
+        else
+        {
+            PrintDisplay::custom_cout << "\nThe wolf is already dead. You can't hit it anymore.\n";
+            PrintDisplay::flush();
+            return false;
+        }
+        
     }
 
     // Nothing else to do.
