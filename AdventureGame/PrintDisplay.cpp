@@ -17,14 +17,14 @@ void PrintDisplay::no_effect_flush()
 void PrintDisplay::common_flush(bool forceNormal)
 {
         string str(custom_cout.str());
-        if (PAManager == nullptr || forceNormal == true) // If we are printing without PA, just print the string
+        if (CommonGameObjects::PAManager == nullptr || forceNormal == true) // If we are printing without PA, just print the string
         {
             std::cout << str << std::flush;
             custom_cout.str("");
             return;
         }
 
-        if (PAManager->isThePlayerHigh() == false)
+        if (CommonGameObjects::PAManager->isThePlayerHigh() == false)
         {
             std::cout << str << std::flush;
         } 

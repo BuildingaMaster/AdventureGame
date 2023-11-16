@@ -17,6 +17,7 @@
 #include "ContextParser.h"
 
 #include "CommonGameObjects.h"
+#include "NPC.h"
 using namespace std;
 
 // Initialize player's inventory object
@@ -26,11 +27,12 @@ using namespace std;
 int main()
 {
     srand(time(0));
-    if (locationManager::init() == false)
+    if (locationManager::init() == false || NPCManager::init() == false)
     {
         locationManager::deinit();
         return 1;
     }
+
     // Print the first description, and verify we are in the first room
     locationManager::updateCurrentLocation(locationManager::getCurrentLocation());
     

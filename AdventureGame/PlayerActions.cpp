@@ -4,12 +4,14 @@
 
 #include "PlayerActions.h"
 #include "PrintDisplay.h"
+#include "NPC.h"
+#include "Location.h"
 
 using namespace std;
 
-PlayerActions::PlayerActions() : wolf(3)
+PlayerActions::PlayerActions()
 {
-	healthMGR = BaseHealth(PLAYER_HEALTH);
+    healthMGR = BaseHealth(PLAYER_HEALTH);
     playerIsHigh = false;
     stepsUntilNotHigh = 0;
 }
@@ -49,33 +51,36 @@ bool PlayerActions::processCommand(vector<string> args)
     }
     else if (args[0] == "hit" && args[1] == "wolf")
     {
-        if (!wolf.isDead())
+        if (NPCManager::scanForNPC(args[1]))
         {
-            if (wolf.takeDamage(1))
+            NPC* wolf = NPCManager::returnNPC(args[1]);
+            if (!wolf->isDead())
             {
-                PrintDisplay::custom_cout << "\nYou hit the wolf. It has " << wolf.getLives() << " lives remaining.\n";
-                PrintDisplay::flush();
-                if (wolf.isDead())
+                if (wolf->takeDamage(1))
                 {
-                    PrintDisplay::custom_cout << "The wolf is dead.\n";
+                    PrintDisplay::custom_cout << "\nYou hit the wolf. It has " << wolf->getLives() << " lives remaining.\n";
+                    PrintDisplay::flush();
+                    if (wolf->isDead())
+                    {
+                        PrintDisplay::custom_cout << "The wolf is dead.\n";
+                        PrintDisplay::flush();
+                    }
+                }
+                else
+                {
+                    PrintDisplay::custom_cout << "\nYou hit the wolf, but it still has " << wolf->getLives() << " lives remaining.\n";
                     PrintDisplay::flush();
                 }
+                PrintDisplay::flush();
+                return true;
             }
             else
             {
-                PrintDisplay::custom_cout << "\nYou hit the wolf, but it still has " << wolf.getLives() << " lives remaining.\n";
+                PrintDisplay::custom_cout << "\nThe wolf is already dead. You can't hit it anymore.\n";
                 PrintDisplay::flush();
+                return false;
             }
-            PrintDisplay::flush();
-            return true;
         }
-        else
-        {
-            PrintDisplay::custom_cout << "\nThe wolf is already dead. You can't hit it anymore.\n";
-            PrintDisplay::flush();
-            return false;
-        }
-        
     }
 
     // Nothing else to do.
