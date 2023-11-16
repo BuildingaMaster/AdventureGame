@@ -1,9 +1,12 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
 
 #include "BaseHealth.h"
+#include "NPC.h"
+
 
 #define PLAYER_HEALTH 3
 

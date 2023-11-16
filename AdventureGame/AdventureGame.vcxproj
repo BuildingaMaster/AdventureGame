@@ -134,6 +134,7 @@
     <ClCompile Include="ContextParser.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PrintDisplay.cpp" />
   </ItemGroup>
@@ -150,6 +151,7 @@
     <ClCompile Include="Location.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PrintDisplay.h" />
   </ItemGroup>

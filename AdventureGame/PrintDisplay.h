@@ -7,7 +7,7 @@
 #include "PlayerActions.h"
 #include "CommonGameObjects.h"
 
-class PrintDisplay : public CommonGameObjects
+class PrintDisplay
 {
 public:
         static std::ostringstream custom_cout;

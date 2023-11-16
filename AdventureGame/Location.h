@@ -77,6 +77,7 @@ public:
 	{
 		APPLE_TREE_IN_ROOM = 1,
 		MUSHROOMS_IN_ROOM = 2,
+		WOLVES_IN_ROOM = 3,
 		INSTANT_KILL_ROOM = 9,
 		AAAA = 64,
 		NONE = 0
