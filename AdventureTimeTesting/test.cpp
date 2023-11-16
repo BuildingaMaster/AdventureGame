@@ -12,6 +12,8 @@
 #include "../AdventureGame/ContextParser.h"
 #include "../AdventureGame/PlayerActions.h"
 
+#include "../AdventureGame/CommonGameObjects.h"
+
 namespace
 {
     TEST(LocationMGRTest,validDirection)
@@ -160,8 +162,7 @@ namespace
     {
         playeract.healPlayer(-1);
         // Move to apple room
-        CP->interpretCommand("north");
-        CP->interpretCommand("north");
+        locationManager::updateCurrentLocation(locationManager::locationMap[3]);
         
 
         // Can't eat apple, not picked up
@@ -246,6 +247,7 @@ namespace
 
     TEST_F(EatTest, OvereatTest)
     {
+        locationManager::updateCurrentLocation(locationManager::locationMap[3]);
         // Pick up mushroom 
         EXPECT_TRUE(CP->interpretCommand("pick apple"));
         // Yes/No needs cin, so fake it
@@ -390,6 +392,71 @@ namespace
         EXPECT_TRUE(CP->interpretCommand("west"));
         EXPECT_GT(playeract.healthMGR.checkHP(),0);
     }
+
+        class GameOverTest : public testing::Test {
+    protected:
+        Inventory *userInventory;
+        PlayerActions playeract;
+        ContextParser *CP;
+
+        // You can remove any or all of the following functions if their bodies would
+        // be empty.
+
+        GameOverTest() {
+            userInventory = new Inventory(&playeract);
+            CommonGameObjects::INManager = userInventory;
+            CommonGameObjects::PAManager = &playeract;
+            CP = new ContextParser(userInventory, &playeract);
+            // You can do set-up work for each test here.
+        }
+
+        ~GameOverTest() override {
+            delete CP;
+            delete userInventory;
+            // You can do clean-up work that doesn't throw exceptions here.
+        }
+
+        // If the constructor and destructor are not enough for setting up
+        // and cleaning up each test, you can define the following methods:
+
+        void SetUp() override {
+            // Code here will be called immediately after the constructor (right
+            // before each test).
+        }
+
+        void TearDown() override {
+            // Code here will be called immediately after each test (right
+            // before the destructor).
+        }
+    };
+
+    TEST_F(GameOverTest, GameOver)
+    {
+        // Move to apple room
+        locationManager::updateCurrentLocation(locationManager::locationMap[3]);
+        // Pick an apple
+
+        EXPECT_TRUE(CP->interpretCommand("pick apple"));
+        
+        // Player Dead
+        playeract.healthMGR.removeHP(999);
+
+        // Yes to play again
+        streambuf* cinbuf = std::cin.rdbuf();
+        std::stringstream ss;
+        ss << "yes\n";
+        cin.rdbuf(ss.rdbuf());
+
+        // Play again
+        playeract.playAgain();
+        cin.rdbuf(cinbuf);
+
+        // Nothing should be in the inventory
+        EXPECT_EQ(userInventory->currentInventory.size(), 0);
+        // We should be at the starting room
+        EXPECT_EQ(locationManager::currentLocation->roomID, 1);
+    }
+
 
 } // namespace
     int main(int argc, char** argv)

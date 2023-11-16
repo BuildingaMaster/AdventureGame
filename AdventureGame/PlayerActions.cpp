@@ -139,11 +139,14 @@ void PlayerActions::decrementMovingHigh()
         thePlayerIsHigh(false);
     }
 }
-bool PlayerActions::playAgain(string command)
+bool PlayerActions::playAgain()
 {
     bool runItBack;
-    cout << "\n Do you wanna play again? \n";
+    PrintDisplay::custom_cout << "\n Do you wanna play again? \n";
+    PrintDisplay::no_effect_flush();
 
+    // If true, the player want to play again
+    // Otherwise close the game
     runItBack = ContextParser::yesNoPrompt();
     if (runItBack == true)
     {
@@ -154,7 +157,9 @@ bool PlayerActions::playAgain(string command)
     }
     else
     {
-        cout << "\nThe difference between the master and the student is that the master has failed far more times than the student.\n";
+        // Goodbye quote
+        PrintDisplay::custom_cout << "\nThe difference between the master and the student is that the master has failed far more times than the student.\n";
+        PrintDisplay::no_effect_flush();
     }
     return runItBack;
 }
