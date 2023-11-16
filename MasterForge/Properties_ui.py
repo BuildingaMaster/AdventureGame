@@ -355,7 +355,7 @@ class Ui_Dialog(object):
         self.label.setText(QCoreApplication.translate("Dialog", u"NOTE: Not really implemented", None))
         self.Common.setTitle(QCoreApplication.translate("Dialog", u"Common", None))
         self.Option8Check.setText(QCoreApplication.translate("Dialog", u"Option 8", None))
-        self.Option3Check.setText(QCoreApplication.translate("Dialog", u"Option 3", None))
+        self.Option3Check.setText(QCoreApplication.translate("Dialog", u"Wolves in room", None))
         self.Option2Check.setText(QCoreApplication.translate("Dialog", u"Mushrooms in room", None))
         self.Option6Check.setText(QCoreApplication.translate("Dialog", u"Option 6", None))
         self.Option5Check.setText(QCoreApplication.translate("Dialog", u"Option 5", None))

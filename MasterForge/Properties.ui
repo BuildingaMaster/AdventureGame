@@ -286,7 +286,7 @@
           <item row="3" column="0">
            <widget class="QCheckBox" name="Option3Check">
             <property name="text">
-             <string>Option 3</string>
+             <string>Wolves in room</string>
             </property>
            </widget>
           </item>
