@@ -5,22 +5,21 @@
 
 #include "NPC.h"
 
-NPC::NPC(int initialLives) : lives(initialLives) {}
+NPC::NPC(int initialLives) : health(initialLives) {}
 
 bool NPC::takeDamage(int damage) 
 {
-    lives -= damage;
-    return lives <= 0;
+    return health.removeHP(damage);
 }
 
 bool NPC::isDead() 
 {
-    return lives <= 0;
+    return health.checkHP() <= 0;
 }
 
 int NPC::getLives() 
 {
-    return lives;
+    return health.checkHP();
 }
 
 

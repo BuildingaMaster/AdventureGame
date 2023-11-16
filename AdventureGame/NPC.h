@@ -4,10 +4,11 @@
 #include <string>
 #include <vector>
 
+#include "BaseHealth.h"
+
 class NPC {
 private:
-    int lives;
-
+    BaseHealth health;
 public:
     NPC(int initialLives);
     bool takeDamage(int damage);

@@ -1,9 +1,8 @@
-#include "PlayerActions.h"
-
 #include <iostream>
 #include <string>
 #include <vector>
 
+#include "PlayerActions.h"
 #include "PrintDisplay.h"
 
 using namespace std;
@@ -55,14 +54,17 @@ bool PlayerActions::processCommand(vector<string> args)
             if (wolf.takeDamage(1))
             {
                 PrintDisplay::custom_cout << "\nYou hit the wolf. It has " << wolf.getLives() << " lives remaining.\n";
+                PrintDisplay::flush();
                 if (wolf.isDead())
                 {
                     PrintDisplay::custom_cout << "The wolf is dead.\n";
+                    PrintDisplay::flush();
                 }
             }
             else
             {
                 PrintDisplay::custom_cout << "\nYou hit the wolf, but it still has " << wolf.getLives() << " lives remaining.\n";
+                PrintDisplay::flush();
             }
             PrintDisplay::flush();
             return true;
