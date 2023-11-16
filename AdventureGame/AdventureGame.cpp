@@ -40,6 +40,7 @@ int main()
     CommonGameObjects::PAManager = &playeract;
 
     Inventory userInventory(&playeract);
+    CommonGameObjects::INManager = &userInventory;
     BaseHealth check;
     
     string command;

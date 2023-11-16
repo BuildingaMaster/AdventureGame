@@ -5,6 +5,7 @@
 #include "PlayerActions.h"
 #include "PrintDisplay.h"
 #include "NPC.h"
+#include "ContextParser.h"
 #include "Location.h"
 
 using namespace std;
@@ -139,19 +140,19 @@ void PlayerActions::decrementMovingHigh()
 bool PlayerActions::playAgain(string command)
 {
     bool runItBack;
-    cout << "Do you wanna play again? " << endl;
+    cout << "\n Do you wanna play again? \n";
 
-    if (command == "yes")
+    runItBack = ContextParser::yesNoPrompt();
+    if (runItBack == true)
     {
-        runItBack = true;
-        // bring player back to starting room, reset the game items & NPCS
-
+        locationManager::updateCurrentLocation(locationManager::locationMap[1]);
+        healthMGR.restoreMaxHP();
+        CommonGameObjects::INManager->clearInventory();
+            // bring player back to starting room, reset the game items & NPCS
     }
-    else if (command == "no")
+    else
     {
-        runItBack = false;
-        cout << "The difference between the master and the student is that the master has failed far more times than the student." << endl;
-  
+        cout << "\nThe difference between the master and the student is that the master has failed far more times than the student.\n";
     }
     return runItBack;
 }
