@@ -18,7 +18,7 @@ public:
         /// @brief Print the buffer to the console without effects, must be called.
         static void no_effect_flush();
 
-        static std::string inputValidation();
+        static std::string inputValidation(bool);
         static std::vector<std::string> commandHistory;
 private:
         static void common_flush(bool);

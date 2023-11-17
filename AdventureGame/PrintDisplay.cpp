@@ -34,6 +34,7 @@ void PrintDisplay::common_flush(bool forceNormal)
         if (CommonGameObjects::PAManager == nullptr || forceNormal == true) // If we are printing without PA, just print the string
         {
             #ifndef WIN32
+            refresh();
             printw("%s",str.c_str());
             refresh();
             #else
@@ -47,6 +48,7 @@ void PrintDisplay::common_flush(bool forceNormal)
         if (CommonGameObjects::PAManager->isThePlayerHigh() == false)
         {
             #ifndef WIN32
+            refresh();
             printw("%s",str.c_str());
             refresh();
             #else
@@ -68,6 +70,7 @@ void PrintDisplay::common_flush(bool forceNormal)
                 std::swap(str[a], str[b]);
             }
             #ifndef WIN32
+            refresh();
             printw("%s",str.c_str());
             refresh();
             #else
@@ -78,7 +81,7 @@ void PrintDisplay::common_flush(bool forceNormal)
         custom_cout.str("");
 }
 
-string PrintDisplay::inputValidation()
+string PrintDisplay::inputValidation(bool noHistory)
 {
     string command;
     int indexOfHistory = -1;
@@ -89,9 +92,6 @@ string PrintDisplay::inputValidation()
     {
         // The user types a character
         ch = getch();
-
-        // Delay the terminal for about 10ms
-        this_thread::sleep_for(chrono::milliseconds(30));
         if (ch == '\xff') // Bad character, ignore.
         {
             continue;
@@ -105,15 +105,29 @@ string PrintDisplay::inputValidation()
             }                  
             command.erase(command.begin()+(interator)); 
             interator--;
-            cout << "\033[2K\r"<< std::flush;
+            PrintDisplay::custom_cout << "\b";
+            PrintDisplay::no_effect_flush();
+
+            cout<< "\0337" << std::flush;//Save cursor Position
+            PrintDisplay::custom_cout << "\r"; 
+            PrintDisplay::no_effect_flush();
+
+            #ifndef WIN32
+            clrtobot();
+            #else
+            cout << "\033[0J" << std::flush;
+            #endif            
+
+            PrintDisplay::custom_cout << "\r"; 
+            PrintDisplay::no_effect_flush();
+
             PrintDisplay::custom_cout << "> " << command;
             PrintDisplay::no_effect_flush();
-            for (int a = command.size()-2; a>=interator; a--)
-            {
-                PrintDisplay::custom_cout << '\b';
-                PrintDisplay::no_effect_flush();
-            }
+            cout << "\0338"<< std::flush; //Save cursor Position
+            // Delay the terminal for about 10ms
+            this_thread::sleep_for(chrono::milliseconds(30));
             continue;
+            
         }
         else if (ch == '\x04') // Left arrow key
         {
@@ -144,6 +158,11 @@ string PrintDisplay::inputValidation()
         }
         else if (ch == '\x03') // Up arrow key
         {
+            if (noHistory == true)
+            {
+                cout << '\a' << std::flush;
+                continue;
+            }
             if (PrintDisplay::commandHistory.size() == 0)// No commands, ignore
             {
                 // Bell, should play sound.
@@ -160,7 +179,13 @@ string PrintDisplay::inputValidation()
             command = PrintDisplay::commandHistory[++indexOfHistory];
 
             // Clear entire line, and reprint command.
-            cout << "\033[2K\r"<< std::flush;
+            #ifndef WIN32
+            PrintDisplay::custom_cout << "\r";
+            PrintDisplay::no_effect_flush();
+            clrtobot();
+            #else
+            cout << "\033[0J" << std::flush;
+            #endif  
             PrintDisplay::custom_cout << "> " << command;
             PrintDisplay::no_effect_flush();
             interator = command.size()-1;
@@ -168,6 +193,11 @@ string PrintDisplay::inputValidation()
         }
         else if (ch == '\x02') // Down arrow key
         {
+            if (noHistory == true)
+            {
+                cout << '\a' << std::flush;
+                continue;
+            }
             // If the index is less than or equal to 0
             if (indexOfHistory <= 0)
             {
@@ -178,6 +208,7 @@ string PrintDisplay::inputValidation()
                     continue;
                 }
                 command="";
+                indexOfHistory = -1;
             }
             else
             {
@@ -185,14 +216,24 @@ string PrintDisplay::inputValidation()
                 command = PrintDisplay::commandHistory[--indexOfHistory];
             }
             // Clear entire line, and reprint command.
-            cout << "\033[2K\r" << std::flush;
+            #ifndef WIN32
+            PrintDisplay::custom_cout << "\r";
+            PrintDisplay::no_effect_flush();
+            clrtobot();
+            #else
+            cout << "\033[0J" << std::flush;
+            #endif  
             PrintDisplay::custom_cout << "> " << command;
             PrintDisplay::no_effect_flush();
             interator = command.size()-1;
             continue;
 
         }
-
+        if (command.size() >= 30 && ch != '\n')
+        {
+            cout << '\a' << std::flush;
+            continue;
+        }
         if (ch != '\n') // Ignore all new lines, acts as return.
         {
             PrintDisplay::custom_cout << ch;
@@ -224,6 +265,7 @@ string PrintDisplay::inputValidation()
                 PrintDisplay::no_effect_flush();
             }
         }
+
         PrintDisplay::no_effect_flush();
 
         // If the user types in a new line

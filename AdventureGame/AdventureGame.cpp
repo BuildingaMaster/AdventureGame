@@ -86,7 +86,7 @@ int main()
             }
             PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
             PrintDisplay::no_effect_flush();
-            command = PrintDisplay::inputValidation();
+            command = PrintDisplay::inputValidation(true);
 
             /*#ifndef WIN32
             char ch = 0; // The character the user entered.
