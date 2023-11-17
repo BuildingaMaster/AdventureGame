@@ -389,6 +389,8 @@ bool locationManager::init()
 
     // Set the starting location to the player location and print the description
 	locationManager::currentLocation = locationManager::locationMap[1];
+	descBytes.clear();
+	mapBytes.clear();
 	return true;
 }
 

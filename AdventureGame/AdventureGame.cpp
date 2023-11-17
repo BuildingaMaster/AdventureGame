@@ -13,11 +13,10 @@
 #include <thread>
 #include <chrono>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <ncurses.h>
 #else
-#include <condio.h>
-#define getch() _getch()
+#include <Windows.h>
 #endif
 
 #include "Location.h"
@@ -29,23 +28,79 @@
 
 #include "CommonGameObjects.h"
 #include "NPC.h"
+#include "PrintDisplay.h"
+
+
 using namespace std;
 
-// Initialize player's inventory object
 
-#include "PrintDisplay.h"
 
 int main()
 {    
-    #ifndef WIN32
-    initscr();
-    keypad(stdscr, TRUE);
-    noecho();
-    scrollok(stdscr, TRUE);
-    cout << "\033[?47l"<<flush; // Normal Screen Buffer
-    cout << "\033[?20l"<<flush; // New line
-    cout << "\033[?2006h"<<flush;
-    #endif
+#ifndef _WIN32
+    // Curses initalization.
+
+    initscr();                    // Start curses
+    keypad(stdscr, TRUE);         //Capture all keys
+    noecho();                     // Dont echo keypresses, PrintDisplay handles it.
+    scrollok(stdscr, TRUE);       // Scrolling is OK
+    cout << "\033[?47l"<<flush;   // Normal Screen Buffer
+    cout << "\033[?20l"<<flush;   // New line
+    cout << "\033[?2006h"<<flush; // Enable readline newline pasting
+#else
+    // Set output mode to handle virtual terminal sequences,
+    // From https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hOut == INVALID_HANDLE_VALUE)
+    {
+        cout << "An error occurred, please try rerunning the app." << endl;
+        return false;
+    }
+    HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
+    if (hIn == INVALID_HANDLE_VALUE)
+    {
+        cout << "An error occurred, please try rerunning the app." << endl;
+        return false;
+    }
+
+    DWORD dwOriginalOutMode = 0;
+    DWORD dwOriginalInMode = 0;
+    if (!GetConsoleMode(hOut, &dwOriginalOutMode))
+    {
+        cout << "An error occurred, please try rerunning the app." << endl;
+        return false;
+    }
+    if (!GetConsoleMode(hIn, &dwOriginalInMode))
+    {
+        cout << "An error occurred, please try rerunning the app." << endl;
+        return false;
+    }
+
+    DWORD dwRequestedOutModes = ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN;
+    DWORD dwRequestedInModes = ENABLE_VIRTUAL_TERMINAL_INPUT;
+
+    DWORD dwOutMode = dwOriginalOutMode | dwRequestedOutModes;
+    if (!SetConsoleMode(hOut, dwOutMode))
+    {
+        // we failed to set both modes, try to step down mode gracefully.
+        dwRequestedOutModes = ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+        dwOutMode = dwOriginalOutMode | dwRequestedOutModes;
+        if (!SetConsoleMode(hOut, dwOutMode))
+        {
+            // Failed to set any VT mode, can't do anything here.
+            cout << "An error occurred, please try rerunning the app." << endl;
+            return -1;
+        }
+    }
+
+    DWORD dwInMode = dwOriginalInMode | dwRequestedInModes;
+    if (!SetConsoleMode(hIn, dwInMode))
+    {
+        // Failed to set VT input mode, can't do anything here.
+        cout << "An error occurred, please try rerunning the app." << endl;
+        return -1;
+    }
+#endif
 
     srand(time(0));
     if (locationManager::init() == false || NPCManager::init() == false)
@@ -68,12 +123,10 @@ int main()
     ContextParser CP(&userInventory,&playeract);
     bool validInput;
     bool stay = true;
-    int indexOfHistory;
     do
     {
         do
         {
-            indexOfHistory = -1; // The index the history is on.
             if (playeract.thePlayerIsDead())
             {
                 PrintDisplay::custom_cout << "\nYOU DID NOT SURVIVE!\n";
@@ -86,173 +139,10 @@ int main()
             }
             PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
             PrintDisplay::no_effect_flush();
-            command = PrintDisplay::inputValidation(true);
 
-            /*#ifndef WIN32
-            char ch = 0; // The character the user entered.
-            int interator = -1;
-            // The following is complicated. Happy reading!
-            while (ch != '\n')
-            {
-                // The user types a character
-                ch = getch();
-    
-                // Delay the terminal for about 10ms
-                this_thread::sleep_for(chrono::milliseconds(10));
-                if (ch == '\xff') // Bad character, ignore.
-                {
-                    continue;
-                }
+            // Handle Input, 
+            command = PrintDisplay::inputValidation(false);
 
-                if (ch == '\x7f') // Captured backspace
-                {
-                    if (interator == -1)
-                    {
-                        continue;
-                    }                  
-                    command.erase(command.begin()+(interator)); 
-                    interator--;
-                    cout << "\033[2K\r"<<flush;
-                    PrintDisplay::custom_cout << "> " << command;
-                    PrintDisplay::no_effect_flush();
-                    for (int a = command.size()-2; a>=interator; a--)
-                    {
-                        PrintDisplay::custom_cout << '\b';
-                        PrintDisplay::no_effect_flush();
-                    }
-                    continue;
-                }
-                else if (ch == '\x04') // Left arrow key
-                {
-                    // Ignore if at the start of the string.
-                    if (interator == -1)
-                    {
-                        continue;
-                    }
-                    // Move cursor back.
-                    ch = '\b';
-                    PrintDisplay::custom_cout << ch;
-                    PrintDisplay::no_effect_flush();
-                    interator--;
-                    continue;
-                }
-                else if (ch == '\x05') // Right arrow key
-                {
-                    // Ignore if at the end of the string.
-                    if (interator == command.size() -1)
-                    {
-                        continue;
-                    }
-                    // "move" cursor to right
-                    // Aka, overwrite letter at new position.
-                    PrintDisplay::custom_cout << command[++interator];
-                    PrintDisplay::no_effect_flush();
-                    continue;
-                }
-                else if (ch == '\x03') // Up arrow key
-                {
-                    if (commandHistory.size() == 0)// No commands, ignore
-                    {
-                        // Bell, should play sound.
-                        cout << '\a' <<flush;
-                        continue;
-                    }
-                    else if (commandHistory.size()-1 == indexOfHistory) // End of history, ignore
-                    {
-                        // Bell, should play sound.
-                        cout << '\a' <<flush;
-                        continue;
-                    }
-                    //TODO index bounds check
-                    command = commandHistory[++indexOfHistory];
-
-                    // Clear entire line, and reprint command.
-                    cout << "\033[2K\r"<<flush;
-                    PrintDisplay::custom_cout << "> " << command;
-                    PrintDisplay::no_effect_flush();
-                    interator = command.size()-1;
-                    continue;
-                }
-                else if (ch == '\x02') // Down arrow key
-                {
-                    // If the index is less than or equal to 0
-                    if (indexOfHistory <= 0)
-                    {
-                        if (command.empty() == true) // Empty command, warn user.
-                        {
-                            cout << '\a' <<flush;
-                            indexOfHistory = -1;
-                            continue;
-                        }
-                        command="";
-                    }
-                    else
-                    {
-                        // Get the next recent command in history.
-                        command = commandHistory[--indexOfHistory];
-                    }
-                    // Clear entire line, and reprint command.
-                    cout << "\033[2K\r" << flush;
-                    PrintDisplay::custom_cout << "> " << command;
-                    PrintDisplay::no_effect_flush();
-                    interator = command.size()-1;
-                    continue;
-
-                }
-
-                if (ch != '\n') // Ignore all new lines, acts as return.
-                {
-                    PrintDisplay::custom_cout << ch;
-                }
-
-                // Insert character to command.
-                command.insert(command.begin()+(++interator),ch);
-                
-                // If the cursor is not the end of the string...
-                // incert the character at the string.
-                // AKA: print character, then print the rest of the string.
-                int temp = interator;
-                bool checkMove = temp<(command.size()-1);
-                int move_count = -1;
-
-                // While we are not at the end of the spring:
-                while (temp<(command.size()-1))
-                {
-                    PrintDisplay::custom_cout << command[++temp];
-                    PrintDisplay::no_effect_flush();
-                    move_count++;
-                }
-                // Return cursor to original position if needed.
-                if (checkMove && ch != '\n')
-                {
-                    for (;move_count>=0;move_count--)
-                    {
-                        PrintDisplay::custom_cout << '\b';
-                        PrintDisplay::no_effect_flush();
-                    }
-                }
-                PrintDisplay::no_effect_flush();
-
-                // If the user types in a new line
-                // AKA: submit command
-                if (ch == '\n')
-                {
-                    // Print the new line
-                    PrintDisplay::custom_cout << ch;
-                    PrintDisplay::no_effect_flush();
-                    // Print carriage return.
-                    PrintDisplay::custom_cout << "\r";
-                    PrintDisplay::no_effect_flush();
-                }
-                PrintDisplay::no_effect_flush();
-            }
-            // Remove the new line, we don't want it.
-            command.replace(command.find('\n'),1,"");
-            
-            #else*/
-            //getline(cin, command);
-            //cin.clear();
-            //#endif
             // This is temporary, and needs to have CP logic
             if (command == "quit")
             {
@@ -264,7 +154,7 @@ int main()
         } while (validInput == false);
         
         // If there is no history, or the most recent command is not the newest one..
-        if (PrintDisplay::commandHistory.size() == 0 || PrintDisplay::commandHistory[0] != command)
+        if (PrintDisplay::commandHistory.empty() == true || PrintDisplay::commandHistory[0] != command)
         {
             // Add it to the history.
             PrintDisplay::commandHistory.insert(PrintDisplay::commandHistory.begin(),command);   
@@ -273,9 +163,11 @@ int main()
     } while (stay);
 
     locationManager::deinit();
-    #ifndef WIN32
+    PrintDisplay::commandHistory.clear();
+#ifndef _WIN32
+    // End curses control. 
     endwin();
-    #endif    
+#endif    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
