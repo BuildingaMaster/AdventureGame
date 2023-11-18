@@ -311,5 +311,10 @@ string PrintDisplay::inputValidation(bool noHistory)
     return command;
 }
 
-
+void PrintDisplay::pause()
+{
+    PrintDisplay::custom_cout << "\nPress any key to continue...\n";
+    PrintDisplay::no_effect_flush();
+    getch();
+}
 

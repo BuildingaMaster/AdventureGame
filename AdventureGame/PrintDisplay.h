@@ -27,6 +27,9 @@ public:
 
         /// @brief The history of the commands the player typed.
         static std::vector<std::string> commandHistory;
+
+        /// @brief Displays "Press any key to continue..."
+        static void pause();
 private:
         static void common_flush(bool);
 };

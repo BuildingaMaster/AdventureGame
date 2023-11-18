@@ -99,7 +99,7 @@ bool ContextParser::yesNoPrompt()
     {
         PrintDisplay::custom_cout << "\nYes or no?\n> ";
         PrintDisplay::no_effect_flush();
-        command = PrintDisplay::inputValidation(false);
+        command = PrintDisplay::inputValidation(true);
         if (command == "yes" || command == "y" || command == "ye")
         {
             return CPResponse::Response::YES;
