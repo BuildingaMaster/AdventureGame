@@ -163,7 +163,7 @@ int main()
         } while (validInput == false);
         
         // If there is no history, or the most recent command is not the newest one..
-        if (PrintDisplay::commandHistory.empty() == true)
+        if (PrintDisplay::commandHistory.empty() == true || PrintDisplay::commandHistory[0] != command)
         {
             // Add it to the history.
             PrintDisplay::commandHistory.insert(PrintDisplay::commandHistory.begin(),command);   
@@ -173,15 +173,17 @@ int main()
 
     locationManager::deinit();
 
+    // Save the commands to a file.
     ofstream cmdHistoryFile;
     cmdHistoryFile.open("command_history.txt");
     cmdHistoryFile << starttime << "\n";
-    for (uint64_t i = 0; i< PrintDisplay::commandHistory.size(); i++)
+    for (uint64_t i = 0; i< PrintDisplay::logCommandVector.size(); i++)
     {
-        cmdHistoryFile << PrintDisplay::commandHistory[PrintDisplay::commandHistory.size()-1-i] << "\n";
+        cmdHistoryFile << PrintDisplay::logCommandVector[PrintDisplay::logCommandVector.size()-1-i] << "\n";
     }
     cmdHistoryFile.close();
     PrintDisplay::commandHistory.clear();
+    PrintDisplay::logCommandVector.clear();
 #ifndef _WIN32
     // End curses control. 
     endwin();

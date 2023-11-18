@@ -39,6 +39,7 @@ using namespace std;
 
 std::ostringstream PrintDisplay::custom_cout;
 std::vector<std::string> PrintDisplay::commandHistory;
+std::vector<std::string> PrintDisplay::logCommandVector;
 
 char readCH()
 {
@@ -339,6 +340,9 @@ string PrintDisplay::inputValidation(bool noHistory)
 
     // Remove the new line, we don't want it.
     command.replace(command.find('\n'),1,"");
+
+    // Log the command to the text file, even if invalid.
+    PrintDisplay::logCommandVector.insert(PrintDisplay::logCommandVector.begin(), command);
     return command;
 }
 

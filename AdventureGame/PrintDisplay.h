@@ -25,8 +25,11 @@ public:
         /// @return The command in string form.
         static std::string inputValidation(bool);
 
-        /// @brief The history of the commands the player typed.
+        /// @brief The history of the commands the player typed (for the terminal).
         static std::vector<std::string> commandHistory;
+
+        /// @brief A log of the commands the player typed (for debugging).
+        static std::vector<std::string> logCommandVector;
 
         /// @brief Displays "Press any key to continue..."
         static void pause();
