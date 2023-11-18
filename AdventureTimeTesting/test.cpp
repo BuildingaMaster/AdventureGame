@@ -1,3 +1,7 @@
+#ifndef GTESTING
+#define GTESTING
+#endif
+
 #include "gtest/gtest.h"
 
 #include <streambuf>
