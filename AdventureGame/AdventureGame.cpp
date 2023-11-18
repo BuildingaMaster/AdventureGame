@@ -109,8 +109,8 @@ int main()
         return -1;
     }
 #endif
-
-    srand(time(0));
+    time_t starttime = time(0);
+    srand(starttime);
     if (locationManager::init() == false || NPCManager::init() == false)
     {
         locationManager::deinit();
@@ -163,7 +163,7 @@ int main()
         } while (validInput == false);
         
         // If there is no history, or the most recent command is not the newest one..
-        if (PrintDisplay::commandHistory.empty() == true || PrintDisplay::commandHistory[0] != command)
+        if (PrintDisplay::commandHistory.empty() == true)
         {
             // Add it to the history.
             PrintDisplay::commandHistory.insert(PrintDisplay::commandHistory.begin(),command);   
@@ -172,6 +172,15 @@ int main()
     } while (stay);
 
     locationManager::deinit();
+
+    ofstream cmdHistoryFile;
+    cmdHistoryFile.open("command_history.txt");
+    cmdHistoryFile << starttime << "\n";
+    for (uint64_t i = 0; i< PrintDisplay::commandHistory.size(); i++)
+    {
+        cmdHistoryFile << PrintDisplay::commandHistory[PrintDisplay::commandHistory.size()-1-i] << "\n";
+    }
+    cmdHistoryFile.close();
     PrintDisplay::commandHistory.clear();
 #ifndef _WIN32
     // End curses control. 

@@ -102,10 +102,12 @@ bool ContextParser::yesNoPrompt()
         command = PrintDisplay::inputValidation(true);
         if (command == "yes" || command == "y" || command == "ye")
         {
+            PrintDisplay::commandHistory.insert(PrintDisplay::commandHistory.begin(), command);
             return CPResponse::Response::YES;
         }
         else if (command == "no" || command == "n")
         {
+            PrintDisplay::commandHistory.insert(PrintDisplay::commandHistory.begin(), command);
             return CPResponse::Response::NO;
         }
     }while (true);
