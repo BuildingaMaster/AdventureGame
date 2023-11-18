@@ -30,6 +30,18 @@ public:
 
         /// @brief Displays "Press any key to continue..."
         static void pause();
+
+#ifdef GTESTING
+        static std::string GT_inStr;
+
+        /// @brief Pretends to be the string buffer for GTESTING
+        /// @param s The string to process
+        static void GT_setString(std::string s);
+
+        /// @brief Helper for GTESTING, replicates getch().
+        /// @return The character at the front of the string
+        static char GT_getch();
+#endif
 private:
         static void common_flush(bool);
 };

@@ -38,6 +38,7 @@ using namespace std;
 int main()
 {    
 #ifndef _WIN32
+#ifndef GTESTING
     // Curses initalization.
 
     initscr();                    // Start curses
@@ -47,6 +48,7 @@ int main()
     cout << "\033[?47l"<<flush;   // Normal Screen Buffer
     cout << "\033[?20l"<<flush;   // New line
     cout << "\033[?2006h"<<flush; // Enable readline newline pasting
+#endif //GTESTING
 #else
     // Set output mode to handle virtual terminal sequences,
     // From https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences

@@ -12,11 +12,42 @@
 #include <thread>
 #include <chrono>
 
+#ifdef GTESTING
+std::string PrintDisplay::GT_inStr = "";
+
+void PrintDisplay::GT_setString(std::string s)
+{
+    // Load the string into the "buffer"
+    GT_inStr = s;
+}
+char PrintDisplay::GT_getch()
+{
+    if (GT_inStr.empty() == false)
+    {
+        // Get the first character from the "buffer"
+        char r = GT_inStr[0];
+        // Delete the first character from the "buffer"
+        GT_inStr.erase(GT_inStr.begin());
+        return r;
+    }
+    return '\xff'; // No characters left in the "buffer"
+}
+#endif
+
 
 using namespace std;
 
 std::ostringstream PrintDisplay::custom_cout;
 std::vector<std::string> PrintDisplay::commandHistory;
+
+char readCH()
+{
+#ifdef GTESTING
+        return PrintDisplay::GT_getch();
+#else
+        return getch();
+#endif
+}
 
 void PrintDisplay::flush()
 {
@@ -30,7 +61,7 @@ void PrintDisplay::no_effect_flush()
 
 void printToScreen(string str)
 {
-#ifndef _WIN32
+#if !defined _WIN32 && !defined GTESTING
     refresh();
     printw("%s", str.c_str());
     refresh();
@@ -100,7 +131,7 @@ string PrintDisplay::inputValidation(bool noHistory)
         bool isScanCode = false; // For windows Only.
 
         // The user types a character
-        ch = getch();
+        ch = readCH();
 
         if (ch == '\xff') // Bad character, ignore.
         {
@@ -111,7 +142,7 @@ string PrintDisplay::inputValidation(bool noHistory)
         else if (ch == -32) // KeyCode incoming. Catch and read next character.
         {
             isScanCode = true;
-            ch = getch(); // Should be a keycode or arrow key
+            ch = readCH(); // Should be a keycode or arrow key
         }
 #endif
 

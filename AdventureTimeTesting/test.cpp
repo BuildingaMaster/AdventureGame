@@ -250,18 +250,16 @@ namespace
         locationManager::updateCurrentLocation(locationManager::locationMap[3]);
         // Pick up mushroom 
         EXPECT_TRUE(CP->interpretCommand("pick apple"));
-        // Yes/No needs cin, so fake it
-        streambuf *cinbuf = std::cin.rdbuf();
-        std::stringstream ss;
-        ss << "yes\n";
-        cin.rdbuf(ss.rdbuf());
+
+        // Yes/No needs an input, so fake it
+        PrintDisplay::GT_setString("yes\n");
+    
         // Eat the apple
         testing::internal::CaptureStdout();
         EXPECT_TRUE(CP->interpretCommand("eat apple"));
         string output = testing::internal::GetCapturedStdout();
-        // Reset cin
-        cin.rdbuf(cinbuf);
-        EXPECT_EQ(output,"\nYou already have max health, are you sure you want to eat the apple?\n\nYes or no?\n> \nYou eat the apple!\n\nYou healed by 1 HP!\n");
+
+        EXPECT_EQ(output,"\nYou already have max health, are you sure you want to eat the apple?\n\nYes or no?\n> yes\n\r\nYou eat the apple!\n\nYou healed by 1 HP!\n");
         EXPECT_EQ(playeract.checkPlayerHealth(), playeract.checkMaxPlayerHealth());
 
     }
@@ -442,14 +440,9 @@ namespace
         playeract.healthMGR.removeHP(999);
 
         // Yes to play again
-        streambuf* cinbuf = std::cin.rdbuf();
-        std::stringstream ss;
-        ss << "yes\n";
-        cin.rdbuf(ss.rdbuf());
-
-        // Play again
+        PrintDisplay::GT_setString("yes\n");
         playeract.playAgain();
-        cin.rdbuf(cinbuf);
+
 
         // Nothing should be in the inventory
         EXPECT_EQ(userInventory->currentInventory.size(), 0);
