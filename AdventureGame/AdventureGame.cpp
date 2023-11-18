@@ -56,12 +56,14 @@ int main()
     if (hOut == INVALID_HANDLE_VALUE)
     {
         cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
         return false;
     }
     HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
     if (hIn == INVALID_HANDLE_VALUE)
     {
         cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
         return false;
     }
 
@@ -70,11 +72,13 @@ int main()
     if (!GetConsoleMode(hOut, &dwOriginalOutMode))
     {
         cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
         return false;
     }
     if (!GetConsoleMode(hIn, &dwOriginalInMode))
     {
         cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
         return false;
     }
 
@@ -91,6 +95,7 @@ int main()
         {
             // Failed to set any VT mode, can't do anything here.
             cout << "An error occurred, please try rerunning the app." << endl;
+            PrintDisplay::pause();
             return -1;
         }
     }
@@ -100,6 +105,7 @@ int main()
     {
         // Failed to set VT input mode, can't do anything here.
         cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
         return -1;
     }
 #endif
@@ -108,6 +114,7 @@ int main()
     if (locationManager::init() == false || NPCManager::init() == false)
     {
         locationManager::deinit();
+        PrintDisplay::pause();
         return 1;
     }
 
