@@ -348,8 +348,10 @@ string PrintDisplay::inputValidation(bool noHistory)
 
 void PrintDisplay::pause()
 {
-    PrintDisplay::custom_cout << "\nPress any key to continue...\n";
+    PrintDisplay::custom_cout << "\nPress any key to continue . . .";
     PrintDisplay::no_effect_flush();
     getch();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
 }
 

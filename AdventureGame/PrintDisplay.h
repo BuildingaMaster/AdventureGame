@@ -31,7 +31,7 @@ public:
         /// @brief A log of the commands the player typed (for debugging).
         static std::vector<std::string> logCommandVector;
 
-        /// @brief Displays "Press any key to continue..."
+        /// @brief Displays "Press any key to continue . . ."
         static void pause();
 
 #ifdef GTESTING
