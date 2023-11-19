@@ -442,13 +442,13 @@ bool PrintDisplay::hitScreen(int MAX_RED)
     nodelay(stdscr, FALSE);
 
     // Hit marker: on the current space, color the background grey.
-    cout << "\033[48;5; 252m" << std::flush;
+    cout << "\033[48;5;252m" << std::flush;
     PrintDisplay::custom_cout << "#";
     PrintDisplay::no_effect_flush();
 
     // Stop coloring.
     cout << "\033[0m" << std::flush;
-    
+
     bool hitLanded = false;
     if (a < MAX_RED)
     {
