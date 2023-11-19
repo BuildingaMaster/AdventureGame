@@ -405,11 +405,18 @@ bool PrintDisplay::hitScreen(int MAX_RED)
     // Instead of waiting for the system to get a key press
     // We want to know if a key press happens every ~50ms.
     // If not, it returns nothing (or null)
+#ifndef _WIN32
     nodelay(stdscr, TRUE);
+#endif
 
     // If the user doesn't type anything,
     // continue the loop
+#ifndef _WIN32
+
     while (getch() == ERR) // AKA: The user didn't press a key.
+#else
+    while(!_kbhit()) // AKA: The user didn't press a key.
+#endif
     {
         if (a > (MAX_RED-1)) // Cursor on green
         {
@@ -438,8 +445,14 @@ bool PrintDisplay::hitScreen(int MAX_RED)
         }
         this_thread::sleep_for(chrono::milliseconds(50)); // Pause by 50ms
     }
+#ifndef _WIN32
     // Return to the regular character waiting mode.
     nodelay(stdscr, FALSE);
+#else 
+    // Get the character, but ignore it.
+    // If not done, a double input would occur.
+    getch();
+#endif
 
     // Hit marker: on the current space, color the background grey.
     cout << "\033[48;5;252m" << std::flush;
