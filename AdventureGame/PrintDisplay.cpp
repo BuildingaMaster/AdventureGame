@@ -3,6 +3,8 @@
 
 #ifndef _WIN32
 #include <ncurses.h>
+#include <locale.h>
+
 #else
 #include <conio.h>
 #define getch() _getwch()
@@ -348,5 +350,117 @@ void PrintDisplay::pause()
     readCH();
     PrintDisplay::custom_cout << "\n";
     PrintDisplay::no_effect_flush();
+}
+
+bool PrintDisplay::hitScreen(int MAX_RED)
+{
+    // Tell player how this works.
+    PrintDisplay::custom_cout << "Strike with any key when Green!" << '\n';
+    PrintDisplay::no_effect_flush();
+    
+    // Number of lines allowed
+    int TOTAL_LINE = 25;
+    //int MAX_RED = 20;
+
+    // Pre-write the colors,
+    // this prevents the terminal from being overwritten with collor
+    for (int i = 0; i<MAX_RED; i++) 
+    {
+            // Space, then go back
+            PrintDisplay::custom_cout << ' ' << '\b';
+            PrintDisplay::no_effect_flush();
+
+            // Red Background
+            cout << "\033[41m" << std::flush; // Red BG
+            PrintDisplay::custom_cout << ' ';
+            PrintDisplay::no_effect_flush();
+
+            // No Background
+            cout << "\033[0m" << std::flush; // Clear BG
+            PrintDisplay::no_effect_flush();
+    }
+    for (int i = 0; i<(TOTAL_LINE-MAX_RED); i++) 
+    {
+            // Space, then go back
+            PrintDisplay::custom_cout << ' ' << '\b';
+            PrintDisplay::no_effect_flush();
+
+            // Bright Green Background 
+            cout << "\033[102m" << std::flush; // Bright Green BG
+            PrintDisplay::custom_cout << ' ';
+            PrintDisplay::no_effect_flush();
+            cout << "\033[0m" << std::flush; // Clear BG
+            PrintDisplay::no_effect_flush();
+    }
+
+    // Add an extra space 
+    // Prevents the whole terminal from being colored.
+    PrintDisplay::custom_cout << ' ';
+    PrintDisplay::no_effect_flush();
+    PrintDisplay::custom_cout << "\r";
+    PrintDisplay::no_effect_flush();
+
+    int a = 0;
+
+    // Instead of waiting for the system to get a key press
+    // We want to know if a key press happens every ~50ms.
+    // If not, it returns nothing (or null)
+    nodelay(stdscr, TRUE);
+
+    // If the user doesn't type anything,
+    // continue the loop
+    while (getch() == ERR) // AKA: The user didn't press a key.
+    {
+        if (a > (MAX_RED-1)) // Cursor on green
+        {
+            cout << "\033[102m" << std::flush;
+            PrintDisplay::custom_cout << ' ';
+            PrintDisplay::no_effect_flush();
+            //cout << "\033[0m" << std::flush;
+            PrintDisplay::no_effect_flush();
+        }
+
+        else // Cursor on red
+        {
+            cout << "\033[41m" << std::flush;
+            PrintDisplay::custom_cout << ' ';
+            PrintDisplay::no_effect_flush();
+            //cout << "\033[0m" << std::flush;
+            PrintDisplay::no_effect_flush();
+        }
+        a++; // Move to next block
+        if (a>TOTAL_LINE-1) // Go back to the start.
+        {
+            cout << "\033[0m" << std::flush;
+            PrintDisplay::custom_cout << "\r";
+            PrintDisplay::no_effect_flush();
+            a=0;
+        }
+        this_thread::sleep_for(chrono::milliseconds(50)); // Pause by 50ms
+    }
+    // Return to the regular character waiting mode.
+    nodelay(stdscr, FALSE);
+
+    // Hit marker: on the current space, color the background grey.
+    cout << "\033[48;5; 252m" << std::flush;
+    PrintDisplay::custom_cout << "#";
+    PrintDisplay::no_effect_flush();
+
+    // Stop coloring.
+    cout << "\033[0m" << std::flush;
+    
+    bool hitLanded = false;
+    if (a < MAX_RED)
+    {
+        PrintDisplay::custom_cout << "\nYou MISSED!\n";
+        hitLanded = false;
+    }
+    else
+    {
+        PrintDisplay::custom_cout << "\nNice hit!\n";
+        hitLanded = true;
+    } 
+    PrintDisplay::no_effect_flush();
+    return hitLanded;
 }
 

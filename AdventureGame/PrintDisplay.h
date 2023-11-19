@@ -34,6 +34,11 @@ public:
         /// @brief Displays "Press any key to continue . . ."
         static void pause();
 
+        /// @brief Displays the HitUI 
+        /// @param MAX_RED How many red tiles to show (less than 24)
+        /// @return If the hit succeeded.
+        static bool hitScreen(int);
+
 #ifdef GTESTING
         static std::string GT_inStr;
 
