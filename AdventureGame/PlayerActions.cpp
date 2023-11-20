@@ -17,6 +17,7 @@ PlayerActions::PlayerActions()
     healthMGR = BaseHealth(PLAYER_HEALTH);
     playerIsHigh = false;
     stepsUntilNotHigh = 0;
+    firstTimePlayerAttacks = true;
 }
 
 bool PlayerActions::processCommand(vector<string> args)
@@ -224,4 +225,15 @@ bool PlayerActions::playAgain()
     }
     return runItBack;
 }
+
+bool PlayerActions::checkAndFlipFirstAttack()
+{
+    bool r = firstTimePlayerAttacks;
+    if (r == true)
+    {
+        firstTimePlayerAttacks = false;
+    }
+    return r;
+}
+
 

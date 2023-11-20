@@ -354,6 +354,40 @@ void PrintDisplay::pause()
 
 bool PrintDisplay::hitScreen(int MAX_RED)
 {
+    // The tutorial, only happens when first triggered.
+    if (CommonGameObjects::PAManager->checkAndFlipFirstAttack())
+    {
+        PrintDisplay::custom_cout << "\nTime to attack!\n";
+
+        PrintDisplay::custom_cout << "Wait until the cursor is over ";
+
+        // Made this text have a Green background.
+        PrintDisplay::no_effect_flush();
+        cout << "\033[102m" << std::flush; // BG Green
+        //PrintDisplay::no_effect_flush();
+        PrintDisplay::custom_cout << "the green bar";
+        PrintDisplay::no_effect_flush();
+        cout << "\033[0m" << std::flush; // BG None
+        
+        PrintDisplay::custom_cout << " to attack.\n";
+
+        PrintDisplay::custom_cout << "When that happens, press any key to launch your attack!\n";
+
+        PrintDisplay::custom_cout << "\nIf your cursor is on a ";
+
+        // Made this text have a Red background with white-ish text.
+        PrintDisplay::no_effect_flush();
+        cout << "\033[41m" << std::flush; // BG Red
+        cout << "\033[37m" << std::flush; // FG White
+        PrintDisplay::custom_cout << "red tile";
+        PrintDisplay::no_effect_flush();
+        cout << "\033[0m" << std::flush;  // BG+FG None
+
+        PrintDisplay::custom_cout << ", you missed, and will be vulnerable.\n";
+        PrintDisplay::custom_cout << "Good luck, and don't die on the first hit!\n";
+        PrintDisplay::pause();
+    }
+    
     // Tell player how this works.
     PrintDisplay::custom_cout << "Strike with any key when Green!" << '\n';
     PrintDisplay::no_effect_flush();
