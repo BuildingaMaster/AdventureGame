@@ -11,6 +11,7 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <regex>
 
 #ifdef GTESTING
 std::string PrintDisplay::GT_inStr = "";
@@ -64,11 +65,11 @@ void printToScreen(string str)
 {
 #if !defined _WIN32 && !defined GTESTING
     refresh();
-    printw("%s", str.c_str());
-    refresh();
-#else
-    std::cout << str << std::flush;
+    string temp(str);
+    str.clear();
+    regex_replace(back_inserter(str),temp.begin(),temp.end(),regex("\\n"),"\n\r");
 #endif
+    std::cout << str << std::flush;
 }
 
 void PrintDisplay::common_flush(bool forceNormal)
@@ -109,11 +110,7 @@ void clear(const string &command)
 {
     PrintDisplay::custom_cout << "\r";
     PrintDisplay::no_effect_flush();
-#ifndef _WIN32
-    clrtobot();
-#else
     cout << "\033[0J" << std::flush;
-#endif  
     PrintDisplay::custom_cout << "> " << command;
     PrintDisplay::no_effect_flush();
 }
@@ -331,9 +328,6 @@ string PrintDisplay::inputValidation(bool noHistory)
             // Print the new line
             PrintDisplay::custom_cout << ch;
             PrintDisplay::no_effect_flush();
-            // Print carriage return.
-            PrintDisplay::custom_cout << "\r";
-            PrintDisplay::no_effect_flush();
         }
     }
     // At this point, the user wants to submit a command.
@@ -350,7 +344,7 @@ void PrintDisplay::pause()
 {
     PrintDisplay::custom_cout << "\nPress any key to continue . . .";
     PrintDisplay::no_effect_flush();
-    getch();
+    readCH();
     PrintDisplay::custom_cout << "\n";
     PrintDisplay::no_effect_flush();
 }
