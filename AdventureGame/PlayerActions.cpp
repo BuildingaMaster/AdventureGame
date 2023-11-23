@@ -18,6 +18,7 @@ PlayerActions::PlayerActions()
     playerIsHigh = false;
     stepsUntilNotHigh = 0;
     firstTimePlayerAttacks = true;
+    firstTimePlayerDodges = true;
 }
 
 bool PlayerActions::processCommand(vector<string> args)
@@ -232,6 +233,16 @@ bool PlayerActions::checkAndFlipFirstAttack()
     if (r == true)
     {
         firstTimePlayerAttacks = false;
+    }
+    return r;
+}
+
+bool PlayerActions::checkAndFlipFirstDodge()
+{
+    bool r = firstTimePlayerDodges;
+    if (r == true)
+    {
+        firstTimePlayerDodges = false;
     }
     return r;
 }

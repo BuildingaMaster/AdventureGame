@@ -39,6 +39,13 @@ public:
         /// @return If the hit succeeded.
         static bool hitScreen(int);
 
+        /// @brief Displays the DodgeUI 
+        /// @return If the player dodged.
+        static bool dodgeScreen();
+
+        /// @brief Print a cool looking box.
+        static void printMoveBox(bool, bool, bool, bool);
+
 #ifdef GTESTING
         static std::string GT_inStr;
 
