@@ -33,6 +33,19 @@
 
 using namespace std;
 
+#ifdef _WIN32
+// https://stackoverflow.com/questions/23471873/change-console-code-page-in-windows-c/55171823#55171823
+class UTF8CodePage {
+public:
+    UTF8CodePage() : m_old_code_page(::GetConsoleOutputCP()) {
+        ::SetConsoleOutputCP(CP_UTF8);
+    }
+    ~UTF8CodePage() { ::SetConsoleOutputCP(m_old_code_page); }
+
+private:
+    UINT m_old_code_page;
+};
+#endif // _WIN32
 
 
 int main()
@@ -50,6 +63,9 @@ int main()
     cout << "\033[?2006h"<<flush; // Enable readline newline pasting
 #endif //GTESTING
 #else
+    UTF8CodePage use;
+   
+    PrintDisplay::no_effect_flush();
     // Set output mode to handle virtual terminal sequences,
     // From https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
