@@ -561,7 +561,7 @@ bool PrintDisplay::dodgeScreen()
         PrintDisplay::custom_cout << "When this box appears:\n";
         PrintDisplay::no_effect_flush();
 
-        PrintDisplay:printMoveBox(false,false,false,false); // Just an empty box. 
+        PrintDisplay::printMoveBox(false,false,false,false); // Just an empty box. 
         
         PrintDisplay::custom_cout << "\nPress any arrow key to dodge the attack.\n";
         PrintDisplay::custom_cout << "However, If the box is colored ";
@@ -637,21 +637,40 @@ bool PrintDisplay::dodgeScreen()
     flushinp();
     while ((ch = readCH()) && ch == ERR && initTime >= chrono::duration_cast< chrono::milliseconds >(chrono::system_clock::now().time_since_epoch())); // AKA: The user didn't press a key.
 #else
-    // TODO clear buffer for windows
+    // Windows doesn't really have a way to flush anything from readCH().
+    // But we can see if the keyboard was hit when the thread was paused,
+    // And manually remove characters by reading/ignoring them.
+    while (_kbhit())
+    {
+        readCH();
+    }
     while(!_kbhit() && initTime >= chrono::duration_cast< chrono::milliseconds >(chrono::system_clock::now().time_since_epoch())); // AKA: The user didn't press a key.
 #endif
 
 // Times up or user entered a key.
 
 #ifdef _WIN32
-    // Get the character.
-    //ch = getch();
-    ch = readCH(); //Get Scan code
-    if (ch != -32) // Not a arrow key.
+    // Get the character, if there is one.
+    if (_kbhit() == true) 
     {
-        return false; // Did not press a valid key dodge failed.
+        ch = readCH(); //Get Scan code
     }
-    ch = readCH(); // Get Key
+
+    if (ch == -32) // Not a arrow key.
+    {
+        ch = readCH(); // Get Key
+    }
+    // For some reason, readCH DOES return ANSI escape codes for some reason.
+    // Maybe it has something to do with _kbhit()?
+    else if (ch == '\x1b' && readCH() == '[') //ANSI escape code
+    {
+        ch = readCH();
+    }
+    else
+    {
+        ch = 0; // Did not press a valid key dodge failed.
+    }
+    
 #else 
     // Return to the regular character waiting mode.
     nodelay( stdscr, FALSE);
@@ -660,59 +679,59 @@ bool PrintDisplay::dodgeScreen()
 
 // Where did the player dodge to?
 #ifdef _WIN32
-        if (ch == 'K' && attackedat != 1) // Left arrow key
+    if (( ch == 'D' || ch == 'K') && attackedat != 1) // Left arrow key
 #else
-        if (ch == '\x04'  && attackedat != 1) // Left arrow key
+    if (ch == '\x04'  && attackedat != 1) // Left arrow key
         
 #endif
-        {
-            PrintDisplay::custom_cout <<"Left arrow key\n";
-            PrintDisplay::custom_cout <<"You dodged the attack!\n";
-            PrintDisplay::no_effect_flush();
-            return true;
-        }
+    {
+        PrintDisplay::custom_cout <<"Left arrow key\n";
+        PrintDisplay::custom_cout <<"You dodged the attack!\n";
+        PrintDisplay::no_effect_flush();
+        return true;
+    }
 #ifdef _WIN32
-        else if (ch == 'M' && attackedat != 2) // Right arrow key
+    else if ((ch == 'C' || ch == 'M') && attackedat != 2) // Right arrow key
 #else
-        else if (ch == '\x05' && attackedat != 2) // Right arrow key
+    else if (ch == '\x05' && attackedat != 2) // Right arrow key
 #endif
-        {
-            PrintDisplay::custom_cout << "Right arrow key\n";
-            PrintDisplay::custom_cout << "You dodged the attack!\n";
-            PrintDisplay::no_effect_flush();
-            return true;
-        }
+    {
+        PrintDisplay::custom_cout << "Right arrow key\n";
+        PrintDisplay::custom_cout << "You dodged the attack!\n";
+        PrintDisplay::no_effect_flush();
+        return true;
+    }
 #ifdef _WIN32
-        else if (ch == 'H') // Up arrow key
+    else if (ch == 'A' || ch == 'H') // Up arrow key
 #else
-        else if (ch == '\x03') // Up arrow key
+    else if (ch == '\x03') // Up arrow key
 #endif
-        {
-            PrintDisplay::custom_cout << "You moved toward the enemy, and definitely got hit.\n";
-            PrintDisplay::no_effect_flush();
-            return false;
-        }
+    {
+        PrintDisplay::custom_cout << "You moved toward the enemy, and definitely got hit.\n";
+        PrintDisplay::no_effect_flush();
+        return false;
+    }
 #ifdef _WIN32
-        else if (ch == 'P' && attackedat != 0) // Down arrow key
+    else if ((ch == 'B' || ch == 'P') && attackedat != 0) // Down arrow key
 #else
-        else if (ch == '\x02' && attackedat != 0) // Down arrow key
+    else if (ch == '\x02' && attackedat != 0) // Down arrow key
 #endif
-        {
-            PrintDisplay::custom_cout << "Down arrow key\n";
-            PrintDisplay::custom_cout << "You dodged the attack!\n";
-            PrintDisplay::no_effect_flush();
-            return true;
-        }
+    {
+        PrintDisplay::custom_cout << "Down arrow key\n";
+        PrintDisplay::custom_cout << "You dodged the attack!\n";
+        PrintDisplay::no_effect_flush();
+        return true;
+    }
+
     if (ch == -1 || ch == 0)
     {
         PrintDisplay::custom_cout << "You stood still and took the hit.\n";
-        PrintDisplay::no_effect_flush();
     }
     else
     {
         PrintDisplay::custom_cout << "You got hit from the attack!\n";
-        PrintDisplay::no_effect_flush();
     }
+    PrintDisplay::no_effect_flush();
     return false;
 }
 
