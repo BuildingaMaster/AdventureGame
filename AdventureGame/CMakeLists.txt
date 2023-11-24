@@ -8,6 +8,7 @@ add_executable(AdventureGame
     Inventory.cpp 
     Item.cpp 
     Location.cpp
+    NPC.cpp
     PlayerActions.cpp
     PrintDisplay.cpp
 )

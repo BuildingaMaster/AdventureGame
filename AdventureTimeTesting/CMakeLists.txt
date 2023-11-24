@@ -7,6 +7,7 @@ add_executable(AdventureTimeTesting
     ../AdventureGame/Inventory.cpp 
     ../AdventureGame/Item.cpp 
     ../AdventureGame/Location.cpp
+    ../AdventureGame/NPC.cpp
     ../AdventureGame/PlayerActions.cpp
     ../AdventureGame/PrintDisplay.cpp
 )
