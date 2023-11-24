@@ -687,7 +687,7 @@ class gui(mainwindow_ui.Ui_MainWindow, QMainWindow):
             temp.pop("roomDef")
             wsSave["data"].append(temp)
         with open(loc, "w") as ws:
-            json.dump(wsSave,ws)
+            json.dump(wsSave,ws,indent=4)
         self.setWindowTitle(f"MasterForge - {file_info.fileName()}")
         self.hasUnsavedChanges = False
         self.ui.actionClose.setDisabled(False)
