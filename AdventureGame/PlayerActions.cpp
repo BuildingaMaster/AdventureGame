@@ -40,6 +40,11 @@ bool PlayerActions::processCommand(vector<string> args)
         PrintDisplay::flush();
         return true;
     }
+    else if (args[0] == "check" && args[1]  == "inventory")
+    {
+        CommonGameObjects::INManager->listInventory();
+        return true;
+    }
     string entityName = "";
 
     for (int i = 1; i<args.size(); i++)
