@@ -297,7 +297,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 8,
             "AltRoomDesc": "You see a northern castle far in the distance.\nThis path north is guarded by a large group of knights.\nThere are too many in the way.",
             "X": 863.0,
             "Y": 244.0
