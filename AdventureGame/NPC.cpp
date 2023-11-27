@@ -33,11 +33,7 @@ bool NPCManager::init()
         {
             NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("wolf", 3));
         }
-    }
-    for (auto const& x : locationManager::locationMap)
-    {
-        NPCMap.insert(std::pair<int, vector<NPC*>>(x.first, vector<NPC*>()));
-        if (x.second->hasAttribute(x.second->KNIGHT_IN_ROOM))
+        else if (x.second->hasAttribute(x.second->KNIGHT_IN_ROOM))
         {
             NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("knight", 4));
         }
