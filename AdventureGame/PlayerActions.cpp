@@ -98,7 +98,7 @@ bool PlayerActions::processCommand(vector<string> args)
                     PrintDisplay::flush();
                     if (knight->isDead())
                     {
-                        PrintDisplay::custom_cout << "The knight is dead.\n";
+                        PrintDisplay::custom_cout << "The knight has been defeated.\n";
                         PrintDisplay::flush();
                     }
                 }
@@ -112,7 +112,7 @@ bool PlayerActions::processCommand(vector<string> args)
             }
             else
             {
-                PrintDisplay::custom_cout << "\nYou have already defeated the knight. Move on to finish your jounrey to the princess\n";
+                PrintDisplay::custom_cout << "\nYou have already defeated the knight. Move on to finish your journey to the princess.\n";
                 PrintDisplay::flush();
                 return false;
             }
