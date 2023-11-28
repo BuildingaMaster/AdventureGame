@@ -85,6 +85,39 @@ bool PlayerActions::processCommand(vector<string> args)
             }
         }
     }
+    else if (args[0] == "hit" && args[1] == "knight")
+    {
+        if (NPCManager::scanForNPC(args[1]))
+        {
+            NPC* knight = NPCManager::returnNPC(args[1]);
+            if (!knight->isDead())
+            {
+                if (knight->takeDamage(1))
+                {
+                    PrintDisplay::custom_cout << "\nYou hit the knight. It has " << knight->getLives() << " lives remaining.\n";
+                    PrintDisplay::flush();
+                    if (knight->isDead())
+                    {
+                        PrintDisplay::custom_cout << "The knight has been defeated.\n";
+                        PrintDisplay::flush();
+                    }
+                }
+                else
+                {
+                    PrintDisplay::custom_cout << "\nYou hit the knight, but it still has " << knight->getLives() << " lives remaining.\n";
+                    PrintDisplay::flush();
+                }
+                PrintDisplay::flush();
+                return true;
+            }
+            else
+            {
+                PrintDisplay::custom_cout << "\nYou have already defeated the knight. Move on to finish your journey to the princess.\n";
+                PrintDisplay::flush();
+                return false;
+            }
+        }
+    }
 
     // Nothing else to do.
     PrintDisplay::custom_cout << "\nYou can't " << args[0] << " that!\n";

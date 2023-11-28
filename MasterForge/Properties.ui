@@ -321,7 +321,7 @@
           <item row="4" column="0">
            <widget class="QCheckBox" name="Option4Check">
             <property name="text">
-             <string>Option 4</string>
+             <string>Knight in room</string>
             </property>
            </widget>
           </item>

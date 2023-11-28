@@ -360,7 +360,7 @@ class Ui_Dialog(object):
         self.Option6Check.setText(QCoreApplication.translate("Dialog", u"Option 6", None))
         self.Option5Check.setText(QCoreApplication.translate("Dialog", u"Option 5", None))
         self.Option1Check.setText(QCoreApplication.translate("Dialog", u"Apples in room", None))
-        self.Option4Check.setText(QCoreApplication.translate("Dialog", u"Option 4", None))
+        self.Option4Check.setText(QCoreApplication.translate("Dialog", u"Knight in room", None))
         self.Option7Check.setText(QCoreApplication.translate("Dialog", u"Option 7", None))
         self.Extended.setTitle(QCoreApplication.translate("Dialog", u"Extended", None))
         self.EnabledCombo.setItemText(0, QCoreApplication.translate("Dialog", u"Instant Kill Room", None))
