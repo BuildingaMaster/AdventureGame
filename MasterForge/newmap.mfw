@@ -42,7 +42,7 @@
             "W": 31,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 1,
             "AltRoomDesc": "So many apples on this tree, better take some.",
             "X": 353.0,
             "Y": 249.0
@@ -387,7 +387,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 256,
             "AltRoomDesc": "How is this even possible? You should be dead.",
             "X": 735.0,
             "Y": 431.0
@@ -417,7 +417,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 256,
             "AltRoomDesc": "YOUR SOUL IS MINE!",
             "X": 415.0,
             "Y": 249.0
