@@ -142,6 +142,11 @@ string PrintDisplay::inputValidation(bool noHistory)
             isScanCode = true;
             ch = readCH(); // Should be a keycode or arrow key
         }
+        else if (ch == '\x1b' && readCH() == '[') //ANSI escape code, could happen if input is very fast
+        {
+            ch = readCH();
+            isScanCode = true;
+        }
 #endif
 
 #ifdef _WIN32
@@ -174,7 +179,7 @@ string PrintDisplay::inputValidation(bool noHistory)
             
         }
 #ifdef _WIN32
-        else if (ch == 'K' && isScanCode == true) // Left arrow key
+        else if ((ch == 'D' || ch == 'K') && isScanCode == true) // Left arrow key
 #else
 
         else if (ch == '\x04') // Left arrow key
@@ -193,7 +198,7 @@ string PrintDisplay::inputValidation(bool noHistory)
             continue;
         }
 #ifdef _WIN32
-        else if (ch == 'M' && isScanCode == true) // Right arrow key
+        else if ((ch == 'C' || ch == 'M') && isScanCode == true) // Right arrow key
 #else
         else if (ch == '\x05') // Right arrow key
 #endif
@@ -210,7 +215,7 @@ string PrintDisplay::inputValidation(bool noHistory)
             continue;
         }
 #ifdef _WIN32
-        else if (ch == 'H' && isScanCode == true) // Up arrow key
+        else if ((ch == 'A' || ch == 'H') && isScanCode == true) // Up arrow key
 #else
         else if (ch == '\x03') // Up arrow key
 #endif
@@ -235,7 +240,7 @@ string PrintDisplay::inputValidation(bool noHistory)
             continue;
         }
 #ifdef _WIN32
-        else if (ch == 'P' && isScanCode == true) // Down arrow key
+        else if ((ch == 'B' || ch == 'P') && isScanCode == true) // Down arrow key
 #else
         else if (ch == '\x02') // Down arrow key
 #endif
