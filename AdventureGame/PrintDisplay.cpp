@@ -41,13 +41,16 @@ using namespace std;
 std::ostringstream PrintDisplay::custom_cout;
 std::vector<std::string> PrintDisplay::commandHistory;
 std::vector<std::string> PrintDisplay::logCommandVector;
+std::vector<char> PrintDisplay::characterLogger;
 
 char readCH()
 {
 #ifdef GTESTING
         return PrintDisplay::GT_getch();
 #else
-        return getch();
+        char t = getch();
+        PrintDisplay::characterLogger.insert(PrintDisplay::characterLogger.end(),t);
+        return t;
 #endif
 }
 

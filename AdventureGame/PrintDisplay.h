@@ -31,6 +31,9 @@ public:
         /// @brief A log of the commands the player typed (for debugging).
         static std::vector<std::string> logCommandVector;
 
+        /// @brief Characters typed for debugging
+        static std::vector<char> characterLogger;
+
         /// @brief Displays "Press any key to continue . . ."
         static void pause();
 

@@ -191,15 +191,23 @@ int main()
 
     // Save the commands to a file.
     ofstream cmdHistoryFile;
+    ofstream charHistoryFile;
     cmdHistoryFile.open("command_history.txt");
+    charHistoryFile.open("char_history.txt");
     cmdHistoryFile << starttime << "\n";
     for (uint64_t i = 0; i< PrintDisplay::logCommandVector.size(); i++)
     {
         cmdHistoryFile << PrintDisplay::logCommandVector[PrintDisplay::logCommandVector.size()-1-i] << "\n";
     }
     cmdHistoryFile.close();
+    for (auto data : PrintDisplay::characterLogger)
+    {
+        charHistoryFile << data;
+    }
+    charHistoryFile.close();
     PrintDisplay::commandHistory.clear();
     PrintDisplay::logCommandVector.clear();
+    PrintDisplay::characterLogger.clear();
 #ifndef _WIN32
     // End curses control. 
     endwin();
