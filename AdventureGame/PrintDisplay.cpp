@@ -149,11 +149,7 @@ string PrintDisplay::inputValidation(bool noHistory)
         }
 #endif
 
-#ifdef _WIN32
-        if (ch == '\b') // Captured backspace
-#else
-        if (ch == '\x7f') // Captured backspace
-#endif
+        if (ch == '\b' || ch == '\x7f') // Captured backspace
         {
             if (interator == -1) // We are at the start of the prompt, dont do anything.
             {
@@ -172,9 +168,9 @@ string PrintDisplay::inputValidation(bool noHistory)
             // Clear screen from cursor down
             clear(command);
 
-            cout << "\0338"<< std::flush; //Save cursor Position
+            cout << "\0338"<< std::flush; //Restore cursor Position
             // Delay the terminal for about 10ms
-            this_thread::sleep_for(chrono::milliseconds(30));
+            this_thread::sleep_for(chrono::milliseconds(20));
             continue;
             
         }
