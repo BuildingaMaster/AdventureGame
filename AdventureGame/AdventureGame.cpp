@@ -127,6 +127,7 @@ int main()
 #endif
     time_t starttime = time(0);
     srand(starttime);
+    NPCManager NPCman();
     if (locationManager::init() == false || NPCManager::init() == false)
     {
         locationManager::deinit();

@@ -73,6 +73,13 @@ bool PlayerActions::processCommand(vector<string> args)
                 {
                     PrintDisplay::custom_cout << "\nYou hit the wolf, but it still has " << wolf->getLives() << " lives remaining.\n";
                     PrintDisplay::flush();
+                    if (wolf->isHostile)
+                    {
+                        PrintDisplay::custom_cout << "And the wolf attacks you back!\n";
+                        this->hurtPlayer(1);
+                        PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
+                        PrintDisplay::flush();
+                    }
                 }
                 PrintDisplay::flush();
                 return true;
@@ -106,6 +113,13 @@ bool PlayerActions::processCommand(vector<string> args)
                 {
                     PrintDisplay::custom_cout << "\nYou hit the knight, but it still has " << knight->getLives() << " lives remaining.\n";
                     PrintDisplay::flush();
+                    if (knight->isHostile)
+                    {
+                        PrintDisplay::custom_cout << "And the knight attacks you back!\n";
+                        this->hurtPlayer(1);
+                        PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
+                        PrintDisplay::flush();
+                    }
                 }
                 PrintDisplay::flush();
                 return true;

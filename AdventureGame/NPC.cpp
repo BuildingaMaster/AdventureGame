@@ -4,6 +4,8 @@
 #include <map>
 #include "NPC.h"
 #include "Location.h"
+#include "PlayerActions.h"
+#include "PrintDisplay.h"
 
 using namespace std;
 
@@ -11,10 +13,6 @@ NPC::NPC(string npcname, int initialLives, bool hostile) : health(initialLives) 
 
 bool NPC::takeDamage(int damage) 
 {
-    if (isHostile && health.checkHP()>1)
-    {
-        // 
-    }
     return health.removeHP(damage);
 }
 
