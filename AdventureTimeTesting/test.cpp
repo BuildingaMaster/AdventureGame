@@ -100,6 +100,15 @@ namespace
         EXPECT_EQ(output, "\nFor some reason, you hit yourself.\nYou can withstand 2 more hits.\n");
         EXPECT_EQ(playeract.checkPlayerHealth(),2);
     }
+    TEST_F(HitTest, NPCHitBack)
+    {
+        NPCManager::init();
+        while (!CP->interpretCommand("hit wolf"))
+        {
+            CP->interpretCommand("north");
+        }
+        EXPECT_EQ(playeract.checkPlayerHealth(), 2);
+    }
 
     class CPTest : public testing::Test {
         protected:
