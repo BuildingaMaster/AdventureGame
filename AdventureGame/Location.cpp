@@ -107,7 +107,8 @@ void Location::printLocation()
 			PrintDisplay::flush();
 		}
 	}
-	cout << timeDescription << endl;
+	PrintDisplay::custom_cout << timeDescription << endl;
+	PrintDisplay::flush();
 
 }
 
@@ -388,6 +389,8 @@ bool locationManager::init()
 
     // Set the starting location to the player location and print the description
 	locationManager::currentLocation = locationManager::locationMap[1];
+	descBytes.clear();
+	mapBytes.clear();
 	return true;
 }
 

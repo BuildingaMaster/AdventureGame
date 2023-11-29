@@ -193,6 +193,7 @@ bool PlayerActions::playAgain()
         // Goodbye quote
         PrintDisplay::custom_cout << "\nThe difference between the master and the student is that the master has failed far more times than the student.\n";
         PrintDisplay::no_effect_flush();
+        PrintDisplay::pause();
     }
     return runItBack;
 }

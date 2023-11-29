@@ -94,6 +94,24 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
 
 bool ContextParser::yesNoPrompt()
 {
+    string command;
+    do
+    {
+        PrintDisplay::custom_cout << "\nYes or no?\n> ";
+        PrintDisplay::no_effect_flush();
+        command = PrintDisplay::inputValidation(true);
+        if (command == "yes" || command == "y" || command == "ye")
+        {
+            PrintDisplay::commandHistory.insert(PrintDisplay::commandHistory.begin(), command);
+            return CPResponse::Response::YES;
+        }
+        else if (command == "no" || command == "n")
+        {
+            PrintDisplay::commandHistory.insert(PrintDisplay::commandHistory.begin(), command);
+            return CPResponse::Response::NO;
+        }
+    }while (true);
+    /*
     string unfilteredCommand;
     string command;
     bool validInput = false;
@@ -123,5 +141,5 @@ bool ContextParser::yesNoPrompt()
         {
             return CPResponse::Response::NO;
         }
-    } while (true);
+    } while (true);*/
 }

@@ -8,6 +8,16 @@
 #include <istream>
 #include <ctime>
 #include <random>
+#include <stdio.h>
+
+#include <thread>
+#include <chrono>
+
+#ifndef _WIN32
+#include <ncurses.h>
+#else
+#include <Windows.h>
+#endif
 
 #include "Location.h"
 #include "PlayerActions.h"
@@ -18,18 +28,109 @@
 
 #include "CommonGameObjects.h"
 #include "NPC.h"
-using namespace std;
-
-// Initialize player's inventory object
-
 #include "PrintDisplay.h"
 
+
+using namespace std;
+
+#ifdef _WIN32
+// https://stackoverflow.com/questions/23471873/change-console-code-page-in-windows-c/55171823#55171823
+class UTF8CodePage {
+public:
+    UTF8CodePage() : m_old_code_page(::GetConsoleOutputCP()) {
+        ::SetConsoleOutputCP(CP_UTF8);
+    }
+    ~UTF8CodePage() { ::SetConsoleOutputCP(m_old_code_page); }
+
+private:
+    UINT m_old_code_page;
+};
+#endif // _WIN32
+
+
 int main()
-{
-    srand(time(0));
+{    
+#ifndef _WIN32
+#ifndef GTESTING
+    // Curses initalization.
+
+    initscr();                    // Start curses
+    keypad(stdscr, TRUE);         //Capture all keys
+    noecho();                     // Dont echo keypresses, PrintDisplay handles it.
+    scrollok(stdscr, TRUE);       // Scrolling is OK
+    cout << "\033[?47l"<<flush;   // Normal Screen Buffer
+    cout << "\033[?20l"<<flush;   // New line
+    cout << "\033[?2006h"<<flush; // Enable readline newline pasting
+#endif //GTESTING
+#else
+    UTF8CodePage use;
+   
+    PrintDisplay::no_effect_flush();
+    // Set output mode to handle virtual terminal sequences,
+    // From https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hOut == INVALID_HANDLE_VALUE)
+    {
+        cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
+        return false;
+    }
+    HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
+    if (hIn == INVALID_HANDLE_VALUE)
+    {
+        cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
+        return false;
+    }
+
+    DWORD dwOriginalOutMode = 0;
+    DWORD dwOriginalInMode = 0;
+    if (!GetConsoleMode(hOut, &dwOriginalOutMode))
+    {
+        cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
+        return false;
+    }
+    if (!GetConsoleMode(hIn, &dwOriginalInMode))
+    {
+        cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
+        return false;
+    }
+
+    DWORD dwRequestedOutModes = ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN;
+    DWORD dwRequestedInModes = ENABLE_VIRTUAL_TERMINAL_INPUT;
+
+    DWORD dwOutMode = dwOriginalOutMode | dwRequestedOutModes;
+    if (!SetConsoleMode(hOut, dwOutMode))
+    {
+        // we failed to set both modes, try to step down mode gracefully.
+        dwRequestedOutModes = ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+        dwOutMode = dwOriginalOutMode | dwRequestedOutModes;
+        if (!SetConsoleMode(hOut, dwOutMode))
+        {
+            // Failed to set any VT mode, can't do anything here.
+            cout << "An error occurred, please try rerunning the app." << endl;
+            PrintDisplay::pause();
+            return -1;
+        }
+    }
+
+    DWORD dwInMode = dwOriginalInMode | dwRequestedInModes;
+    if (!SetConsoleMode(hIn, dwInMode))
+    {
+        // Failed to set VT input mode, can't do anything here.
+        cout << "An error occurred, please try rerunning the app." << endl;
+        PrintDisplay::pause();
+        return -1;
+    }
+#endif
+    time_t starttime = time(0);
+    srand(starttime);
     if (locationManager::init() == false || NPCManager::init() == false)
     {
         locationManager::deinit();
+        PrintDisplay::pause();
         return 1;
     }
 
@@ -63,8 +164,10 @@ int main()
             }
             PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
             PrintDisplay::no_effect_flush();
-            getline(cin, command);
-            cin.clear();
+
+            // Handle Input, 
+            command = PrintDisplay::inputValidation(false);
+
             // This is temporary, and needs to have CP logic
             if (command == "quit")
             {
@@ -74,10 +177,33 @@ int main()
             // TODO: how do we restart the game? not make it a harsh exit of the game 
             validInput = CP.interpretCommand(command);
         } while (validInput == false);
+        
+        // If there is no history, or the most recent command is not the newest one..
+        if (PrintDisplay::commandHistory.empty() == true || PrintDisplay::commandHistory[0] != command)
+        {
+            // Add it to the history.
+            PrintDisplay::commandHistory.insert(PrintDisplay::commandHistory.begin(),command);   
+        }
         playeract.decrementMovingHigh();
     } while (stay);
 
     locationManager::deinit();
+
+    // Save the commands to a file.
+    ofstream cmdHistoryFile;
+    cmdHistoryFile.open("command_history.txt");
+    cmdHistoryFile << starttime << "\n";
+    for (uint64_t i = 0; i< PrintDisplay::logCommandVector.size(); i++)
+    {
+        cmdHistoryFile << PrintDisplay::logCommandVector[PrintDisplay::logCommandVector.size()-1-i] << "\n";
+    }
+    cmdHistoryFile.close();
+    PrintDisplay::commandHistory.clear();
+    PrintDisplay::logCommandVector.clear();
+#ifndef _WIN32
+    // End curses control. 
+    endwin();
+#endif    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
