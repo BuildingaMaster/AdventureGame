@@ -259,7 +259,7 @@ namespace
         EXPECT_TRUE(CP->interpretCommand("eat apple"));
         string output = testing::internal::GetCapturedStdout();
 
-        EXPECT_EQ(output,"\nYou already have max health, are you sure you want to eat the apple?\n\nYes or no?\n> yes\n\r\nYou eat the apple!\n\nYou healed by 1 HP!\n");
+        EXPECT_EQ(output,"\nYou already have max health, are you sure you want to eat the apple?\n\nYes or no?\n> yes\n\nYou eat the apple!\n\nYou healed by 1 HP!\n");
         EXPECT_EQ(playeract.checkPlayerHealth(), playeract.checkMaxPlayerHealth());
 
     }
