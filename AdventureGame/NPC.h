@@ -12,8 +12,9 @@ class NPC {
 private:
     BaseHealth health;
 public:
-    NPC(string name ,int initialLives);
+    NPC(string name ,int initialLives, bool hostile);
     string name;
+    bool isHostile;
     bool takeDamage(int damage);
     bool isDead();
     int getLives();
