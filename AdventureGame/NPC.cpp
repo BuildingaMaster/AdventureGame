@@ -7,6 +7,7 @@
 #include <thread>
 #include <chrono>
 #include "Location.h"
+#include "Princess.h"
 #include "PlayerActions.h"
 #include "PrintDisplay.h"
 #include "CommonGameObjects.h"
@@ -91,6 +92,10 @@ bool NPCManager::init()
         else if (x.second->hasAttribute(x.second->KNIGHT_IN_ROOM))
         {
             NPCMap[x.first].insert(NPCMap[x.first].begin(), new Knight());
+        }
+        else if (x.second->hasAttribute(x.second->PRINCESS_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Princess());
         }
         else if (x.second->hasAttribute(x.second->PRINCESS_IN_ROOM))
         {
