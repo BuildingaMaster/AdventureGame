@@ -77,7 +77,10 @@ bool PlayerActions::processCommand(vector<string> args)
                     {
                         PrintDisplay::custom_cout << "And the wolf attacks you back!\n";
                         this->hurtPlayer(1);
-                        PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
+                        if (this->checkPlayerHealth() != 0)
+                        {
+                            PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
+                        }
                         PrintDisplay::flush();
                     }
                 }
@@ -117,7 +120,10 @@ bool PlayerActions::processCommand(vector<string> args)
                     {
                         PrintDisplay::custom_cout << "And the knight attacks you back!\n";
                         this->hurtPlayer(1);
-                        PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
+                        if (this->checkPlayerHealth() != 0)
+                        {
+                            PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
+                        }
                         PrintDisplay::flush();
                     }
                 }

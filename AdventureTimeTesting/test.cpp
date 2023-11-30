@@ -65,6 +65,7 @@ namespace
         // be empty.
 
         HitTest() {
+            NPCManager::init();
             userInventory = new Inventory(&playeract);
             CommonGameObjects::PAManager = &playeract;
             CP = new ContextParser(userInventory, &playeract);
@@ -74,6 +75,7 @@ namespace
         ~HitTest() override {
             delete CP;
             delete userInventory;
+            NPCManager::deinit();
             // You can do clean-up work that doesn't throw exceptions here.
         }
 
@@ -102,11 +104,8 @@ namespace
     }
     TEST_F(HitTest, NPCHitBack)
     {
-        NPCManager::init();
-        while (!CP->interpretCommand("hit wolf"))
-        {
-            CP->interpretCommand("north");
-        }
+        locationManager::updateCurrentLocation(locationManager::locationMap[23]);
+        CP->interpretCommand("hit wolf");
         EXPECT_EQ(playeract.checkPlayerHealth(), 2);
     }
 

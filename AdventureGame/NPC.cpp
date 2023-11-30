@@ -43,6 +43,19 @@ bool NPCManager::init()
     return true;
 }
 
+void NPCManager::deinit()
+{
+    for (auto &x : NPCMap)
+    {
+        for (auto y : x.second)
+        {
+            delete y;
+        }
+    x.second.clear();
+    }
+    delete &NPCMap;
+}
+
 NPC* NPCManager::returnNPC(string NPCname)
 {
     uint32_t roomID = locationManager::getCurrentLocation()->getLocationID();

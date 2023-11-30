@@ -28,4 +28,5 @@ public:
     static bool scanForNPC(string);
     static map<int, vector<NPC*>> NPCMap;
     static NPC* returnNPC(string);
+    static void deinit();
 };
