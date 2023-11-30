@@ -51,9 +51,9 @@ void NPCManager::deinit()
         {
             delete y;
         }
-    x.second.clear();
+        x.second.clear();
     }
-    delete &NPCMap;
+    NPCMap.clear();
 }
 
 NPC* NPCManager::returnNPC(string NPCname)
