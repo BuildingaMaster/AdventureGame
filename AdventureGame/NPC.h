@@ -19,6 +19,7 @@ public:
     bool takeDamage(int damage);
     bool isDead();
     int getLives();
+    virtual void nothing() {}; // Does nothing
 };
 
 class NPCManager

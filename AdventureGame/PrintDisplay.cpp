@@ -911,3 +911,22 @@ void PrintDisplay::printMoveBox(bool upRed, bool downRed, bool leftRed, bool rig
     PrintDisplay::custom_cout << "\n";
     PrintDisplay::no_effect_flush();
 }
+int PrintDisplay::optionParser(int number_of_args)
+{
+    string temp;
+    int r;
+    regex exp ("\\D");
+    do 
+    {
+        PrintDisplay::custom_cout << "\nPress any key to continue . . .\n";
+        PrintDisplay::no_effect_flush();
+        temp = PrintDisplay::inputValidation(true);
+        if (regex_search(temp,exp))
+        {
+            continue;
+        }
+        r = stoi(temp);
+    } while(r < 0 || r > number_of_args);
+    return r;
+}
+

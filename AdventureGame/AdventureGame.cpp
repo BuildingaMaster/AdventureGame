@@ -28,6 +28,7 @@
 
 #include "CommonGameObjects.h"
 #include "NPC.h"
+#include "Princess.h"
 #include "PrintDisplay.h"
 #include "Potion.h"
 
@@ -163,6 +164,12 @@ int main()
                     break;
                 }
             }
+
+            if (NPCManager::scanForNPC("princess"))
+            {
+                dynamic_cast<Princess&>(*NPCManager::returnNPC("princess")).rizzTime();
+            }
+
             PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
             PrintDisplay::no_effect_flush();
 
