@@ -55,6 +55,9 @@ public:
 
         /// @brief Print a cool looking box.
         static void printMoveBox(bool, bool, bool, bool);
+        /// @brief Select option by numbers
+        /// @param number_of_args How many numbers/options to show
+        static int optionParser(int);
 
 #ifdef GTESTING
         static std::string GT_inStr;

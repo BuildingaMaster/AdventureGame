@@ -137,6 +137,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
+    <ClCompile Include="Princess.cpp" />
     <ClCompile Include="PrintDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="NPC.h" />
     <ClInclude Include="PlayerActions.h" />
+    <ClInclude Include="Princess.h" />
     <ClInclude Include="PrintDisplay.h" />
   </ItemGroup>
   <ItemGroup>

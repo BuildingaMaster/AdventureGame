@@ -4,6 +4,7 @@
 #include <map>
 #include "NPC.h"
 #include "Location.h"
+#include "Princess.h"
 #include "PlayerActions.h"
 #include "PrintDisplay.h"
 
@@ -38,6 +39,10 @@ bool NPCManager::init()
         else if (x.second->hasAttribute(x.second->KNIGHT_IN_ROOM))
         {
             NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("knight", 4, true));
+        }
+        else if (x.second->hasAttribute(x.second->PRINCESS_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Princess());
         }
         else if (x.second->hasAttribute(x.second->DRAGON_IN_ROOM))
         {
