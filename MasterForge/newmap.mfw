@@ -627,7 +627,7 @@
             "W": 43,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 2,
             "AltRoomDesc": "",
             "X": 619.0,
             "Y": 295.0
@@ -650,7 +650,7 @@
         {
             "RoomID": 44,
             "RoomName": "A Voice ",
-            "RoomDesc": "You hear \"HA HA HA HA\" directly above you through the ceiliing.\n\"I know that voice... I hate it! But who's is it?\"\nYou feel before you can find out, you should prepare yourself.\nGet some protection perhaps.",
+            "RoomDesc": "You hear \"HA HA HA HA\" directly above you through the ceiliing.\n\"I know that voice... I hate it! But who's is it?\"\nYou feel before you can find out, you must prepare yourself.\nGet some protection perhaps.",
             "N": 45,
             "S": 43,
             "E": 46,
@@ -665,7 +665,7 @@
         {
             "RoomID": 45,
             "RoomName": "Butler",
-            "RoomDesc": "You try an tip toe around a man cleaning the dishes with a towel. \nYou step on a cracker and the man turns around.\n\"Master!... Wait I've never seen you here... what is your name?\"\n\nDIALOGUE HERE\n\"Master\" name \" it is! I am Geoffrey the Butler! If you need anything holler!\"",
+            "RoomDesc": "You try and tip toe around a man cleaning dishes with a towel. \nYou step on a cracker and the man turns around.\n\"Master!... Wait I've never seen you here... what is your name?\"\n\nDIALOGUE HERE\n\"Master\" name \" it is! I am Geoffrey the Butler! If you need anything holler!\"",
             "N": 0,
             "S": 44,
             "E": 50,
@@ -710,7 +710,7 @@
         {
             "RoomID": 48,
             "RoomName": "MerryXMas",
-            "RoomDesc": "Panting from killing the Ogor, your eye catches the best armour a man could equip.\nThe Diamond Armour reflects the light.\n\"Only Kings and Queens have the money to obtain this\" you state.",
+            "RoomDesc": "Panting from killing the Ogor, your eye catches armor a man could only dream of wearing.\nThe Diamond Armour reflects the and glimmers in the light.\n\"Only Kings and Queens have the money to obtain this\" you state in awe\n.",
             "N": 0,
             "S": 0,
             "E": 0,
@@ -747,7 +747,7 @@
             "W": 45,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 1,
             "AltRoomDesc": "A bowl of apples is on a round table... these might come in handy.",
             "X": 620.0,
             "Y": 176.0
@@ -755,7 +755,7 @@
         {
             "RoomID": 51,
             "RoomName": "Decision",
-            "RoomDesc": "You come to the end of the hall. \nThere are stairs to the left that lead up towards a laugh, \"HA HA HA HA\"\nTo your right are stairs that lead down to a dark, urky place.\nThere is a sign above \"Ain't No Church In The Wild",
+            "RoomDesc": "You come to the end of the hall. \nThere are stairs to the left that lead up towards: \"HA HA HA HA\"\nTo your right are stairs that lead down to a dark, urky vibe.\nThere is a sign above \"Ain't No Church In The Wild",
             "N": 0,
             "S": 50,
             "E": 0,
@@ -770,7 +770,7 @@
         {
             "RoomID": 52,
             "RoomName": "RainDrop",
-            "RoomDesc": "You grab a torch to see.\nEvery footstep echoes.\nWater drops from the ceiling into puddles.\nYou see a rat run across the floor with a finger.",
+            "RoomDesc": "You grab a torch to see.\nEvery step you take down the stone stairs echoes.\nWater drops from the ceiling into puddles.\nYou see a rat run across the floor with a finger.",
             "N": 0,
             "S": 0,
             "E": 53,
@@ -785,7 +785,7 @@
         {
             "RoomID": 53,
             "RoomName": "Snoring",
-            "RoomDesc": "You hear loud snoring, you shine the torch but the light isn't strong enough to see what's snoring.\n",
+            "RoomDesc": "You hear loud snoring, you shine the torch but the light isn't strong enough to see what's sleeping.\n",
             "N": 55,
             "S": 54,
             "E": 56,
@@ -793,7 +793,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "You hear loud snoring, you shine the torch but the light isn't strong enough to see what's snoring.\n",
+            "AltRoomDesc": "You hear loud snoring, you shine the torch but the light isn't strong enough to see what's sleeping.\n",
             "X": 740.0,
             "Y": 116.0
         },
@@ -815,7 +815,7 @@
         {
             "RoomID": 55,
             "RoomName": " BurntApp",
-            "RoomDesc": "You look down and see dead gatekeepers, many missing limbs, blood oozing from them.\nThey all coincidentally have burn scars. \nOne gatekeeper opens his eyes and tries gain the strength to talk but all that comes out is \"Hel...\" and then his eyes close, lifeless.\n\n",
+            "RoomDesc": "You look down and see dead gatekeepers, many missing limbs, blood oozing from them.\nThey all coincidentally have burn scars. \nOne gatekeeper opens his eyes and tries to muster the strength to talk, but all that comes out is \"Hel...\" and then his eyes close, lifeless.\n\n",
             "N": 0,
             "S": 53,
             "E": 0,
@@ -823,7 +823,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "",
+            "AltRoomDesc": "You look down and see dead gatekeepers, many missing limbs, blood oozing from them.\nThey all coincidentally have burn scars. \nOne gatekeeper opens his eyes and tries to muster the strength to talk, but all that comes out is \"Hel...\" and then his eyes close, lifeless.",
             "X": 741.0,
             "Y": 57.0
         },
@@ -860,7 +860,7 @@
         {
             "RoomID": 58,
             "RoomName": "SecretPass",
-            "RoomDesc": "You climb through a tunnel that leads you to the promise land.",
+            "RoomDesc": "You climb over the slimey Dragon into a black tunnel, the ground is wet. \nRats run past your arms and feet, you try to disregard them because you feel there is something worth while at the end of the tunnel.",
             "N": 0,
             "S": 0,
             "E": 66,
@@ -875,7 +875,7 @@
         {
             "RoomID": 59,
             "RoomName": "A Spark",
-            "RoomDesc": "In the distance, at the end of the hallway is a large figure sitting in a King's chair.\nLaughing \"AH HA HA HA HA\"\nA girl is chained and is trying to escape, \"Someone Help! You won't win! Karma is headed your way!\"\nYour eyes widen, you recognize that voice!",
+            "RoomDesc": "In the distance, at the end of the hallway is a large figure sitting in a King's chair.\nLaughing \"AH HA HA HA HA\"\nA girl is chained and is struggling to escape, \"Someone Help! You won't win! Karma is headed your way!\"\nYour eyes widen, you recognize that voice!",
             "N": 60,
             "S": 0,
             "E": 0,
@@ -883,7 +883,7 @@
             "A": 0,
             "B": 51,
             "attrib": 0,
-            "AltRoomDesc": "",
+            "AltRoomDesc": "In the distance, at the end of the hallway is a large figure sitting in a King's chair.\nLaughing \"AH HA HA HA HA\"\nA girl is chained and is struggling to escape, \"Someone Help! You won't win! Karma is headed your way!\"\nYour eyes widen, you recognize that voice!",
             "X": 560.0,
             "Y": 115.0
         },
@@ -905,7 +905,7 @@
         {
             "RoomID": 61,
             "RoomName": "Taunt",
-            "RoomDesc": "You are getting closer to the large figure, he exclaims, \"You are hopeless, no one wants to save you! HA HA HA HA ",
+            "RoomDesc": "You are getting closer to the large figure, he exclaims to the woman, \"You are hopeless, no one wants to save you! HA HA HA HA\"",
             "N": 62,
             "S": 0,
             "E": 59,
@@ -913,14 +913,14 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "",
+            "AltRoomDesc": "You are getting closer to the large figure, he exclaims to the woman, \"You are hopeless, no one wants to save you! HA HA HA HA\"",
             "X": 500.0,
             "Y": 116.0
         },
         {
             "RoomID": 62,
             "RoomName": "Her Room",
-            "RoomDesc": "You walk into a room full of pictures and flowers. \nYou see clothes that a princess would wear.\nYou scan the room and come across a picture that grabs your attention\nThe picture is a of you and your lost love Florence! \nYou think to yourself, \"She never forgot me!\"",
+            "RoomDesc": "You walk into a room full of pictures and flowers. \nYou see clothes that a princess would wear.\nYou scan the room and come across a picture that grabs your attention\nThe picture is of you and your lost love Florence! \nYou think to yourself, \"She never forgot me!\" \nA wave of energy runs through your veins",
             "N": 0,
             "S": 61,
             "E": 0,
@@ -935,7 +935,7 @@
         {
             "RoomID": 63,
             "RoomName": "DisArray",
-            "RoomDesc": "The large figure is in rage, \"How did you get here?! \nYou have been banned from this kingdom, never to step foot in the Castle of Orina for eternity! \nOrdered to be executed and humiliated!\n\nFlorence exclaims, \"I knew you would come back! I have been caged up from the outside world ever since you left!\"",
+            "RoomDesc": "The large figure is in rage, \"How did you get here?! \nYou have been banned from this kingdom, never to step foot in the Castle of Orina for eternity! \nOrdered to be executed and humiliated!\"\n\nFlorence exclaims, \"I knew you would come back! I have been caged up from the outside world ever since you left!\"",
             "N": 0,
             "S": 0,
             "E": 61,
@@ -943,7 +943,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "",
+            "AltRoomDesc": "The large figure is in rage, \"How did you get here?! \nYou have been banned from this kingdom, never to step foot in the Castle of Orina for eternity! \nOrdered to be executed and humiliated!\"\n\nFlorence exclaims, \"I knew you would come back! I have been caged up from the outside world ever since you left!\"",
             "X": 440.0,
             "Y": 115.0
         },
@@ -958,7 +958,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "",
+            "AltRoomDesc": "\"King Zeus\" you state.\n\nKing Zeus: \"Remember what happened last time you tested me!\"\n\nYou: \"I have gotten stronger, no longer afraid of you!\"\n\nKing Zeus: \"I will finish you in front of your pathetic love! AH HA HA HA!\"",
             "X": 380.0,
             "Y": 116.0
         },
