@@ -65,6 +65,7 @@ namespace
         // be empty.
 
         HitTest() {
+            NPCManager::init();
             userInventory = new Inventory(&playeract);
             CommonGameObjects::PAManager = &playeract;
             CP = new ContextParser(userInventory, &playeract);
@@ -74,6 +75,7 @@ namespace
         ~HitTest() override {
             delete CP;
             delete userInventory;
+            NPCManager::deinit();
             // You can do clean-up work that doesn't throw exceptions here.
         }
 
@@ -99,6 +101,12 @@ namespace
         string output = testing::internal::GetCapturedStdout();
         EXPECT_EQ(output, "\nFor some reason, you hit yourself.\nYou can withstand 2 more hits.\n");
         EXPECT_EQ(playeract.checkPlayerHealth(),2);
+    }
+    TEST_F(HitTest, NPCHitBack)
+    {
+        locationManager::updateCurrentLocation(locationManager::locationMap[23]);
+        CP->interpretCommand("hit wolf");
+        EXPECT_EQ(playeract.checkPlayerHealth(), 2);
     }
 
     class CPTest : public testing::Test {

@@ -4,10 +4,12 @@
 #include <map>
 #include "NPC.h"
 #include "Location.h"
+#include "PlayerActions.h"
+#include "PrintDisplay.h"
 
 using namespace std;
 
-NPC::NPC(string npcname, int initialLives) : health(initialLives) { name = npcname; }
+NPC::NPC(string npcname, int initialLives, bool hostile) : health(initialLives) { name = npcname; isHostile = hostile; }
 
 bool NPC::takeDamage(int damage) 
 {
@@ -31,14 +33,27 @@ bool NPCManager::init()
         NPCMap.insert(std::pair<int, vector<NPC*>>(x.first, vector<NPC*>()));
         if (x.second->hasAttribute(x.second->WOLVES_IN_ROOM))
         {
-            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("wolf", 3));
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("wolf", 3, true));
         }
         else if (x.second->hasAttribute(x.second->KNIGHT_IN_ROOM))
         {
-            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("knight", 4));
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("knight", 4, true));
         }
     }
     return true;
+}
+
+void NPCManager::deinit()
+{
+    for (auto &x : NPCMap)
+    {
+        for (auto y : x.second)
+        {
+            delete y;
+        }
+        x.second.clear();
+    }
+    NPCMap.clear();
 }
 
 NPC* NPCManager::returnNPC(string NPCname)

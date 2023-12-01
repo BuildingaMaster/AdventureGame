@@ -188,6 +188,7 @@ int main()
     } while (stay);
 
     locationManager::deinit();
+    NPCManager::deinit();
 
     // Save the commands to a file.
     ofstream cmdHistoryFile;

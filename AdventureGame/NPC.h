@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include "BaseHealth.h"
+#include "PlayerActions.h"
 
 using namespace std;
 
@@ -12,8 +13,9 @@ class NPC {
 private:
     BaseHealth health;
 public:
-    NPC(string name ,int initialLives);
+    NPC(string name ,int initialLives, bool hostile);
     string name;
+    bool isHostile;
     bool takeDamage(int damage);
     bool isDead();
     int getLives();
@@ -26,4 +28,5 @@ public:
     static bool scanForNPC(string);
     static map<int, vector<NPC*>> NPCMap;
     static NPC* returnNPC(string);
+    static void deinit();
 };
