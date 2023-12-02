@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <thread>
+#include <chrono>
 
 #include "PlayerActions.h"
 #include "PrintDisplay.h"
@@ -61,30 +63,33 @@ bool PlayerActions::processCommand(vector<string> args)
             NPC* wolf = NPCManager::returnNPC(args[1]);
             if (!wolf->isDead())
             {
-                if (!PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOO#####", 50))
+                if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOO#####", 50))
                 {
-                    // Return true.
-                    // It's a valid command, however, the attack failed.
-                    return true; 
+                    if (wolf->takeDamage(1))
+                    {
+                        PrintDisplay::custom_cout << "\nYou hit the wolf. It has " << wolf->getLives() << " lives remaining.\n";
+                        PrintDisplay::flush();
+                        if (wolf->isDead())
+                        {
+                            PrintDisplay::custom_cout << "The wolf is dead.\n";
+                            PrintDisplay::flush();
+                            return true; 
+                        }
+                    }
+                    else
+                    {
+                        PrintDisplay::custom_cout << "\nYou hit the wolf, but it still has " << wolf->getLives() << " lives remaining.\n";
+                        PrintDisplay::flush();
+                                            
+                    }
+                    this_thread::sleep_for(chrono::milliseconds(1500));
                 }
                 
-                if (wolf->takeDamage(1))
+                if (wolf->isHostile)
                 {
-                    PrintDisplay::custom_cout << "\nYou hit the wolf. It has " << wolf->getLives() << " lives remaining.\n";
-                    PrintDisplay::flush();
-                    if (wolf->isDead())
+                    PrintDisplay::custom_cout << "The wolf attacks you back!\n";
+                    if (!PrintDisplay::dodgeScreen()) // The player got hit.
                     {
-                        PrintDisplay::custom_cout << "The wolf is dead.\n";
-                        PrintDisplay::flush();
-                    }
-                }
-                else
-                {
-                    PrintDisplay::custom_cout << "\nYou hit the wolf, but it still has " << wolf->getLives() << " lives remaining.\n";
-                    PrintDisplay::flush();
-                    if (wolf->isHostile)
-                    {
-                        PrintDisplay::custom_cout << "And the wolf attacks you back!\n";
                         this->hurtPlayer(1);
                         if (this->checkPlayerHealth() != 0)
                         {
@@ -93,6 +98,7 @@ bool PlayerActions::processCommand(vector<string> args)
                         PrintDisplay::flush();
                     }
                 }
+                
                 PrintDisplay::flush();
                 return true;
             }
@@ -111,23 +117,33 @@ bool PlayerActions::processCommand(vector<string> args)
             NPC* knight = NPCManager::returnNPC(args[1]);
             if (!knight->isDead())
             {
-                if (knight->takeDamage(1))
+                if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOOOO###", 50))
                 {
-                    PrintDisplay::custom_cout << "\nYou hit the knight. It has " << knight->getLives() << " lives remaining.\n";
-                    PrintDisplay::flush();
-                    if (knight->isDead())
+                    if (knight->takeDamage(1))
                     {
-                        PrintDisplay::custom_cout << "The knight has been defeated.\n";
+                        PrintDisplay::custom_cout << "\nYou hit the knight. It has " << knight->getLives() << " lives remaining.\n";
                         PrintDisplay::flush();
+                        if (knight->isDead())
+                        {
+                            PrintDisplay::custom_cout << "The knight is dead.\n";
+                            PrintDisplay::flush();
+                            return true; 
+                        }
                     }
-                }
-                else
-                {
-                    PrintDisplay::custom_cout << "\nYou hit the knight, but it still has " << knight->getLives() << " lives remaining.\n";
-                    PrintDisplay::flush();
-                    if (knight->isHostile)
+                    else
                     {
-                        PrintDisplay::custom_cout << "And the knight attacks you back!\n";
+                        PrintDisplay::custom_cout << "\nYou hit the knight, but it still has " << knight->getLives() << " lives remaining.\n";
+                        PrintDisplay::flush();
+                                            
+                    }
+                    this_thread::sleep_for(chrono::milliseconds(1500));
+                }
+
+                if (knight->isHostile)
+                {   
+                    PrintDisplay::custom_cout << "The knight attacks you back!\n";
+                    if (!PrintDisplay::dodgeScreen()) // The player got hit.
+                    {
                         this->hurtPlayer(1);
                         if (this->checkPlayerHealth() != 0)
                         {
