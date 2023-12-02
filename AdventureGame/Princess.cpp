@@ -85,3 +85,22 @@ bool Princess::rizzTime()
     }
     return false;
 }
+
+void Princess::attackFailed()
+{
+    PrintDisplay::custom_cout << "Princess:\n\t\"Are you joking?\"";
+    PrintDisplay::custom_cout << "\n\t\"You've come ALL this way to kill me, and you MISS?\"";
+    PrintDisplay::custom_cout << "\n\t\"I'll admit exiling you was mercy, which was an obvious mistake.\"";
+    PrintDisplay::custom_cout << "\n\t\"But unlike you, I learn from them.\"";
+    PrintDisplay::custom_cout << "\n\t\"GUARDS!\"\n\n";
+
+    PrintDisplay::custom_cout << "You turn a see a legion of guards surrounding you.\n";
+    PrintDisplay::custom_cout << "Before you could even make a move, you felt a slice on your neck.\n";
+    PrintDisplay::no_effect_flush();
+    CommonGameObjects::PAManager->hurtPlayer(999999);
+}
+
+bool Princess::recieveAttack()
+{
+   return this->PlayerAttacksMe("OOO#OOO", 20);
+}

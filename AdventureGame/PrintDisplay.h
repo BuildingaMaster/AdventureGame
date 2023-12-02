@@ -36,7 +36,6 @@ public:
 
         /// @brief Displays the HitUI 
         /// @param hitBox a string of '#' (hit) and 'O' (miss). IE: "000##"
-        /// @param MAX_RED How many red tiles to show (less than 24)
         /// @param time_to_react How fast the cursor moves
         /// @return If the hit succeeded.
         static bool hitScreen(string, int);
@@ -46,7 +45,7 @@ public:
         /// @param disable_forward_tile Should the player be able to dodge forward?
         /// @param more_than_one_tile Multi-tile mode
         /// @param reaction_time How fast should the player react? (1111 is ideal.)
-        /// @return 
+        /// @return HP lost
         static int dodgeScreen(int, bool, bool, int);
 
         /// @brief Displays the default DodgeUI 
@@ -70,6 +69,10 @@ public:
         /// @return The character at the front of the string
         static char GT_getch();
 #endif
+#ifdef GTESTING
+public:
+#else
 private:
+#endif
         static void common_flush(bool);
 };
