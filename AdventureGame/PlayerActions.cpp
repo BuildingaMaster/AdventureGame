@@ -61,7 +61,7 @@ bool PlayerActions::processCommand(vector<string> args)
             NPC* wolf = NPCManager::returnNPC(args[1]);
             if (!wolf->isDead())
             {
-                if (!PrintDisplay::hitScreen(20))
+                if (!PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOO#####", 50))
                 {
                     // Return true.
                     // It's a valid command, however, the attack failed.

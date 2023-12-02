@@ -386,7 +386,7 @@ void PrintDisplay::pause()
     PrintDisplay::no_effect_flush();
 }
 
-bool PrintDisplay::hitScreen(int MAX_RED)
+bool PrintDisplay::hitScreen(string hitBox, int time_to_react)
 {
     // The tutorial, only happens when first triggered.
     if (CommonGameObjects::PAManager->checkAndFlipFirstAttack())
@@ -402,7 +402,6 @@ bool PrintDisplay::hitScreen(int MAX_RED)
         PrintDisplay::custom_cout << "the green bar";
         PrintDisplay::no_effect_flush();
         cout << "\033[0m" << std::flush; // BG None
-        
         PrintDisplay::custom_cout << " to attack.\n";
 
         PrintDisplay::custom_cout << "When that happens, press any key to launch your attack!\n";
@@ -426,39 +425,34 @@ bool PrintDisplay::hitScreen(int MAX_RED)
     PrintDisplay::custom_cout << "Strike with any key when Green!" << '\n';
     PrintDisplay::no_effect_flush();
     
-    // Number of lines allowed
-    int TOTAL_LINE = 25;
-    //int MAX_RED = 20;
-
     // Pre-write the colors,
     // this prevents the terminal from being overwritten with collor
-    for (int i = 0; i<MAX_RED; i++) 
+    // Number of lines allowed
+    int TOTAL_LINE = hitBox.size();
+
+    for (auto &c : hitBox)
     {
-            // Space, then go back
-            PrintDisplay::custom_cout << ' ' << '\b';
-            PrintDisplay::no_effect_flush();
+        // Space, then go back
+        PrintDisplay::custom_cout << ' ' << '\b';
+        PrintDisplay::no_effect_flush();
+        switch (c)
+        {
+            case '#':
+            {
+                cout << "\033[102m" << std::flush; // Bright Green BG
+                break;
+            }
+            default:
+            {
+                cout << "\033[41m" << std::flush; // Red BG
+                break;
+            }
+        }
+        PrintDisplay::custom_cout << ' ';
+        PrintDisplay::no_effect_flush();
 
-            // Red Background
-            cout << "\033[41m" << std::flush; // Red BG
-            PrintDisplay::custom_cout << ' ';
-            PrintDisplay::no_effect_flush();
-
-            // No Background
-            cout << "\033[0m" << std::flush; // Clear BG
-            PrintDisplay::no_effect_flush();
-    }
-    for (int i = 0; i<(TOTAL_LINE-MAX_RED); i++) 
-    {
-            // Space, then go back
-            PrintDisplay::custom_cout << ' ' << '\b';
-            PrintDisplay::no_effect_flush();
-
-            // Bright Green Background 
-            cout << "\033[102m" << std::flush; // Bright Green BG
-            PrintDisplay::custom_cout << ' ';
-            PrintDisplay::no_effect_flush();
-            cout << "\033[0m" << std::flush; // Clear BG
-            PrintDisplay::no_effect_flush();
+        cout << "\033[0m" << std::flush; // Clear BG
+        PrintDisplay::no_effect_flush();
     }
 
     // Add an extra space 
@@ -468,7 +462,7 @@ bool PrintDisplay::hitScreen(int MAX_RED)
     PrintDisplay::custom_cout << "\r";
     PrintDisplay::no_effect_flush();
 
-    int a = 0;
+    int cursorOnColumn = 0;
 
     // Instead of waiting for the system to get a key press
     // We want to know if a key press happens every ~50ms.
@@ -486,7 +480,7 @@ bool PrintDisplay::hitScreen(int MAX_RED)
     while(!_kbhit()) // AKA: The user didn't press a key.
 #endif
     {
-        if (a > (MAX_RED-1)) // Cursor on green
+        if (hitBox[cursorOnColumn] == '#') // Cursor on green
         {
             cout << "\033[102m" << std::flush;
             PrintDisplay::custom_cout << ' ';
@@ -503,15 +497,15 @@ bool PrintDisplay::hitScreen(int MAX_RED)
             //cout << "\033[0m" << std::flush;
             PrintDisplay::no_effect_flush();
         }
-        a++; // Move to next block
-        if (a>TOTAL_LINE-1) // Go back to the start.
+        cursorOnColumn++; // Move to next block
+        if (cursorOnColumn>TOTAL_LINE-1) // Go back to the start.
         {
             cout << "\033[0m" << std::flush;
             PrintDisplay::custom_cout << "\r";
             PrintDisplay::no_effect_flush();
-            a=0;
+            cursorOnColumn=0;
         }
-        this_thread::sleep_for(chrono::milliseconds(50)); // Pause by 50ms
+        this_thread::sleep_for(chrono::milliseconds(time_to_react)); // Pause by 50ms
     }
 #ifndef _WIN32
     // Return to the regular character waiting mode.
@@ -531,7 +525,7 @@ bool PrintDisplay::hitScreen(int MAX_RED)
     cout << "\033[0m" << std::flush;
 
     bool hitLanded = false;
-    if (a < MAX_RED)
+    if (hitBox[cursorOnColumn] != '#')
     {
         PrintDisplay::custom_cout << "\nYou MISSED!\n";
         hitLanded = false;

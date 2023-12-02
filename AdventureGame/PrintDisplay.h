@@ -35,9 +35,11 @@ public:
         static void pause();
 
         /// @brief Displays the HitUI 
+        /// @param hitBox a string of '#' (hit) and 'O' (miss). IE: "000##"
         /// @param MAX_RED How many red tiles to show (less than 24)
+        /// @param time_to_react How fast the cursor moves
         /// @return If the hit succeeded.
-        static bool hitScreen(int);
+        static bool hitScreen(string, int);
 
         /// @brief Displays the DodgeUI 
         /// @return If the player dodged.
