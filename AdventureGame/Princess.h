@@ -7,5 +7,7 @@ public:
     Princess();
     bool rizzTime(); //Triggers ending
     virtual void nothing() {}; // Does nothing
+private: 
+    bool secondTry = false;
 };
 
