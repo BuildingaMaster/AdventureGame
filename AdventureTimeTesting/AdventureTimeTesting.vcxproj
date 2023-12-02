@@ -147,11 +147,14 @@ if %errorlevel% leq 1 exit 0 else exit %errorlevel%
     <ClCompile Include="..\AdventureGame\ContextParser.cpp" />
     <ClCompile Include="..\AdventureGame\Inventory.cpp" />
     <ClCompile Include="..\AdventureGame\Item.cpp" />
+    <ClCompile Include="..\AdventureGame\Knight.cpp" />
     <ClCompile Include="..\AdventureGame\Location.cpp" />
     <ClCompile Include="..\AdventureGame\NPC.cpp" />
     <ClCompile Include="..\AdventureGame\PlayerActions.cpp" />
+    <ClCompile Include="..\AdventureGame\Princess.cpp" />
     <ClCompile Include="..\AdventureGame\PrintDisplay.cpp" />
     <ClCompile Include="..\AdventureGame\CommonGameObjects.cpp" />
+    <ClCompile Include="..\AdventureGame\Wolf.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
