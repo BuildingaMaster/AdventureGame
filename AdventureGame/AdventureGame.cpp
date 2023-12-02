@@ -149,6 +149,7 @@ int main()
     ContextParser CP(&userInventory,&playeract);
     bool validInput;
     bool stay = true;
+    bool princessIgnored = false;
     do
     {
         do
@@ -164,9 +165,43 @@ int main()
                 }
             }
 
+            // If the princess is in the room, trigger the cutscene.
             if (NPCManager::scanForNPC("princess"))
             {
-                dynamic_cast<Princess&>(*NPCManager::returnNPC("princess")).rizzTime();
+                bool endGame = false;
+                NPC* princess = NPCManager::returnNPC("princess");
+                if (princess->isDead())
+                {
+                    PrintDisplay::custom_cout << "\nYou slay your ex, the Princess of Papettia in cold blood.\n";
+                    PrintDisplay::custom_cout << "Her slain corpse hits the floor with a loud thud.\n";
+                    PrintDisplay::custom_cout << "A metallic object rolls to your feet and you decide to pick it up. Its the crown!\n";
+                    PrintDisplay::custom_cout << "You place it on your head and proclaim:\n";
+                    PrintDisplay::custom_cout << "\"The Kingdom of Papettia belongs to ME! Long live the new king!\"\n\n";
+                    PrintDisplay::custom_cout << "EVIL ENDING\n\n";
+                    endGame = true;
+                }
+                else if (!princessIgnored)
+                {
+                    endGame = dynamic_cast<Princess&>(*princess).rizzTime();
+                }
+
+                if (endGame == true) // End the game.
+                {
+                    PrintDisplay::custom_cout << "\nYour adventure has reached it's conclusion.\n";
+                    PrintDisplay::custom_cout << "Thanks for playing!\n\n";
+                    PrintDisplay::no_effect_flush();
+                    PrintDisplay::pause();
+                    stay = false;
+                    break;
+                }
+                else
+                {
+                    princessIgnored = true;
+                }
+            }
+            else if (princessIgnored) // Check if princessIgnored is true, if shes not in the room.
+            {
+                princessIgnored = false;
             }
 
             PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";

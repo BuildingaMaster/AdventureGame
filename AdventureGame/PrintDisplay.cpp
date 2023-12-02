@@ -141,7 +141,7 @@ void PrintDisplay::common_flush(bool forceNormal)
             {
                 int a = rand() % (str.size());
                 int b = rand() % (str.size());
-                if ((str[a] == '\n' || str[b] == '\n') || (str[a] == ' ' || str[b] == ' ')) // We keep endlines and spaces as is
+                if ((str[a] == '\n' || str[b] == '\n') || (str[a] == ' ' || str[b] == ' ') || (str[a] == '\t' || str[b] == '\t') || (str[a] == '"' || str[b] == '"')) // We keep endlines and spaces as is
                 {
                     i--;
                     continue;
@@ -911,15 +911,17 @@ int PrintDisplay::optionParser(int number_of_args)
     regex exp ("\\D");
     do 
     {
-        PrintDisplay::custom_cout << "\nPress any key to continue . . .\n";
+        PrintDisplay::custom_cout << "\nWhat do you choose? Enter a number from 1-" << number_of_args << ".\n> ";
         PrintDisplay::no_effect_flush();
         temp = PrintDisplay::inputValidation(true);
-        if (regex_search(temp,exp))
+        if (regex_search(temp,exp) || temp.empty() == true || temp == "0")
         {
+            PrintDisplay::custom_cout << "\nEnter a number from 1-" << number_of_args << ".\n";
+            PrintDisplay::no_effect_flush();
             continue;
         }
         r = stoi(temp);
-    } while(r < 0 || r > number_of_args);
+    } while(r <= 0 || r > number_of_args);
     return r;
 }
 
