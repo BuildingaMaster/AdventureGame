@@ -135,11 +135,13 @@
     <ClCompile Include="ContextParser.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Knight.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Princess.cpp" />
     <ClCompile Include="PrintDisplay.cpp" />
+    <ClCompile Include="Wolf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armor.h" />
@@ -160,6 +162,8 @@
     <ClInclude Include="Potion.h" />
     <ClInclude Include="Princess.h" />
     <ClInclude Include="PrintDisplay.h" />
+    <ClCompile Include="Knight.h" />
+    <ClCompile Include="Wolf.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="map.mbd">

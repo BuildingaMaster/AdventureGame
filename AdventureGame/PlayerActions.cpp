@@ -78,42 +78,40 @@ bool PlayerActions::processCommand(vector<string> args)
             NPC* character = NPCManager::returnNPC(args[1]);
             if (!character->isDead())
             {
-                if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOO#####", 50))
+                if (character->recieveAttack())
                 {
+                    PrintDisplay::custom_cout << "\nYou hit the "<< character->name;
                     if (character->takeDamage(1))
                     {
-                        PrintDisplay::custom_cout << "\nYou hit the "<< character->name <<". It has " << character->getLives() << " lives remaining.\n";
+                        PrintDisplay::custom_cout << ".\n";
                         PrintDisplay::flush();
-                        if (character->isDead())
-                        {
-                            PrintDisplay::custom_cout << "The "<< character->name <<" is dead.\n";
-                            PrintDisplay::flush();
-                            return true; 
-                        }
+                        
+                        PrintDisplay::custom_cout << "The "<< character->name <<" is dead.\n";
+                        PrintDisplay::flush();
                     }
                     else
                     {
-                        PrintDisplay::custom_cout << "\nYou hit the "<< character->name <<", but it still has " << character->getLives() << " lives remaining.\n";
+                        PrintDisplay::custom_cout << ", but it still has " << character->getLives() << " lives remaining.\n";
                         PrintDisplay::flush();
-                                            
                     }
-                    this_thread::sleep_for(chrono::milliseconds(1500));
                 }
-                
+                /*
                 if (character->isHostile)
                 {
-                    PrintDisplay::custom_cout << "The wolf attacks you back!\n";
+                    this_thread::sleep_for(chrono::milliseconds(1200));
+                    PrintDisplay::custom_cout << "And the "<< character->name <<" attacks you back!\n";
                     int hitCount = PrintDisplay::dodgeScreen();
                     if (hitCount > 0) // The player got hit.
                     {
                         this->hurtPlayer(hitCount);
-                        if (this->checkPlayerHealth() != 0)
+                        if (!this->thePlayerIsDead())
                         {
                             PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
                         }
                         PrintDisplay::flush();
                     }
-                }
+                }     
+                */                                       
                 
                 PrintDisplay::flush();
                 return true;
@@ -311,6 +309,7 @@ bool PlayerActions::playAgain()
         locationManager::updateCurrentLocation(locationManager::locationMap[1]);
         changeArmor(none);
         healthMGR.restoreMaxHP();
+        NPCManager::resurrectAllNPCs();
          // bring player back to starting room, reset the inventory & NPCS
     }
     else

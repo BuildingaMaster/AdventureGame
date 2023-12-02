@@ -1,12 +1,21 @@
+#include "NPC.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <map>
-#include "NPC.h"
+#include <thread>
+#include <chrono>
 #include "Location.h"
-#include "Princess.h"
 #include "PlayerActions.h"
 #include "PrintDisplay.h"
+#include "CommonGameObjects.h"
+
+#include "PrintDisplay.h"
+
+#include "Knight.h"
+#include "Princess.h"
+#include "Wolf.h"
 
 using namespace std;
 
@@ -27,6 +36,47 @@ int NPC::getLives()
     return health.checkHP();
 }
 
+void NPC::resurrect()
+{
+    health.restoreMaxHP();
+}
+
+void NPC::AttackAtPlayer() {}
+
+void NPC::AttackAtPlayer(
+                        int dodge_iterations, 
+                        bool dodge_disable_forward_tile, 
+                        bool dodge_more_than_one_tile, 
+                        int dodge_reaction_time)
+{
+    /*
+    int dodge_iterations
+    bool dodge_disable_forward_tile
+    bool dodge_more_than_one_tile
+    int dodge_reaction_time
+    */
+    if (isHostile)
+    {
+        PrintDisplay::custom_cout << "The " << this->name << " begins it's attack!\n";
+        this_thread::sleep_for(chrono::milliseconds(700));
+        int hitCount = PrintDisplay::dodgeScreen();
+        if (hitCount > 0) // The player got hit.
+        {
+            CommonGameObjects::PAManager->hurtPlayer(hitCount);
+            if (!CommonGameObjects::PAManager->thePlayerIsDead())
+            {
+                PrintDisplay::custom_cout << "You can withstand " << CommonGameObjects::PAManager->checkPlayerHealth() << " more hits!" << endl;
+            }
+            PrintDisplay::flush();
+        }
+    }
+}
+
+bool NPC::PlayerAttacksMe(string strike_hitBox, int strike_time_to_react)
+{
+    return PrintDisplay::hitScreen(strike_hitBox, strike_time_to_react);
+}
+
 bool NPCManager::init()
 {
     for (auto const& x : locationManager::locationMap)
@@ -34,11 +84,11 @@ bool NPCManager::init()
         NPCMap.insert(std::pair<int, vector<NPC*>>(x.first, vector<NPC*>()));
         if (x.second->hasAttribute(x.second->WOLVES_IN_ROOM))
         {
-            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("wolf", 3, true));
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Wolf());
         }
         else if (x.second->hasAttribute(x.second->KNIGHT_IN_ROOM))
         {
-            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("knight", 4, true));
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Knight());
         }
         else if (x.second->hasAttribute(x.second->PRINCESS_IN_ROOM))
         {
@@ -86,6 +136,34 @@ NPC* NPCManager::returnNPC(string NPCname)
 bool NPCManager::scanForNPC(string NPCname)
 {
     return returnNPC(NPCname) != nullptr;
+}
+
+void NPCManager::resurrectAllNPCs()
+{
+    for (auto ID : NPCMap)
+    {
+        for (auto npc : ID.second)
+        {
+            npc->resurrect();
+        }
+    }
+}
+
+bool NPCManager::fightHostileNPCs()
+{
+    uint32_t roomID = locationManager::getCurrentLocation()->getLocationID();
+    for (auto npc : NPCMap[roomID])
+    {
+        if (npc->isHostile)
+        {
+            npc->attackPlayer();
+        }
+        if (CommonGameObjects::PAManager->thePlayerIsDead())
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 map<int, vector<NPC*>> NPCManager::NPCMap;

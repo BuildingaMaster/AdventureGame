@@ -128,6 +128,8 @@ public:
 	void setAdjacent(Location*, cardinalDirection, bool);
 	Location* checkAdjacent(cardinalDirection);
 	int getLocationID();
+	uint64_t getNumberOfTimesEntered();
+	void addNumberOfTimesEntered();
 
 	bool hasAttribute(roomAttributes);
 
@@ -139,6 +141,7 @@ public:
 private:
 #endif
 	int roomID;
+	uint64_t number_of_times_entered;
 	bool firstTime = true;
 	uint64_t roomAttrs;
 	map<uint64_t,bool> attributeMap;
