@@ -695,7 +695,7 @@
         {
             "RoomID": 47,
             "RoomName": "Knights",
-            "RoomDesc": "You come face to face with an army of Knights.\nThey stand in a horizontal line, guarding something precious behind them.\nYou begin to way your options out. \n\nCAN ONLY MOVE TO MERRY XMAS BY KILLING OGOR",
+            "RoomDesc": "You come face to face with an army of Knights.\nThey stand in a horizontal line, guarding something precious behind them.\nYou begin to way your options out. \n\n",
             "N": 49,
             "S": 0,
             "E": 48,
