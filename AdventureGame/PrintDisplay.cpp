@@ -53,6 +53,18 @@ char readCH()
 #endif
 }
 
+void ignoreCH()
+{
+#ifdef _WIN32
+    while (_kbhit())
+    {
+        readCH();
+    }
+#else
+    flushinp();
+#endif
+}
+
 /// @brief Remove all formatting from the terminal
 void effectReset()
 {
@@ -545,6 +557,7 @@ int PrintDisplay::dodgeScreen()
 
 int PrintDisplay::dodgeScreen(int iterations, bool disable_forward_tile, bool more_than_one_tile, int reaction_time)
 {
+    ignoreCH();
     std::random_device rd;  
     std::mt19937 gen(rd()); 
     
@@ -666,16 +679,13 @@ int PrintDisplay::dodgeScreen(int iterations, bool disable_forward_tile, bool mo
 
 
     #ifndef _WIN32
-        flushinp();
+        ignoreCH();
         while ((ch = readCH()) && ch == ERR && initTime >= chrono::duration_cast< chrono::milliseconds >(chrono::system_clock::now().time_since_epoch())); // AKA: The user didn't press a key.
     #else
         // Windows doesn't really have a way to flush anything from readCH().
         // But we can see if the keyboard was hit when the thread was paused,
         // And manually remove characters by reading/ignoring them.
-        while (_kbhit())
-        {
-            readCH();
-        }
+        ignoreCH();
         while(!_kbhit() && initTime >= chrono::duration_cast< chrono::milliseconds >(chrono::system_clock::now().time_since_epoch())); // AKA: The user didn't press a key.
     #endif
 
