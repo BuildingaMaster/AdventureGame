@@ -105,6 +105,8 @@ namespace
     TEST_F(HitTest, NPCHitBack)
     {
         locationManager::updateCurrentLocation(locationManager::locationMap[23]);
+        // Yes/No needs an input, so fake it
+        PrintDisplay::GT_setString("\n\n\n");
         CP->interpretCommand("hit wolf");
         EXPECT_EQ(playeract.checkPlayerHealth(), 2);
     }

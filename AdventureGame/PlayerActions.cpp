@@ -88,9 +88,10 @@ bool PlayerActions::processCommand(vector<string> args)
                 if (wolf->isHostile)
                 {
                     PrintDisplay::custom_cout << "The wolf attacks you back!\n";
-                    if (!PrintDisplay::dodgeScreen()) // The player got hit.
+                    int hitCount = PrintDisplay::dodgeScreen();
+                    if (hitCount > 0) // The player got hit.
                     {
-                        this->hurtPlayer(1);
+                        this->hurtPlayer(hitCount);
                         if (this->checkPlayerHealth() != 0)
                         {
                             PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
@@ -142,9 +143,10 @@ bool PlayerActions::processCommand(vector<string> args)
                 if (knight->isHostile)
                 {   
                     PrintDisplay::custom_cout << "The knight attacks you back!\n";
-                    if (!PrintDisplay::dodgeScreen()) // The player got hit.
+                    int hitCount = PrintDisplay::dodgeScreen();
+                    if (hitCount > 0) // The player got hit.
                     {
-                        this->hurtPlayer(1);
+                        this->hurtPlayer(hitCount);
                         if (this->checkPlayerHealth() != 0)
                         {
                             PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;

@@ -76,3 +76,9 @@ bool NPCManager::scanForNPC(string NPCname)
 }
 
 map<int, vector<NPC*>> NPCManager::NPCMap;
+
+
+std::map<std::string,  std::pair<std::string,std::string>> NPCDescription::NPCTag = {
+        {"wolf", std::pair<std::string,std::string>{"WOLF!!!! Its time to run or fight!", "WOLVES!!!! Its time to run or fight!"}},
+        {"knight", std::pair<std::string,std::string>{"The knight blocks your path!", "The knights surround you and block your path!"}},
+};

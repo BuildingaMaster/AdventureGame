@@ -30,3 +30,10 @@ public:
     static NPC* returnNPC(string);
     static void deinit();
 };
+
+class NPCDescription
+{
+    public:
+        /// @brief The NPC's description, first singular, second is plural
+        static std::map<std::string,  std::pair<std::string,std::string>> NPCTag;
+};

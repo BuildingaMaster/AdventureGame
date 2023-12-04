@@ -72,6 +72,7 @@ const string locationManager::directionStrings[] = { "north", "south", "east", "
 void Location::printLocation()
 {
 	map<string,int> counter;
+	map<string,pair<bool,int>> NPCCounter;
 	if (firstTime)
 	{
 		PrintDisplay::custom_cout << endl << description << endl;
@@ -83,6 +84,7 @@ void Location::printLocation()
 
 	PrintDisplay::flush();
 
+	// For inventory
 	for (auto element : Inventory::itemMap[roomID])
 	{
 		if (counter.find(element->getItemName()) == counter.end())
@@ -91,6 +93,21 @@ void Location::printLocation()
 		}
 		counter[element->getItemName()] = counter[element->getItemName()]+1;
 	}
+
+	// for NPCs
+	for (auto element : NPCManager::NPCMap[roomID])
+	{
+		if (!element->isDead())
+		{
+			if (NPCCounter.find(element->name) == NPCCounter.end())
+			{
+				NPCCounter.insert(pair<string,pair<bool,int>>{element->name,make_pair(element->isHostile,0)});
+			}
+			NPCCounter[element->name].second =NPCCounter[element->name].second + 1;
+		}
+	}
+
+	// Items
 	if (counter.size() > 0)
 	{
 		PrintDisplay::custom_cout << endl;
@@ -107,7 +124,25 @@ void Location::printLocation()
 			PrintDisplay::flush();
 		}
 	}
+
 	PrintDisplay::custom_cout << timeDescription << endl;
+	// NPCS
+	if (NPCCounter.size() > 0)
+	{
+		PrintDisplay::custom_cout << endl;
+		for (auto element : NPCCounter)
+		{
+			if (element.second.second > 1) 
+			{
+				PrintDisplay::custom_cout << NPCDescription::NPCTag[element.first].second;
+			}
+			else
+			{
+				PrintDisplay::custom_cout << NPCDescription::NPCTag[element.first].first;
+			}
+			PrintDisplay::flush();
+		}
+	}
 	PrintDisplay::flush();
 
 }
