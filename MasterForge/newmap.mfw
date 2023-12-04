@@ -620,7 +620,7 @@
         {
             "RoomID": 42,
             "RoomName": "LaLaLand",
-            "RoomDesc": "You walk through the hall and approach the giggles.\nA blonde lady with a flower crown stops you in your tracks. \nShe says, \"I've missed you! Let's celebrate.\"\nYou look at her confused and think \"I've never met this woman before.\"\nShe puts out an open hand and offers you a mushroom.\n\nWest you see a couple of people singing.\nNorth is the sound of feet stomping in sync.\n\n \n",
+            "RoomDesc": "You walk through the hall and approach the giggles.\nA blonde lady with a flower crown stops you in your tracks. \nShe says, \"I've missed you! Let's celebrate.\"\nYou look at her confused and think \"I've never met this woman before.\"\nShe puts out an open hand and offers you a mushroom.\n\nWest you see a couple of people singing.\nNorth is the sound of feet stomping in sync.",
             "N": 46,
             "S": 41,
             "E": 0,
@@ -679,8 +679,8 @@
         },
         {
             "RoomID": 46,
-            "RoomName": "SoundArmy",
-            "RoomDesc": "A room made to honor the past kings who once ruled.\nPictures and articles cover the walls.\nClose by east, you hear heavy footsteps pacing around. \nIt sounds like an army walking in sync. \n\nNorth is a bowl filled with some kind of food, your stomach rumbles.\nWest you hear a sinister laugh. ",
+            "RoomName": "Mural",
+            "RoomDesc": "A room made to honor the past kings who once ruled.\nPictures and articles cover the walls.\nClose by in the east, you hear heavy footsteps pacing around. \nIt sounds like an army walking in sync. \n\nNorth is a bowl filled with some kind of food, your stomach rumbles.\nWest you hear a sinister laugh. ",
             "N": 50,
             "S": 42,
             "E": 47,
@@ -710,7 +710,7 @@
         {
             "RoomID": 48,
             "RoomName": "MerryXMas",
-            "RoomDesc": "Panting from killing the amry, your eye catches armor a man could only dream of wearing.\nThe Diamond Armour reflects the and glimmers in the light.\n\"Only Kings and Queens have the money to obtain this\" you state in awe.\n\nSouth is the sight of breathless knights, face down on the tile. \nYou smirk pridefully at the work you've done.\n.",
+            "RoomDesc": "Panting from killing the amry, your eye catches armor a man could only dream of wearing.\nThe Diamond Armour reflects the and glimmers in the light.\n\"Only Kings and Queens have the money to obtain this\" you state in awe.\n\nWest is the sight of breathless knights, face down on the tile. \nYou smirk pridefully at the work you've done.\n.",
             "N": 0,
             "S": 0,
             "E": 0,
@@ -718,14 +718,14 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "Panting from killing army, your eye catches the best armor a man could equip.\nThe Diamond Armor reflects the light.\n\nSouth is the work you've done.\n",
+            "AltRoomDesc": "Panting from killing army, your eye catches the best armor a man could equip.\nThe Diamond Armor reflects the light.\n\nWest is the work you've done.\n",
             "X": 740.0,
             "Y": 235.0
         },
         {
             "RoomID": 49,
             "RoomName": "Dining Room",
-            "RoomDesc": "A table that holds 30 people, gold plates & glasses are at every seat.\nA breadbasket sits in the middle of the table. \nThe walls decorated with king and queen quotes from the kingdom news. \n\nWest is a bowl with some food and nobody around.",
+            "RoomDesc": "A table that holds 30 people, gold plates & glasses are placed at every seat.\nA breadbasket sits in the middle of the table. \nThe walls decorated with king and queen quotes from the kingdom news. \n\nWest is a bowl with some food and nobody around.",
             "N": 0,
             "S": 47,
             "E": 0,
@@ -875,7 +875,7 @@
         {
             "RoomID": 59,
             "RoomName": "A Spark",
-            "RoomDesc": "In the distance west, at the end of the hallway is a large figure sitting in a King's chair.\nLaughing \"AH HA HA HA HA\"\nA girl is sitting on the large figure's lap. \nYour eyes widen, you recognize that voice!\n\nNorth, a room with people huddled at a round table.",
+            "RoomDesc": "In the distance west, at the end of the hallway is a large figure sitting in a King's chair.\nLaughing \"AH HA HA HA HA\"\nA girl is sitting on the large figure's lap. \nYour eyes widen, you recognize that voice!\n\nNorth, a room of people huddled at a round table.",
             "N": 60,
             "S": 0,
             "E": 0,
@@ -883,7 +883,7 @@
             "A": 0,
             "B": 51,
             "attrib": 0,
-            "AltRoomDesc": "In the distance west, a large figure sitting in a King's chair.\nLaughing \"AH HA HA HA HA\"\nA girl is sitting on the large figure's lap. \n\nNorth, a room with people sitting at a table.\n",
+            "AltRoomDesc": "In the distance west, a large figure sitting in a King's chair.\nLaughing \"AH HA HA HA HA\"\nA girl is sitting on the large figure's lap. \n\nNorth, a room of people sitting at a table.\n",
             "X": 560.0,
             "Y": 115.0
         },
@@ -905,7 +905,7 @@
         {
             "RoomID": 61,
             "RoomName": "BadTalk",
-            "RoomDesc": "You are getting closer to the large figure.\nHe charmingly says to the Florence, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\nYou try to pay no mind to his words.\n\nNorth, a room full of bright colors and pictures that intrigue you.",
+            "RoomDesc": "You are getting closer to the large figure.\nHe charmingly says to the lady, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\nYou try to pay no mind to his words.\n\nNorth, a room full of bright colors and pictures that intrigue you. ",
             "N": 62,
             "S": 0,
             "E": 59,
@@ -913,14 +913,14 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "You are getting closer to the large figure.\nHe says to the Florence, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\n\nNorth, a room with bright colors and pictures from the past.\n",
+            "AltRoomDesc": "You are getting closer to the large figure.\nHe says to the lady, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\n\nNorth, a room with bright colors and pictures from the past.\n",
             "X": 500.0,
             "Y": 116.0
         },
         {
             "RoomID": 62,
             "RoomName": "Her Room",
-            "RoomDesc": "You walk into a room full of pictures and flowers. \nYou come across a picture that grabs your attention\nThe picture is of you and your lost love Florence! \nYou think to yourself, \"She never forgot me!\" \nA wave of energy runs through your veins\nThis energy is shortly lived, as the picture right next to that is of a larger man and Florence.\nThey look happily together.\nYou pace the room in rage.",
+            "RoomDesc": "You walk into a room full of pictures and flowers. \nYou come across a picture that grabs your attention\nThe picture is of you and your lost love Florence! \nYou think to yourself, \"She never forgot me!\" \nA wave of energy runs through your veins\nThis energy is shortly lived, the picture next to that is of the large figure and Florence.\nThey look happily together.\nYou pace the room in rage.",
             "N": 0,
             "S": 61,
             "E": 0,
@@ -928,14 +928,14 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "You walk into a room full of pictures and flowers. \nYou find a picture of you and your lost love Florence! \nA wave of energy runs through your veins\nThe picture right next to that is of a larger man and Florence.\nThey look happily together.\nYou pace the room in rage.",
+            "AltRoomDesc": "You walk into a room full of pictures and flowers. \nYou find a picture of you and your lost love Florence! \nA wave of energy runs through your veins\nThe picture right next to that is of the large figure and Florence.\nThey look happily together.\nYou pace the room in rage.",
             "X": 501.0,
             "Y": 56.0
         },
         {
             "RoomID": 63,
             "RoomName": "DisArray",
-            "RoomDesc": "The large figure is in rage, \"How did you get here?! \nYou have been banned from this kingdom, never to step foot in the Castle of Orina for eternity! \nOrdered to be executed and humiliated!\"\n\nFlorence gasps, speechless. ",
+            "RoomDesc": "The large figure is close enough to recgonize... \"King Thadeus!\" you roar.\nKing Thadeus is in rage, \"How did you get here?! \nYou have been banned from this kingdom, never to step foot in the Castle of Orina for eternity! \nOrdered to be executed and humiliated!\"\n\nFlorence gasps, speechless. ",
             "N": 0,
             "S": 0,
             "E": 61,
@@ -943,7 +943,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "The large figure is in rage, \"How did you get here?! \nYou have been banned from this kingdom, ordered to be executed and humiliated!\"\n\nFlorence gasps, speechless. ",
+            "AltRoomDesc": "King Thadeus is in rage, \"How did you get here?! \nYou have been banned from this kingdom, ordered to be executed and humiliated!\"\n\nFlorence gasps, speechless. ",
             "X": 440.0,
             "Y": 115.0
         },
