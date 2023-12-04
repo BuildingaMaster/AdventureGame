@@ -263,7 +263,7 @@
           </size>
          </property>
          <property name="text">
-          <string>NOTE: Not really implemented</string>
+          <string>Select attributes that apply in the room.</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -279,7 +279,7 @@
           <item row="4" column="1">
            <widget class="QCheckBox" name="Option8Check">
             <property name="text">
-             <string>Option 8</string>
+             <string>Armor 3</string>
             </property>
            </widget>
           </item>
@@ -300,14 +300,14 @@
           <item row="2" column="1">
            <widget class="QCheckBox" name="Option6Check">
             <property name="text">
-             <string>Option 6</string>
+             <string>Armor 1</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="QCheckBox" name="Option5Check">
             <property name="text">
-             <string>Option 5</string>
+             <string>Boomerang in room</string>
             </property>
            </widget>
           </item>
@@ -328,7 +328,7 @@
           <item row="3" column="1">
            <widget class="QCheckBox" name="Option7Check">
             <property name="text">
-             <string>Option 7</string>
+             <string>Armor 2</string>
             </property>
            </widget>
           </item>
