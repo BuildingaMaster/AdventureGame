@@ -20,6 +20,8 @@ private:
 	BaseHealth healthMGR;
 	bool playerIsHigh;
 	int stepsUntilNotHigh;
+	bool firstTimePlayerAttacks;
+	bool firstTimePlayerDodges;
 public:
 	// Constructor 
 	/// @brief sets HealthMGR equal to BaseHealth(PLAYER_HEALTH)
@@ -63,4 +65,10 @@ public:
 
 	/// @brief The player is asked to play the game again
 	bool playAgain();
+
+	/// @brief If the strikeUI is in tutorial mode.
+	bool checkAndFlipFirstAttack();
+
+	/// @brief If the dodgeUI is in tutorial mode.
+	bool checkAndFlipFirstDodge();
 };

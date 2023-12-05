@@ -26,6 +26,10 @@ void BaseHealth::addHP(int amount)
 
 int BaseHealth::checkHP()
 {
+    if (health <= 0)
+    {
+        health = 0;
+    }
     return health;
 }
 

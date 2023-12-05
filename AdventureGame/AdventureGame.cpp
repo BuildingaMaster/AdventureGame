@@ -53,9 +53,9 @@ int main()
 #ifndef _WIN32
 #ifndef GTESTING
     // Curses initalization.
-
+    setlocale(LC_ALL, "");        // Accept all types of characters.
     initscr();                    // Start curses
-    keypad(stdscr, TRUE);         //Capture all keys
+    keypad(stdscr, TRUE);         // Capture all keys
     noecho();                     // Dont echo keypresses, PrintDisplay handles it.
     scrollok(stdscr, TRUE);       // Scrolling is OK
     cout << "\033[?47l"<<flush;   // Normal Screen Buffer

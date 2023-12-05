@@ -34,6 +34,28 @@ public:
         /// @brief Displays "Press any key to continue . . ."
         static void pause();
 
+        /// @brief Displays the HitUI 
+        /// @param hitBox a string of '#' (hit) and 'O' (miss). IE: "000##"
+        /// @param MAX_RED How many red tiles to show (less than 24)
+        /// @param time_to_react How fast the cursor moves
+        /// @return If the hit succeeded.
+        static bool hitScreen(string, int);
+        
+        /// @brief Displays the dodgeUI for the player
+        /// @param iterations How many times the enemy can have sucessive attacks
+        /// @param disable_forward_tile Should the player be able to dodge forward?
+        /// @param more_than_one_tile Multi-tile mode
+        /// @param reaction_time How fast should the player react? (1111 is ideal.)
+        /// @return 
+        static int dodgeScreen(int, bool, bool, int);
+
+        /// @brief Displays the default DodgeUI 
+        /// @return If the player dodged.
+        static int dodgeScreen();
+
+        /// @brief Print a cool looking box.
+        static void printMoveBox(bool, bool, bool, bool);
+
 #ifdef GTESTING
         static std::string GT_inStr;
 

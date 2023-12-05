@@ -3,6 +3,8 @@
 
 #ifndef _WIN32
 #include <ncurses.h>
+#include <locale.h>
+
 #else
 #include <conio.h>
 #define getch() _getwch()
@@ -49,6 +51,52 @@ char readCH()
 #else
         return getch();
 #endif
+}
+
+void ignoreCH()
+{
+#ifdef _WIN32
+    while (_kbhit())
+    {
+        readCH();
+    }
+#else
+    flushinp();
+#endif
+}
+
+/// @brief Remove all formatting from the terminal
+void effectReset()
+{
+    PrintDisplay::no_effect_flush();
+    cout << "\033[0m" << std::flush;
+    PrintDisplay::no_effect_flush();
+}
+
+/// @brief Color the background bright red.
+void addRedBackground()
+{
+    cout << "\033[101m" << std::flush;
+    PrintDisplay::no_effect_flush();    
+}
+
+/// @brief Adds the color before printing the box.
+/// @param shouldColor Should the box be colored.
+void preDrawCenter(bool shouldColor)
+{
+    PrintDisplay::no_effect_flush();
+    if (shouldColor)
+    {
+        addRedBackground();
+    }    
+}
+
+/// @brief preDrawCenter, but adds a few spaces before preDrawing.
+/// @param shouldColor Should the box be colored.
+void preDrawUpDown(bool shouldColor)
+{
+    PrintDisplay::custom_cout << "      ";
+    preDrawCenter(shouldColor);
 }
 
 void PrintDisplay::flush()
@@ -350,3 +398,509 @@ void PrintDisplay::pause()
     PrintDisplay::no_effect_flush();
 }
 
+bool PrintDisplay::hitScreen(string hitBox, int time_to_react)
+{
+    // The tutorial, only happens when first triggered.
+    if (CommonGameObjects::PAManager->checkAndFlipFirstAttack())
+    {
+        PrintDisplay::custom_cout << "\nTime to attack!\n";
+
+        PrintDisplay::custom_cout << "Wait until the cursor is over ";
+
+        // Made this text have a Green background.
+        PrintDisplay::no_effect_flush();
+        cout << "\033[102m" << std::flush; // BG Green
+        //PrintDisplay::no_effect_flush();
+        PrintDisplay::custom_cout << "the green bar";
+        PrintDisplay::no_effect_flush();
+        cout << "\033[0m" << std::flush; // BG None
+        PrintDisplay::custom_cout << " to attack.\n";
+
+        PrintDisplay::custom_cout << "When that happens, press any key to launch your attack!\n";
+
+        PrintDisplay::custom_cout << "\nIf your cursor is on a ";
+
+        // Made this text have a Red background with white-ish text.
+        PrintDisplay::no_effect_flush();
+        cout << "\033[41m" << std::flush; // BG Red
+        cout << "\033[37m" << std::flush; // FG White
+        PrintDisplay::custom_cout << "red tile";
+        PrintDisplay::no_effect_flush();
+        cout << "\033[0m" << std::flush;  // BG+FG None
+
+        PrintDisplay::custom_cout << ", you missed, and will be vulnerable.\n";
+        PrintDisplay::custom_cout << "Good luck, and don't die on the first hit!\n";
+        PrintDisplay::pause();
+    }
+    
+    // Tell player how this works.
+    PrintDisplay::custom_cout << "Strike with any key when Green!" << '\n';
+    PrintDisplay::no_effect_flush();
+    
+    // Pre-write the colors,
+    // this prevents the terminal from being overwritten with collor
+    // Number of lines allowed
+    int TOTAL_LINE = hitBox.size();
+
+    for (auto &c : hitBox)
+    {
+        // Space, then go back
+        PrintDisplay::custom_cout << ' ' << '\b';
+        PrintDisplay::no_effect_flush();
+        switch (c)
+        {
+            case '#':
+            {
+                cout << "\033[102m" << std::flush; // Bright Green BG
+                break;
+            }
+            default:
+            {
+                cout << "\033[41m" << std::flush; // Red BG
+                break;
+            }
+        }
+        PrintDisplay::custom_cout << ' ';
+        PrintDisplay::no_effect_flush();
+
+        cout << "\033[0m" << std::flush; // Clear BG
+        PrintDisplay::no_effect_flush();
+    }
+
+    // Add an extra space 
+    // Prevents the whole terminal from being colored.
+    PrintDisplay::custom_cout << ' ';
+    PrintDisplay::no_effect_flush();
+    PrintDisplay::custom_cout << "\r";
+    PrintDisplay::no_effect_flush();
+
+    int cursorOnColumn = 0;
+
+    // Instead of waiting for the system to get a key press
+    // We want to know if a key press happens every ~50ms.
+    // If not, it returns nothing (or null)
+#ifndef _WIN32
+    nodelay(stdscr, TRUE);
+#endif
+
+    // If the user doesn't type anything,
+    // continue the loop
+#ifndef _WIN32
+    while (readCH() == ERR) // AKA: The user didn't press a key.
+#else
+    while(!_kbhit()) // AKA: The user didn't press a key.
+#endif
+    {
+        if (hitBox[cursorOnColumn] == '#') // Cursor on green
+        {
+            cout << "\033[102m" << std::flush;
+            PrintDisplay::custom_cout << ' ';
+            PrintDisplay::no_effect_flush();
+            //cout << "\033[0m" << std::flush;
+            PrintDisplay::no_effect_flush();
+        }
+
+        else // Cursor on red
+        {
+            cout << "\033[41m" << std::flush;
+            PrintDisplay::custom_cout << ' ';
+            PrintDisplay::no_effect_flush();
+            //cout << "\033[0m" << std::flush;
+            PrintDisplay::no_effect_flush();
+        }
+        cursorOnColumn++; // Move to next block
+        if (cursorOnColumn>TOTAL_LINE-1) // Go back to the start.
+        {
+            cout << "\033[0m" << std::flush;
+            PrintDisplay::custom_cout << "\r";
+            PrintDisplay::no_effect_flush();
+            cursorOnColumn=0;
+        }
+        this_thread::sleep_for(chrono::milliseconds(time_to_react)); // Pause by 50ms
+    }
+#ifndef _WIN32
+    // Return to the regular character waiting mode.
+    nodelay(stdscr, FALSE);
+#else 
+    // Get the character, but ignore it.
+    // If not done, a double input would occur.
+    getch();
+#endif
+
+    // Hit marker: on the current space, color the background grey.
+    cout << "\033[48;5;252m" << std::flush;
+    PrintDisplay::custom_cout << "#";
+    PrintDisplay::no_effect_flush();
+
+    // Stop coloring.
+    cout << "\033[0m" << std::flush;
+
+    bool hitLanded = false;
+    if (hitBox[cursorOnColumn] != '#')
+    {
+        PrintDisplay::custom_cout << "\nYou MISSED!\n";
+        hitLanded = false;
+    }
+    else
+    {
+        PrintDisplay::custom_cout << "\nNice hit!\n";
+        hitLanded = true;
+    } 
+    PrintDisplay::no_effect_flush();
+    return hitLanded;
+}
+
+int PrintDisplay::dodgeScreen()
+{
+    return PrintDisplay::dodgeScreen(1, true, false, 1111);
+}
+
+int PrintDisplay::dodgeScreen(int iterations, bool disable_forward_tile, bool more_than_one_tile, int reaction_time)
+{
+    ignoreCH();
+    std::random_device rd;  
+    std::mt19937 gen(rd()); 
+    
+
+    char ch = 0;
+    int hitPoints = 0;
+    int number_of_directions = 4 - static_cast<int>(disable_forward_tile);
+    bool upRed = disable_forward_tile;
+    bool downRed = false;
+    bool leftRed = false;
+    bool rightRed = false;
+    std::uniform_int_distribution<int> msRandom(800, 1400);
+    std::uniform_int_distribution<int> RNG_Directions(1, pow(2, number_of_directions)-1);
+    std::uniform_int_distribution<int> RNG_power(0, number_of_directions - 1);
+
+    // How to dodge
+    if (CommonGameObjects::PAManager->checkAndFlipFirstDodge() == true) // User never dodged before.
+    {
+        PrintDisplay::custom_cout << "\nThe enemy fights back!\n";
+        PrintDisplay::custom_cout << "Don't worry, you can dodge attacks, but you need to be quick.\n\n";
+        PrintDisplay::custom_cout << "When this box appears:\n";
+        PrintDisplay::no_effect_flush();
+
+        PrintDisplay::printMoveBox(false,false,false,false); // Just an empty box. 
+        
+        PrintDisplay::custom_cout << "\nPress any arrow key to dodge the attack.\n";
+        PrintDisplay::custom_cout << "However, If the box is colored ";
+
+        PrintDisplay::no_effect_flush();
+        cout << "\033[91m" << std::flush;
+        PrintDisplay::no_effect_flush();    
+
+        PrintDisplay::custom_cout << "red";
+        effectReset();
+
+        PrintDisplay::custom_cout << ", don't dodge in that direction!\n";
+        PrintDisplay::custom_cout << "Otherwise, you'll get hit by the enemy.\n";
+
+        PrintDisplay::custom_cout << "Good luck, and don't die on the first hit!\n";
+        PrintDisplay::pause();
+    }
+
+
+    // Instead of waiting for the system to get a key press
+    // We want to know if a key press happens every ~50ms.
+    // If not, it returns nothing (or null)
+#ifndef _WIN32
+    nodelay(stdscr, TRUE);
+#endif
+
+    PrintDisplay::custom_cout << "The enemy prepares their attack...\n";
+    PrintDisplay::no_effect_flush();
+
+    this_thread::sleep_for(chrono::milliseconds(msRandom(gen))); // Pause by 50ms
+
+    for (int number_of_times = 0; number_of_times < iterations; number_of_times ++)
+    {
+        PrintDisplay::custom_cout << "THE ENEMY ATTACKS ";
+        int attackedat = 0;
+        if (more_than_one_tile)
+        {
+            PrintDisplay::custom_cout << "IN MULTIPLE DIRECTIONS!!!";
+            attackedat = RNG_Directions(gen);            
+            
+            if (attackedat == static_cast<int>(pow(2, number_of_directions)-1))
+            {
+                attackedat = attackedat - pow(2, RNG_power(gen));
+            }
+            leftRed = attackedat & 1;
+            rightRed = attackedat >> 1 & 1;
+            downRed = attackedat >> 2 & 1;
+            upRed = (attackedat >> 3 & 1) || disable_forward_tile;
+        }
+        else
+        {
+            switch (rand() % number_of_directions)
+            {
+                case 0:
+                {
+                    downRed = true;
+                    //attackedat = pow(3,2);
+                    PrintDisplay::custom_cout << "TOWARDS YOU!!!";
+                    break;
+                }
+                case 1:
+                {
+                    leftRed = true;
+                    //attackedat = pow(0,2);
+                    PrintDisplay::custom_cout << "TO THE LEFT!!!";
+                    break;
+                }
+                case 2:
+                {
+                    rightRed = true;
+                    //attackedat = pow(1,2);
+                    PrintDisplay::custom_cout << "TO THE RIGHT!!!";
+                    break;
+                }
+                case 3:
+                {
+                    upRed = true;
+                    //attackedat = pow(2,2);
+                    PrintDisplay::custom_cout << "FROM BEHIND!!!";
+                    break;
+                }
+            }
+        }
+        PrintDisplay::custom_cout << "\n";
+        PrintDisplay::no_effect_flush();
+        PrintDisplay::printMoveBox(upRed, downRed, leftRed, rightRed);
+
+
+        // If the user doesn't type anything,
+        // continue the loop
+        chrono::milliseconds initTime = chrono::duration_cast< chrono::milliseconds >(
+            chrono::system_clock::now().time_since_epoch()
+        );
+        initTime += chrono::milliseconds(reaction_time);
+
+
+    #ifndef _WIN32
+        ignoreCH();
+        while ((ch = readCH()) && ch == ERR && initTime >= chrono::duration_cast< chrono::milliseconds >(chrono::system_clock::now().time_since_epoch())); // AKA: The user didn't press a key.
+    #else
+        // Windows doesn't really have a way to flush anything from readCH().
+        // But we can see if the keyboard was hit when the thread was paused,
+        // And manually remove characters by reading/ignoring them.
+        ignoreCH();
+        while(!_kbhit() && initTime >= chrono::duration_cast< chrono::milliseconds >(chrono::system_clock::now().time_since_epoch())); // AKA: The user didn't press a key.
+    #endif
+
+    // Times up or user entered a key.
+
+    #ifdef _WIN32
+        // Get the character, if there is one.
+        if (_kbhit() == true) 
+        {
+            ch = readCH(); //Get Scan code
+        }
+
+        if (ch == -32) // Not a arrow key.
+        {
+            ch = readCH(); // Get Key
+        }
+        // For some reason, readCH DOES return ANSI escape codes for some reason.
+        // Maybe it has something to do with _kbhit()?
+        else if (ch == '\x1b' && readCH() == '[') //ANSI escape code
+        {
+            ch = readCH();
+        }
+        else
+        {
+            ch = 0; // Did not press a valid key dodge failed.
+        }
+    #endif
+
+
+    // Where did the player dodge to?
+    #ifdef _WIN32
+        if (( ch == 'D' || ch == 'K') && !leftRed) // Left arrow key
+    #else
+        if (ch == '\x04'  && !leftRed) // Left arrow key
+
+    #endif
+        {
+            PrintDisplay::custom_cout <<"You moved left and dodged the attack!\n";
+            PrintDisplay::no_effect_flush();
+            continue;
+        }
+    #ifdef _WIN32
+        else if ((ch == 'C' || ch == 'M') && !rightRed) // Right arrow key
+    #else
+        else if (ch == '\x05' && !rightRed) // Right arrow key
+    #endif
+        {
+            PrintDisplay::custom_cout << "You moved right and dodged the attack!\n";
+            PrintDisplay::no_effect_flush();
+            continue;
+        }
+    #ifdef _WIN32
+        else if (ch == 'A' || ch == 'H') // Up arrow key
+    #else
+        else if (ch == '\x03') // Up arrow key
+    #endif
+        {
+            if (upRed)
+            {
+                PrintDisplay::custom_cout << "You moved toward the enemy, and definitely got hit.\n";
+                PrintDisplay::no_effect_flush();
+                hitPoints++;
+                continue;
+            }
+            else
+            {
+                PrintDisplay::custom_cout << "You lunged forward and dodged the attack!\n";
+                PrintDisplay::no_effect_flush();
+                continue;
+            }
+        }
+    #ifdef _WIN32
+        else if ((ch == 'B' || ch == 'P') && !downRed) // Down arrow key
+    #else
+        else if (ch == '\x02' && !downRed) // Down arrow key
+    #endif
+        {
+            PrintDisplay::custom_cout << "You moved back and dodged the attack!\n";
+            PrintDisplay::no_effect_flush();
+            continue;
+        }
+
+        if (ch == -1 || ch == 0)
+        {
+            PrintDisplay::custom_cout << "You stood still and took the hit.\n";
+        }
+        else
+        {
+            PrintDisplay::custom_cout << "You got hit from the attack!\n";
+        }
+        PrintDisplay::no_effect_flush();
+        hitPoints++;
+    }
+    if (iterations > 1 && hitPoints == 0)
+    {
+        PrintDisplay::custom_cout << "\nYou dodged all of the attacks!\n";
+        PrintDisplay::no_effect_flush();
+    }
+    else if (iterations > 1 && hitPoints > 0)
+    {
+        PrintDisplay::custom_cout << "\nYou got hit "<< hitPoints <<" time";
+        if (hitPoints > 1)
+        {
+            PrintDisplay::custom_cout << "s";
+        }
+        PrintDisplay::custom_cout << "!\n";
+        PrintDisplay::no_effect_flush(); 
+    }
+#ifndef _WIN32
+    // Return to the regular character waiting mode.
+    nodelay( stdscr, FALSE);
+#endif
+    return hitPoints;
+}
+
+void PrintDisplay::printMoveBox(bool upRed, bool downRed, bool leftRed, bool rightRed)
+{   
+    PrintDisplay::no_effect_flush();
+
+    // Print Up arrow box
+    preDrawUpDown(upRed);
+    PrintDisplay::custom_cout << u8"\u250C\u2500\u2500\u2500\u2510";
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+
+    
+    preDrawUpDown(upRed);
+    PrintDisplay::custom_cout << u8"\u2502 \u039B \u2502";
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+
+    preDrawUpDown(upRed);
+    PrintDisplay::custom_cout << u8"\u2502 \u2502 \u2502";
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+
+    preDrawUpDown(upRed);
+    PrintDisplay::custom_cout << u8"\u2514\u2500\u2500\u2500\u2518";
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+
+    // Tops of center boxes
+    preDrawCenter(leftRed);
+    PrintDisplay::custom_cout << u8"\u250C\u2500\u2500\u2500\u2500\u2510"; // L
+    effectReset();
+
+    //preDrawCenter(true);
+    PrintDisplay::custom_cout << u8"\u250C\u2500\u2500\u2500\u2510"; // C
+    effectReset();
+
+    preDrawCenter(rightRed);
+    PrintDisplay::custom_cout << u8"\u250C\u2500\u2500\u2500\u2500\u2510";// R
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+
+    // Middles of center boxes
+    preDrawCenter(leftRed);
+    PrintDisplay::custom_cout << u8"\u2502<\u2500\u2500 \u2502"; // L
+    effectReset();
+
+    //preDrawCenter(true);
+    PrintDisplay::custom_cout << u8"\u2502YOU\u2502"; // C
+    effectReset();
+
+    preDrawCenter(rightRed);
+    PrintDisplay::custom_cout << u8"\u2502 \u2500\u2500>\u2502";// R
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+
+
+    // Lowers of center boxes
+    preDrawCenter(leftRed);
+    PrintDisplay::custom_cout << u8"\u2514\u2500\u2500\u2500\u2500\u2518";
+    effectReset();
+
+    //preDrawCenter(true);
+    PrintDisplay::custom_cout << u8"\u2514\u2500\u2500\u2500\u2518";
+    effectReset();
+
+    preDrawCenter(rightRed);
+    PrintDisplay::custom_cout << u8"\u2514\u2500\u2500\u2500\u2500\u2518";
+    effectReset();  
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+
+
+
+    // Print down arrow box
+    preDrawUpDown(downRed);
+    PrintDisplay::custom_cout << u8"\u250C\u2500\u2500\u2500\u2510";
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+
+    preDrawUpDown(downRed);
+    PrintDisplay::custom_cout << u8"\u2502 \u2502 \u2502";
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+    
+    preDrawUpDown(downRed);
+    PrintDisplay::custom_cout << u8"\u2502 V \u2502";
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+
+    preDrawUpDown(downRed);
+    PrintDisplay::custom_cout << u8"\u2514\u2500\u2500\u2500\u2518";
+    effectReset();
+    PrintDisplay::custom_cout << "\n";
+    PrintDisplay::no_effect_flush();
+}
