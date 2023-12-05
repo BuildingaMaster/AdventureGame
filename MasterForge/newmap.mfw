@@ -980,7 +980,7 @@
         {
             "RoomID": 66,
             "RoomName": "Princess",
-            "RoomDesc": "THIS ROOM CAN ONLY BE ENTERED IF BOSS IS DEFEATED OR DRAGON IS DEFEATED ",
+            "RoomDesc": "You exhaustedly walk up to Florence; she smiles at you.\nYour destiny has been accomplished.\nYou are face to face with the reason you came this far.\n",
             "N": 0,
             "S": 0,
             "E": 65,
@@ -988,7 +988,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "",
+            "AltRoomDesc": "You exhaustedly walk up to Florence.\nYour mission is done.\nYou are face to face with your love.",
             "X": 260.0,
             "Y": 117.0
         }
