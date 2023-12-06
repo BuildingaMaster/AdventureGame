@@ -845,7 +845,7 @@
         {
             "RoomID": 57,
             "RoomName": "DRAGON",
-            "RoomDesc": "You shine your torch up to the steel cell and the creature opens one eye that stares through your soul.\nYou jump back and crush a skull. \nTHE DRAGON AWAKES IN RAGE!\n\nThe dragon roars in anger and blows fire that throws you back.\n\nTime to fight!",
+            "RoomDesc": "You shine your torch up to the steel cell and the creature opens one eye that stares through your soul.\nYou jump back and crush a skull.",
             "N": 0,
             "S": 0,
             "E": 58,
@@ -853,7 +853,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "You jump back and crush a skull. \nTHE DRAGON AWAKES IN RAGE!\nTime to fight!",
+            "AltRoomDesc": "Clumsily step back and crush yet another skull.\nAre you doing this on purpose?",
             "X": 863.0,
             "Y": 118.0
         },
@@ -905,7 +905,7 @@
         {
             "RoomID": 61,
             "RoomName": "BadTalk",
-            "RoomDesc": "You are getting closer to the large figure.\nHe charmingly says to the lady, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\nYou try to pay no mind to his words.\n\nNorth, a room full of bright colors and pictures that intrigue you. ",
+            "RoomDesc": "You are getting closer to the large figure.\nHe charmingly says to the lady, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\nYou try to pay no mind to his words.\n\nDue north, you see a room full of bright colors and pictures that intrigue you. ",
             "N": 62,
             "S": 0,
             "E": 59,
