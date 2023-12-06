@@ -187,7 +187,7 @@ bool Inventory::processCommand(vector<string> args)
         multiSelect = true;
     }
 
-    if (args[0] == "pick" || args[0] == "grab" || args[0] == "take")
+    if (args[0] == "pick" || args[0] == "grab" || args[0] == "take" || args[0] == "get")
     {
 
         for (int i = 0; i < itemMap[roomID].size(); i++) // Grab pass
