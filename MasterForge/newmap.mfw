@@ -815,7 +815,7 @@
         {
             "RoomID": 55,
             "RoomName": " BurntApp",
-            "RoomDesc": "You look down and see dead gatekeepers, many missing limbs, blood oozing from them.\nThey all coincidentally have burn scars. \nOne gatekeeper opens his eyes and tries to muster the strength to talk, but all that comes out is \"Hel...\" and then his eyes close, lifeless.\n\n\n",
+            "RoomDesc": "You look down and see dead gatekeepers, many missing limbs, blood oozing from them.\nThey all coincidentally have burn scars. \nOne gatekeeper opens his eyes and tries to muster the strength to talk, but all that comes out is \"Hel...\" and then his eyes close, lifeless.",
             "N": 0,
             "S": 53,
             "E": 0,
@@ -823,7 +823,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "You look down and see dead gatekeepers, many missing limbs.\nBurn scars cover them. \nOne gatekeeper opens his eyes and says,\"Hel...\" and then his eyes close, lifeless.\n",
+            "AltRoomDesc": "You look down and see dead gatekeepers, many missing limbs.\nBurn scars cover them. \nOne gatekeeper opens his eyes and says,\"Hel...\" and then his eyes close, lifeless.",
             "X": 741.0,
             "Y": 57.0
         },
@@ -875,7 +875,7 @@
         {
             "RoomID": 59,
             "RoomName": "A Spark",
-            "RoomDesc": "In the distance west, at the end of the hallway is a large figure sitting in a King's chair.\nLaughing \"AH HA HA HA HA\"\nA girl is sitting on the large figure's lap. \nYour eyes widen, you recognize that voice!\n\nNorth, a room of people huddled at a round table.",
+            "RoomDesc": "In the distance west, at the end of the hallway is a large figure sitting in a King's chair.\nIts booming laughter can be heard throughout the chambers.\nA girl is sitting on the large figure's lap. \nYour eyes widen, you recognize that voice!\n\nNorth, a room of people huddled at a round table.",
             "N": 60,
             "S": 0,
             "E": 0,
@@ -883,7 +883,7 @@
             "A": 0,
             "B": 51,
             "attrib": 0,
-            "AltRoomDesc": "In the distance west, a large figure sitting in a King's chair.\nLaughing \"AH HA HA HA HA\"\nA girl is sitting on the large figure's lap. \n\nNorth, a room of people sitting at a table.\n",
+            "AltRoomDesc": "In the west, a large figure sitting in a King's chair.\nIts booming laughter can be heard throughout the chambers.\nA girl is sitting on the large figure's lap. \n\nDue north, a room of people sitting at a table.\n",
             "X": 560.0,
             "Y": 115.0
         },
@@ -898,7 +898,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "A bunch of degenerate folks  turn your way.\nThey look like they haven't seen the sun in days.\nTheir eyes are bloodshot, hair looking crazy.\n",
+            "AltRoomDesc": "A bunch of degenerate folks turn your way.\nThey look like they haven't seen the sun in days.\nTheir eyes are bloodshot, hair looking crazy.\n",
             "X": 561.0,
             "Y": 56.0
         },
@@ -913,14 +913,14 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "You are getting closer to the large figure.\nHe says to the lady, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\n\nNorth, a room with bright colors and pictures from the past.\n",
+            "AltRoomDesc": "You are getting closer to the large figure.\nHe says to the lady, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\n\nDue north, you can see a room with bright colors and pictures from the past.\n",
             "X": 500.0,
             "Y": 116.0
         },
         {
             "RoomID": 62,
             "RoomName": "Her Room",
-            "RoomDesc": "You walk into a room full of pictures and flowers. \nYou come across a picture that grabs your attention\nThe picture is of you and your lost love Florence! \nYou think to yourself, \"She never forgot me!\" \nA wave of energy runs through your veins\nThis energy is shortly lived, the picture next to that is of the large figure and Florence.\nThey look happily together.\nYou pace the room in rage.",
+            "RoomDesc": "You walk into a room full of pictures and flowers. \nYou come across a picture that grabs your attention.\nThe picture is of you and your lost love Florence! \nYou think to yourself, \"She never forgot me!\" \nA wave of energy runs through your veins.\nThis energy is shortly lived, the picture next to that is of the large figure and Florence.\nThey look happily together.\nYou pace the room in rage.",
             "N": 0,
             "S": 61,
             "E": 0,
@@ -928,14 +928,14 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "You walk into a room full of pictures and flowers. \nYou find a picture of you and your lost love Florence! \nA wave of energy runs through your veins\nThe picture right next to that is of the large figure and Florence.\nThey look happily together.\nYou pace the room in rage.",
+            "AltRoomDesc": "You walk into a room full of pictures and flowers. \nYou find a picture of you and your lost love Florence! \nA wave of energy runs through your veins.\nThe picture right next to that is of the large figure and Florence.\nThey look happily together.\nYou pace the room in rage.",
             "X": 501.0,
             "Y": 56.0
         },
         {
             "RoomID": 63,
             "RoomName": "DisArray",
-            "RoomDesc": "The large figure is close enough to recgonize... \"King Thadeus!\" you roar.\nKing Thadeus is in rage, \"How did you get here?! \nYou have been banned from this kingdom, never to step foot in the Castle of Orina for eternity! \nOrdered to be executed and humiliated!\"\n\nFlorence gasps, speechless. ",
+            "RoomDesc": "The large figure is close enough to recognize... \"King Thadeus!\" you roar.\nKing Thadeus is in rage, \"How did you get here?! \nYou have been banned from this kingdom, never to step foot in the Castle of Orina for eternity! \nOrdered to be executed and humiliated!\"\n\nFlorence gasps, speechless. ",
             "N": 0,
             "S": 0,
             "E": 61,
@@ -965,7 +965,7 @@
         {
             "RoomID": 65,
             "RoomName": "THE BOSS",
-            "RoomDesc": "Thadeus gives Florence a kiss, then smiles at you.\nYou clench your fist and your face turns red. \nThadeus smirks at you and says, \"Come get some you coinless hobbit\" \n\nYou scream \"AHHHHH\" and run full speed towards Thadeus. ",
+            "RoomDesc": "Thadeus gives Florence a kiss, then smiles at you.\nYou clench your fist and your face turns red. \nThadeus smirks at you and says, \"Come get some you coinless hobbit!\" \n\nYou scream \"AHHHHH\" and run full speed towards Thadeus. ",
             "N": 0,
             "S": 0,
             "E": 64,
