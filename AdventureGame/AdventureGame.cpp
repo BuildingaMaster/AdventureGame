@@ -25,6 +25,7 @@
 #include "Inventory.h"
 #include "Consumable.h"
 #include "ContextParser.h"
+#include "Weapon.h"
 
 #include "CommonGameObjects.h"
 #include "NPC.h"
@@ -127,7 +128,7 @@ int main()
 #endif
     time_t starttime = time(0);
     srand(starttime);
-    if (locationManager::init() == false || NPCManager::init() == false)
+    if (locationManager::init() == false || NPCManager::init() == false || WeaponManager::init() == false)
     {
         locationManager::deinit();
         PrintDisplay::pause();
@@ -189,6 +190,7 @@ int main()
 
     locationManager::deinit();
     NPCManager::deinit();
+    WeaponManager::deinit();
 
     // Save the commands to a file.
     ofstream cmdHistoryFile;

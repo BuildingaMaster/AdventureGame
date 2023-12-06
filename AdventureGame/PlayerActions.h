@@ -6,6 +6,7 @@
 
 #include "BaseHealth.h"
 #include "NPC.h"
+#include "Weapon.h"
 
 #define PLAYER_HEALTH 3
 
@@ -67,7 +68,7 @@ public:
 
 	/// @brief The effect slowly wears off.
 	void decrementMovingHigh();
-	std::string playerActionsValidCommands = "check hit ";
+	std::string playerActionsValidCommands = "check hit throw ";
 
 	/// @brief The player is asked to play the game again
 	bool playAgain();

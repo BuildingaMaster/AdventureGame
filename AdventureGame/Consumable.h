@@ -23,11 +23,12 @@ private:
 public:
 	consumableType getConsumType();
 	Consumable(consumableType, double);
+	Consumable();
 	/// @brief The player can eat the item
 	/// @param  player A reference to the PlayerActions object 
 	void consume(PlayerActions*);
-	~Consumable();
-	Consumable();
+	virtual ~Consumable() = default;
 	virtual void action() {}; // Does nothing
+	virtual void lol() {};
 };
 

@@ -39,7 +39,7 @@ public:
         /// @param MAX_RED How many red tiles to show (less than 24)
         /// @param time_to_react How fast the cursor moves
         /// @return If the hit succeeded.
-        static bool hitScreen(string, int);
+        static bool hitScreen(std::string, int);
         
         /// @brief Displays the dodgeUI for the player
         /// @param iterations How many times the enemy can have sucessive attacks
