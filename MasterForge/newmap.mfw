@@ -57,7 +57,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 16,
             "AltRoomDesc": "You're on a sandy beach.\nThere is a vast sea to the West.\nYou cant swim and hate sand.",
             "X": 5.0,
             "Y": 517.0

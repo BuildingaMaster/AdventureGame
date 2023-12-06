@@ -10,6 +10,7 @@
 #include "ContextParser.h"
 #include "Location.h"
 #include "CommonGameObjects.h"
+#include "Weapon.h"
 
 
 using namespace std;
@@ -79,7 +80,7 @@ bool PlayerActions::processCommand(vector<string> args)
             {
                 if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOO#####", 50))
                 {
-                    if (wolf->takeDamage(1))
+                    if (wolf->takeDamage(WeaponManager::getCurrentWeapon()->getDamageAmount()))
                     {
                         PrintDisplay::custom_cout << "\nYou hit the wolf. It has " << wolf->getLives() << " lives remaining.\n";
                         PrintDisplay::flush();
@@ -134,7 +135,7 @@ bool PlayerActions::processCommand(vector<string> args)
             {
                 if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOOOO###", 50))
                 {
-                    if (knight->takeDamage(1))
+                    if (knight->takeDamage(WeaponManager::getCurrentWeapon()->getDamageAmount()))
                     {
                         PrintDisplay::custom_cout << "\nYou hit the knight. It has " << knight->getLives() << " lives remaining.\n";
                         PrintDisplay::flush();
@@ -232,6 +233,11 @@ bool PlayerActions::processCommand(vector<string> args)
                 return false;
             }
         }
+    }
+    else if (args[0] == "throw" && args[1] == "boomerang" && WeaponManager::getCurrentWeapon()->getWeaponType() == boomerang)
+    {
+        WeaponManager::getCurrentWeapon()->action();
+        return true;
     }
 
     // Nothing else to do.

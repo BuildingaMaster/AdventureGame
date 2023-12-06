@@ -26,6 +26,7 @@ class NPCManager
 public:
     static bool init();
     static bool scanForNPC(string);
+    static vector<NPC*>& getNPCsInRoom();
     static map<int, vector<NPC*>> NPCMap;
     static NPC* returnNPC(string);
     static void deinit();

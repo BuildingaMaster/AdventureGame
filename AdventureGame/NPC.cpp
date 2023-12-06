@@ -79,6 +79,12 @@ bool NPCManager::scanForNPC(string NPCname)
     return returnNPC(NPCname) != nullptr;
 }
 
+vector<NPC*>& NPCManager::getNPCsInRoom()
+{
+    uint32_t roomID = locationManager::getCurrentLocation()->getLocationID();
+    return NPCManager::NPCMap[roomID];
+}
+
 map<int, vector<NPC*>> NPCManager::NPCMap;
 
 

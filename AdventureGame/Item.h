@@ -18,7 +18,8 @@ public:
     itemType getType();
     void setItemName(std::string);
     std::string getItemName();
-    virtual void action() {};  // Does nothing
+    virtual void action() = 0;  // Does nothing
+    virtual ~Item() = default;
 #ifdef GTESTING
 public:
 #else
