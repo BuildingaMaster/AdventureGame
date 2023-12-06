@@ -1,6 +1,6 @@
 {
     "version": 1.1,
-    "iteration": 41,
+    "iteration": 67,
     "data": [
         {
             "RoomID": 1,
@@ -14,8 +14,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "This is where you woke up.\nThere are trees in every direction.",
-            "X": 351.0,
-            "Y": 370.0
+            "X": 129.0,
+            "Y": 518.0
         },
         {
             "RoomID": 2,
@@ -29,8 +29,8 @@
             "B": 0,
             "attrib": 2,
             "AltRoomDesc": "Here's the spot where you found a mushroom patch.",
-            "X": 351.0,
-            "Y": 310.0
+            "X": 127.0,
+            "Y": 459.0
         },
         {
             "RoomID": 3,
@@ -44,8 +44,8 @@
             "B": 0,
             "attrib": 1,
             "AltRoomDesc": "So many apples on this tree, better take some.",
-            "X": 353.0,
-            "Y": 249.0
+            "X": 128.0,
+            "Y": 397.0
         },
         {
             "RoomID": 4,
@@ -59,8 +59,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "You're on a sandy beach.\nThere is a vast sea to the West.\nYou cant swim and hate sand.",
-            "X": 227.0,
-            "Y": 369.0
+            "X": 5.0,
+            "Y": 517.0
         },
         {
             "RoomID": 5,
@@ -74,8 +74,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "You are surrounded by trees, in the vast wilderness.",
-            "X": 351.0,
-            "Y": 429.0
+            "X": 127.0,
+            "Y": 579.0
         },
         {
             "RoomID": 6,
@@ -89,8 +89,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "A massive mountain blocks your path to the South.\nThere's no way you're getting around it.",
-            "X": 351.0,
-            "Y": 490.0
+            "X": 128.0,
+            "Y": 639.0
         },
         {
             "RoomID": 7,
@@ -104,8 +104,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "There is a dark cave entrance to the north.\nThe cliff path continues to the east and west.\nIt seems like you can climb down to the south from here.",
-            "X": 352.0,
-            "Y": 64.0
+            "X": 129.0,
+            "Y": 218.0
         },
         {
             "RoomID": 8,
@@ -119,8 +119,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "A strange and empty shack.\nWho did it belong to?\nA powerful object grabs your attention.",
-            "X": 413.0,
-            "Y": 371.0
+            "X": 190.0,
+            "Y": 518.0
         },
         {
             "RoomID": 9,
@@ -134,8 +134,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "The mosquitoes are all over you!\nChatter is heard in the east \n",
-            "X": 475.0,
-            "Y": 370.0
+            "X": 250.0,
+            "Y": 518.0
         },
         {
             "RoomID": 10,
@@ -149,8 +149,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "You are back in the town square.\nThe villagers here seem like they recognize you.\nA small path north, to a large building on a hill.\nTo the south, a small collection of carts seems to form a market.",
-            "X": 540.0,
-            "Y": 369.0
+            "X": 311.0,
+            "Y": 519.0
         },
         {
             "RoomID": 11,
@@ -164,8 +164,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "This is the town hall, overlooking the village to the south.\nThat picture on the bounty board keeps drawing your attention.",
-            "X": 541.0,
-            "Y": 305.0
+            "X": 313.0,
+            "Y": 457.0
         },
         {
             "RoomID": 12,
@@ -179,8 +179,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "This bustling square is the village marketplace.\nMaybe you can find someone to buy or sell from.",
-            "X": 541.0,
-            "Y": 432.0
+            "X": 311.0,
+            "Y": 577.0
         },
         {
             "RoomID": 13,
@@ -194,8 +194,8 @@
             "B": 0,
             "attrib": 1,
             "AltRoomDesc": "A small ring of stones surrounds a lone apple tree.\nThere are trees as far as the eye can see.",
-            "X": 606.0,
-            "Y": 369.0
+            "X": 370.0,
+            "Y": 532.0
         },
         {
             "RoomID": 14,
@@ -209,8 +209,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "Trees surround you in all directions.\nThe chirping of birds seems to taunt you.",
-            "X": 672.0,
-            "Y": 369.0
+            "X": 436.0,
+            "Y": 531.0
         },
         {
             "RoomID": 15,
@@ -224,8 +224,8 @@
             "B": 0,
             "attrib": 2,
             "AltRoomDesc": "A murky pond in the woods.\nAt least the mushrooms look a bit appetizing.",
-            "X": 736.0,
-            "Y": 368.0
+            "X": 497.0,
+            "Y": 534.0
         },
         {
             "RoomID": 16,
@@ -239,8 +239,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "The trees here are sparser than the rest of the forest.",
-            "X": 799.0,
-            "Y": 368.0
+            "X": 557.0,
+            "Y": 533.0
         },
         {
             "RoomID": 17,
@@ -254,8 +254,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "The central square of the village.\nA path splits to the north and south.\nYou keep getting dirty looks.\nThe villagers must not like you.",
-            "X": 863.0,
-            "Y": 368.0
+            "X": 618.0,
+            "Y": 534.0
         },
         {
             "RoomID": 18,
@@ -269,8 +269,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "This bustling square is the village marketplace.\nMaybe you can find someone to buy or sell from.",
-            "X": 865.0,
-            "Y": 435.0
+            "X": 617.0,
+            "Y": 595.0
         },
         {
             "RoomID": 19,
@@ -284,14 +284,14 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "A large and elegant building at the top of the hill is the village town hall.\nThere is a bounty board with a wanted poster.\nThe picture looks familiar...\nA road leads north and south.",
-            "X": 863.0,
-            "Y": 307.0
+            "X": 619.0,
+            "Y": 475.0
         },
         {
             "RoomID": 20,
             "RoomName": "Road to the Castle of Orina",
-            "RoomDesc": "You see a northern castle far in the distance.\nThis path north is guarded by a large group of knights.\nYou don't want to look for a fight.",
-            "N": 0,
+            "RoomDesc": "You see a northern castle far in the distance.\nThis path north is guarded by a large group of knights.\nYou gotta fight, for your right, to enter.\n",
+            "N": 41,
             "S": 19,
             "E": 0,
             "W": 0,
@@ -299,8 +299,8 @@
             "B": 0,
             "attrib": 8,
             "AltRoomDesc": "You see a northern castle far in the distance.\nThis path north is guarded by a large group of knights.\nThere are too many in the way.",
-            "X": 863.0,
-            "Y": 244.0
+            "X": 618.0,
+            "Y": 415.0
         },
         {
             "RoomID": 21,
@@ -314,8 +314,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "A massive mountain blocks your path to the east.\nThere's no way you're getting around it.",
-            "X": 924.0,
-            "Y": 372.0
+            "X": 679.0,
+            "Y": 548.0
         },
         {
             "RoomID": 22,
@@ -329,8 +329,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "A massive mountain blocks your path to the South.\nThere's no way you're getting around it.",
-            "X": 866.0,
-            "Y": 497.0
+            "X": 616.0,
+            "Y": 655.0
         },
         {
             "RoomID": 23,
@@ -344,8 +344,8 @@
             "B": 0,
             "attrib": 4,
             "AltRoomDesc": "You are standing in the wolves den.",
-            "X": 352.0,
-            "Y": 2.0
+            "X": 131.0,
+            "Y": 158.0
         },
         {
             "RoomID": 24,
@@ -359,8 +359,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "A large boulder blocks the path to the north.",
-            "X": 289.0,
-            "Y": 2.0
+            "X": 70.0,
+            "Y": 157.0
         },
         {
             "RoomID": 25,
@@ -374,8 +374,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "This grave has a magical aura.\nTowering trees surround the clearing in all directions.\nA legendary sword is embedded deep within a large stone.\nAre you worthy?",
-            "X": 671.0,
-            "Y": 180.0
+            "X": 436.0,
+            "Y": 345.0
         },
         {
             "RoomID": 26,
@@ -389,8 +389,8 @@
             "B": 0,
             "attrib": 256,
             "AltRoomDesc": "How is this even possible? You should be dead.",
-            "X": 735.0,
-            "Y": 431.0
+            "X": 498.0,
+            "Y": 594.0
         },
         {
             "RoomID": 27,
@@ -404,8 +404,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "You're on a sandy beach with sharp rocks along the shoreline.\nThere is a vast sea to the west.\nYou cant swim and hate sand.",
-            "X": 227.0,
-            "Y": 307.0
+            "X": 7.0,
+            "Y": 456.0
         },
         {
             "RoomID": 28,
@@ -419,8 +419,8 @@
             "B": 0,
             "attrib": 256,
             "AltRoomDesc": "YOUR SOUL IS MINE!",
-            "X": 415.0,
-            "Y": 249.0
+            "X": 189.0,
+            "Y": 396.0
         },
         {
             "RoomID": 29,
@@ -434,8 +434,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "You are still surrounded by nothing but trees.\nThere is a small odor of saltwater, coming from somewhere.",
-            "X": 289.0,
-            "Y": 369.0
+            "X": 67.0,
+            "Y": 518.0
         },
         {
             "RoomID": 30,
@@ -449,8 +449,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "There is a strange tree with a faced carved into the bark.\nThe forest stretches in every direction.",
-            "X": 290.0,
-            "Y": 309.0
+            "X": 68.0,
+            "Y": 457.0
         },
         {
             "RoomID": 31,
@@ -464,8 +464,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "You are in the midst of a forest.\nA brisk wind shakes the leaves.",
-            "X": 290.0,
-            "Y": 248.0
+            "X": 68.0,
+            "Y": 397.0
         },
         {
             "RoomID": 32,
@@ -479,8 +479,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "You're on a sandy beach.\nThere is a vast sea to the west.\nIt's very, very windy.",
-            "X": 226.0,
-            "Y": 246.0
+            "X": 8.0,
+            "Y": 396.0
         },
         {
             "RoomID": 33,
@@ -494,8 +494,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "The trees are getting dense.\nYou can barely squeeze between them.",
-            "X": 671.0,
-            "Y": 306.0
+            "X": 437.0,
+            "Y": 468.0
         },
         {
             "RoomID": 34,
@@ -509,8 +509,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "You're on a sandy beach with the ruins of an old shipwreck.\nThere is a vast sea to the west.\nYou can't swim and hate sand.",
-            "X": 228.0,
-            "Y": 433.0
+            "X": 5.0,
+            "Y": 577.0
         },
         {
             "RoomID": 35,
@@ -524,8 +524,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "This patch of woods seems particularly difficult to traverse.\nIt's too foggy to see!",
-            "X": 606.0,
-            "Y": 307.0
+            "X": 373.0,
+            "Y": 467.0
         },
         {
             "RoomID": 36,
@@ -539,8 +539,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "The trees here are covered in cobwebs.\nSmall spiders crawl at your feet.",
-            "X": 672.0,
-            "Y": 243.0
+            "X": 436.0,
+            "Y": 404.0
         },
         {
             "RoomID": 37,
@@ -554,8 +554,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "You feel like you are being watched.\nBut there's nothing but trees, in every direction.",
-            "X": 352.0,
-            "Y": 188.0
+            "X": 128.0,
+            "Y": 338.0
         },
         {
             "RoomID": 38,
@@ -569,8 +569,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "It's getting very rocky.\nThere is a mountain range to the north in the far distance.\nA warning sign by the rocks reads: \"STEEP CLIFF\".",
-            "X": 352.0,
-            "Y": 128.0
+            "X": 129.0,
+            "Y": 278.0
         },
         {
             "RoomID": 39,
@@ -584,8 +584,8 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "This is the top of a steep cliff.\nYou definitely can't climb down south from here.\nYou have a good view of the forest below.\nThere is a small village in the distance, to the south-east.",
-            "X": 415.0,
-            "Y": 65.0
+            "X": 190.0,
+            "Y": 218.0
         },
         {
             "RoomID": 40,
@@ -599,8 +599,398 @@
             "B": 0,
             "attrib": 0,
             "AltRoomDesc": "This is the top of a steep cliff.\nYou definitely can't climb down south from here.\nYou have a good view of the forest below.\nThere is a large body of water, to the south-west.",
-            "X": 289.0,
-            "Y": 64.0
+            "X": 69.0,
+            "Y": 216.0
+        },
+        {
+            "RoomID": 41,
+            "RoomName": "TheBegOfEnd ",
+            "RoomDesc": "Welcome to the Castle of Orina.\nYou hear a choir singing in sync, the sound echoes throughout the Castle.\nYou let out a sigh of relief, you feel like you have reached your destination. \nYou snap out of this thought and again get focused on the task at hand.\nYou didn't come this far for a pat on the back.\n\nYou hear giggles ahead...",
+            "N": 42,
+            "S": 20,
+            "E": 0,
+            "W": 0,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "Welcome to the Castle of Orina.\nYou hear a choir singing in sync, the sound echoes throughout the Castle.\nThere is more than what meets the eye.",
+            "X": 618.0,
+            "Y": 355.0
+        },
+        {
+            "RoomID": 42,
+            "RoomName": "LaLaLand",
+            "RoomDesc": "You walk through the hall and approach the giggles.\nA blonde lady with a flower crown stops you in your tracks. \nShe says, \"I've missed you! Let's celebrate.\"\nYou look at her confused and think \"I've never met this woman before.\"\nShe puts out an open hand and offers you a mushroom.\n\nWest you see a couple of people singing.\nNorth is the sound of feet stomping in sync.",
+            "N": 46,
+            "S": 41,
+            "E": 0,
+            "W": 43,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "A blonde lady with a flower crown stops you in your tracks. \nShe says, \"I've missed you! Let's celebrate.\"\nShe puts out an open hand and offers you a mushroom.\n\nWest you see a couple of people singing.\nNorth of you is the sound of feet stomping in sync.",
+            "X": 619.0,
+            "Y": 295.0
+        },
+        {
+            "RoomID": 43,
+            "RoomName": "The Choir",
+            "RoomDesc": "The Choir sings passionately.\nIt sounds great but you can't hear anything else going on.\nYou think, \"What if someone sneak attacks me?\" \n\nNorth you hear an evil laugh. ",
+            "N": 44,
+            "S": 0,
+            "E": 42,
+            "W": 0,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "The Choir sings passionately.\nYou are paranoid someone else is nearby.\n\nNorth you hear an evil laugh. ",
+            "X": 561.0,
+            "Y": 295.0
+        },
+        {
+            "RoomID": 44,
+            "RoomName": "A Voice ",
+            "RoomDesc": "You hear \"HA HA HA HA\" directly above you through the ceiling.\n\"I know that voice... I hate it! But who's is it?\"\nYou feel before you can find out, you must prepare yourself.\nGet some protection perhaps.\n\nNorth is a man humming doing chores.\nEast a couple rooms down, you see a closed door and hear stomping. ",
+            "N": 45,
+            "S": 43,
+            "E": 46,
+            "W": 0,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You hear \"HA HA HA HA\" directly above you through the ceiling.\nYou feel before you can find out, you should prepare yourself.\n\nNorth is a man humming doing chores.\nEast a couple rooms down, you see a closed door and hear stomping.\n",
+            "X": 560.0,
+            "Y": 235.0
+        },
+        {
+            "RoomID": 45,
+            "RoomName": "Butler",
+            "RoomDesc": "You try and tip toe around a man cleaning dishes with a towel. \nYou step on a cracker and the man turns around.\nYou hide behind the counter and the man goes back to minding his business.\n\nThrough the doorway to the right is a bowl with something round in it.",
+            "N": 0,
+            "S": 44,
+            "E": 50,
+            "W": 0,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You try and tip toe around a focused man.\nYou step on a cracker and the man turns around.\nYou hide behind the counter and the man can't see you.\n\nTo your right, a bowl with something round inside.",
+            "X": 560.0,
+            "Y": 174.0
+        },
+        {
+            "RoomID": 46,
+            "RoomName": "Mural",
+            "RoomDesc": "A room made to honor the past kings who once ruled.\nPictures and articles cover the walls.\nClose by in the east, you hear heavy footsteps pacing around. \nIt sounds like an army walking in sync. \n\nNorth is a bowl filled with some kind of food, your stomach rumbles.\nWest you hear a sinister laugh. ",
+            "N": 50,
+            "S": 42,
+            "E": 47,
+            "W": 44,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "A room made to honor the past kings who ruled. \nClose by east, you hear heavy footsteps pacing around. \n\nNorth is a bowl filled with balls colored green and red. \nWest you hear a sinister laugh. ",
+            "X": 619.0,
+            "Y": 235.0
+        },
+        {
+            "RoomID": 47,
+            "RoomName": "Knights",
+            "RoomDesc": "You come face to face with an army of Knights.\nThey stand in a horizontal line, guarding something precious behind them to the east.\n\nNorth is a feasting table. \nYou begin to way your options out. \n\n",
+            "N": 49,
+            "S": 0,
+            "E": 48,
+            "W": 46,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You come face to face with an army of Knights.\nThey stand in a line, guarding something precious behind them to the east.\nNorth is a long table. \n\n",
+            "X": 680.0,
+            "Y": 235.0
+        },
+        {
+            "RoomID": 48,
+            "RoomName": "MerryXMas",
+            "RoomDesc": "Panting from killing the amry, your eye catches armor a man could only dream of wearing.\nThe Diamond Armour reflects the and glimmers in the light.\n\"Only Kings and Queens have the money to obtain this\" you state in awe.\n\nWest is the sight of breathless knights, face down on the tile. \nYou smirk pridefully at the work you've done.\n.",
+            "N": 0,
+            "S": 0,
+            "E": 0,
+            "W": 47,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "Panting from killing army, your eye catches the best armor a man could equip.\nThe Diamond Armor reflects the light.\n\nWest is the work you've done.\n",
+            "X": 740.0,
+            "Y": 235.0
+        },
+        {
+            "RoomID": 49,
+            "RoomName": "Dining Room",
+            "RoomDesc": "A table that holds 30 people, gold plates & glasses are placed at every seat.\nA breadbasket sits in the middle of the table. \nThe walls decorated with king and queen quotes from the kingdom news. \n\nWest is a bowl with some food and nobody around.",
+            "N": 0,
+            "S": 47,
+            "E": 0,
+            "W": 50,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "A table made for big gatherings.\nA breadbasket sits in the middle.\nThe walls decorated with quotes from the news. \n\nWest is a bowl with some food.",
+            "X": 680.0,
+            "Y": 176.0
+        },
+        {
+            "RoomID": 50,
+            "RoomName": "Fruitful",
+            "RoomDesc": "A bowl of apples is on a round table... these might come in handy.\nThe choir can still be heard.\nMural paintings color the walls around you.\n\nWest, a proper man checking off a to-do list.\nEast, a room decorated with words.\nNorth, a hall with a big window, your gut tells you there might be more here.",
+            "N": 51,
+            "S": 46,
+            "E": 49,
+            "W": 45,
+            "A": 0,
+            "B": 0,
+            "attrib": 1,
+            "AltRoomDesc": "A bowl of apples is on a round table... these might come in handy.\nA room full of mural paintings.\n\nSouth, a man checking off the to-do list.\nEast, a room covered in words.\nNorth, a hall with a window, your gut tells you to go here.",
+            "X": 620.0,
+            "Y": 176.0
+        },
+        {
+            "RoomID": 51,
+            "RoomName": "Decision",
+            "RoomDesc": "You come to the end of the hall. \nAbove are stairs that lead up towards the voice, \"HA HA HA HA\"\nBelow are stairs that lead down to a dark, murky vibe.\nThere is a sign that hangs, \"Ain't No Church In The Wild\"",
+            "N": 0,
+            "S": 50,
+            "E": 0,
+            "W": 0,
+            "A": 59,
+            "B": 52,
+            "attrib": 0,
+            "AltRoomDesc": "You come to a end of the hall.\nAbove you hear, \"HA HA HA HA\"\nBelow you, a sign that hangs, \"Ain't No Church In The Wild\"\n",
+            "X": 620.0,
+            "Y": 118.0
+        },
+        {
+            "RoomID": 52,
+            "RoomName": "RainDrop",
+            "RoomDesc": "You grab a torch to light the way.\nEvery step you take down the stone stairs echoes.\nWater drops from the ceiling into puddles.\nYou see a rat run across the floor with a finger.\n\nEast is a muffled noise worth investigating.",
+            "N": 0,
+            "S": 0,
+            "E": 53,
+            "W": 0,
+            "A": 51,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You grab a torch to see.\nEvery footstep echoes.\nA rat runs across with a finger.\n\nEast, a muffled noise worth getting closer to.",
+            "X": 680.0,
+            "Y": 117.0
+        },
+        {
+            "RoomID": 53,
+            "RoomName": "Snoring",
+            "RoomDesc": "To the right, you hear loud snoring, you shine the torch but the light isn't strong enough to see what's sleeping.\nYou become curious, but cautious not to wake it.\n\nNorth, you smell an odor of something dead. What could have died?\nSouth, a scatter of sharp objects that might help. \n\n",
+            "N": 55,
+            "S": 54,
+            "E": 56,
+            "W": 52,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "To the right, you hear loud snoring, you shine the torch but the light isn't strong enough.\nWhat could it be?\n\nNorth, you smell an awful odor.\nSouth, sharp objects that might help. \n\n",
+            "X": 740.0,
+            "Y": 116.0
+        },
+        {
+            "RoomID": 54,
+            "RoomName": "BrokenW",
+            "RoomDesc": "You shine the light towards the ground and see weapons broken in two.\nWhoever did this is not to be reckoned with.\nNerves start to kick in.",
+            "N": 53,
+            "S": 0,
+            "E": 0,
+            "W": 0,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You look at the ground and see weapons broken in two.\nYou become nervous.\n",
+            "X": 740.0,
+            "Y": 176.0
+        },
+        {
+            "RoomID": 55,
+            "RoomName": " BurntApp",
+            "RoomDesc": "You look down and see dead gatekeepers, many missing limbs, blood oozing from them.\nThey all coincidentally have burn scars. \nOne gatekeeper opens his eyes and tries to muster the strength to talk, but all that comes out is \"Hel...\" and then his eyes close, lifeless.",
+            "N": 0,
+            "S": 53,
+            "E": 0,
+            "W": 0,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You look down and see dead gatekeepers, many missing limbs.\nBurn scars cover them. \nOne gatekeeper opens his eyes and says,\"Hel...\" and then his eyes close, lifeless.",
+            "X": 741.0,
+            "Y": 57.0
+        },
+        {
+            "RoomID": 56,
+            "RoomName": "GGNurse",
+            "RoomDesc": "To the east, you faintly see a large, scaley creature sleeping with blood, skulls, and bones all around it's cage. \nYou can feel his power. ",
+            "N": 0,
+            "S": 0,
+            "E": 57,
+            "W": 53,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "East, you faintly see a large, creature sleeping with blood and bones all around it's cage. \nYou can feel his powers.",
+            "X": 801.0,
+            "Y": 117.0
+        },
+        {
+            "RoomID": 57,
+            "RoomName": "DRAGON",
+            "RoomDesc": "You shine your torch up to the steel cell and the creature opens one eye that stares through your soul.\nYou jump back and crush a skull.",
+            "N": 0,
+            "S": 0,
+            "E": 58,
+            "W": 56,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "Clumsily step back and crush yet another skull.\nAre you doing this on purpose?",
+            "X": 863.0,
+            "Y": 118.0
+        },
+        {
+            "RoomID": 58,
+            "RoomName": "SecretPass",
+            "RoomDesc": "You climb over the slimy Dragon into a black tunnel, the ground is wet. \nRats run past your arms and feet, you try to disregard them because you feel there is something worthwhile at the end of the tunnel.",
+            "N": 0,
+            "S": 0,
+            "E": 66,
+            "W": 57,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You climb over the dead dragon to a tunnel.\nRats run past you.\nYou feel this tunnel will reward you.",
+            "X": 924.0,
+            "Y": 118.0
+        },
+        {
+            "RoomID": 59,
+            "RoomName": "A Spark",
+            "RoomDesc": "In the distance west, at the end of the hallway is a large figure sitting in a King's chair.\nIts booming laughter can be heard throughout the chambers.\nA girl is sitting on the large figure's lap. \nYour eyes widen, you recognize that voice!\n\nNorth, a room of people huddled at a round table.",
+            "N": 60,
+            "S": 0,
+            "E": 0,
+            "W": 61,
+            "A": 0,
+            "B": 51,
+            "attrib": 0,
+            "AltRoomDesc": "In the west, a large figure sitting in a King's chair.\nIts booming laughter can be heard throughout the chambers.\nA girl is sitting on the large figure's lap. \n\nDue north, a room of people sitting at a table.\n",
+            "X": 560.0,
+            "Y": 115.0
+        },
+        {
+            "RoomID": 60,
+            "RoomName": "Vampires",
+            "RoomDesc": "A bunch of degenerate folks whose skin look as pale as paper turn your way.\nThey look like they haven't seen the sun in days.\nTheir eyes are bloodshot with bags hanging underneath.\nTheir hair, looking like they just got out of bed.",
+            "N": 0,
+            "S": 59,
+            "E": 0,
+            "W": 0,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "A bunch of degenerate folks turn your way.\nThey look like they haven't seen the sun in days.\nTheir eyes are bloodshot, hair looking crazy.\n",
+            "X": 561.0,
+            "Y": 56.0
+        },
+        {
+            "RoomID": 61,
+            "RoomName": "BadTalk",
+            "RoomDesc": "You are getting closer to the large figure.\nHe charmingly says to the lady, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\nYou try to pay no mind to his words.\n\nDue north, you see a room full of bright colors and pictures that intrigue you. ",
+            "N": 62,
+            "S": 0,
+            "E": 59,
+            "W": 63,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You are getting closer to the large figure.\nHe says to the lady, \n\"You are mine for eternity, your last boyfriend was a PEASANT! HA HA HA HA\"\n\nDue north, you can see a room with bright colors and pictures from the past.\n",
+            "X": 500.0,
+            "Y": 116.0
+        },
+        {
+            "RoomID": 62,
+            "RoomName": "Her Room",
+            "RoomDesc": "You walk into a room full of pictures and flowers. \nYou come across a picture that grabs your attention.\nThe picture is of you and your lost love Florence! \nYou think to yourself, \"She never forgot me!\" \nA wave of energy runs through your veins.\nThis energy is shortly lived, the picture next to that is of the large figure and Florence.\nThey look happily together.\nYou pace the room in rage.",
+            "N": 0,
+            "S": 61,
+            "E": 0,
+            "W": 0,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You walk into a room full of pictures and flowers. \nYou find a picture of you and your lost love Florence! \nA wave of energy runs through your veins.\nThe picture right next to that is of the large figure and Florence.\nThey look happily together.\nYou pace the room in rage.",
+            "X": 501.0,
+            "Y": 56.0
+        },
+        {
+            "RoomID": 63,
+            "RoomName": "DisArray",
+            "RoomDesc": "The large figure is close enough to recognize... \"King Thadeus!\" you roar.\nKing Thadeus is in rage, \"How did you get here?! \nYou have been banned from this kingdom, never to step foot in the Castle of Orina for eternity! \nOrdered to be executed and humiliated!\"\n\nFlorence gasps, speechless. ",
+            "N": 0,
+            "S": 0,
+            "E": 61,
+            "W": 64,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "King Thadeus is in rage, \"How did you get here?! \nYou have been banned from this kingdom, ordered to be executed and humiliated!\"\n\nFlorence gasps, speechless. ",
+            "X": 440.0,
+            "Y": 115.0
+        },
+        {
+            "RoomID": 64,
+            "RoomName": "A Reminder",
+            "RoomDesc": "\"Thadeus, it looks like you've ate so much boar, you've become one!\" you state smirking.\n\nThadeus: \"Remember what happened last time you tested me!\"\n\nYou: \"I have gotten stronger, no longer afraid of you!\"\n\nThadeus: \"I will finish you in front of Florence, to show her who the alpha is! \nAH HA HA HA!\"",
+            "N": 0,
+            "S": 0,
+            "E": 63,
+            "W": 65,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "\"Thadeus, it looks like you've ate so much boar, you've become one!\" you state smirking.\n\nThadeus: \"Remember what happened last time you tested me!\"\n\nYou: \"I have gotten stronger, no longer afraid of you!\"\n",
+            "X": 380.0,
+            "Y": 116.0
+        },
+        {
+            "RoomID": 65,
+            "RoomName": "THE BOSS",
+            "RoomDesc": "Thadeus gives Florence a kiss, then smiles at you.\nYou clench your fist and your face turns red. \nThadeus smirks at you and says, \"Come get some you coinless hobbit!\" \n\nYou scream \"AHHHHH\" and run full speed towards Thadeus. ",
+            "N": 0,
+            "S": 0,
+            "E": 64,
+            "W": 66,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "Thadeus gives Florence a kiss, then smiles at you.\nYou clench your fist and your face turns red. \n\nYou scream \"AHHHHH\" and run full speed towards Thadeus. ",
+            "X": 320.0,
+            "Y": 117.0
+        },
+        {
+            "RoomID": 66,
+            "RoomName": "Princess",
+            "RoomDesc": "You exhaustedly walk up to Florence; she smiles at you.\nYour destiny has been accomplished.\nYou are face to face with the reason you came this far.\n",
+            "N": 0,
+            "S": 0,
+            "E": 65,
+            "W": 58,
+            "A": 0,
+            "B": 0,
+            "attrib": 0,
+            "AltRoomDesc": "You exhaustedly walk up to Florence.\nYour mission is done.\nYou are face to face with your love.",
+            "X": 260.0,
+            "Y": 117.0
         }
     ]
 }
