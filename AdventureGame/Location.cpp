@@ -290,6 +290,9 @@ void Location::addNumberOfTimesEntered()
 // Initializes the current Location
 Location* locationManager::currentLocation = currentLocation = nullptr;
 
+// Initializes the previous Location
+Location* locationManager::previousLocation = previousLocation = nullptr;
+
 // Initializes the current Time
 int locationManager::currentTime = 8;
 

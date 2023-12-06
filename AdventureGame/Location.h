@@ -183,6 +183,7 @@ public:
 private:
 #endif
 	static Location* currentLocation;
+	static Location* previousLocation;
 	const static string directionStrings[6];
 	static fileParse::mapFile map;
 	static fileParse::mapDescFile mapDesc;
