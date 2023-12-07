@@ -4,6 +4,7 @@
 #include <map>
 #include "Item.h"
 #include "Consumable.h"
+#include "Armor.h"
 #include "PlayerActions.h"
 
 using namespace std;

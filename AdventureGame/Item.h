@@ -4,7 +4,7 @@
 #include <map>
 
 enum itemState { inWorld, inInventory };
-enum itemType { consumable, weapon };
+enum itemType { consumable, weapon , armor};
 
 class  Item
 {

@@ -18,6 +18,7 @@ PlayerActions::PlayerActions()
 {
     healthMGR = BaseHealth(PLAYER_HEALTH);
     playerIsHigh = false;
+    worn = none;
     stepsUntilNotHigh = 0;
     firstTimePlayerAttacks = true;
     firstTimePlayerDodges = true;
@@ -238,6 +239,12 @@ bool PlayerActions::processCommand(vector<string> args)
     PrintDisplay::custom_cout << "\nYou can't " << args[0] << " that!\n";
     PrintDisplay::no_effect_flush();
     return false;
+}
+
+void PlayerActions::changeArmor(armorType newArmor)
+{
+    healthMGR.changeMaxHP(newArmor);
+    worn = newArmor;
 }
 
 void PlayerActions::healPlayer(int amount)

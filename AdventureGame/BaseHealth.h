@@ -33,6 +33,10 @@ public:
     /// @return Max health of entity
     int checkMaxHP();
 
+    /// @brief Updates the max health
+    /// @param args the new max health
+    void changeMaxHP(int);
+
     /// @brief Restores an entity's health to it's max.
     void restoreMaxHP();
 };
