@@ -571,10 +571,7 @@ int PrintDisplay::dodgeScreen(int iterations, bool disable_forward_tile, bool mo
     char ch = 0;
     int hitPoints = 0;
     int number_of_directions = 4 - static_cast<int>(disable_forward_tile);
-    bool upRed = disable_forward_tile;
-    bool downRed = false;
-    bool leftRed = false;
-    bool rightRed = false;
+
     std::uniform_int_distribution<int> msRandom(800, 1400);
     std::uniform_int_distribution<int> RNG_Directions(1, pow(2, number_of_directions)-1);
     std::uniform_int_distribution<int> RNG_power(0, number_of_directions - 1);
@@ -621,7 +618,10 @@ int PrintDisplay::dodgeScreen(int iterations, bool disable_forward_tile, bool mo
 
     for (int number_of_times = 0; number_of_times < iterations; number_of_times ++)
     {
-        effectManager::wearDownSlow();
+        bool upRed = disable_forward_tile;
+        bool downRed = false;
+        bool leftRed = false;
+        bool rightRed = false;
         PrintDisplay::custom_cout << "THE ENEMY ATTACKS ";
         int attackedat = 0;
         if (more_than_one_tile)

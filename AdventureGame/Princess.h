@@ -12,6 +12,7 @@ public:
     virtual void attackFailed();
     virtual void attackPlayer() {};
     virtual bool recieveAttack();
+    virtual void printIAmDeadMessage() {};
     virtual ~Princess() = default;
 
 #ifdef GTESTING
