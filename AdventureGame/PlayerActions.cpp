@@ -165,6 +165,60 @@ bool PlayerActions::processCommand(vector<string> args)
             }
         }
     }
+    else if (args[0] == "hit" && args[1] == "dragon")
+    {
+        if (NPCManager::scanForNPC(args[1]))
+        {
+            NPC* dragon = NPCManager::returnNPC(args[1]);
+            if (!dragon->isDead())
+            {
+                if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOOOOOO#", 50))
+                {
+                    if (dragon->takeDamage(1))
+                    {
+                        PrintDisplay::custom_cout << "\nYou hit the dragon. It has " << dragon->getLives() << " lives remaining.\n";
+                        PrintDisplay::flush();
+                        if (dragon->isDead())
+                        {
+                            PrintDisplay::custom_cout << "The dragon is dead.\n";
+                            PrintDisplay::flush();
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        PrintDisplay::custom_cout << "\nYou hit the dragon, but it still has " << dragon->getLives() << " lives remaining.\n";
+                        PrintDisplay::flush();
+
+                    }
+                    this_thread::sleep_for(chrono::milliseconds(1200));
+                }
+
+                if (dragon->isHostile)
+                {
+                    PrintDisplay::custom_cout << "The dragon attacks you back!\n";
+                    int hitCount = PrintDisplay::dodgeScreen();
+                    if (hitCount > 0) // The player got hit.
+                    {
+                        this->hurtPlayer(hitCount);
+                        if (this->checkPlayerHealth() != 0)
+                        {
+                            PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
+                        }
+                        PrintDisplay::flush();
+                    }
+                }
+                PrintDisplay::flush();
+                return true;
+            }
+            else
+            {
+                PrintDisplay::custom_cout << "\nYou have already slayed the dragon. There is a secret passage east of here. Do you dare to take it?\n";
+                PrintDisplay::flush();
+                return false;
+            }
+        }
+    }
 
     // Nothing else to do.
     PrintDisplay::custom_cout << "\nYou can't " << args[0] << " that!\n";

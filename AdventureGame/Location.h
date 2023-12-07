@@ -80,6 +80,7 @@ public:
 		WOLVES_IN_ROOM = 3,
 		KNIGHT_IN_ROOM = 4,
 		INSTANT_KILL_ROOM = 9,
+		DRAGON_IN_ROOM = 11,
 		AAAA = 64,
 		NONE = 0
 	};
