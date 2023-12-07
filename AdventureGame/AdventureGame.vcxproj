@@ -133,6 +133,7 @@
     <ClCompile Include="CommonGameObjects.cpp" />
     <ClCompile Include="Consumable.cpp" />
     <ClCompile Include="ContextParser.cpp" />
+    <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Knight.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="CommonGameObjects.h" />
     <ClInclude Include="Consumable.h" />
     <ClCompile Include="ContextParser.h" />
+    <ClInclude Include="Dragon.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
   </ItemGroup>
