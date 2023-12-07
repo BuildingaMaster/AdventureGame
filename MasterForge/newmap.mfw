@@ -170,7 +170,7 @@
         {
             "RoomID": 12,
             "RoomName": "Torres Village (Market)",
-            "RoomDesc": "This bustling square is the village marketplace.\nMaybe you can find someone to buy or sell from.\nPeople seem too busy to notice your arrival.",
+            "RoomDesc": "This bustling square is the village marketplace.\nMaybe you can find someone to buy or sell from.\nHowever, once you arrived they have seemed to \nclose up shop. ",
             "N": 10,
             "S": 0,
             "E": 0,
@@ -178,7 +178,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "This bustling square is the village marketplace.\nMaybe you can find someone to buy or sell from.",
+            "AltRoomDesc": "The market place is closed unfortunately.\nWhat did you do to deserve this?",
             "X": 311.0,
             "Y": 577.0
         },
@@ -260,7 +260,7 @@
         {
             "RoomID": 18,
             "RoomName": "Morales Village (Market)",
-            "RoomDesc": "This bustling square is the village marketplace.\nMaybe you can find someone to buy or sell from.\nPeople seem too busy to notice your arrival.",
+            "RoomDesc": "This bustling square is the village marketplace.\nMaybe you can find someone to buy or sell from.\nHowever, once you arrived they have seemed to \nclose up shop. ",
             "N": 17,
             "S": 22,
             "E": 22,
@@ -268,7 +268,7 @@
             "A": 0,
             "B": 0,
             "attrib": 0,
-            "AltRoomDesc": "This bustling square is the village marketplace.\nMaybe you can find someone to buy or sell from.",
+            "AltRoomDesc": "The market place is closed unfortunately.\nWhat did you do to deserve this?",
             "X": 617.0,
             "Y": 595.0
         },
@@ -315,7 +315,7 @@
             "attrib": 0,
             "AltRoomDesc": "A massive mountain blocks your path to the east.\nThere's no way you're getting around it.",
             "X": 679.0,
-            "Y": 548.0
+            "Y": 543.0
         },
         {
             "RoomID": 22,
