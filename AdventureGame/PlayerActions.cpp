@@ -40,8 +40,17 @@ bool PlayerActions::processCommand(vector<string> args)
         PrintDisplay::flush();
         return true;
     }
+    string entityName = "";
+
+    for (int i = 1; i<args.size(); i++)
+    {
+        entityName+= args[i] + " ";
+    }
+    entityName.erase(entityName.end()-1);
+    args[1] = entityName;
+
     // Hit command [base, only the player for now]
-    else if (args[0] == "hit" &&  args[1] == "self")
+    if (args[0] == "hit" &&  args[1] == "self")
     {
         if (healthMGR.removeHP(1)) // The player is dead.
         {
