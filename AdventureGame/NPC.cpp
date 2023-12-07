@@ -18,6 +18,7 @@
 #include "Wolf.h"
 #include "King.h"
 #include "Dragon.h"
+#include "Villager.h"
 
 using namespace std;
 

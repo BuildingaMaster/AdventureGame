@@ -142,6 +142,7 @@
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="Princess.cpp" />
     <ClCompile Include="PrintDisplay.cpp" />
+    <ClCompile Include="Villager.cpp" />
     <ClCompile Include="Wolf.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="Dragon.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Villager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Location.cpp" />
