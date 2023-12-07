@@ -62,7 +62,7 @@ public:
 
 	/// @brief The effect slowly wears off.
 	void decrementMovingHigh();
-	std::string playerActionsValidCommands = "check hit throw ";
+	std::string playerActionsValidCommands = "check hit throw swing";
 
 	/// @brief The player is asked to play the game again
 	bool playAgain();
