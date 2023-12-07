@@ -330,6 +330,10 @@ bool PlayerActions::isThePlayerHigh()
 }
 void PlayerActions::thePlayerIsHigh(bool ishigh)
 {
+    if (ishigh == false)
+    {
+        stepsUntilNotHigh = 0;
+    }
     playerIsHigh = ishigh;
 }
 
@@ -343,7 +347,6 @@ void PlayerActions::decrementMovingHigh()
     stepsUntilNotHigh = stepsUntilNotHigh-1;
     if (stepsUntilNotHigh <= 0)
     {
-        stepsUntilNotHigh = 0;
         thePlayerIsHigh(false);
     }
 }

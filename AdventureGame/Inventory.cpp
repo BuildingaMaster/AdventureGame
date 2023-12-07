@@ -5,6 +5,7 @@
 #include "Consumable.h"
 #include "Armor.h"
 #include "Location.h"
+#include "Potion.h"
 
 #include "PrintDisplay.h"
 
@@ -43,6 +44,7 @@ Inventory::Inventory(PlayerActions* pd)
             itemMap[x.first].insert(itemMap[x.first].begin(), new Armor(iron, 1)); // Add iron armor
         }
     }
+    itemMap[2].insert(itemMap[2].begin(), new Potion(sobriety,1)); //add mushroom
 }
 
 Inventory::~Inventory()
@@ -153,19 +155,27 @@ bool Inventory::processCommand(vector<string> args)
     bool multiSelect = false;
     bool found = false;
 
-    string itemArg = args[1];
+    string itemArg = "";
     int count = 0;
+    int startI = 1;
     if (itemArg == "all" || itemArg == "every")
     {
-        itemArg = args[2];
+        startI = 2;
         multiSelect = true;
     }
+
+    for (int i = startI; i<args.size(); i++)
+    {
+        itemArg+= args[i] + " ";
+    }
+    itemArg.erase(itemArg.end()-1);
     
     if (itemArg[itemArg.size() - 1] == 's')
     {
         itemArg.erase(itemArg.size() - 1, 1);
         multiSelect = true;
     }
+
 
     if (args[0] == "pick" || args[0] == "grab" || args[0] == "take")
     {
@@ -284,17 +294,35 @@ bool Inventory::processCommand(vector<string> args)
         PrintDisplay::flush();
         return false;
     }
-    else if (args[0] == "drink" || args[0] == "chugg")
+    else if (args[0] == "drink" || args[0] == "chug")
     {
         if (multiSelect == true)
         {
             PrintDisplay::custom_cout << "\nYou can only drink one " << itemArg << " at a time.\n";
             PrintDisplay::flush();
         }
-        string potion_name = "";
-        for (int i = 1; i<args.size(); i++)
+        for (int i = 0; i < currentInventory.size(); i++)
         {
-            potion_name+= args[i] + " ";
+            // Is the item in the inventory
+            if (currentInventory[i]->getItemName() == itemArg)
+            {
+                // Is it a consumable?
+                if (currentInventory[i]->getType() == potion)
+                {
+                    // https://stackoverflow.com/questions/19501838/get-derived-type-via-base-class-virtual-function
+                    Potion& item = dynamic_cast<Potion&>(*currentInventory[i]);
+                    item.action();
+                    delete currentInventory[i];
+                    currentInventory.erase(currentInventory.begin()+i);
+                    return true;
+                }
+                else
+                {
+                    PrintDisplay::custom_cout << "\nYou can't "<< args[0] <<" that!\n";
+                    PrintDisplay::flush();
+                    return false;
+                }
+            }
         }
     }
     else if ( args[0] == "drop" || args[0] == "throw" || args[0] == "discard")

@@ -21,7 +21,7 @@ public:
 	/// @return If discarding worked.
 	bool discardItem(vector<string> args, int roomID);
 	bool processCommand(vector<string> args);
-	string inventoryValidCommands = "pick grab take eat consume drop throw discard inventory items equip wear don";
+	string inventoryValidCommands = "pick grab take eat consume drop throw discard inventory items equip wear don drink chug";
 	static map<int, vector<Item*>> itemMap;
 	
 	/// @brief Drops all items to the ground.
