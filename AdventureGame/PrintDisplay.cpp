@@ -15,6 +15,8 @@
 #include <chrono>
 #include <regex>
 
+#include "Potion.h"
+
 #ifdef GTESTING
 std::string PrintDisplay::GT_inStr = "";
 
@@ -400,6 +402,8 @@ void PrintDisplay::pause()
 
 bool PrintDisplay::hitScreen(string hitBox, int time_to_react)
 {
+    time_to_react = time_to_react + ((effectManager::shouldSlowDown) * 60);
+    effectManager::wearDownSlow();
     // The tutorial, only happens when first triggered.
     if (CommonGameObjects::PAManager->checkAndFlipFirstAttack())
     {
@@ -560,6 +564,8 @@ int PrintDisplay::dodgeScreen(int iterations, bool disable_forward_tile, bool mo
     ignoreCH();
     std::random_device rd;  
     std::mt19937 gen(rd()); 
+
+    reaction_time = reaction_time + ((effectManager::shouldSlowDown) * 70);
     
 
     char ch = 0;
@@ -615,6 +621,7 @@ int PrintDisplay::dodgeScreen(int iterations, bool disable_forward_tile, bool mo
 
     for (int number_of_times = 0; number_of_times < iterations; number_of_times ++)
     {
+        effectManager::wearDownSlow();
         PrintDisplay::custom_cout << "THE ENEMY ATTACKS ";
         int attackedat = 0;
         if (more_than_one_tile)

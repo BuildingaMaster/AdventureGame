@@ -29,6 +29,7 @@
 #include "CommonGameObjects.h"
 #include "NPC.h"
 #include "PrintDisplay.h"
+#include "Potion.h"
 
 
 using namespace std;

@@ -162,7 +162,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 8192,
             "AltRoomDesc": "This is the town hall, overlooking the village to the south.\nThat picture on the bounty board keeps drawing your attention.",
             "X": 313.0,
             "Y": 457.0
@@ -312,7 +312,7 @@
             "W": 17,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 32768,
             "AltRoomDesc": "A massive mountain blocks your path to the east.\nThere's no way you're getting around it.",
             "X": 679.0,
             "Y": 548.0
@@ -342,7 +342,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 4,
+            "attrib": 4100,
             "AltRoomDesc": "You are standing in the wolves den.",
             "X": 131.0,
             "Y": 158.0
@@ -477,7 +477,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 8192,
             "AltRoomDesc": "You're on a sandy beach.\nThere is a vast sea to the west.\nIt's very, very windy.",
             "X": 8.0,
             "Y": 396.0
@@ -537,7 +537,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 278528,
             "AltRoomDesc": "The trees here are covered in cobwebs.\nSmall spiders crawl at your feet.",
             "X": 436.0,
             "Y": 404.0
@@ -717,7 +717,7 @@
             "W": 47,
             "A": 0,
             "B": 0,
-            "attrib": 128,
+            "attrib": 12416,
             "AltRoomDesc": "Panting from killing army, your eye catches the best armor a man could equip.\n\nWest is the work you've done.\n",
             "X": 740.0,
             "Y": 235.0
@@ -927,7 +927,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 20480,
             "AltRoomDesc": "You walk into a room full of pictures and flowers. \nYou find a picture of you and your lost love Florence! \nA wave of energy runs through your veins.\nThe picture right next to that is of the large figure and Florence.\nThey look happily together.\nYou pace the room in rage.",
             "X": 501.0,
             "Y": 56.0
