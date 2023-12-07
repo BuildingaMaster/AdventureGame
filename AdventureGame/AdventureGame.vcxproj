@@ -136,6 +136,7 @@
     <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="King.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Location.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="King.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="Potion.h" />
