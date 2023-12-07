@@ -394,6 +394,36 @@
               <string>Potion of Teleportation</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>Villager 1 in Room</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Villager 2 in Room</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Villager 3 in room</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Villager 4 in Room</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Villager 5 in room</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Villager 6 in Room</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
