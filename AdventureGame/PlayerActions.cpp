@@ -10,6 +10,7 @@
 #include "ContextParser.h"
 #include "Location.h"
 #include "CommonGameObjects.h"
+#include "Potion.h"
 
 
 using namespace std;
@@ -81,7 +82,7 @@ bool PlayerActions::processCommand(vector<string> args)
                 if (character->recieveAttack())
                 {
                     PrintDisplay::custom_cout << "\nYou hit the "<< character->name;
-                    if (character->takeDamage(1))
+                    if (character->takeDamage(1 + effectManager::attackUpBonus))
                     {
                         PrintDisplay::custom_cout << ".\n";
                         PrintDisplay::flush();
