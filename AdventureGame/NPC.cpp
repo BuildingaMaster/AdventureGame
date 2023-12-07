@@ -109,6 +109,30 @@ bool NPCManager::init()
         {
             NPCMap[x.first].insert(NPCMap[x.first].begin(), new King());
         }
+        else if (x.second->hasAttribute(x.second->VILLAGER1_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Villager("Trevor"));
+        }
+        else if (x.second->hasAttribute(x.second->VILLAGER2_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Villager("Juan"));
+        }
+        else if (x.second->hasAttribute(x.second->VILLAGER3_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Villager("Eric"));
+        }
+        else if (x.second->hasAttribute(x.second->VILLAGER4_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Villager("Nick P"));
+        }
+        else if (x.second->hasAttribute(x.second->VILLAGER5_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Villager("Nick T"));
+        }
+        else if (x.second->hasAttribute(x.second->VILLAGER6_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Villager("John"));
+        }
     }
     return true;
 }

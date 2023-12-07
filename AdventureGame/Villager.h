@@ -4,8 +4,11 @@
 class Villager:
 	public NPC
 {
+public:
     /// @brief Create a Villager object (1 health, not hostile)
-	Villager();
+    string villagername;
+	Villager(string);
+    void loredump();
     virtual void nothing() {}; // Does nothing
     virtual void attackFailed() {};
     virtual void attackPlayer();
