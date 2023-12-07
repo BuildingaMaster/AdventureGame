@@ -30,11 +30,6 @@ Consumable::Consumable() : Item(consumable)
 	itemName = "apple";
 }
 
-Consumable::~Consumable()
-{
-	
-}
-
 void Consumable::consume(PlayerActions* player)
 {
 	switch (itemType)

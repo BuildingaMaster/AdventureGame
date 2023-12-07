@@ -5,6 +5,7 @@
 #include "Consumable.h"
 #include "Armor.h"
 #include "Location.h"
+#include "Weapon.h"
 
 #include "PrintDisplay.h"
 
@@ -29,6 +30,10 @@ Inventory::Inventory(PlayerActions* pd)
             itemMap[x.first].insert(itemMap[x.first].begin(), new Consumable(mushroom, 1)); //add mushroom
             itemMap[x.first].insert(itemMap[x.first].begin(), new Consumable(mushroom, 1)); //add mushroom
             itemMap[x.first].insert(itemMap[x.first].begin(), new Consumable(mushroom, 1)); //add mushroom
+        }
+        if (x.second->hasAttribute(x.second->BOOMERANG_IN_ROOM))
+        {
+            itemMap[x.first].insert(itemMap[x.first].begin(), new Weapon(boomerang,5)); //Boomerang
         }
         if (x.second->hasAttribute(x.second->ARMOR_1))
         {
@@ -67,6 +72,34 @@ void Inventory::addItem(Item* toAdd)
 
 // The item map, shared.
 map<int, vector<Item*>> Inventory::itemMap;
+
+
+bool Inventory::useItem(vector<string> args, int roomID)
+{
+    string itemArg = args[1];
+    if (itemArg == "fists")
+    {
+        WeaponManager::swapWeapontoFists();
+        return true;
+    }
+    for (int i = 0; i<currentInventory.size(); i++)
+    {
+        if (currentInventory[i]->getItemName() == itemArg)
+        {
+            if (currentInventory[i]->getType() == weapon)
+            {
+                PrintDisplay::custom_cout << "\nYou equipped the " << itemArg << ".\n";
+                PrintDisplay::no_effect_flush();
+                Weapon& w = dynamic_cast<Weapon&>(*currentInventory[i]);
+                WeaponManager::swapWeapon(&w);
+                return true;
+            }
+        }
+    }
+    PrintDisplay::custom_cout << "\nYou can't use that!\n";
+    PrintDisplay::no_effect_flush();
+    return false;
+}
 
 
 bool Inventory::discardItem(vector<string> args, int roomID)
@@ -167,7 +200,7 @@ bool Inventory::processCommand(vector<string> args)
         multiSelect = true;
     }
 
-    if (args[0] == "pick" || args[0] == "grab" || args[0] == "take")
+    if (args[0] == "pick" || args[0] == "grab" || args[0] == "take" || args[0] == "get")
     {
 
         for (int i = 0; i < itemMap[roomID].size(); i++) // Grab pass
@@ -284,7 +317,11 @@ bool Inventory::processCommand(vector<string> args)
         PrintDisplay::flush();
         return false;
     }
-    else if ( args[0] == "drop" || args[0] == "throw" || args[0] == "discard")
+    else if ( args[0] == "use" || args[0] == "draw" || args[0] == "equip")
+    {
+        useItem(args,roomID);
+    }
+    else if ( args[0] == "drop" || args[0] == "discard")
     {
         discardItem(args, roomID);
     }

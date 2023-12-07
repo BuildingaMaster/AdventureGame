@@ -10,6 +10,7 @@
 #include "ContextParser.h"
 #include "Location.h"
 #include "CommonGameObjects.h"
+#include "Weapon.h"
 
 
 using namespace std;
@@ -46,6 +47,12 @@ bool PlayerActions::processCommand(vector<string> args)
         CommonGameObjects::INManager->listInventory();
         return true;
     }
+    else if (args[0] == "check" && args[1]  == "weapon")
+    {
+        PrintDisplay::custom_cout << "\nYou have the  "<< WeaponManager::getCurrentWeapon()->getItemName() <<" equipped.\n";
+        PrintDisplay::flush();
+        return true;
+    }
     string entityName = "";
 
     for (int i = 1; i<args.size(); i++)
@@ -80,7 +87,7 @@ bool PlayerActions::processCommand(vector<string> args)
             {
                 if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOO#####", 50))
                 {
-                    if (wolf->takeDamage(1))
+                    if (wolf->takeDamage(WeaponManager::getCurrentWeapon()->getDamageAmount()))
                     {
                         PrintDisplay::custom_cout << "\nYou hit the wolf. It has " << wolf->getLives() << " lives remaining.\n";
                         PrintDisplay::flush();
@@ -135,7 +142,7 @@ bool PlayerActions::processCommand(vector<string> args)
             {
                 if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOOOO###", 50))
                 {
-                    if (knight->takeDamage(1))
+                    if (knight->takeDamage(WeaponManager::getCurrentWeapon()->getDamageAmount()))
                     {
                         PrintDisplay::custom_cout << "\nYou hit the knight. It has " << knight->getLives() << " lives remaining.\n";
                         PrintDisplay::flush();
@@ -287,7 +294,19 @@ bool PlayerActions::processCommand(vector<string> args)
                 return false;
             }
         }
+    }    else if (args[0] == "throw" && args[1] == "boomerang" && WeaponManager::getCurrentWeapon()->getWeaponType() == boomerang)
+    {
+        WeaponManager::getCurrentWeapon()->action();
+        return true;
     }
+    else if (args[0] == "throw" && args[1] == "boomerang" && WeaponManager::getCurrentWeapon()->getWeaponType() != boomerang)
+    {
+        PrintDisplay::custom_cout << "\nYou have the boomerang, but you don't have it equipped.\n";
+        PrintDisplay::flush();
+        return false;
+    }
+    
+
     // Nothing else to do.
     PrintDisplay::custom_cout << "\nYou can't " << args[0] << " that!\n";
     PrintDisplay::no_effect_flush();

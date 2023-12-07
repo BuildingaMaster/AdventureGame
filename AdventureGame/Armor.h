@@ -15,6 +15,7 @@ public:
 	armorType getArmorType();
 	Armor(armorType, double);
 	void equip(PlayerActions*);
+	virtual void action() {}//does nothing
 	~Armor();
 	Armor();
 };
