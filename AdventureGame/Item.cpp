@@ -9,7 +9,7 @@ std::map<std::string,  std::pair<std::string,std::string>> itemDescription::item
     {"mushroom", std::pair<std::string,std::string>{"Looking down, you see a small mushroom that's likely safe to eat.", "Looking down, you see a few wild mushrooms growing."}},
     {"boomerang", std::pair<std::string,std::string>{"You have found a sturdy boomerang, which can be used for a weapon.", "You have found a sturdy boomerang, which can be used for a weapon."}},
     {"legendary sword", std::pair<std::string,std::string>{"You now possess the legendary sword, with great power comes great responsibility.", "You now possess the legendary sword, with great power comes great responsibility."}},
-
+    {"chinese sword", std::pair<std::string,std::string>{"You now possess the chinese sword, cheap is good for now, but it might hurt you down the road.", "You now possess the chinese sword, cheap is good for now, but it might hurt you down the road."}},
 };
 
 Item::Item()

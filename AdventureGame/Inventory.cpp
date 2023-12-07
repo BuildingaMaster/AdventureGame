@@ -38,6 +38,10 @@ Inventory::Inventory(PlayerActions* pd)
         {
             itemMap[x.first].insert(itemMap[x.first].begin(), new Weapon(legendarysword, 5)); //Legendary Sword
         }
+        if (x.second->hasAttribute(x.second->CHINESE_SWORD_IN_ROOM))
+        {
+            itemMap[x.first].insert(itemMap[x.first].begin(), new Weapon(chinesesword, 5)); //Legendary Sword
+        }
     }
 }
 
