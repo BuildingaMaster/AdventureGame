@@ -47,6 +47,12 @@ bool PlayerActions::processCommand(vector<string> args)
         CommonGameObjects::INManager->listInventory();
         return true;
     }
+    else if (args[0] == "check" && args[1]  == "weapon")
+    {
+        PrintDisplay::custom_cout << "\nYou have the  "<< WeaponManager::getCurrentWeapon()->getItemName() <<" equipped.\n";
+        PrintDisplay::flush();
+        return true;
+    }
     string entityName = "";
 
     for (int i = 1; i<args.size(); i++)
@@ -293,6 +299,13 @@ bool PlayerActions::processCommand(vector<string> args)
         WeaponManager::getCurrentWeapon()->action();
         return true;
     }
+    else if (args[0] == "throw" && args[1] == "boomerang" && WeaponManager::getCurrentWeapon()->getWeaponType() != boomerang)
+    {
+        PrintDisplay::custom_cout << "\nYou have the boomerang, but you don't have it equipped.\n";
+        PrintDisplay::flush();
+        return false;
+    }
+    
 
     // Nothing else to do.
     PrintDisplay::custom_cout << "\nYou can't " << args[0] << " that!\n";
