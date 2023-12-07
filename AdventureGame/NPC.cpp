@@ -178,7 +178,7 @@ bool NPCManager::findLiveHostileNPCs()
             return true;
         }
     }
-    return true;
+    return false;
 }
 
 map<int, vector<NPC*>> NPCManager::NPCMap;
