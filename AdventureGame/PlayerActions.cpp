@@ -234,7 +234,7 @@ bool PlayerActions::processCommand(vector<string> args)
             }
         }
     }
-    else if (args[0] == "hit" && args[1] == "King Thadeus") // is this too much for the user to type?
+    else if (args[0] == "hit" && args[1] == "king") // is this too much for the user to type?
     {
         if (NPCManager::scanForNPC(args[1]))
         {
@@ -245,18 +245,18 @@ bool PlayerActions::processCommand(vector<string> args)
                 {
                     if (kingThad->takeDamage(1))
                     {
-                        PrintDisplay::custom_cout << "\nYou strike the King! He has " << kingThad->getLives() << " lives remaining.\n";
+                        PrintDisplay::custom_cout << "\nYou strike the king! He has " << kingThad->getLives() << " lives remaining.\n";
                         PrintDisplay::flush();
                         if (kingThad->isDead())
                         {
-                            PrintDisplay::custom_cout << "NOOOOO! How could this happen!?\n";
+                            PrintDisplay::custom_cout << "King Thadeus: NOOOOO! How could this happen!?\n";
                             PrintDisplay::flush();
                             return true;
                         }
                     }
                     else
                     {
-                        PrintDisplay::custom_cout << "\nYou strike the King, but he still has " << kingThad->getLives() << " lives remaining.\n";
+                        PrintDisplay::custom_cout << "\nYou strike the king, but he still has " << kingThad->getLives() << " lives remaining.\n";
                         PrintDisplay::flush();
 
                     }
@@ -265,7 +265,7 @@ bool PlayerActions::processCommand(vector<string> args)
 
                 if (kingThad->isHostile)
                 {
-                    PrintDisplay::custom_cout << "The King screams with all his might as he swings at you!\n";
+                    PrintDisplay::custom_cout << "The king screams with all his might as he swings at you!\n";
                     int hitCount = PrintDisplay::dodgeScreen();
                     if (hitCount > 0) // The player got hit.
                     {
@@ -282,7 +282,7 @@ bool PlayerActions::processCommand(vector<string> args)
             }
             else
             {
-                PrintDisplay::custom_cout << "\nYou have already defeated the King. Have mercy. You are one step away from accomplishing you mission.\n";
+                PrintDisplay::custom_cout << "\nYou have already defeated the king. Have mercy. You are one step away from accomplishing you mission.\n";
                 PrintDisplay::flush();
                 return false;
             }
