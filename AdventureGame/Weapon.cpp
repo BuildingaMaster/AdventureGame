@@ -31,9 +31,9 @@ Weapon::Weapon(weaponType initType, double initWeight) : Item(weapon)
 		itemName = "legendary sword";
 		damageAmount = 3;
 	}
-	else if (initType == fakels)
+	else if (initType == chinesesword)
 	{
-		itemName = "fake legendary sword";
+		itemName = "chinese sword";
 		damageAmount = 3;
 	}
 
