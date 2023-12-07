@@ -5,8 +5,8 @@
 #include "PlayerActions.h"
 #include "PrintDisplay.h"
 
-// Fists, Boomerang
-enum weaponType { fists, boomerang };
+// Fists, Boomerang, Legendary Sword, and the Fake Legendary Sword
+enum weaponType { fists, boomerang, legendarysword, fakels };
 
 class Weapon : public Item
 {

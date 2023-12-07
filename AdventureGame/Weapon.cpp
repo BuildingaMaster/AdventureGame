@@ -26,6 +26,17 @@ Weapon::Weapon(weaponType initType, double initWeight) : Item(weapon)
 		itemName = "boomerang";
 		damageAmount = 1;
 	}
+	else if (initType == legendarysword)
+	{
+		itemName = "legendary sword";
+		damageAmount = 3;
+	}
+	else if (initType == fakels)
+	{
+		itemName = "fake legendary sword";
+		damageAmount = 3;
+	}
+
 }
 
 Weapon::Weapon() : Item(weapon)
@@ -33,6 +44,7 @@ Weapon::Weapon() : Item(weapon)
 	itemType = fists;
 	setWeight(0);
 	itemName = "fists";
+
 }
 /*
 void Weapon::consume(PlayerActions* player)
