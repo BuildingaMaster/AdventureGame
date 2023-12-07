@@ -114,6 +114,7 @@ void effectManager::addStrength()
         CommonGameObjects::PAManager->hurtPlayer(999999);
         PrintDisplay::no_effect_flush();
     }
+    effectManager::attackUpBonus = true;
     PrintDisplay::custom_cout << "\nYou now have a stronger attack!\n";
     effectManager::strengthTurns = 5;
     PrintDisplay::flush();
@@ -129,6 +130,7 @@ void effectManager::slowDownTime()
         PrintDisplay::no_effect_flush();
         return;
     }
+    effectManager::shouldSlowDown = true;
     effectManager::slowDownTurns = 3;
     PrintDisplay::custom_cout << "\nYou now have the ability to slow down time!\n";
     PrintDisplay::flush();
