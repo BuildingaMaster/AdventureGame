@@ -43,6 +43,10 @@ bool NPCManager::init()
         {
             NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("dragon", 5, true));
         }
+        else if (x.second->hasAttribute(x.second->KING_THAD_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("King Thadeus", 6, true));
+        }
     }
     return true;
 }

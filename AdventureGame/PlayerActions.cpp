@@ -143,20 +143,20 @@ bool PlayerActions::processCommand(vector<string> args)
                         {
                             PrintDisplay::custom_cout << "The knight is dead.\n";
                             PrintDisplay::flush();
-                            return true; 
+                            return true;
                         }
                     }
                     else
                     {
                         PrintDisplay::custom_cout << "\nYou hit the knight, but it still has " << knight->getLives() << " lives remaining.\n";
                         PrintDisplay::flush();
-                                            
+
                     }
                     this_thread::sleep_for(chrono::milliseconds(1500));
                 }
 
                 if (knight->isHostile)
-                {   
+                {
                     PrintDisplay::custom_cout << "The knight attacks you back!\n";
                     int hitCount = PrintDisplay::dodgeScreen();
                     if (hitCount > 0) // The player got hit.
@@ -234,7 +234,60 @@ bool PlayerActions::processCommand(vector<string> args)
             }
         }
     }
+    else if (args[0] == "hit" && args[1] == "King Thadeus") // is this too much for the user to type?
+    {
+        if (NPCManager::scanForNPC(args[1]))
+        {
+            NPC* kingThad = NPCManager::returnNPC(args[1]);
+            if (!kingThad->isDead())
+            {
+                if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOOOO###", 50))
+                {
+                    if (kingThad->takeDamage(1))
+                    {
+                        PrintDisplay::custom_cout << "\nYou strike the King! He has " << kingThad->getLives() << " lives remaining.\n";
+                        PrintDisplay::flush();
+                        if (kingThad->isDead())
+                        {
+                            PrintDisplay::custom_cout << "NOOOOO! How could this happen!?\n";
+                            PrintDisplay::flush();
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        PrintDisplay::custom_cout << "\nYou strike the King, but he still has " << kingThad->getLives() << " lives remaining.\n";
+                        PrintDisplay::flush();
 
+                    }
+                    this_thread::sleep_for(chrono::milliseconds(1500));
+                }
+
+                if (kingThad->isHostile)
+                {
+                    PrintDisplay::custom_cout << "The King screams with all his might as he swings at you!\n";
+                    int hitCount = PrintDisplay::dodgeScreen();
+                    if (hitCount > 0) // The player got hit.
+                    {
+                        this->hurtPlayer(hitCount);
+                        if (this->checkPlayerHealth() != 0)
+                        {
+                            PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
+                        }
+                        PrintDisplay::flush();
+                    }
+                }
+                PrintDisplay::flush();
+                return true;
+            }
+            else
+            {
+                PrintDisplay::custom_cout << "\nYou have already defeated the King. Have mercy. You are one step away from accomplishing you mission.\n";
+                PrintDisplay::flush();
+                return false;
+            }
+        }
+    }
     // Nothing else to do.
     PrintDisplay::custom_cout << "\nYou can't " << args[0] << " that!\n";
     PrintDisplay::no_effect_flush();

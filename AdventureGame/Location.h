@@ -84,6 +84,7 @@ public:
 		ARMOR_1 = 6,
 		ARMOR_2 = 7,
 		ARMOR_3 = 8,
+		KING_THAD_IN_ROOM = 12,
 		AAAA = 64,
 		NONE = 0
 	};
