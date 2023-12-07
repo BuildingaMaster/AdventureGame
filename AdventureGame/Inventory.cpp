@@ -33,7 +33,6 @@ Inventory::Inventory(PlayerActions* pd)
         if (x.second->hasAttribute(x.second->ARMOR_1))
         {
             itemMap[x.first].insert(itemMap[x.first].begin(), new Armor(leather, 1)); // Add leather armor
-            PrintDisplay::custom_cout << "Working!\n";
         }
         if (x.second->hasAttribute(x.second->ARMOR_2))
         {
