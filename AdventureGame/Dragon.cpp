@@ -2,7 +2,7 @@
 
 #include "PrintDisplay.h"
 
-Dragon::Dragon() : NPC("dragon", 5, true) {}
+Dragon::Dragon() : NPC("dragon", 5, true) { ; }
 
 void Dragon::attackPlayer()
 {

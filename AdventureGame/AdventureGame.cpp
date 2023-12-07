@@ -190,6 +190,10 @@ int main()
             else if (!princessIgnored)
             {
                 endGame = dynamic_cast<Princess&>(*princess).rizzTime();
+                if (playeract.thePlayerIsDead())
+                {
+                    continue;
+                }
             }
 
             if (endGame == true) // End the game.

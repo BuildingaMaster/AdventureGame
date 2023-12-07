@@ -1,7 +1,7 @@
 #include "Wolf.h"
 #include "PrintDisplay.h"
 
-Wolf::Wolf() : NPC("wolf", 3, true) {};
+Wolf::Wolf() : NPC("wolf", 3, true) { ; };
 
 void Wolf::attackPlayer()
 {

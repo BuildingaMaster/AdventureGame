@@ -6,7 +6,7 @@
 #include "CommonGameObjects.h"
 using namespace std;
 
-Princess::Princess() : NPC("princess", 1, false) {}
+Princess::Princess() : NPC("princess", 1, false) { ; }
 
 bool Princess::rizzTime()
 {
@@ -81,14 +81,14 @@ bool Princess::rizzTime()
         PrintDisplay::custom_cout << "\tthen get your pathetic ass out of my castle!\"\n\n";
         PrintDisplay::no_effect_flush();
         PrintDisplay::custom_cout << "She charges towards you!\n";
-        if(!PrintDisplay::dodgeScreen(1, true, true, 700))
+        if(PrintDisplay::dodgeScreen(1, true, true, 700))
         {
             PrintDisplay::custom_cout << "You got pushed out the window!\n";
             PrintDisplay::custom_cout << "Fortunately, you've landed in the moat!\n";
             PrintDisplay::custom_cout << "However, she knows you cant swim...\n";
             PrintDisplay::no_effect_flush();
             CommonGameObjects::PAManager->hurtPlayer(999999);
-            return false;
+            return true;
         }
         PrintDisplay::no_effect_flush();
         this->secondTry = true;

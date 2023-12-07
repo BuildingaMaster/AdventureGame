@@ -1,7 +1,7 @@
 #include "King.h"
 #include "PrintDisplay.h"
 
-King::King() : NPC("king", 6, true) {}
+King::King() : NPC("king", 6, true) { ; }
 
 void King::attackPlayer()
 {

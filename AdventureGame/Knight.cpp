@@ -1,7 +1,7 @@
 #include "Knight.h"
 #include "PrintDisplay.h"
 
-Knight::Knight() : NPC("knight", 4, true) {}
+Knight::Knight() : NPC("knight", 4, true) { ; }
 
 void Knight::attackPlayer()
 {
