@@ -43,6 +43,10 @@ bool NPCManager::init()
         {
             NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("dragon", 5, true));
         }
+        else if (x.second->hasAttribute(x.second->KING_THAD_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("king", 6, true));
+        }
     }
     return true;
 }
@@ -86,4 +90,5 @@ std::map<std::string,  std::pair<std::string,std::string>> NPCDescription::NPCTa
         {"wolf", std::pair<std::string,std::string>{"WOLF!!!! Its time to run or fight!", "WOLVES!!!! Its time to run or fight!"}},
         {"knight", std::pair<std::string,std::string>{"The knight blocks your path!", "The knights surround you and block your path!"}},
         {"dragon", std::pair<std::string,std::string>{"THE DRAGON AWAKES IN RAGE!\nThe dragon roars in anger and blows fire that throws you back.", "THE DRAGON AWAKES IN RAGE!\nThe dragons roar in anger and blows fire that throws you back."}},
+        {"king", std::pair<std::string,std::string>{"The king is the only thing between you and Florence!\n", "The king is the only thing between you and Florence!\n"}},
 };
