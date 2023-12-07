@@ -359,6 +359,16 @@
               <string>Instant Kill Room</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>Princess in Room</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Dragon in Room</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
