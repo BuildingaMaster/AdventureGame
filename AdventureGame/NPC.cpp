@@ -16,6 +16,8 @@
 #include "Knight.h"
 #include "Princess.h"
 #include "Wolf.h"
+#include "King.h"
+#include "Dragon.h"
 
 using namespace std;
 
@@ -59,7 +61,7 @@ void NPC::AttackAtPlayer(
     {
         PrintDisplay::custom_cout << "The " << this->name << " begins it's attack!\n";
         this_thread::sleep_for(chrono::milliseconds(700));
-        int hitCount = PrintDisplay::dodgeScreen();
+        int hitCount = PrintDisplay::dodgeScreen(dodge_iterations, dodge_disable_forward_tile, dodge_more_than_one_tile, dodge_reaction_time);
         if (hitCount > 0) // The player got hit.
         {
             CommonGameObjects::PAManager->hurtPlayer(hitCount);
@@ -96,11 +98,11 @@ bool NPCManager::init()
         }
         else if (x.second->hasAttribute(x.second->DRAGON_IN_ROOM))
         {
-            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("dragon", 5, true));
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Dragon());
         }
         else if (x.second->hasAttribute(x.second->KING_THAD_IN_ROOM))
         {
-            NPCMap[x.first].insert(NPCMap[x.first].begin(), new NPC("king", 6, true));
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new King());
         }
     }
     return true;

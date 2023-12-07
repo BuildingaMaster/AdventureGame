@@ -30,6 +30,7 @@ public:
     virtual void attackFailed() = 0;
     virtual void attackPlayer() = 0;
     virtual bool recieveAttack() = 0;
+    virtual void printIAmDeadMessage() = 0;
     void AttackAtPlayer();
 
     /// @brief Displays the dodgeUI for the player when NPC is attacked
