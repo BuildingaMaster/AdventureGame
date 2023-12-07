@@ -90,4 +90,5 @@ std::map<std::string,  std::pair<std::string,std::string>> NPCDescription::NPCTa
         {"wolf", std::pair<std::string,std::string>{"WOLF!!!! Its time to run or fight!", "WOLVES!!!! Its time to run or fight!"}},
         {"knight", std::pair<std::string,std::string>{"The knight blocks your path!", "The knights surround you and block your path!"}},
         {"dragon", std::pair<std::string,std::string>{"THE DRAGON AWAKES IN RAGE!\nThe dragon roars in anger and blows fire that throws you back.", "THE DRAGON AWAKES IN RAGE!\nThe dragons roar in anger and blows fire that throws you back."}},
+        {"King Thadeus", std::pair<std::string,std::string>{"The King is the only thing betweem you and Florence!", "The King is the only thing betweem you and Florence!"}},
 };
