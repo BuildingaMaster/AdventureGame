@@ -241,7 +241,7 @@ bool PlayerActions::processCommand(vector<string> args)
             NPC* kingThad = NPCManager::returnNPC(args[1]);
             if (!kingThad->isDead())
             {
-                if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOOOOO##", 15))
+                if (PrintDisplay::hitScreen("OOOOOOOOOOOOOOOOOOOOOOO##", 25))
                 {
                     if (kingThad->takeDamage(1))
                     {
