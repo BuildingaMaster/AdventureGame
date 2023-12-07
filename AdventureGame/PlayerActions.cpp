@@ -18,6 +18,7 @@ PlayerActions::PlayerActions()
 {
     healthMGR = BaseHealth(PLAYER_HEALTH);
     playerIsHigh = false;
+    worn = none;
     stepsUntilNotHigh = 0;
     firstTimePlayerAttacks = true;
     firstTimePlayerDodges = true;
@@ -34,7 +35,7 @@ bool PlayerActions::processCommand(vector<string> args)
     }
 
     // Check player health [basic]
-    if (args[0] == "check" &&  args[1] == "health")
+    if (args[0] == "check" &&  (args[1] == "health" || args[1] == "hp" || args[1] == "self"))
     {
         PrintDisplay::custom_cout << "\nYou can withstand "<< healthMGR.checkHP() <<" more hits.\n";
         PrintDisplay::flush();
@@ -240,6 +241,12 @@ bool PlayerActions::processCommand(vector<string> args)
     return false;
 }
 
+void PlayerActions::changeArmor(armorType newArmor)
+{
+    healthMGR.changeMaxHP(newArmor);
+    worn = newArmor;
+}
+
 void PlayerActions::healPlayer(int amount)
 {
     healthMGR.addHP(amount);
@@ -300,6 +307,7 @@ bool PlayerActions::playAgain()
     {
         CommonGameObjects::INManager->dropAllInventory();
         locationManager::updateCurrentLocation(locationManager::locationMap[1]);
+        changeArmor(none);
         healthMGR.restoreMaxHP();
          // bring player back to starting room, reset the inventory & NPCS
     }

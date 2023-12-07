@@ -4,6 +4,7 @@
 #include <map>
 #include "Item.h"
 #include "Consumable.h"
+#include "Armor.h"
 #include "PlayerActions.h"
 
 using namespace std;
@@ -20,7 +21,7 @@ public:
 	/// @return If discarding worked.
 	bool discardItem(vector<string> args, int roomID);
 	bool processCommand(vector<string> args);
-	string inventoryValidCommands = "pick grab take eat consume drop throw discard inventory items";
+	string inventoryValidCommands = "pick grab take eat consume drop throw discard inventory items equip wear don";
 	static map<int, vector<Item*>> itemMap;
 	
 	/// @brief Drops all items to the ground.

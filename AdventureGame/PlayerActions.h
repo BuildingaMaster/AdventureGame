@@ -7,8 +7,9 @@
 #include "BaseHealth.h"
 #include "NPC.h"
 
-
 #define PLAYER_HEALTH 3
+
+enum armorType { leather = 4, chain = 5, iron = 6, none = 3 };
 
 class PlayerActions
 {
@@ -22,10 +23,15 @@ private:
 	int stepsUntilNotHigh;
 	bool firstTimePlayerAttacks;
 	bool firstTimePlayerDodges;
+	armorType worn;
 public:
 	// Constructor 
 	/// @brief sets HealthMGR equal to BaseHealth(PLAYER_HEALTH)
 	PlayerActions();
+
+	/// @brief Changes the player's current armor
+	/// @param newone the player's new type of armor, either leather, chain or iron
+	void changeArmor(armorType newone);
 
 	// Function
 	/// @brief Allows player to check their health

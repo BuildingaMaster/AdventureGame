@@ -357,7 +357,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 64,
             "AltRoomDesc": "A large boulder blocks the path to the north.",
             "X": 70.0,
             "Y": 157.0
@@ -507,7 +507,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 32,
             "AltRoomDesc": "You're on a sandy beach with the ruins of an old shipwreck.\nThere is a vast sea to the west.\nYou can't swim and hate sand.",
             "X": 5.0,
             "Y": 577.0
@@ -807,7 +807,7 @@
             "W": 0,
             "A": 0,
             "B": 0,
-            "attrib": 0,
+            "attrib": 128,
             "AltRoomDesc": "You look at the ground and see weapons broken in two.\nYou become nervous.\n",
             "X": 740.0,
             "Y": 176.0

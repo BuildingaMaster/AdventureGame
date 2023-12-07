@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AdventureGame.cpp" />
+    <ClCompile Include="Armor.cpp" />
     <ClCompile Include="BaseHealth.cpp" />
     <ClCompile Include="CommonGameObjects.cpp" />
     <ClCompile Include="Consumable.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="PrintDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Armor.h" />
     <ClInclude Include="BaseHealth.h" />
     <ClInclude Include="CommonGameObjects.h" />
     <ClInclude Include="Consumable.h" />

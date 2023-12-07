@@ -81,6 +81,9 @@ public:
 		KNIGHT_IN_ROOM = 4,
 		INSTANT_KILL_ROOM = 9,
 		DRAGON_IN_ROOM = 11,
+		ARMOR_1 = 6,
+		ARMOR_2 = 7,
+		ARMOR_3 = 8,
 		AAAA = 64,
 		NONE = 0
 	};

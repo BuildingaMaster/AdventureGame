@@ -12,6 +12,16 @@ BaseHealth::BaseHealth(int amount)
     maxHealth = amount;
 }
 
+void BaseHealth::changeMaxHP(int args)
+{
+    bool max = (checkMaxHP() == checkHP());
+    maxHealth = args;
+    if (checkHP() > args || max)
+    {
+        health = maxHealth;
+    }
+}
+
 void BaseHealth::addHP(int amount)
 {
     if ((health + amount) >= maxHealth)
