@@ -91,8 +91,6 @@ bool Inventory::useItem(vector<string> args, int roomID)
     PrintDisplay::no_effect_flush();
     return false;
 }
-
-
 bool Inventory::discardItem(vector<string> args, int roomID)
 {
     string itemArg = args[1];
