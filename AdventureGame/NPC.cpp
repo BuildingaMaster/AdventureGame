@@ -168,6 +168,19 @@ bool NPCManager::fightHostileNPCs()
     return true;
 }
 
+bool NPCManager::findLiveHostileNPCs()
+{
+    uint32_t roomID = locationManager::getCurrentLocation()->getLocationID();
+    for (auto npc : NPCMap[roomID])
+    {
+        if (npc->isHostile && !npc->isDead())
+        {
+            return true;
+        }
+    }
+    return true;
+}
+
 map<int, vector<NPC*>> NPCManager::NPCMap;
 
 

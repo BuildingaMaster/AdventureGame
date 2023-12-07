@@ -184,6 +184,12 @@ bool locationManager::processCommand(vector<string> args)
 			PrintDisplay::flush();
 			return false;
 		}
+		else if (NPCManager::findLiveHostileNPCs() && currentLocation->checkAdjacent(arg0Direction) != previousLocation)
+		{
+			PrintDisplay::custom_cout << "\nYou'll need to defeat the enemy first!\n";
+			PrintDisplay::flush();
+			return false;
+		}
 		else
 		{
 			// Move Player to the new location and print out its description
