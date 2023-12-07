@@ -369,6 +369,31 @@
               <string>Dragon in Room</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>The King in Room</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Potion of Strength</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Potion of Mobility</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Potion of Sobriety</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Potion of Teleportation</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
