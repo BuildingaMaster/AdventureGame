@@ -34,6 +34,10 @@ Inventory::Inventory(PlayerActions* pd)
         {
             itemMap[x.first].insert(itemMap[x.first].begin(), new Weapon(boomerang,5)); //Boomerang
         }
+        if (x.second->hasAttribute(x.second->LEG_SWORD_IN_ROOM))
+        {
+            itemMap[x.first].insert(itemMap[x.first].begin(), new Weapon(legendarysword, 5)); //Legendary Sword
+        }
     }
 }
 

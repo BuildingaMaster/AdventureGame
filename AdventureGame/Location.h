@@ -82,6 +82,7 @@ public:
 		BOOMERANG_IN_ROOM = 5,
 		INSTANT_KILL_ROOM = 9,
 		DRAGON_IN_ROOM = 11,
+		LEG_SWORD_IN_ROOM = 17,
 		AAAA = 64,
 		NONE = 0
 	};
