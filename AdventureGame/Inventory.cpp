@@ -196,6 +196,14 @@ bool Inventory::processCommand(vector<string> args)
         {
             if (itemMap[roomID][i]->getItemName() == itemArg)
             {
+                if (itemMap[roomID][i]->getItemName() == "legendary sword")
+                {
+                    if (!PrintDisplay::hitScreen("00000000000000000#", 15))
+                    {
+                        PrintDisplay::custom_cout << "\nYour pull out game is weak!!!\n";
+                        return true;
+                    }
+                }
                 addItem(itemMap[roomID][i]);
                 if (multiSelect == false)
                 {
