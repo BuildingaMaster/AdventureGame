@@ -284,6 +284,19 @@ bool Inventory::processCommand(vector<string> args)
         PrintDisplay::flush();
         return false;
     }
+    else if (args[0] == "drink" || args[0] == "chugg")
+    {
+        if (multiSelect == true)
+        {
+            PrintDisplay::custom_cout << "\nYou can only drink one " << itemArg << " at a time.\n";
+            PrintDisplay::flush();
+        }
+        string potion_name = "";
+        for (int i = 1; i<args.size(); i++)
+        {
+            potion_name+= args[i] + " ";
+        }
+    }
     else if ( args[0] == "drop" || args[0] == "throw" || args[0] == "discard")
     {
         discardItem(args, roomID);
