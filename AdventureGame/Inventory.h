@@ -20,12 +20,15 @@ public:
 	/// @return If discarding worked.
 	bool discardItem(vector<string> args, int roomID);
 	bool processCommand(vector<string> args);
-	string inventoryValidCommands = "pick grab take eat consume drop throw discard";
+	string inventoryValidCommands = "pick grab take eat consume drop throw discard inventory items";
 	static map<int, vector<Item*>> itemMap;
 	
 	/// @brief Drops all items to the ground.
 	void dropAllInventory();
 	void clearInventory();
+
+	/// @brief List all the elements in the user's inventory.
+	void listInventory();
 
 #ifdef GTESTING
 public:

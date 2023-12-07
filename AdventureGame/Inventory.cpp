@@ -124,7 +124,11 @@ bool Inventory::discardItem(vector<string> args, int roomID)
 
 bool Inventory::processCommand(vector<string> args)
 {
-    //TODO Apple is in every room
+    if (args[0] == "inventory" || args[0] == "items")
+    {
+        listInventory();
+        return true;
+    }
     if (args.size() == 1)
     {
         PrintDisplay::custom_cout << "\nIt's not clear what you want to " << args[0] << ".\n";
@@ -284,4 +288,41 @@ void Inventory::dropAllInventory()
         itemMap[roomID][itemMap[roomID].size() - 1]->setState(inWorld);
     }
     currentInventory.clear();
+}
+
+void Inventory::listInventory()
+{
+    // <item type, quantity>
+    map<string, int> tempItemCount;
+
+    if (currentInventory.empty() == true)
+    {
+        PrintDisplay::custom_cout << "\nYou have no items in the inventory.\n";
+        PrintDisplay::no_effect_flush();
+        return;
+    }
+
+    for (auto item : currentInventory)
+    {
+        if (tempItemCount.count(item->getItemName()))
+        {
+            tempItemCount[item->getItemName()]++; 
+        }
+        else
+        {
+            tempItemCount.insert(std::pair<string, int>(item->getItemName(), 1));
+        }
+    }
+    PrintDisplay::custom_cout << "\nHere's what you have in your inventory:\n\n";
+
+    for (auto item : tempItemCount)
+    {
+        PrintDisplay::custom_cout << "- " << item.second << " " << item.first;
+        if (item.second > 1)
+        {
+            PrintDisplay::custom_cout << "s";
+        }
+        PrintDisplay::custom_cout << "\n";
+        PrintDisplay::no_effect_flush();
+    }
 }

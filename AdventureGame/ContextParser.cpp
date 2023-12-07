@@ -64,7 +64,7 @@ bool ContextParser::interpretCommand(string unfilteredCmd)
         // Handles the "help" command
         PrintDisplay::custom_cout << "Here is a list of commands that might be useful: \n\n";
         PrintDisplay::no_effect_flush();
-        PrintDisplay::custom_cout << "Movements\n move/go/walk/travel north/east/south/west/above/below \n\nActions\n pick/grab/eat/consume apple/mushroom\n hit self\n check health \n\nSurroundings\n visualize,look,see,describe \n\nquit\n";
+        PrintDisplay::custom_cout << "Movements\n move/go/walk/travel north/east/south/west/above/below \n\nActions\n pick/grab/eat/consume apple/mushroom\n hit self\n check health/inventory \n\nSurroundings\n visualize,look,see,describe \n\nquit\n";
         PrintDisplay::no_effect_flush();    
         return true;
     }
