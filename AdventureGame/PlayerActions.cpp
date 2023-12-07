@@ -307,6 +307,7 @@ bool PlayerActions::playAgain()
     {
         CommonGameObjects::INManager->dropAllInventory();
         locationManager::updateCurrentLocation(locationManager::locationMap[1]);
+        changeArmor(none);
         healthMGR.restoreMaxHP();
          // bring player back to starting room, reset the inventory & NPCS
     }
