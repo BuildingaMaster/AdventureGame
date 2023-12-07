@@ -137,6 +137,7 @@
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PrintDisplay.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseHealth.h" />
@@ -145,6 +146,7 @@
     <ClCompile Include="ContextParser.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Location.cpp" />
