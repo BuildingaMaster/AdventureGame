@@ -251,8 +251,17 @@ bool PlayerActions::processCommand(vector<string> args)
         PrintDisplay::flush();
         return false;
     }
-    
-
+    else if (args[0] == "swing" && args[1] == "sword" && WeaponManager::getCurrentWeapon()->getWeaponType() == legendarysword)
+    {
+        WeaponManager::getCurrentWeapon()->action();
+        return true;
+    }
+    else if (args[0] == "swing" && args[1] == "sword" && WeaponManager::getCurrentWeapon()->getWeaponType() != legendarysword)
+    {
+        PrintDisplay::custom_cout << "\nYou have the legendary sword, but you don't have it equipped.\n";
+        PrintDisplay::flush();
+        return false;
+    }
     // Nothing else to do.
     PrintDisplay::custom_cout << "\nYou can't " << args[0] << " that!\n";
     PrintDisplay::no_effect_flush();
