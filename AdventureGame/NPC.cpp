@@ -133,6 +133,10 @@ bool NPCManager::init()
         {
             NPCMap[x.first].insert(NPCMap[x.first].begin(), new Villager("John"));
         }
+        else if (x.second->hasAttribute(x.second->VILLAGER7_IN_ROOM))
+        {
+            NPCMap[x.first].insert(NPCMap[x.first].begin(), new Villager("Tiffany"));
+        }
     }
     return true;
 }

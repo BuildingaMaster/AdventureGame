@@ -50,6 +50,12 @@ void Villager::loredump()
         PrintDisplay::custom_cout << "\nJust to think, this could've all been avoided if";
         PrintDisplay::custom_cout << "\nyou didn't sleep with the princess' cousin.\n";
     }
+    else if (villagername == "Tiffany")
+    {
+        PrintDisplay::custom_cout << "\nSo you're back to square one, huh?";
+        PrintDisplay::custom_cout << "\nJust to think, this could've all been avoided if";
+        PrintDisplay::custom_cout << "\nyou didn't sleep with the princess' cousin.\n";
+    }
 }
 
 void Villager::attackPlayer()
