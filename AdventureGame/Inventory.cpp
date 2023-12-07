@@ -203,6 +203,15 @@ bool Inventory::processCommand(vector<string> args)
                 return true;
                 */
             }
+            else if (args[1] == "armor" && itemMap[roomID][i]->getType() == armor)
+            {
+                addItem(itemMap[roomID][i]);
+                string temp = itemMap[roomID][i]->getItemName();
+                itemMap[roomID].erase(itemMap[roomID].begin() + i); // Remove pass
+                PrintDisplay::custom_cout << "\nYou have taken the " << temp << " armor.\n";
+                PrintDisplay::flush();
+                return true;
+            }
         }
         if (found)
         {
@@ -290,16 +299,64 @@ bool Inventory::processCommand(vector<string> args)
                 // Is it a consumable?
                 if (currentInventory[i]->getType() == armor)
                 {
-                    if (itemArg != "armor")
+                    Armor& item = dynamic_cast<Armor&>(*currentInventory[i]);
+                    PrintDisplay::custom_cout << "\nYou put on the " << itemArg << " armor!\n";
+                    item.equip(playerData);
+                    return true;
+                }
+            }
+        }
+        if (args[1] == "armor")
+        {
+            for (int i = 0; i < currentInventory.size(); i++)
+            {
+                // Is the item in the inventory
+                if (currentInventory[i]->getItemName() == "iron")
+                {
+                    // Is it a consumable?
+                    if (currentInventory[i]->getType() == armor)
                     {
                         Armor& item = dynamic_cast<Armor&>(*currentInventory[i]);
-                        PrintDisplay::custom_cout << "\nYou put on the " << itemArg << " armor!\n";
+                        PrintDisplay::custom_cout << "\nYou put on the " << "iron" << " armor!\n";
+                        item.equip(playerData);
+                        return true;
+                    }
+                }
+            }
+            for (int i = 0; i < currentInventory.size(); i++)
+            {
+                // Is the item in the inventory
+                if (currentInventory[i]->getItemName() == "chainmail")
+                {
+                    // Is it a consumable?
+                    if (currentInventory[i]->getType() == armor)
+                    {
+                        Armor& item = dynamic_cast<Armor&>(*currentInventory[i]);
+                        PrintDisplay::custom_cout << "\nYou put on the " << "chainmail" << " armor!\n";
+                        item.equip(playerData);
+                        return true;
+                    }
+                }
+            }
+            for (int i = 0; i < currentInventory.size(); i++)
+            {
+                // Is the item in the inventory
+                if (currentInventory[i]->getItemName() == "leather")
+                {
+                    // Is it a consumable?
+                    if (currentInventory[i]->getType() == armor)
+                    {
+                        Armor& item = dynamic_cast<Armor&>(*currentInventory[i]);
+                        PrintDisplay::custom_cout << "\nYou put on the " << "leather" << " armor!\n";
                         item.equip(playerData);
                         return true;
                     }
                 }
             }
         }
+        PrintDisplay::custom_cout << "\nYou don't have any " << itemArg << ".\n";
+        PrintDisplay::flush();
+        return false;
     }
     
     return true;

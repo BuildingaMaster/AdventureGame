@@ -35,7 +35,7 @@ bool PlayerActions::processCommand(vector<string> args)
     }
 
     // Check player health [basic]
-    if (args[0] == "check" &&  args[1] == "health")
+    if (args[0] == "check" &&  (args[1] == "health" || args[1] == "hp"))
     {
         PrintDisplay::custom_cout << "\nYou can withstand "<< healthMGR.checkHP() <<" more hits.\n";
         PrintDisplay::flush();

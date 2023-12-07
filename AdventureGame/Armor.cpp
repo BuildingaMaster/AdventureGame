@@ -39,7 +39,7 @@ void Armor::equip(PlayerActions* pact)
 	if (itemType != none)
 	{
 		pact->changeArmor(itemType);
-		PrintDisplay::custom_cout << "\nYou have equipped the " << itemName << "!" << endl;
+		PrintDisplay::custom_cout << "\nYou have equipped the " << itemName << " armor!" << endl;
 	}
 }
 
