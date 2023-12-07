@@ -194,7 +194,24 @@ int main()
             if (endGame == true) // End the game.
             {
                 PrintDisplay::custom_cout << "\nYour adventure has reached it's conclusion.\n";
-                PrintDisplay::custom_cout << "Thanks for playing!\n\n";
+                PrintDisplay::custom_cout << "Thanks for playing Survival Kingdom!\n\n";
+                PrintDisplay::custom_cout << "The Master Builder Team:\n";
+                PrintDisplay::custom_cout << "\tEric Castorina\n";
+                PrintDisplay::custom_cout << "\tJohn Papetti III\n";
+                PrintDisplay::custom_cout << "\tJuan Jahaziel Gonzalez Morales\n";
+                PrintDisplay::custom_cout << "\tNick Perillo\n";
+                PrintDisplay::custom_cout << "\tNick Torres\n";
+                PrintDisplay::custom_cout << "\tTrevor Morales\n\n";
+                PrintDisplay::no_effect_flush();
+                PrintDisplay::pause();
+                PrintDisplay::custom_cout << "\nThanks to:\n";
+                PrintDisplay::custom_cout << "\tLee Vallone\n\n";
+                PrintDisplay::custom_cout << "\tAdrian Bernal\n";
+                PrintDisplay::custom_cout << "\tBrian Mata\n";
+                PrintDisplay::custom_cout << "\tTiffany Coelho\n";
+                PrintDisplay::custom_cout << "\tEddie Reynolds\n";
+                PrintDisplay::custom_cout << "\tTimothy Miller\n";
+                PrintDisplay::custom_cout << "\tValerie Kruus\n";
                 PrintDisplay::no_effect_flush();
                 PrintDisplay::pause();
                 stay = false;

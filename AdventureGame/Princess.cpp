@@ -12,7 +12,7 @@ bool Princess::rizzTime()
 {
     if (this->secondTry == true)
     {
-        PrintDisplay::custom_cout << "\nYou have returned to the room of the Princess of Papettia.\n";
+        PrintDisplay::custom_cout << "\nYou have returned to the room of the Princess of Papettia, the lovely Florence.\n";
     }
     else
     {
@@ -20,7 +20,7 @@ bool Princess::rizzTime()
     }
     
     PrintDisplay::no_effect_flush();
-    PrintDisplay::custom_cout << "\nPrincess:";
+    PrintDisplay::custom_cout << "\nPrincess Florence:";
     PrintDisplay::no_effect_flush();
     if (this->secondTry == true)
     {
@@ -49,7 +49,7 @@ bool Princess::rizzTime()
 
     PrintDisplay::custom_cout << "Option 3: ";
     PrintDisplay::no_effect_flush();
-    PrintDisplay::custom_cout << "*You ignore the Princess*\n";
+    PrintDisplay::custom_cout << "*You ignore Princess Florence*\n";
     PrintDisplay::flush();    
     
     int answer = PrintDisplay::optionParser(3);
@@ -58,7 +58,7 @@ bool Princess::rizzTime()
 
     if (answer == 1 && !CommonGameObjects::PAManager->isThePlayerHigh())
     {
-        PrintDisplay::custom_cout << "Princess:\n\t\"You know me so well!\"\n\tKilling the dragon and my new boyfriend was so hot!\"\n\n";
+        PrintDisplay::custom_cout << "Princess Florence:\n\t\"You know me so well!\"\n\tKilling the dragon and my new boyfriend was so hot!\"\n\n";
         PrintDisplay::custom_cout << "You and the Princess begin to embrace.\n";
         PrintDisplay::custom_cout << "You and the Princess reconcile and live happily ever after!\n\n";
         PrintDisplay::custom_cout << "GOOD ENDING\n\n";
@@ -67,7 +67,7 @@ bool Princess::rizzTime()
     }
     else if (answer == 2 || (answer == 1 && CommonGameObjects::PAManager->isThePlayerHigh()))
     {
-        PrintDisplay::custom_cout << "Princess:\n\t\"Get your pathetic ass out of my castle!\"\n";
+        PrintDisplay::custom_cout << "Princess Florence:\n\t\"Get your pathetic ass out of my castle!\"\n";
         PrintDisplay::custom_cout << "You:\n\t\"...okay.\"\n\n";
         PrintDisplay::custom_cout << "You run off into the forest as the pain of rejection fills your soul.\n";
         PrintDisplay::custom_cout << "You weep and run as far as you can, never to be seen again.\n\n";
@@ -78,7 +78,18 @@ bool Princess::rizzTime()
     else if (answer == 3)
     {
         PrintDisplay::custom_cout << "Princess:\n\t\"If you haven't got the guts to say anything,\n";
-        PrintDisplay::custom_cout << "\tthe get your pathetic ass out of my castle!\"\n\n";
+        PrintDisplay::custom_cout << "\tthen get your pathetic ass out of my castle!\"\n\n";
+        PrintDisplay::no_effect_flush();
+        PrintDisplay::custom_cout << "She charges towards you!\n";
+        if(!PrintDisplay::dodgeScreen(1, true, true, 700))
+        {
+            PrintDisplay::custom_cout << "You got pushed out the window!\n";
+            PrintDisplay::custom_cout << "Fortunately, you've landed in the moat!\n";
+            PrintDisplay::custom_cout << "However, she knows you cant swim...\n";
+            PrintDisplay::no_effect_flush();
+            CommonGameObjects::PAManager->hurtPlayer(999999);
+            return false;
+        }
         PrintDisplay::no_effect_flush();
         this->secondTry = true;
         return false;
