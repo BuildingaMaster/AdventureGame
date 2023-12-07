@@ -8,6 +8,8 @@ std::map<std::string,  std::pair<std::string,std::string>> itemDescription::item
     {"apple", std::pair<std::string,std::string>{"You see a faint shimmer of light from the apple in front of you.", "You see a few apples in front of you."}},
     {"mushroom", std::pair<std::string,std::string>{"Looking down, you see a small mushroom that's likely safe to eat.", "Looking down, you see a few wild mushrooms growing."}},
     {"boomerang", std::pair<std::string,std::string>{"You have found a sturdy boomerang, which can be used for a weapon.", "You have found a sturdy boomerang, which can be used for a weapon."}},
+    {"legendary sword", std::pair<std::string,std::string>{"You now possess the legendary sword, with great power comes great responsibility.", "You now possess the legendary sword, with great power comes great responsibility."}},
+
 };
 
 Item::Item()
