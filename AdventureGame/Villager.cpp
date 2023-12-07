@@ -16,7 +16,8 @@ void Villager::loredump()
         PrintDisplay::custom_cout << "\nThe wolves ate my children and I want revenge.";
         PrintDisplay::custom_cout << "\nI am just a wimpy villager though.";
         PrintDisplay::custom_cout << "\nWould you be willing to slaughter some ?";
-        PrintDisplay::custom_cout << "\nIf you do, I will give you some armor. ";
+        PrintDisplay::custom_cout << "\nI left some armor at the end of the cave.";
+        PrintDisplay::custom_cout << "\nFeel free to take it after killing some wolves.";
         PrintDisplay::custom_cout << "\nGo north and you'll find them.\n";
     }
     else if (villagername == "Juan")
