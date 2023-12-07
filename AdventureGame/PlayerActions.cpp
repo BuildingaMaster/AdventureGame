@@ -197,9 +197,10 @@ bool PlayerActions::processCommand(vector<string> args)
                 if (dragon->isHostile)
                 {
                     PrintDisplay::custom_cout << "The dragon attacks you back!\n";
-                    if (!PrintDisplay::dodgeScreen()) // The player got hit.
+                    int hitCount = PrintDisplay::dodgeScreen();
+                    if (hitCount > 0) // The player got hit.
                     {
-                        this->hurtPlayer(1);
+                        this->hurtPlayer(hitCount);
                         if (this->checkPlayerHealth() != 0)
                         {
                             PrintDisplay::custom_cout << "You can withstand " << this->checkPlayerHealth() << " more hits!" << endl;
