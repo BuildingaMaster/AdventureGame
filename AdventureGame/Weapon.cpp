@@ -10,7 +10,7 @@ using namespace std;
 
 random_device WeaponManager::rd;
 
-uniform_int_distribution<int> WeaponManager::dist(1, 15);
+uniform_int_distribution<int> WeaponManager::dist(1, 6);
 
 Weapon::Weapon(weaponType initType, double initWeight) : Item(weapon)
 {
@@ -110,21 +110,29 @@ void Weapon::action()
 		{
 			PrintDisplay::custom_cout << "\nThere were no enemies to hit!\n";
 		}
-		else if (WeaponManager::dist(WeaponManager::rd) == 1)
+		if (PrintDisplay::hitScreen("0#0#",60))
 		{
-			PrintDisplay::custom_cout << "\nA strong breeze altered the boomerang's trajectory!\n";
-			PrintDisplay::custom_cout << "It caused the boomerang to miss!\n";
-			PrintDisplay::custom_cout << "THWACK! It hit you square in the face.\n";
-			CommonGameObjects::PAManager->hurtPlayer(1);
-		}
-		else
-		{
-			for (auto &a : temp)
+			if (WeaponManager::dist(WeaponManager::rd) == 1)
 			{
-				a->takeDamage(1);
+				PrintDisplay::custom_cout << "\nA strong breeze altered the boomerang's trajectory!\n";
+				PrintDisplay::custom_cout << "It caused the boomerang to miss!\n";
+				PrintDisplay::custom_cout << "THWACK! It hit you square in the face.\n";
+				CommonGameObjects::PAManager->hurtPlayer(2);
 			}
-			PrintDisplay::custom_cout << "\nThe boomerang hit " << temp.size() << "beings!\n";
-			CommonGameObjects::PAManager->hurtPlayer(1);
+			else 
+			{
+				for (auto &a : temp)
+				{
+					a->takeDamage(2);
+				}
+				PrintDisplay::custom_cout << "\nThe boomerang hit " << temp.size() << " being";
+				if (temp.size() > 1)
+				{
+					PrintDisplay::custom_cout << "s";
+				}
+				PrintDisplay::custom_cout << "!\n";
+				CommonGameObjects::PAManager->hurtPlayer(1);
+			}
 		}
 		PrintDisplay::flush();
 	}
