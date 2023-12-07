@@ -133,12 +133,17 @@
     <ClCompile Include="CommonGameObjects.cpp" />
     <ClCompile Include="Consumable.cpp" />
     <ClCompile Include="ContextParser.cpp" />
+    <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="King.cpp" />
+    <ClCompile Include="Knight.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="Potion.cpp" />
+    <ClCompile Include="Princess.cpp" />
     <ClCompile Include="PrintDisplay.cpp" />
+    <ClCompile Include="Wolf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armor.h" />
@@ -146,6 +151,7 @@
     <ClInclude Include="CommonGameObjects.h" />
     <ClInclude Include="Consumable.h" />
     <ClCompile Include="ContextParser.h" />
+    <ClInclude Include="Dragon.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
   </ItemGroup>
@@ -154,10 +160,14 @@
     <ClCompile Include="Location.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="King.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="Potion.h" />
+    <ClInclude Include="Princess.h" />
     <ClInclude Include="PrintDisplay.h" />
+    <ClCompile Include="Knight.h" />
+    <ClCompile Include="Wolf.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="map.mbd">

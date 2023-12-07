@@ -107,7 +107,7 @@ namespace
         locationManager::updateCurrentLocation(locationManager::locationMap[23]);
         // Yes/No needs an input, so fake it
         PrintDisplay::GT_setString("\n\n\n");
-        CP->interpretCommand("hit wolf");
+        NPCManager::fightHostileNPCs();
         EXPECT_EQ(playeract.checkPlayerHealth(), 2);
     }
 
@@ -411,6 +411,7 @@ namespace
         // be empty.
 
         GameOverTest() {
+            NPCManager::init();
             userInventory = new Inventory(&playeract);
             CommonGameObjects::INManager = userInventory;
             CommonGameObjects::PAManager = &playeract;
@@ -421,6 +422,7 @@ namespace
         ~GameOverTest() override {
             delete CP;
             delete userInventory;
+            NPCManager::deinit();
             // You can do clean-up work that doesn't throw exceptions here.
         }
 
@@ -438,7 +440,7 @@ namespace
         }
     };
 
-    TEST_F(GameOverTest, GameOver)
+    TEST_F(GameOverTest, GameOverApple)
     {
         // Move to apple room
         locationManager::updateCurrentLocation(locationManager::locationMap[3]);
@@ -458,6 +460,16 @@ namespace
         EXPECT_EQ(userInventory->currentInventory.size(), 0);
         // We should be at the starting room
         EXPECT_EQ(locationManager::currentLocation->roomID, 1);
+    }
+
+    TEST_F(GameOverTest, GameOverWolf)
+    {
+        locationManager::updateCurrentLocation(locationManager::locationMap[23]);
+        NPC* wolf = NPCManager::returnNPC("wolf");
+        EXPECT_TRUE(wolf->health.removeHP(4)); //is the wolf dead?
+        PrintDisplay::GT_setString("yes\n");
+        playeract.playAgain();
+        EXPECT_EQ(wolf->health.health,wolf->health.maxHealth);
     }
 
 

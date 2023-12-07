@@ -140,6 +140,7 @@ void Location::printLocation()
 			{
 				PrintDisplay::custom_cout << NPCDescription::NPCTag[element.first].first;
 			}
+			PrintDisplay::custom_cout << "\n";
 			PrintDisplay::flush();
 		}
 	}
@@ -276,6 +277,16 @@ int Location::getLocationID()
 	return roomID;
 }
 
+uint64_t Location::getNumberOfTimesEntered()
+{
+	return number_of_times_entered;
+}
+
+void Location::addNumberOfTimesEntered()
+{
+	number_of_times_entered++;
+}
+
 // Initializes the current Location
 Location* locationManager::currentLocation = currentLocation = nullptr;
 
@@ -324,6 +335,7 @@ void locationManager::updateCurrentLocation(Location* newLocation)
 	updateCurrentTime();
 	currentLocation->printLocation();
 	currentLocation->justVisitedRoom();
+	currentLocation->addNumberOfTimesEntered();
 	if (currentLocation->hasAttribute(Location::INSTANT_KILL_ROOM))
 	{
 		CommonGameObjects::PAManager->hurtPlayer(99999999);

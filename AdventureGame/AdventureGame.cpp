@@ -28,6 +28,7 @@
 
 #include "CommonGameObjects.h"
 #include "NPC.h"
+#include "Princess.h"
 #include "PrintDisplay.h"
 #include "Potion.h"
 
@@ -149,20 +150,93 @@ int main()
     ContextParser CP(&userInventory,&playeract);
     bool validInput;
     bool stay = true;
+    bool playerDidNotMove = false;
+    bool princessIgnored = false;
+    Location* prevLocation = nullptr;
     do
     {
+        playerDidNotMove = prevLocation == locationManager::getCurrentLocation();
+        if (!playerDidNotMove)
+        {
+            prevLocation = locationManager::getCurrentLocation();
+        }
+
+        if (playeract.thePlayerIsDead())
+        {
+            PrintDisplay::custom_cout << "\nYOU DID NOT SURVIVE!\n";
+            PrintDisplay::no_effect_flush();
+            if (!playeract.playAgain())
+            {
+                stay = false;
+                break;
+            }
+        }
+
+        // If the princess is in the room, trigger the cutscene.
+        if (NPCManager::scanForNPC("princess"))
+        {
+            bool endGame = false;
+            NPC* princess = NPCManager::returnNPC("princess");
+            if (princess->isDead())
+            {
+                PrintDisplay::custom_cout << "\nYou slay your ex, the Princess of Papettia in cold blood.\n";
+                PrintDisplay::custom_cout << "Her slain corpse hits the floor with a loud thud.\n";
+                PrintDisplay::custom_cout << "A metallic object rolls to your feet and you decide to pick it up. Its the crown!\n";
+                PrintDisplay::custom_cout << "You place it on your head and proclaim:\n";
+                PrintDisplay::custom_cout << "\"The Kingdom of Papettia belongs to ME! Long live the new king!\"\n\n";
+                PrintDisplay::custom_cout << "EVIL ENDING\n\n";
+                endGame = true;
+            }
+            else if (!princessIgnored)
+            {
+                endGame = dynamic_cast<Princess&>(*princess).rizzTime();
+            }
+
+            if (endGame == true) // End the game.
+            {
+                PrintDisplay::custom_cout << "\nYour adventure has reached it's conclusion.\n";
+                PrintDisplay::custom_cout << "Thanks for playing Survival Kingdom!\n\n";
+                PrintDisplay::custom_cout << "The Master Builder Team:\n";
+                PrintDisplay::custom_cout << "\tEric Castorina\n";
+                PrintDisplay::custom_cout << "\tJohn Papetti III\n";
+                PrintDisplay::custom_cout << "\tJuan Jahaziel Gonzalez Morales\n";
+                PrintDisplay::custom_cout << "\tNick Perillo\n";
+                PrintDisplay::custom_cout << "\tNick Torres\n";
+                PrintDisplay::custom_cout << "\tTrevor Morales\n\n";
+                PrintDisplay::no_effect_flush();
+                PrintDisplay::pause();
+                PrintDisplay::custom_cout << "\nThanks to:\n";
+                PrintDisplay::custom_cout << "\tLee Vallone\n\n";
+                PrintDisplay::custom_cout << "\tAdrian Bernal\n";
+                PrintDisplay::custom_cout << "\tBrian Mata\n";
+                PrintDisplay::custom_cout << "\tTiffany Coelho\n";
+                PrintDisplay::custom_cout << "\tEddie Reynolds\n";
+                PrintDisplay::custom_cout << "\tTimothy Miller\n";
+                PrintDisplay::custom_cout << "\tValerie Kruus\n";
+                PrintDisplay::no_effect_flush();
+                PrintDisplay::pause();
+                stay = false;
+                break;
+            }
+            else
+            {
+                princessIgnored = true;
+            }
+        }
+        else if (princessIgnored) // Check if princessIgnored is true, if shes not in the room.
+        {
+            princessIgnored = false;
+        }
+
+        
+        if (playerDidNotMove && NPCManager::fightHostileNPCs() == false)
+        {
+            continue;
+        }
+
         do
         {
-            if (playeract.thePlayerIsDead())
-            {
-                PrintDisplay::custom_cout << "\nYOU DID NOT SURVIVE!\n";
-                PrintDisplay::no_effect_flush();
-                if (!playeract.playAgain())
-                {
-                    stay = false;
-                    break;
-                }
-            }
+
             PrintDisplay::custom_cout << "\nWhat would you like to do?\n> ";
             PrintDisplay::no_effect_flush();
 
