@@ -43,8 +43,23 @@ Inventory::Inventory(PlayerActions* pd)
         {
             itemMap[x.first].insert(itemMap[x.first].begin(), new Armor(iron, 1)); // Add iron armor
         }
+        if (x.second->hasAttribute(x.second->STRENGTH_POTION))
+        {
+            itemMap[x.first].insert(itemMap[x.first].begin(),new Potion(strength, 1));
+        }
+        if (x.second->hasAttribute(x.second->MOBILITY_POTION))
+        {
+            itemMap[x.first].insert(itemMap[x.first].begin(),new Potion(mobility, 1));
+        }
+        if (x.second->hasAttribute(x.second->SOBER_POTION))
+        {
+            itemMap[x.first].insert(itemMap[x.first].begin(),new Potion(sobriety, 1));
+        }
+        if (x.second->hasAttribute(x.second->TELEPORT_POTION))
+        {
+            itemMap[x.first].insert(itemMap[x.first].begin(),new Potion(teleportation, 1));
+        }
     }
-    itemMap[2].insert(itemMap[2].begin(), new Potion(sobriety,1)); //add mushroom
 }
 
 Inventory::~Inventory()
