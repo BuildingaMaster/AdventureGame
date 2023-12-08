@@ -340,6 +340,7 @@ int locationManager::getCurrentTime()
 // Updates the current Location to a new Location
 void locationManager::updateCurrentLocation(Location* newLocation)
 {
+	previousLocation = currentLocation;
 	currentLocation = newLocation;
 	updateCurrentTime();
 	currentLocation->printLocation();
