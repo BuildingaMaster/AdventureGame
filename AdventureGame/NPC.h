@@ -55,6 +55,7 @@ public:
     static NPC* returnNPC(string);
     static void resurrectAllNPCs();
     static bool fightHostileNPCs();
+    static bool findLiveHostileNPCs();
     static void deinit();
 };
 

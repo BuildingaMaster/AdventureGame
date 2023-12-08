@@ -184,6 +184,12 @@ bool locationManager::processCommand(vector<string> args)
 			PrintDisplay::flush();
 			return false;
 		}
+		else if (NPCManager::findLiveHostileNPCs() && currentLocation->checkAdjacent(arg0Direction) != previousLocation)
+		{
+			PrintDisplay::custom_cout << "\nYou'll need to defeat the enemy first!\n";
+			PrintDisplay::flush();
+			return false;
+		}
 		else
 		{
 			// Move Player to the new location and print out its description
@@ -290,6 +296,9 @@ void Location::addNumberOfTimesEntered()
 // Initializes the current Location
 Location* locationManager::currentLocation = currentLocation = nullptr;
 
+// Initializes the previous Location
+Location* locationManager::previousLocation = previousLocation = nullptr;
+
 // Initializes the current Time
 int locationManager::currentTime = 8;
 
@@ -331,6 +340,7 @@ int locationManager::getCurrentTime()
 // Updates the current Location to a new Location
 void locationManager::updateCurrentLocation(Location* newLocation)
 {
+	previousLocation = currentLocation;
 	currentLocation = newLocation;
 	updateCurrentTime();
 	currentLocation->printLocation();
